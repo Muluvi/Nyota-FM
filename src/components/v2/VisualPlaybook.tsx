@@ -32,17 +32,6 @@ const visualSystems = [
   { id: 'motion', label: 'Motion', icon: Waves, count: '8 behaviours', title: 'Signal without distracting', description: 'Animate only what changes: live radio status, revenue ramps, audience funnels and the next recommended action.', tags: ['Live pulse', 'Reveal', 'Scrubber', 'Reduced motion'] },
 ] as const;
 
-const motionFeatures = [
-  'Scroll-linked chapter progress', 'Staggered section reveals', 'Spring-loaded card lifts', 'Hover border illumination', 'Live radio pulse',
-  'Animated KPI count-up', 'Chart bar morphing', 'Chart mode crossfade', 'Animated funnel growth', 'Ticker-style status rail',
-  'Audio waveform breathing', 'Play button ripple', 'CTA magnetic nudge', 'Cursor-follow spotlight', 'Image parallax depth',
-  'Editorial image reveal', 'Gradient noise drift', 'Marquee partner strip', 'Horizontal drag gallery', 'Swipeable story cards',
-  'Accordion height transition', 'Tabs indicator slide', 'Tooltip fade and lift', 'Popover scale-in', 'Dialog spring entry',
-  'Toast slide-in', 'Skeleton shimmer', 'Progress bar sweep', 'Milestone confetti restraint', 'Map region highlight',
-  'Heatmap cell cascade', 'Table row hover sweep', 'Sort column transition', 'Filter chip layout animation', 'Number flip transition',
-  'Theme color interpolation', 'Reduced-motion fallback', 'Low-bandwidth motion mode', 'Focus ring transition', 'Back-to-top glide',
-] as const;
-
 const chartModes = {
   change: { label: 'Change over time', icon: Activity, values: [32, 38, 45, 54, 67, 79], labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q1', 'Q2'], note: 'Use a line or area when the board needs to see momentum.' },
   mix: { label: 'Revenue mix', icon: BarChart3, values: [58, 21, 12, 9], labels: ['Spot', 'Shows', 'Digital', 'Events'], note: 'Use a stacked bar when the question is “what is the portfolio made of?”' },
@@ -127,21 +116,12 @@ export function VisualPlaybook() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[{ icon: Radio, label: 'Live layer', value: 'Now playing + status' }, { icon: Gauge, label: 'Decision layer', value: 'KPIs with context' }, { icon: Map, label: 'Place layer', value: 'Local impact map' }, { icon: MessageCircle, label: 'Action layer', value: 'WhatsApp / USSD CTA' }].map(({ icon: Icon, label, value }) => <div key={label} className="bg-ink-2 border border-hairline rounded p-3"><Icon size={16} className="text-brass mb-3" /><div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">{label}</div><div className="text-sm text-paper mt-1">{value}</div></div>)}
+            {[{ icon: Radio, label: 'Live layer', value: 'Now playing + status' }, { icon: Gauge, label: 'Decision layer', value: 'KPIs with context' }, { icon: Map, label: 'Place layer', value: 'Local impact map' }, { icon: MessageCircle, label: 'Action layer', value: 'WhatsApp / USSD CTA' }].map(({ icon: Icon, label, value }, index) => <motion.div key={label} initial={shouldReduceMotion || lowBandwidth ? false : { opacity: 0, y: 12 }} whileInView={shouldReduceMotion || lowBandwidth ? undefined : { opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ ...motionTransition, delay: index * 0.08 }} whileHover={shouldReduceMotion || lowBandwidth ? undefined : { y: -3 }} className="bg-ink-2 border border-hairline rounded p-3"><div className="flex items-start justify-between"><Icon size={16} className="text-brass mb-3" />{index === 0 && <span className="relative flex size-2"><span className="absolute inline-flex size-2 animate-ping rounded-full bg-moss opacity-75" /><span className="relative inline-flex size-2 rounded-full bg-emerald-400" /></span>}</div><div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">{label}</div><div className="text-sm text-paper mt-1">{value}</div></motion.div>)}
           </div>
         </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-4 text-xs text-sage"><div className="flex items-center gap-2"><Play size={13} className="text-brass" /> Static fallback first; motion second; meaning always available without interaction.</div><div className="flex items-center gap-1 text-brass font-mono">Explore the chapters <ChevronRight size={14} /></div></div>
 
-        <div className="mt-10 border border-hairline rounded bg-ink-2 p-5 sm:p-6">
-          <div className="flex flex-wrap items-end justify-between gap-3 mb-5">
-            <div><div className="text-[10px] text-brass font-mono uppercase tracking-widest mb-1">Motion inventory</div><h3 className="font-display text-2xl text-paper">40 ways to make meaning move</h3></div>
-            <div className="text-xs font-mono text-sage">{lowBandwidth ? '8 essential behaviours active' : '40 behaviours mapped'}</div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-            {motionFeatures.map((feature, index) => <motion.div key={feature} initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: shouldReduceMotion ? 0 : 0.3, delay: shouldReduceMotion || lowBandwidth ? 0 : index * 0.018 }} className="flex items-center gap-2 rounded border border-hairline px-3 py-2 text-xs text-sage"><span className="text-brass font-mono">{String(index + 1).padStart(2, '0')}</span><span>{feature}</span></motion.div>)}
-          </div>
-        </div>
       </Reveal>
     </section>
   );
