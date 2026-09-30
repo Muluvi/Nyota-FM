@@ -10,15 +10,15 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'letter', badge: 'LTR', title: 'A Letter to the Ownership', desc: 'May 2026 strategic memorandum from Firefly Management' },
-  { id: 'summary', badge: '00', title: 'Executive Summary — The Growth Thesis', desc: 'The Five-Pillar plan, TAM whitespace & 2028 vision' },
-  { id: 'part-1', badge: 'P.I', part: 'Part I', title: 'The Market Opportunity (Ch 1–3)', desc: 'TAM 7.2M, Vernacular fragmentation thesis, Nyota today & 2028 ambition' },
-  { id: 'part-2', badge: 'P.II', part: 'Part II', title: 'The Firefly Growth Engine (Ch 4–11)', desc: 'Brand identity, Visual/Sonic system, 12-SKU merchandise, Visual Radio thesis' },
-  { id: 'part-3', badge: 'P.III', part: 'Part III', title: 'Programming Reinvention (Ch 12–14)', desc: 'Daypart grid, 55/30/15 language mix, four pre-recorded show formats' },
-  { id: 'part-4', badge: 'P.IV', part: 'Part IV', title: 'The Revenue Architecture (Ch 15–18)', desc: 'Eight streams to growth, outside broadcasts, WhatsApp/USSD, 2.4× trajectory' },
-  { id: 'part-5', badge: 'P.V', part: 'Part V', title: 'Digital Channel Architecture (Ch 19–21)', desc: 'Ten-platform master table, anchor-and-derivative engine, response SLAs' },
-  { id: 'part-6', badge: 'P.VI', part: 'Part VI', title: 'Execution & Governance (Ch 22–26)', desc: 'Risk register, consolidated implementation plan (KSh 12.7M–21.3M), the 6 asks' },
-  { id: 'appendices', badge: 'APP', title: 'Appendices & Supporting Material (A–G)', desc: 'Competitor profiles, 5-county demographics, format bibles, style guide, glossary' },
+  { id: 'hero', badge: 'v2.0', title: 'The Twang\'aa Transformation v2.0', desc: 'Board-Ready proposal, Three-Tier Evidence standard & executive summary' },
+  { id: 'part-1', badge: 'P.1', part: 'Part 1', title: 'The Objectives (A–E)', desc: 'Five Ownership Objectives checked against 2026 empirical reality' },
+  { id: 'part-2', badge: 'P.2', part: 'Part 2', title: 'The Data (Master Data Annexure)', desc: '8 empirical data domains, population sizing, ad rates & local vendor quotes' },
+  { id: 'part-3', badge: 'P.3', part: 'Part 3', title: 'Data Analysis & Payback Model', desc: 'Revenue concentrations, v1.0 survival test, 8-quarter trajectory & sensitivity' },
+  { id: 'part-4', badge: 'P.4', part: 'Part 4', title: 'The Opportunities Matrix', desc: '12 revenue levers ranked by EV composite score & Top 5 Board Priorities' },
+  { id: 'part-5', badge: 'P.5', part: 'Part 5', title: 'Strategies to Capture (5.1–5.21)', desc: '21 comprehensive action plans with receipts, execution budgets & KPIs' },
+  { id: 'part-6', badge: 'P.6', part: 'Part 6', title: 'The Build & Studio Capex', desc: '24-month roadmap, phased studio schedule (KSh 4.97M–9.60M) & staffing' },
+  { id: 'part-7', badge: 'P.7', part: 'Part 7', title: 'The Gap Audit (Centerpiece)', desc: 'Checklist A (20 gaps), Checklist B (40 build items), Checklist C (12 omitted levers)' },
+  { id: 'part-asks', badge: 'ASK', part: 'Closing', title: 'Source List (37 Sources) & The 6 Asks', desc: 'Traceable citation registry, 12 compliance checks & Board action endorsements' },
 ];
 
 export function ContentsOverlay({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
