@@ -26,10 +26,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-ink text-paper font-body selection:bg-brass selection:text-ink pb-24">
+    <div className="min-h-screen overflow-x-hidden bg-ink text-paper font-body selection:bg-brass selection:text-ink pb-16 sm:pb-24">
       <Header />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-12">
+      <main className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6 sm:pt-16">
         {/* Cover / Hero Block & How to Read This Document */}
         <DocumentHero onNavigate={handleNavigate} />
 
@@ -76,7 +76,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex flex-col sm:flex-row items-center justify-between border-t border-hairline mt-20 gap-4">
+      <footer className="mx-auto mt-16 flex w-full max-w-6xl flex-col items-center justify-between gap-4 border-t border-hairline px-4 py-10 sm:mt-20 sm:flex-row sm:px-6 sm:py-12">
         <div className="text-eyebrow text-sage-dim text-center sm:text-left">
           THE TWANG’AA TRANSFORMATION v2.0 • NYOTA FM 107.3 • STRICTLY CONFIDENTIAL
         </div>
