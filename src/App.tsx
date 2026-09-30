@@ -15,6 +15,7 @@ import { Part6TheBuild } from './components/v2/Part6TheBuild';
 import { Part7GapAudit } from './components/v2/Part7GapAudit';
 import { SourceListAndAsks } from './components/v2/SourceListAndAsks';
 import { VisualPlaybook } from './components/v2/VisualPlaybook';
+import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
 
 export default function App() {
   const handleNavigate = (id: string) => {
@@ -35,6 +36,9 @@ export default function App() {
 
         {/* VISUAL SYSTEM — HANDBOOK-LED PROPOSAL LAYER */}
         <VisualPlaybook />
+
+        {/* DATA-ENRICHED FIGURES — COMPLETE V2.0 ANNEXURE */}
+        <DataEnrichedAnnexure />
 
         {/* PART 1 — THE OBJECTIVES */}
         <ChapterSection id="part-1" number="01" title="Part 1 — The Objectives">
