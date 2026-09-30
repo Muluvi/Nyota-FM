@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import {
   Activity,
   BarChart3,
@@ -31,6 +32,17 @@ const visualSystems = [
   { id: 'motion', label: 'Motion', icon: Waves, count: '8 behaviours', title: 'Signal without distracting', description: 'Animate only what changes: live radio status, revenue ramps, audience funnels and the next recommended action.', tags: ['Live pulse', 'Reveal', 'Scrubber', 'Reduced motion'] },
 ] as const;
 
+const motionFeatures = [
+  'Scroll-linked chapter progress', 'Staggered section reveals', 'Spring-loaded card lifts', 'Hover border illumination', 'Live radio pulse',
+  'Animated KPI count-up', 'Chart bar morphing', 'Chart mode crossfade', 'Animated funnel growth', 'Ticker-style status rail',
+  'Audio waveform breathing', 'Play button ripple', 'CTA magnetic nudge', 'Cursor-follow spotlight', 'Image parallax depth',
+  'Editorial image reveal', 'Gradient noise drift', 'Marquee partner strip', 'Horizontal drag gallery', 'Swipeable story cards',
+  'Accordion height transition', 'Tabs indicator slide', 'Tooltip fade and lift', 'Popover scale-in', 'Dialog spring entry',
+  'Toast slide-in', 'Skeleton shimmer', 'Progress bar sweep', 'Milestone confetti restraint', 'Map region highlight',
+  'Heatmap cell cascade', 'Table row hover sweep', 'Sort column transition', 'Filter chip layout animation', 'Number flip transition',
+  'Theme color interpolation', 'Reduced-motion fallback', 'Low-bandwidth motion mode', 'Focus ring transition', 'Back-to-top glide',
+] as const;
+
 const chartModes = {
   change: { label: 'Change over time', icon: Activity, values: [32, 38, 45, 54, 67, 79], labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q1', 'Q2'], note: 'Use a line or area when the board needs to see momentum.' },
   mix: { label: 'Revenue mix', icon: BarChart3, values: [58, 21, 12, 9], labels: ['Spot', 'Shows', 'Digital', 'Events'], note: 'Use a stacked bar when the question is “what is the portfolio made of?”' },
@@ -50,6 +62,8 @@ export function VisualPlaybook() {
   const activeSystem = visualSystems.find((system) => system.id === selected) ?? visualSystems[0];
   const chart = chartModes[chartMode];
   const ChartIcon = chart.icon;
+  const shouldReduceMotion = useReducedMotion();
+  const motionTransition = shouldReduceMotion ? { duration: 0 } : { type: 'spring' as const, stiffness: 280, damping: 22 };
 
   return (
     <section id="visual-system" className="py-14 border-b border-hairline">
@@ -85,12 +99,12 @@ export function VisualPlaybook() {
               const Icon = system.icon;
               const isSelected = selected === system.id;
               return (
-                <button key={system.id} type="button" onClick={() => setSelected(system.id)} className={`text-left p-4 rounded border transition-all ${isSelected ? 'border-brass bg-brass/10 -translate-y-0.5' : 'border-hairline bg-ink-2 hover:border-sage-dim'}`}>
+                <motion.button key={system.id} type="button" onClick={() => setSelected(system.id)} whileHover={shouldReduceMotion ? undefined : { y: -4 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }} transition={motionTransition} className={`text-left p-4 rounded border transition-colors ${isSelected ? 'border-brass bg-brass/10' : 'border-hairline bg-ink-2 hover:border-sage-dim'}`}>
                   <div className="flex items-center justify-between mb-4"><Icon size={18} className={isSelected ? 'text-brass' : 'text-sage'} /><span className="text-[10px] font-mono text-sage-dim">{system.count}</span></div>
                   <div className="font-display text-lg text-paper mb-1">{system.label}</div>
                   <div className="text-xs text-sage leading-relaxed">{system.title}</div>
-                </button>
-              );
+                  </motion.button>
+                );
             })}
           </div>
 
@@ -106,7 +120,7 @@ export function VisualPlaybook() {
               <div className="flex items-center justify-between mb-5"><div><div className="text-[10px] text-brass font-mono uppercase tracking-widest mb-1">Interactive chart chooser</div><h3 className="font-display text-2xl text-paper">Match visual to question</h3></div><ChartIcon size={18} className="text-brass" /></div>
               <div className="flex gap-2 mb-5">{(Object.keys(chartModes) as Array<keyof typeof chartModes>).map((mode) => <button key={mode} type="button" onClick={() => setChartMode(mode)} className={`flex-1 py-2 px-2 rounded border text-[10px] font-mono ${chartMode === mode ? 'bg-brass/15 border-brass text-brass' : 'border-hairline text-sage hover:border-sage-dim'}`}>{chartModes[mode].label}</button>)}</div>
               <div className="h-36 flex items-end gap-2 border-b border-hairline pb-2" aria-label={`${chart.label} preview`}>
-                {chart.values.map((value, index) => <div key={chart.labels[index]} className="flex-1 h-full flex flex-col justify-end gap-2"><div className="bg-brass/80 hover:bg-brass rounded-t transition-all" style={{ height: `${value}%` }} title={`${chart.labels[index]}: ${value}%`} /><span className="text-[10px] font-mono text-sage-dim text-center">{chart.labels[index]}</span></div>)}
+                {chart.values.map((value, index) => <div key={chart.labels[index]} className="flex-1 h-full flex flex-col justify-end gap-2"><motion.div initial={shouldReduceMotion ? false : { height: 0 }} animate={{ height: `${value}%` }} transition={{ ...motionTransition, delay: index * 0.04 }} className="bg-brass/80 hover:bg-brass rounded-t" title={`${chart.labels[index]}: ${value}%`} /><span className="text-[10px] font-mono text-sage-dim text-center">{chart.labels[index]}</span></div>)}
               </div>
               <p className="text-xs text-sage mt-4 flex items-start gap-2"><MousePointer2 size={14} className="text-brass mt-0.5 shrink-0" /> {chart.note}</p>
             </div>
@@ -118,6 +132,16 @@ export function VisualPlaybook() {
         </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-4 text-xs text-sage"><div className="flex items-center gap-2"><Play size={13} className="text-brass" /> Static fallback first; motion second; meaning always available without interaction.</div><div className="flex items-center gap-1 text-brass font-mono">Explore the chapters <ChevronRight size={14} /></div></div>
+
+        <div className="mt-10 border border-hairline rounded bg-ink-2 p-5 sm:p-6">
+          <div className="flex flex-wrap items-end justify-between gap-3 mb-5">
+            <div><div className="text-[10px] text-brass font-mono uppercase tracking-widest mb-1">Motion inventory</div><h3 className="font-display text-2xl text-paper">40 ways to make meaning move</h3></div>
+            <div className="text-xs font-mono text-sage">{lowBandwidth ? '8 essential behaviours active' : '40 behaviours mapped'}</div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+            {motionFeatures.map((feature, index) => <motion.div key={feature} initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: shouldReduceMotion ? 0 : 0.3, delay: shouldReduceMotion || lowBandwidth ? 0 : index * 0.018 }} className="flex items-center gap-2 rounded border border-hairline px-3 py-2 text-xs text-sage"><span className="text-brass font-mono">{String(index + 1).padStart(2, '0')}</span><span>{feature}</span></motion.div>)}
+          </div>
+        </div>
       </Reveal>
     </section>
   );
