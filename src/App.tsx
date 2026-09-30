@@ -14,6 +14,7 @@ import { Part5Strategies } from './components/v2/Part5Strategies';
 import { Part6TheBuild } from './components/v2/Part6TheBuild';
 import { Part7GapAudit } from './components/v2/Part7GapAudit';
 import { SourceListAndAsks } from './components/v2/SourceListAndAsks';
+import { VisualPlaybook } from './components/v2/VisualPlaybook';
 
 export default function App() {
   const handleNavigate = (id: string) => {
@@ -31,6 +32,9 @@ export default function App() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 pt-12">
         {/* Cover / Hero Block & How to Read This Document */}
         <DocumentHero onNavigate={handleNavigate} />
+
+        {/* VISUAL SYSTEM — HANDBOOK-LED PROPOSAL LAYER */}
+        <VisualPlaybook />
 
         {/* PART 1 — THE OBJECTIVES */}
         <ChapterSection id="part-1" number="01" title="Part 1 — The Objectives">
