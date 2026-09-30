@@ -1,0 +1,1 @@
+sed -i 's/background: linear-gradient(-45deg, var(--color-broadcast-night), #0c2a3d, var(--color-broadcast-night), #2e1a0b);/background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.15), transparent 40%), radial-gradient(circle at bottom left, rgba(250, 204, 21, 0.15), transparent 40%), var(--color-broadcast-night);/g' src/index.css

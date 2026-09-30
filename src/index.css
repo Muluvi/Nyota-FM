@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1B211E;
+  --color-ink-2: #161B19;
+  --color-paper: #F3F1EA;
+  --color-sage: #8FA096;
+  --color-sage-dim: #5C6B63;
+  --color-brass: #B8925A;
+  --color-hairline: #2E3632;
+  --color-brick: #8C5A46;
+  --color-moss: #5C7A66;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+/* Base Configuration */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--color-ink);
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Scale */
+h1 { font-size: clamp(2rem, 8vw, 3.2rem); }
+h2 { font-size: clamp(1.4rem, 5.5vw, 2rem); }
+.text-data { font-family: var(--font-mono); font-size: clamp(1.3rem, 5vw, 2.2rem); }
+.text-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; }
+
+/* Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 4px;
+  border-radius: 4px;
+  transition: outline-offset 0.2s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-ink); }
+::-webkit-scrollbar-thumb { background: var(--color-hairline); }
+
+/* Ledger Stamp Animation */
+@keyframes stamp-press {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-stamp {
+  animation: stamp-press 300ms ease-out forwards;
+}
+
+/* Signal Rule Animation */
+@keyframes draw-rule {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.animate-draw-rule {
+  animation: draw-rule 500ms ease-out forwards;
+}
+
+/* Section Entrance Animation */
+@keyframes section-entrance {
+  0% { transform: translateY(16px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-section-entrance {
+  animation: section-entrance 400ms ease-out forwards;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-stamp, .animate-draw-rule, .animate-section-entrance {
+    animation: none;
+    transform: none;
+    opacity: 1;
+    width: 100%;
+  }
+}

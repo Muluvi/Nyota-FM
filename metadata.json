@@ -1,0 +1,6 @@
+{
+  "name": "Nyota FM Digital Leap Proposal",
+  "description": "A complete social media & BTL investment blueprint for Nyota FM.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
