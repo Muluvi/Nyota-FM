@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Target, TrendingUp, Users, Award, Radio, AlertTriangle, CheckCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
+import { InteractiveSchedule } from '../website/InteractiveSchedule';
+import { TwangaaLexicon } from '../website/TwangaaLexicon';
 
 interface ObjectiveItem {
   id: string;
@@ -227,6 +229,16 @@ export function Part1Objectives() {
         );
       })}
       </div>
+
+      {/* Interactive 24-Hour Programming Clock & Lineup */}
+      <Reveal>
+        <InteractiveSchedule />
+      </Reveal>
+
+      {/* Cultural Moat & Dialect Audio Lexicon */}
+      <Reveal>
+        <TwangaaLexicon />
+      </Reveal>
     </div>
   );
 }

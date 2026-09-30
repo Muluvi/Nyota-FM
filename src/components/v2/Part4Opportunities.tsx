@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Award, TrendingUp, Sparkles, Filter, CheckCircle2, ArrowRight } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
+import { AdCampaignCalculator } from '../website/AdCampaignCalculator';
 
 interface Opportunity {
   rank: number;
@@ -292,6 +293,11 @@ export function Part4Opportunities() {
             </div>
           </div>
         </div>
+      </Reveal>
+
+      {/* Interactive Advertising Rate Card & Campaign Builder */}
+      <Reveal>
+        <AdCampaignCalculator />
       </Reveal>
     </div>
   );

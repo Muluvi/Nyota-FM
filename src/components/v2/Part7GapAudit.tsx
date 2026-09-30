@@ -4,6 +4,7 @@ import {
   Layers, Package, FileCheck, ArrowUpRight 
 } from 'lucide-react';
 import { Reveal } from '../ledger/Reveal';
+import { InteractiveGapAuditWorkbench } from '../website/InteractiveGapAuditWorkbench';
 
 export function Part7GapAudit() {
   const [activeChecklist, setActiveChecklist] = useState<'A' | 'B' | 'C'>('A');
@@ -96,6 +97,11 @@ export function Part7GapAudit() {
 
   return (
     <div className="space-y-6">
+      {/* Interactive Operational Readiness & Compliance Workbench */}
+      <Reveal>
+        <InteractiveGapAuditWorkbench />
+      </Reveal>
+
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">

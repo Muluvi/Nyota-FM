@@ -5,6 +5,8 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
+import { InteractiveStudioPlan } from '../website/InteractiveStudioPlan';
+import { VisualRadioStudioSimulator } from '../website/VisualRadioStudioSimulator';
 
 export function Part6TheBuild() {
   const [activePhase, setActivePhase] = useState<'p1' | 'p2' | 'p3'>('p1');
@@ -130,6 +132,16 @@ export function Part6TheBuild() {
             ))}
           </div>
         </div>
+      </Reveal>
+
+      {/* Interactive Studio Floor Plan & Equipment Inspector */}
+      <Reveal>
+        <InteractiveStudioPlan />
+      </Reveal>
+
+      {/* Interactive Visual Radio Multi-Cam Studio Switcher */}
+      <Reveal>
+        <VisualRadioStudioSimulator />
       </Reveal>
 
       {/* 6.2 Consolidated Studio Capex Schedule */}

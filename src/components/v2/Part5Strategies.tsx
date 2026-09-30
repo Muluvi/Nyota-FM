@@ -5,6 +5,8 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
+import { StrategyTracker } from '../website/StrategyTracker';
+import { TwangaaMobileSimulator } from '../website/TwangaaMobileSimulator';
 
 interface StrategyItem {
   id: string;
@@ -579,6 +581,16 @@ export function Part5Strategies() {
 
   return (
     <div className="space-y-6">
+      {/* Interactive 21 Strategies Implementation & Board Endorsement Matrix */}
+      <Reveal>
+        <StrategyTracker />
+      </Reveal>
+
+      {/* Interactive USSD & WhatsApp Mobile Listener Journey Simulator */}
+      <Reveal>
+        <TwangaaMobileSimulator />
+      </Reveal>
+
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">

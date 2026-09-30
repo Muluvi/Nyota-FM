@@ -1,241 +1,332 @@
 import React, { useState } from 'react';
-import { Database, Calculator, HelpCircle, ShieldCheck, ArrowRight, BookOpen, Layers, CheckCircle2 } from 'lucide-react';
+import { Database, Calculator, HelpCircle, ArrowRight, Layers, Radio, Sparkles, CheckCircle2, TrendingUp, Sliders, ExternalLink } from 'lucide-react';
 import { Reveal } from '../ledger/Reveal';
+import AnimatedCounter from '../AnimatedCounter';
 
 interface DocumentHeroProps {
   onNavigate: (sectionId: string) => void;
+  onOpenBriefing?: () => void;
 }
 
-export function DocumentHero({ onNavigate }: DocumentHeroProps) {
-  const [activeTierDemo, setActiveTierDemo] = useState<1 | 2 | 0 | null>(null);
+export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) {
+  const [activeTierTab, setActiveTierTab] = useState<1 | 2 | 0>(1);
 
-  const parts = [
-    { id: 'part-1', num: 'PART 1', title: 'The Objectives', desc: 'Five Ownership Objectives (A–E) reality-checked against 2026 data' },
-    { id: 'part-2', num: 'PART 2', title: 'The Data (Master Data Annexure)', desc: '8 empirical data domains, 25+ benchmarked tables & vendor rate cards' },
-    { id: 'part-3', num: 'PART 3', title: 'Data Analysis', desc: 'Revenue concentrations, v1.0 stress-tests, whitespace & payback model' },
-    { id: 'part-4', num: 'PART 4', title: 'The Opportunities', desc: '12 revenue levers ranked by EV × P(S) / Time composite formula' },
-    { id: 'part-5', num: 'PART 5', title: 'Strategies to Capture', desc: '21 actionable, fully-costed strategies with receipts & milestone KPIs' },
-    { id: 'part-6', num: 'PART 6', title: 'The Build', desc: '24-month roadmap, KSh 4.97M–9.60M studio schedule, staffing & governance' },
-    { id: 'part-7', num: 'PART 7', title: 'The Gap Audit', desc: 'Checklist A (20 Gaps), Checklist B (40 Operational Items), Checklist C (12 Omitted Levers)' },
+  const sections = [
+    { id: 'part-1', num: '01', title: 'Ownership Objectives', desc: '5 strategic mandates tested against 2026 Kenyan ad market reality.', badge: 'Part 1' },
+    { id: 'part-2', num: '02', title: 'Sourced Data Room', desc: '8 empirical data domains, 2019 Census, ad rates & vendor quotes.', badge: 'Part 2' },
+    { id: 'part-3', num: '03', title: 'Payback & ROI Model', desc: 'Interactive 8-quarter EBITDA simulation, break-even & cashflow.', badge: 'Part 3' },
+    { id: 'part-4', num: '04', title: 'Opportunities Matrix', desc: '12 commercial revenue streams ranked by Expected Value formula.', badge: 'Part 4' },
+    { id: 'part-5', num: '05', title: '21 Action Execution Plans', desc: 'Full implementation playbooks with verifiable receipts & KPIs.', badge: 'Part 5' },
+    { id: 'part-6', num: '06', title: 'Phased Studio Build', desc: '24-month roadmap, KSh 627K–9.60M equipment schedule & staffing.', badge: 'Part 6' },
+    { id: 'part-7', num: '07', title: 'Centerpiece Gap Audit', desc: 'Checklist A (20 Gaps), B (40 Build Items) & C (12 Reclaimed Levers).', badge: 'Part 7' },
   ];
 
   return (
-    <section id="hero" className="pt-10 pb-12 border-b border-hairline">
+    <section id="overview" className="pt-6 sm:pt-10 pb-16 border-b border-hairline">
       <Reveal>
-        {/* Document Header Bar */}
+        {/* Top Status Eyebrow Bar */}
         <div className="flex flex-wrap items-center justify-between text-eyebrow text-sage-dim mb-4 tracking-widest pb-3 border-b border-hairline gap-2">
           <span className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-brass animate-ping" />
-            <span>TRANSFORMATION PROGRAMME v2.0</span>
+            <span className="size-2 rounded-full bg-moss animate-ping" />
+            <span className="text-moss font-semibold">107.3 FM BROADCAST PLATFORM</span>
           </span>
-          <span className="text-brass font-mono font-semibold">NYOTA FM 107.3 · WESTERN KENYA</span>
+          <span className="text-brass font-mono font-semibold">
+            WESTERN KENYA & LAKE BASIN HUB
+          </span>
         </div>
 
-        {/* Tagline & Main Title */}
-        <div className="text-eyebrow text-brass mb-3 font-mono tracking-widest flex items-center gap-2">
-          <span>HAPA TULIPO, TWANG’AA</span>
-          <span className="text-sage-dim">·</span>
-          <span className="text-sage text-[10px]">BOARD-READY PROPOSAL</span>
-        </div>
-
-        <h1 className="font-display text-paper leading-[1.06] mb-4 text-3xl sm:text-5xl">
-          NYOTA FM 107.3 — THE TWANG'AA TRANSFORMATION v2.0
-        </h1>
-
-        <p className="font-display italic text-sage text-base sm:text-xl mb-6 leading-relaxed max-w-3xl">
-          A Data-Backed, Board-Ready Proposal for Brand, Studio, Programming, Digital & Commercial Leadership of Western Kenya, 2026–2028.
-        </p>
-
-        {/* Metadata Badge Block */}
-        <div className="p-4 bg-ink-2 rounded border border-hairline flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-sage gap-3 mb-8">
-          <div>
-            <span className="text-paper font-semibold block sm:inline">PREPARED FOR NYOTA FM OWNERSHIP</span>
-            <span className="hidden sm:inline mx-2 text-sage-dim">|</span>
-            <span className="text-sage-dim">Firefly Management · Strategy Directorate</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-sage-dim">September 2026</span>
-            <span className="px-2 py-0.5 rounded bg-brass/20 text-brass border border-brass/40 font-semibold tracking-wider">
-              STRICTLY CONFIDENTIAL
-            </span>
-          </div>
-        </div>
-
-        {/* Executive Highlights Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
-          <div className="bg-ink-2 p-3.5 rounded border border-hairline">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">Evidence Base</div>
-            <div className="font-mono text-xl sm:text-2xl text-paper font-bold flex items-center gap-1.5">
-              <span>37</span>
-              <span className="text-[11px] font-normal text-emerald-400">Sources</span>
-            </div>
-            <div className="text-[11px] text-sage mt-1">KNBS, CA Kenya, GeoPoll, ReelAnalytics</div>
+        {/* Primary Station Headline & Lead Narrative */}
+        <div className="max-w-4xl">
+          <div className="text-eyebrow text-brass mb-3 font-mono tracking-widest flex items-center gap-2">
+            <Sparkles size={13} />
+            <span>HAPA TULIPO, TWANG’AA · STRATEGIC TRANSFORMATION</span>
           </div>
 
-          <div className="bg-ink-2 p-3.5 rounded border border-hairline">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">Studio Phase 1 Capex</div>
-            <div className="font-mono text-xl sm:text-2xl text-brass font-bold flex items-center gap-1.5">
-              <span>KSh 627K</span>
-              <span className="text-[10px] font-normal text-sage-dim">– 837K</span>
-            </div>
-            <div className="text-[11px] text-sage mt-1">vs v1.0's KSh 2.2M–3.8M estimate</div>
-          </div>
+          <h1 className="font-display text-paper leading-[1.04] mb-4 text-3xl sm:text-6xl lg:text-7xl font-semibold">
+            The Voice of Western Kenya, Amplified.
+          </h1>
 
-          <div className="bg-ink-2 p-3.5 rounded border border-hairline">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">Operational Build</div>
-            <div className="font-mono text-xl sm:text-2xl text-paper font-bold flex items-center gap-1.5">
-              <span>40</span>
-              <span className="text-[11px] font-normal text-brass">Items</span>
-            </div>
-            <div className="text-[11px] text-sage mt-1">Costed, scheduled & assigned</div>
-          </div>
-
-          <div className="bg-ink-2 p-3.5 rounded border border-hairline">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">Action Strategies</div>
-            <div className="font-mono text-xl sm:text-2xl text-emerald-400 font-bold flex items-center gap-1.5">
-              <span>21</span>
-              <span className="text-[11px] font-normal text-sage-dim">Plans</span>
-            </div>
-            <div className="text-[11px] text-sage mt-1">Every plan with receipts & KPIs</div>
-          </div>
-        </div>
-
-        {/* HOW TO READ THIS DOCUMENT CARD */}
-        <div className="bg-ink-2 border border-brass/40 rounded p-5 sm:p-6 mb-10 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-brass/5 rounded-full blur-2xl pointer-events-none" />
-          
-          <div className="flex items-center gap-2 mb-3">
-            <BookOpen size={16} className="text-brass" />
-            <span className="text-xs font-mono font-semibold uppercase tracking-widest text-brass">
-              HOW TO READ THIS DOCUMENT — v2.0 REVOLUTION
-            </span>
-          </div>
-
-          <p className="text-sm sm:text-base text-paper/95 leading-relaxed mb-4">
-            This is <strong className="text-brass font-semibold">v2.0</strong>. It supersedes the v1.0 Twang'aa Transformation (May 2026).
-            v1.0 was strategically sound but evidentially hollow. It stated that <em className="text-sage italic">"all financial figures are illustrative,"</em> presented no audited baseline, no competitor financials, no prevailing ad rates, no platform economics, and no research to support its targets. Ownership asked for bankable numbers. This document supplies them.
+          <p className="font-display italic text-sage text-lg sm:text-2xl mb-6 leading-relaxed max-w-3xl">
+            A comprehensive, data-backed strategic platform for Nyota FM 107.3 — scaling broadcast reach, digital engagement, and commercial sustainability across 6M+ citizens from 2026 through 2028.
           </p>
 
-          <div className="text-xs text-sage mb-3">
-            Every figure in this document is labelled as one of three strict validation tiers. Click any tier below to preview its audit standard:
-          </div>
+          <p className="font-body text-paper/85 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl">
+            Built on verified Kenyan market realities, empirical audience research, and phased studio economics. Every target is backed by receipts; every revenue stream is costed; every operational gap is resolved.
+          </p>
 
-          {/* Three Tier Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {/* Tier 1 */}
-            <div 
-              onClick={() => setActiveTierDemo(activeTierDemo === 1 ? null : 1)}
-              className={`p-3.5 rounded border transition-all cursor-pointer ${activeTierDemo === 1 ? 'border-emerald-400 bg-moss/20 ring-1 ring-emerald-400' : 'border-moss/40 bg-moss/10 hover:border-moss'}`}
+          {/* Quick CTA Actions */}
+          <div className="flex flex-wrap items-center gap-3 mb-10">
+            <button
+              type="button"
+              onClick={() => onNavigate('part-5')}
+              className="inline-flex items-center gap-2 rounded-lg bg-brass px-5 py-3 text-xs font-mono uppercase tracking-wider text-ink font-bold shadow-lg transition-all hover:brightness-110 active:scale-95"
             >
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded bg-moss/30 border border-moss text-emerald-300 font-semibold">
-                  <Database size={10} className="mr-1" /> TIER 1 · HARD DATA
-                </span>
-                <span className="text-[10px] font-mono text-emerald-400">Primary Citation</span>
-              </div>
-              <p className="text-xs text-paper/90 leading-snug">
-                A figure traceable to a named, citable source with a URL and access date.
-              </p>
-              <div className="mt-2 text-[10px] font-mono text-sage-dim">
-                Format: <code className="text-emerald-300">(Source: [Name], [URL], accessed [date])</code>
-              </div>
-            </div>
+              <span>Explore 21 Action Plans</span>
+              <ArrowRight size={14} />
+            </button>
 
-            {/* Tier 2 */}
-            <div 
-              onClick={() => setActiveTierDemo(activeTierDemo === 2 ? null : 2)}
-              className={`p-3.5 rounded border transition-all cursor-pointer ${activeTierDemo === 2 ? 'border-brass bg-brass/20 ring-1 ring-brass' : 'border-brass/40 bg-brass/10 hover:border-brass'}`}
+            <button
+              type="button"
+              onClick={() => onNavigate('part-3')}
+              className="inline-flex items-center gap-2 rounded-lg border border-brass/50 bg-brass/10 px-5 py-3 text-xs font-mono uppercase tracking-wider text-brass font-semibold transition-all hover:bg-brass/20 active:scale-95"
             >
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded bg-brass/30 border border-brass text-amber-300 font-semibold">
-                  <Calculator size={10} className="mr-1" /> TIER 2 · MODELLED
-                </span>
-                <span className="text-[10px] font-mono text-amber-400">Derivation</span>
-              </div>
-              <p className="text-xs text-paper/90 leading-snug">
-                A figure derived from Tier 1 inputs using a stated, reproducible mathematical method.
-              </p>
-              <div className="mt-2 text-[10px] font-mono text-sage-dim">
-                Format: <code className="text-amber-300">(Modelled estimate. Method: [...]. Inputs: [...].)</code>
-              </div>
-            </div>
+              <Sliders size={14} />
+              <span>Launch Payback Simulator</span>
+            </button>
 
-            {/* Tier 0 */}
-            <div 
-              onClick={() => setActiveTierDemo(activeTierDemo === 0 ? null : 0)}
-              className={`p-3.5 rounded border transition-all cursor-pointer ${activeTierDemo === 0 ? 'border-rose-400 bg-brick/30 ring-1 ring-rose-400' : 'border-brick/50 bg-brick/15 hover:border-rose-400'}`}
+            <button
+              type="button"
+              onClick={() => onNavigate('part-2')}
+              className="inline-flex items-center gap-2 rounded-lg border border-hairline bg-ink-2 px-5 py-3 text-xs font-mono uppercase tracking-wider text-sage transition-all hover:border-paper hover:text-paper active:scale-95"
             >
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded bg-brick/40 border border-brick text-rose-300 font-semibold">
-                  <HelpCircle size={10} className="mr-1" /> TIER 0 · DATA GAP
-                </span>
-                <span className="text-[10px] font-mono text-rose-400">Primary Research</span>
-              </div>
-              <p className="text-xs text-paper/90 leading-snug">
-                A number the proposal needs but that cannot be responsibly sourced or modelled without field testing.
-              </p>
-              <div className="mt-2 text-[10px] font-mono text-sage-dim">
-                Format: <code className="text-rose-300">(DATA GAP — requires primary research. Method: [...]. Cost: [...].)</code>
-              </div>
-            </div>
-          </div>
+              <Database size={14} />
+              <span>Inspect Data Room</span>
+            </button>
 
-          <div className="mt-4 pt-3 border-t border-hairline flex items-center justify-between text-xs text-sage font-mono">
-            <span>No figure appears unlabelled throughout this proposal.</span>
-            <span className="text-brass">Zero generic speculation.</span>
+            {onOpenBriefing && (
+              <button
+                type="button"
+                onClick={onOpenBriefing}
+                className="inline-flex items-center gap-2 rounded-lg border border-brass/60 bg-brass/15 px-5 py-3 text-xs font-mono uppercase tracking-wider text-paper font-semibold transition-all hover:bg-brass hover:text-ink active:scale-95 shadow-md"
+              >
+                <Sparkles size={14} className="text-brass" />
+                <span>Executive Board Mode</span>
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Seven-Part Architecture Navigation Grid */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-sage-dim flex items-center gap-2">
-              <Layers size={13} className="text-brass" />
-              <span>THE SEVEN-PART BOARD ARCHITECTURE</span>
-            </h3>
-            <span className="text-[11px] font-mono text-brass">Click to jump</span>
+        {/* Live Animated Metrics Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-12">
+          <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
+            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+              Evidence Standard
+            </div>
+            <div className="font-mono text-2xl sm:text-3xl text-paper font-bold flex items-center gap-1.5 group-hover:text-brass transition-colors">
+              <AnimatedCounter value={37} duration={1200} />
+              <span className="text-xs font-normal text-emerald-400">Sources</span>
+            </div>
+            <div className="text-[11px] text-sage mt-1">
+              KNBS, CA Kenya, GeoPoll & ReelAnalytics
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
-            {parts.map((p, idx) => (
+          <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
+            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+              Phase 1 Studio Capex
+            </div>
+            <div className="font-mono text-2xl sm:text-3xl text-brass font-bold flex items-center gap-1 group-hover:brightness-110 transition-colors">
+              <span>KSh</span>
+              <AnimatedCounter value={627} duration={1400} />
+              <span className="text-xs font-normal text-sage-dim">K – 837K</span>
+            </div>
+            <div className="text-[11px] text-sage mt-1">
+              Sourced local hardware quotations
+            </div>
+          </div>
+
+          <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
+            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+              Operational Build
+            </div>
+            <div className="font-mono text-2xl sm:text-3xl text-paper font-bold flex items-center gap-1.5 group-hover:text-brass transition-colors">
+              <AnimatedCounter value={40} duration={1000} />
+              <span className="text-xs font-normal text-brass">Items</span>
+            </div>
+            <div className="text-[11px] text-sage mt-1">
+              Scheduled, costed & accountability assigned
+            </div>
+          </div>
+
+          <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
+            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+              Action Execution Plans
+            </div>
+            <div className="font-mono text-2xl sm:text-3xl text-emerald-400 font-bold flex items-center gap-1.5 group-hover:brightness-110 transition-colors">
+              <AnimatedCounter value={21} duration={1000} />
+              <span className="text-xs font-normal text-sage-dim">Strategies</span>
+            </div>
+            <div className="text-[11px] text-sage mt-1">
+              Every strategy with receipts & milestone KPIs
+            </div>
+          </div>
+        </div>
+
+        {/* EVIDENCE STANDARDS & METHODOLOGY EXPLORER */}
+        <div className="bg-ink-2 border border-brass/40 rounded-xl p-5 sm:p-7 mb-14 relative overflow-hidden shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4 mb-5">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+                  Audit Protocol
+                </span>
+                <span className="font-mono text-xs text-sage-dim">· Three-Tier Evidence Standard</span>
+              </div>
+              <h3 className="font-display text-xl sm:text-2xl text-paper font-semibold mt-1">
+                Zero Speculation: Every Figure Classified by Rigour
+              </h3>
+            </div>
+
+            {/* Interactive Tier Switcher Tabs */}
+            <div className="flex items-center gap-1.5 font-mono text-xs bg-ink p-1 rounded-lg border border-hairline">
               <button
-                key={p.id}
-                onClick={() => onNavigate(p.id)}
-                className="p-3 bg-ink-2 hover:bg-ink border border-hairline hover:border-brass/60 rounded text-left transition-all group flex flex-col justify-between"
+                type="button"
+                onClick={() => setActiveTierTab(1)}
+                className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
+                  activeTierTab === 1
+                    ? 'bg-moss/30 text-emerald-300 font-semibold border border-moss/60'
+                    : 'text-sage hover:text-paper'
+                }`}
+              >
+                <Database size={12} />
+                <span>Tier 1 · Hard Data</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTierTab(2)}
+                className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
+                  activeTierTab === 2
+                    ? 'bg-brass/30 text-amber-300 font-semibold border border-brass/60'
+                    : 'text-sage hover:text-paper'
+                }`}
+              >
+                <Calculator size={12} />
+                <span>Tier 2 · Modelled</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTierTab(0)}
+                className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
+                  activeTierTab === 0
+                    ? 'bg-brick/30 text-rose-300 font-semibold border border-brick/60'
+                    : 'text-sage hover:text-paper'
+                }`}
+              >
+                <HelpCircle size={12} />
+                <span>Tier 0 · Data Gap</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Active Tier Explanation Card */}
+          <div className="rounded-lg bg-ink p-4 border border-hairline transition-all">
+            {activeTierTab === 1 && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 font-semibold">
+                    <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                    TIER 1 · PRIMARY VERIFIED HARD DATA
+                  </span>
+                  <span className="text-[11px] font-mono text-sage-dim">37 Documented Sources</span>
+                </div>
+                <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-body">
+                  Traceable to a named, publicly citable institution or documented vendor quote. Includes Kenya National Bureau of Statistics (KNBS) 2019 Census, Communications Authority of Kenya (CA) Q2–Q4 2025/26 sector statistics, Media Council of Kenya, ReelAnalytics broadcast monitoring, and Africa&apos;s Talking official rate cards.
+                </p>
+                <div className="p-2.5 rounded bg-ink-2 border border-hairline font-mono text-xs text-sage flex items-center justify-between">
+                  <span>Example: Weekly reach n=23.9M listeners, smartphone penetration 92.9%</span>
+                  <span className="text-emerald-400 font-semibold">Strictly Verified</span>
+                </div>
+              </div>
+            )}
+
+            {activeTierTab === 2 && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-amber-300 font-semibold">
+                    <span className="size-2 rounded-full bg-amber-400 animate-pulse" />
+                    TIER 2 · MODELLED ECONOMETRIC ESTIMATE
+                  </span>
+                  <span className="text-[11px] font-mono text-sage-dim">Reproducible Formulae</span>
+                </div>
+                <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-body">
+                  Derived mathematically from Tier 1 verified inputs using an explicit, reproducible method. Used for market share trajectories, discounted cash flow payback schedules, outside broadcast yield projections, and digital conversion funnels.
+                </p>
+                <div className="p-2.5 rounded bg-ink-2 border border-hairline font-mono text-xs text-sage flex items-center justify-between">
+                  <span>Example: EV = Yield × P(Success) / Time composite commercial ranking</span>
+                  <span className="text-amber-400 font-semibold">Math Stated</span>
+                </div>
+              </div>
+            )}
+
+            {activeTierTab === 0 && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-rose-300 font-semibold">
+                    <span className="size-2 rounded-full bg-rose-400 animate-pulse" />
+                    TIER 0 · EXPLICIT DATA GAP
+                  </span>
+                  <span className="text-[11px] font-mono text-sage-dim">Primary Field Research Needed</span>
+                </div>
+                <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-body">
+                  A figure the transformation model needs, but which cannot be responsibly sourced without dedicated on-the-ground field surveying. Instead of guessing, each gap is explicitly catalogued with recommended methodology, timeline, and budget.
+                </p>
+                <div className="p-2.5 rounded bg-ink-2 border border-hairline font-mono text-xs text-sage flex items-center justify-between">
+                  <span>Example: Dial-level station recall in rural Bungoma wards (KSh 180K survey)</span>
+                  <span className="text-rose-400 font-semibold">Honest Gap Declared</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* INTERACTIVE TABLE OF CONTENTS / ARCHITECTURE CARDS */}
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-sage flex items-center gap-2">
+              <Layers size={14} className="text-brass" />
+              <span>THE SEVEN BOARD ARCHITECTURE MODULES</span>
+            </h3>
+            <span className="text-xs font-mono text-brass">Click any card to jump</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            {sections.map((sec) => (
+              <button
+                key={sec.id}
+                type="button"
+                onClick={() => onNavigate(sec.id)}
+                className="group p-4 bg-ink-2 hover:bg-ink border border-hairline hover:border-brass/70 rounded-xl text-left transition-all duration-200 shadow-md hover:shadow-xl flex flex-col justify-between min-h-[130px]"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-mono text-[11px] text-brass font-semibold group-hover:translate-x-0.5 transition-transform">
-                      {p.num}
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono text-xs font-bold text-brass group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                      <span className="size-1.5 rounded-full bg-brass/60" />
+                      Part {sec.num}
                     </span>
-                    <ArrowRight size={12} className="text-sage-dim group-hover:text-brass transition-colors" />
+                    <ArrowRight size={14} className="text-sage-dim group-hover:text-brass group-hover:translate-x-1 transition-all" />
                   </div>
-                  <div className="font-display text-sm text-paper font-medium mb-1">
-                    {p.title}
-                  </div>
-                  <div className="text-xs text-sage leading-snug">
-                    {p.desc}
-                  </div>
+                  <h4 className="font-display text-base text-paper font-semibold group-hover:text-brass transition-colors">
+                    {sec.title}
+                  </h4>
+                  <p className="text-xs text-sage leading-relaxed mt-1 font-body">
+                    {sec.desc}
+                  </p>
                 </div>
               </button>
             ))}
 
-            {/* Quick jump to Sources & The 6 Asks */}
+            {/* Closing Conclusions & Board Asks Card */}
             <button
+              type="button"
               onClick={() => onNavigate('part-asks')}
-              className="p-3 bg-brass/10 hover:bg-brass/20 border border-brass/40 hover:border-brass rounded text-left transition-all group flex flex-col justify-between"
+              className="group p-4 bg-brass/10 hover:bg-brass/20 border border-brass/40 hover:border-brass rounded-xl text-left transition-all duration-200 shadow-md hover:shadow-xl flex flex-col justify-between min-h-[130px]"
             >
               <div>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-mono text-[11px] text-brass font-bold">THE CONCLUSION</span>
-                  <CheckCircle2 size={12} className="text-brass" />
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-xs font-bold text-brass group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
+                    <span className="size-1.5 rounded-full bg-brass" />
+                    Closing Action
+                  </span>
+                  <CheckCircle2 size={14} className="text-brass" />
                 </div>
-                <div className="font-display text-sm text-paper font-medium mb-1">
-                  The Six Asks of Ownership & Source List
-                </div>
-                <div className="text-xs text-sage leading-snug">
-                  Board sign-off scorecard, capital commitments & 37 verified master sources
-                </div>
+                <h4 className="font-display text-base text-paper font-semibold group-hover:text-brass transition-colors">
+                  The Six Asks & 37 Sourced Citations
+                </h4>
+                <p className="text-xs text-sage leading-relaxed mt-1 font-body">
+                  Formal governance resolutions, capital commitments & complete source registry.
+                </p>
               </div>
             </button>
           </div>

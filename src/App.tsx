@@ -1,10 +1,13 @@
-import React from 'react';
-import { Header } from './components/ledger/Header';
-import { BackToTop } from './components/ledger/BackToTop';
+import React, { useState, useEffect } from 'react';
+import { Navbar } from './components/website/Navbar';
+import { SearchModal } from './components/website/SearchModal';
+import { LiveRadioPlayer } from './components/website/LiveRadioPlayer';
+import { FloatingNavRail } from './components/website/FloatingNavRail';
+import { WebsiteFooter } from './components/website/WebsiteFooter';
+import { ExecutiveBriefingMode } from './components/website/ExecutiveBriefingMode';
 import { ChapterSection } from './components/ledger/ChapterSection';
-import { Reveal } from './components/ledger/Reveal';
 
-// v2.0 Strategic Modules
+// Core Strategic Modules
 import { DocumentHero } from './components/v2/DocumentHero';
 import { Part1Objectives } from './components/v2/Part1Objectives';
 import { Part2MasterData } from './components/v2/Part2MasterData';
@@ -18,80 +21,121 @@ import { VisualPlaybook } from './components/v2/VisualPlaybook';
 import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
 
 export default function App() {
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [briefingOpen, setBriefingOpen] = useState(false);
+
+  // Global keyboard shortcut: Cmd+K / Ctrl+K / '/' to open search, 'b' to open briefing
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      } else if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        setSearchOpen(true);
+      } else if ((e.key === 'b' || e.key === 'B') && !e.metaKey && !e.ctrlKey && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        setBriefingOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const handleNavigate = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 70;
+      const y = el.getBoundingClientRect().top + window.scrollY - 74;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-ink text-paper font-body selection:bg-brass selection:text-ink pb-16 sm:pb-24">
-      <Header />
+    <div className="min-h-screen overflow-x-hidden bg-ink text-paper font-body selection:bg-brass selection:text-ink">
+      {/* Persistent Website Navigation Bar */}
+      <Navbar
+        onOpenSearch={() => setSearchOpen(true)}
+        onOpenBriefing={() => setBriefingOpen(true)}
+      />
 
-      <main className="mx-auto w-full max-w-6xl px-4 pt-14 sm:px-6 sm:pt-16">
-        {/* Cover / Hero Block & How to Read This Document */}
-        <DocumentHero onNavigate={handleNavigate} />
+      {/* Instant Global Search Modal */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      {/* Executive Board Briefing & Resolutions Mode */}
+      {briefingOpen && (
+        <ExecutiveBriefingMode
+          onClose={() => setBriefingOpen(false)}
+          onNavigate={(id) => {
+            setBriefingOpen(false);
+            handleNavigate(id);
+          }}
+        />
+      )}
+
+      {/* Main Content Stream */}
+      <main className="mx-auto w-full max-w-7xl px-4 pt-16 sm:px-6 sm:pt-20">
+        {/* Cover / Strategic Website Hero Block */}
+        <DocumentHero
+          onNavigate={handleNavigate}
+          onOpenBriefing={() => setBriefingOpen(true)}
+        />
 
         {/* VISUAL SYSTEM — HANDBOOK-LED PROPOSAL LAYER */}
         <VisualPlaybook />
 
-        {/* DATA-ENRICHED FIGURES — COMPLETE V2.0 ANNEXURE */}
+        {/* DATA-ENRICHED FIGURES — COMPLETE SOURCED ANNEXURE */}
         <DataEnrichedAnnexure />
 
         {/* PART 1 — THE OBJECTIVES */}
-        <ChapterSection id="part-1" number="01" title="Part 1 — The Objectives">
+        <ChapterSection id="part-1" number="01" title="The Objectives — 5 Strategic Mandates">
           <Part1Objectives />
         </ChapterSection>
 
         {/* PART 2 — THE DATA (MASTER DATA ANNEXURE) */}
-        <ChapterSection id="part-2" number="02" title="Part 2 — The Data (Master Data Annexure)">
+        <ChapterSection id="part-2" number="02" title="Sourced Master Data Room & Benchmark Tables">
           <Part2MasterData />
         </ChapterSection>
 
-        {/* PART 3 — DATA ANALYSIS */}
-        <ChapterSection id="part-3" number="03" title="Part 3 — Data Analysis & Payback Model">
+        {/* PART 3 — DATA ANALYSIS & PAYBACK MODEL */}
+        <ChapterSection id="part-3" number="03" title="Data Analysis, Sensitivity & Payback Simulator">
           <Part3DataAnalysis />
         </ChapterSection>
 
-        {/* PART 4 — THE OPPORTUNITIES */}
-        <ChapterSection id="part-4" number="04" title="Part 4 — The Opportunities Matrix">
+        {/* PART 4 — THE OPPORTUNITIES MATRIX */}
+        <ChapterSection id="part-4" number="04" title="The Commercial Opportunities & Expected Value Matrix">
           <Part4Opportunities />
         </ChapterSection>
 
         {/* PART 5 — STRATEGIES TO CAPTURE */}
-        <ChapterSection id="part-5" number="05" title="Part 5 — Strategies to Capture (21 Action Plans)">
+        <ChapterSection id="part-5" number="05" title="Action Execution Plans (21 Concrete Strategies)">
           <Part5Strategies />
         </ChapterSection>
 
         {/* PART 6 — THE BUILD */}
-        <ChapterSection id="part-6" number="06" title="Part 6 — The Build, Phased Capex & Governance">
+        <ChapterSection id="part-6" number="06" title="Studio Build, Phased Capex & Governance Roadmap">
           <Part6TheBuild />
         </ChapterSection>
 
         {/* PART 7 — THE GAP AUDIT */}
-        <ChapterSection id="part-7" number="07" title="Part 7 — The Gap Audit (The Centerpiece)">
+        <ChapterSection id="part-7" number="07" title="The Gap Audit (Comprehensive Centerpiece Checklists)">
           <Part7GapAudit />
         </ChapterSection>
 
         {/* SOURCE LIST & THE SIX ASKS OF OWNERSHIP */}
-        <SourceListAndAsks />
+        <div id="part-asks" className="scroll-mt-20 sm:scroll-mt-24 pt-12">
+          <SourceListAndAsks />
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="mx-auto mt-16 flex w-full max-w-6xl flex-col items-center justify-between gap-4 border-t border-hairline px-4 py-10 sm:mt-20 sm:flex-row sm:px-6 sm:py-12">
-        <div className="text-eyebrow text-sage-dim text-center sm:text-left">
-          THE TWANG’AA TRANSFORMATION v2.0 • NYOTA FM 107.3 • STRICTLY CONFIDENTIAL
-        </div>
-        <img
-          src="https://res.cloudinary.com/da5j0zjok/image/upload/v1786407396/Horizontal_logo_clear_png_v0cjbd.png"
-          alt="Firefly Management"
-          className="h-4 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity"
-        />
-      </footer>
+      {/* Standard Website Footer */}
+      <WebsiteFooter onNavigate={handleNavigate} />
 
-      <BackToTop />
+      {/* Interactive Live Radio Player Widget */}
+      <LiveRadioPlayer />
+
+      {/* Desktop Sticky Rail & Back-to-Top Indicator */}
+      <FloatingNavRail />
     </div>
   );
 }

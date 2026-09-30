@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
+import { InteractivePaybackSimulator } from '../website/InteractivePaybackSimulator';
 
 export function Part3DataAnalysis() {
   const [selectedQuarter, setSelectedQuarter] = useState<number>(7); // Q4 2027 (index 7)
@@ -343,6 +344,11 @@ export function Part3DataAnalysis() {
             </div>
           </div>
         </div>
+      </Reveal>
+
+      {/* Interactive Payback & Sensitivity Engine */}
+      <Reveal>
+        <InteractivePaybackSimulator />
       </Reveal>
 
       {/* 3.5 The Single Biggest Risks */}

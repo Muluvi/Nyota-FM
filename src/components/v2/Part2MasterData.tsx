@@ -5,6 +5,8 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
+import { CountyCoverageExplorer } from '../website/CountyCoverageExplorer';
+import { CountyEconomicExplorer } from '../website/CountyEconomicExplorer';
 
 export function Part2MasterData() {
   const [activeTab, setActiveTab] = useState<'market' | 'competitors' | 'ad_econ' | 'digital' | 'studio' | 'regulatory' | 'audience' | 'levers'>('market');
@@ -137,6 +139,12 @@ export function Part2MasterData() {
               </p>
             </div>
           </div>
+
+          {/* Interactive 5-County Signal Coverage Explorer */}
+          <CountyCoverageExplorer />
+
+          {/* Interactive Western Kenya County Economic & Commercial Engine */}
+          <CountyEconomicExplorer />
 
           {/* 2.1.2 Radio Penetration & 2.1.3 Device Ownership */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
