@@ -7,6 +7,11 @@ import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { CountyCoverageExplorer } from '../website/CountyCoverageExplorer';
 import { CountyEconomicExplorer } from '../website/CountyEconomicExplorer';
+import { CompetitorDialMap } from '../website/CompetitorDialMap';
+import { TransmitterElevationTool } from '../website/TransmitterElevationTool';
+import { AgriCommodityIndex } from '../website/AgriCommodityIndex';
+import { ListenerVoxPop } from '../website/ListenerVoxPop';
+import { CMORoyaltyCalculator } from '../website/CMORoyaltyCalculator';
 
 export function Part2MasterData() {
   const [activeTab, setActiveTab] = useState<'market' | 'competitors' | 'ad_econ' | 'digital' | 'studio' | 'regulatory' | 'audience' | 'levers'>('market');
@@ -145,6 +150,21 @@ export function Part2MasterData() {
 
           {/* Interactive Western Kenya County Economic & Commercial Engine */}
           <CountyEconomicExplorer />
+
+          {/* Interactive Transmitter Elevation & Propagation Profile Tool */}
+          <TransmitterElevationTool />
+
+          {/* Comparative Radio Dial Map & Competitor Spectrum */}
+          <CompetitorDialMap />
+
+          {/* Agri-Commodity Live Price Ticker & Market Soko Index */}
+          <AgriCommodityIndex />
+
+          {/* Grassroots Listener Panel & Qualitative Testimonials */}
+          <ListenerVoxPop />
+
+          {/* Music Copyright Licensing (MCSK, PRISK, KAMP) & Local Content Quota */}
+          <CMORoyaltyCalculator />
 
           {/* 2.1.2 Radio Penetration & 2.1.3 Device Ownership */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

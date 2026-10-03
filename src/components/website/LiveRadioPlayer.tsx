@@ -6,6 +6,8 @@ export function LiveRadioPlayer() {
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [streamBitrate, setStreamBitrate] = useState<'32k' | '128k' | '256k'>('128k');
+  const [eqPreset, setEqPreset] = useState<'voice' | 'music' | 'flat'>('voice');
   const [nowPlaying, setNowPlaying] = useState({
     show: 'The Morning Signal',
     hosts: 'Achieng & Otieno',
@@ -253,21 +255,56 @@ export function LiveRadioPlayer() {
               </div>
               <div className="mt-2 flex items-center justify-between text-[11px] text-sage-dim font-mono border-t border-hairline/60 pt-2">
                 <span>Coverage: {nowPlaying.region}</span>
-                <span className="text-moss font-semibold">Stereo · 128 kbps</span>
+                <div className="flex items-center gap-1">
+                  {(['32k', '128k', '256k'] as const).map((b) => (
+                    <button
+                      key={b}
+                      type="button"
+                      onClick={() => setStreamBitrate(b)}
+                      className={`px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors ${
+                        streamBitrate === b ? 'bg-moss text-ink font-bold' : 'text-sage hover:text-paper bg-ink-2'
+                      }`}
+                      title={b === '32k' ? 'Low Data (2G/3G)' : b === '128k' ? 'Standard HQ' : 'Lossless Studio'}
+                    >
+                      {b}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Audio Waveform visualization */}
-            <div className="flex h-8 items-end gap-1 px-1 py-1 bg-ink/50 rounded mb-4" aria-label="Audio waveform">
+            {/* Audio Waveform & Multi-band Visualizer */}
+            <div className="flex h-10 items-end gap-1 px-1.5 py-1 bg-ink/70 rounded mb-3 border border-hairline/60" aria-label="Audio waveform">
               {Array.from({ length: 28 }, (_, i) => (
                 <span
                   key={i}
-                  className="flex-1 rounded-full bg-brass/70 transition-all duration-150"
+                  className={`flex-1 rounded-full transition-all duration-150 ${
+                    i % 4 === 0 ? 'bg-brass' : i % 2 === 0 ? 'bg-emerald-400' : 'bg-brass/60'
+                  }`}
                   style={{
-                    height: isPlaying ? `${Math.max(15, (Math.sin(i * 0.5) * 40 + 50))}%` : '15%',
+                    height: isPlaying ? `${Math.max(12, (Math.sin(i * 0.45) * 45 + 50))}%` : '15%',
                   }}
                 />
               ))}
+            </div>
+
+            {/* EQ Preset Selector */}
+            <div className="flex items-center justify-between text-[10px] font-mono text-sage-dim mb-3 px-1">
+              <span>EQ Preset:</span>
+              <div className="flex gap-1">
+                {(['voice', 'music', 'flat'] as const).map((eq) => (
+                  <button
+                    key={eq}
+                    type="button"
+                    onClick={() => setEqPreset(eq)}
+                    className={`px-2 py-0.5 rounded uppercase font-semibold transition-colors ${
+                      eqPreset === eq ? 'bg-brass/20 text-brass border border-brass/40' : 'text-sage hover:text-paper'
+                    }`}
+                  >
+                    {eq === 'voice' ? 'Warm Voice' : eq === 'music' ? 'Ngoma Bass' : 'Studio Flat'}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Controls */}

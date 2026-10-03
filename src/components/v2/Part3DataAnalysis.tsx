@@ -6,6 +6,7 @@ import {
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { InteractivePaybackSimulator } from '../website/InteractivePaybackSimulator';
+import { CapexWaterfallSimulator } from '../website/CapexWaterfallSimulator';
 
 export function Part3DataAnalysis() {
   const [selectedQuarter, setSelectedQuarter] = useState<number>(7); // Q4 2027 (index 7)
@@ -349,6 +350,11 @@ export function Part3DataAnalysis() {
       {/* Interactive Payback & Sensitivity Engine */}
       <Reveal>
         <InteractivePaybackSimulator />
+      </Reveal>
+
+      {/* Interactive Month-by-Month Capex Waterfall Recovery */}
+      <Reveal>
+        <CapexWaterfallSimulator />
       </Reveal>
 
       {/* 3.5 The Single Biggest Risks */}

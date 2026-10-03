@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Search, Radio, Volume2, ArrowUp, ChevronRight, Layers, ExternalLink } from 'lucide-react';
+import { PresentationModeToggle } from './PresentationModeToggle';
 
 interface NavItem {
   id: string;
@@ -151,6 +152,11 @@ export function Navbar({
 
           {/* Action Tools: Search, Live Stream & Mobile Toggle */}
           <div className="flex items-center gap-2">
+            {/* Boardroom Presentation Deck Mode */}
+            <div className="hidden sm:block">
+              <PresentationModeToggle />
+            </div>
+
             {/* Executive Board Briefing Button */}
             {onOpenBriefing && (
               <button

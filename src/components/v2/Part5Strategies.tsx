@@ -7,6 +7,11 @@ import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { StrategyTracker } from '../website/StrategyTracker';
 import { TwangaaMobileSimulator } from '../website/TwangaaMobileSimulator';
+import { CivicNoticeBuilder } from '../website/CivicNoticeBuilder';
+import { PoliticalRateCardEngine } from '../website/PoliticalRateCardEngine';
+import { DiasporaHub } from '../website/DiasporaHub';
+import { LoyaltyClubEngine } from '../website/LoyaltyClubEngine';
+import { EditorialPolicyHandbook } from '../website/EditorialPolicyHandbook';
 
 interface StrategyItem {
   id: string;
@@ -589,6 +594,31 @@ export function Part5Strategies() {
       {/* Interactive USSD & WhatsApp Mobile Listener Journey Simulator */}
       <Reveal>
         <TwangaaMobileSimulator />
+      </Reveal>
+
+      {/* County Government Public Civic Notice & Townhall Generator */}
+      <Reveal>
+        <CivicNoticeBuilder />
+      </Reveal>
+
+      {/* 2027 Election Political Advertising & Statutory Compliance Engine */}
+      <Reveal>
+        <PoliticalRateCardEngine />
+      </Reveal>
+
+      {/* Global Western Diaspora Streaming Hub & Remittance Media Gateway */}
+      <Reveal>
+        <DiasporaHub />
+      </Reveal>
+
+      {/* Twang'aa Club Listener Loyalty & M-Pesa Rewards Engine */}
+      <Reveal>
+        <LoyaltyClubEngine />
+      </Reveal>
+
+      {/* Code of Editorial Conduct & Fact-Checking Handbook */}
+      <Reveal>
+        <EditorialPolicyHandbook />
       </Reveal>
 
       <Reveal>
