@@ -5,6 +5,7 @@ import { LiveRadioPlayer } from './components/website/LiveRadioPlayer';
 import { FloatingNavRail } from './components/website/FloatingNavRail';
 import { WebsiteFooter } from './components/website/WebsiteFooter';
 import { ExecutiveBriefingMode } from './components/website/ExecutiveBriefingMode';
+import { MobileBottomDock } from './components/website/MobileBottomDock';
 import { ChapterSection } from './components/ledger/ChapterSection';
 
 // Core Strategic Modules
@@ -73,8 +74,8 @@ export default function App() {
         />
       )}
 
-      {/* Main Content Stream */}
-      <main className="mx-auto w-full max-w-7xl px-4 pt-16 sm:px-6 sm:pt-20">
+      {/* Main Content Stream - Optimized for mobile edge spacing and touch safe area */}
+      <main className="mx-auto w-full max-w-7xl px-3 sm:px-6 pt-14 sm:pt-20 pb-20 md:pb-12">
         {/* Cover / Strategic Website Hero Block */}
         <DocumentHero
           onNavigate={handleNavigate}
@@ -133,6 +134,13 @@ export default function App() {
 
       {/* Interactive Live Radio Player Widget */}
       <LiveRadioPlayer />
+
+      {/* Ergonomic Mobile Phone Bottom Dock (<15% screen height) */}
+      <MobileBottomDock
+        onOpenSearch={() => setSearchOpen(true)}
+        onOpenBriefing={() => setBriefingOpen(true)}
+        onNavigate={handleNavigate}
+      />
 
       {/* Desktop Sticky Rail & Back-to-Top Indicator */}
       <FloatingNavRail />

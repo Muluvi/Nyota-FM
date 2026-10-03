@@ -156,48 +156,48 @@ export function LiveRadioPlayer() {
 
   return (
     <>
-      {/* Floating Mini Player Widget (Bottom Right) */}
-      <div className="fixed bottom-6 left-6 z-40 max-w-[calc(100vw-3rem)]">
+      {/* Floating Mini Player Widget (Bottom Left on desktop, lifted above dock on mobile) */}
+      <div className="fixed bottom-20 md:bottom-6 left-3 md:left-6 z-40 max-w-[calc(100vw-1.5rem)] md:max-w-md">
         {!isExpanded ? (
-          <div className="flex items-center gap-3 rounded-full bg-ink-2/95 border border-brass/40 px-4 py-2.5 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-brass">
+          <div className="flex items-center gap-2.5 sm:gap-3 rounded-full bg-ink-2/95 border border-brass/40 px-3 sm:px-4 py-2 sm:py-2.5 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-brass">
             <button
               type="button"
               onClick={togglePlay}
-              className={`grid h-9 w-9 place-items-center rounded-full transition-transform active:scale-95 ${
+              className={`grid h-8 sm:h-9 w-8 sm:w-9 place-items-center rounded-full transition-transform active:scale-95 shrink-0 ${
                 isPlaying ? 'bg-moss text-ink' : 'bg-brass text-ink hover:scale-105'
               }`}
               title={isPlaying ? 'Pause broadcast stream' : 'Listen live to 107.3 FM'}
               aria-label={isPlaying ? 'Pause live radio' : 'Play live radio'}
             >
-              {isPlaying ? <Pause size={16} /> : <Play size={16} className="ml-0.5" />}
+              {isPlaying ? <Pause size={15} /> : <Play size={15} className="ml-0.5" />}
             </button>
 
             <button
               type="button"
               onClick={() => setIsExpanded(true)}
-              className="flex items-center gap-3 text-left group"
+              className="flex items-center gap-2 sm:gap-3 text-left group min-w-0"
             >
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="flex h-2 w-2 relative">
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="flex h-2 w-2 relative shrink-0">
                     <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isPlaying ? 'bg-moss' : 'bg-brass'} opacity-75`} />
                     <span className={`relative inline-flex rounded-full h-2 w-2 ${isPlaying ? 'bg-moss' : 'bg-brass'}`} />
                   </span>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-brass font-semibold">
+                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-wider text-brass font-semibold truncate">
                     107.3 FM LIVE
                   </span>
                 </div>
-                <div className="font-body text-xs font-medium text-paper group-hover:text-brass transition-colors truncate max-w-[140px] sm:max-w-[200px]">
+                <div className="font-body text-xs font-medium text-paper group-hover:text-brass transition-colors truncate max-w-[120px] sm:max-w-[200px]">
                   {nowPlaying.show}
                 </div>
               </div>
 
               {/* Animated Equalizer Bars */}
-              <div className="flex items-end gap-0.5 h-4 w-7" aria-hidden="true">
+              <div className="flex items-end gap-0.5 h-3.5 w-6 shrink-0" aria-hidden="true">
                 {[0.6, 1.0, 0.4, 0.8, 0.5].map((scale, i) => (
                   <span
                     key={i}
-                    className="w-1 bg-brass/80 rounded-t-sm transition-all"
+                    className="w-0.5 sm:w-1 bg-brass/80 rounded-t-sm transition-all"
                     style={{
                       height: isPlaying ? `${Math.floor(25 + Math.random() * 75 * scale)}%` : '20%',
                       animation: isPlaying ? `pulse 0.${6 + i * 2}s ease-in-out infinite alternate` : 'none',
@@ -210,14 +210,15 @@ export function LiveRadioPlayer() {
             <button
               type="button"
               onClick={() => setIsExpanded(true)}
-              className="text-sage-dim hover:text-paper p-1 transition-colors"
+              className="text-sage-dim hover:text-paper p-1 transition-colors min-h-[44px] min-w-[32px] flex items-center justify-center"
               title="Expand player"
+              aria-label="Expand live radio player"
             >
               <Maximize2 size={13} />
             </button>
           </div>
         ) : (
-          <div className="w-80 sm:w-96 rounded-xl border border-brass/50 bg-ink-2/95 p-5 shadow-2xl backdrop-blur-md animate-section-entrance">
+          <div className="w-[calc(100vw-1.5rem)] sm:w-96 rounded-xl border border-brass/50 bg-ink-2/95 p-4 sm:p-5 shadow-2xl backdrop-blur-md animate-section-entrance max-h-[80vh] overflow-y-auto">
             <div className="flex items-start justify-between border-b border-hairline pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="grid h-8 w-8 place-items-center rounded bg-brass/20 text-brass">

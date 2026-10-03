@@ -37,29 +37,29 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
 
         {/* Primary Station Headline & Lead Narrative */}
         <div className="max-w-4xl">
-          <div className="text-eyebrow text-brass mb-3 font-mono tracking-widest flex items-center gap-2">
-            <Sparkles size={13} />
-            <span>HAPA TULIPO, TWANG’AA · STRATEGIC TRANSFORMATION</span>
+          <div className="text-eyebrow text-brass mb-2.5 sm:mb-3 font-mono tracking-widest flex items-center gap-1.5 sm:gap-2">
+            <Sparkles size={12} className="shrink-0" />
+            <span className="truncate">HAPA TULIPO, TWANG’AA · STRATEGIC TRANSFORMATION</span>
           </div>
 
-          <h1 className="font-display text-paper leading-[1.04] mb-4 text-3xl sm:text-6xl lg:text-7xl font-semibold">
+          <h1 className="font-display text-paper leading-[1.08] mb-3 sm:mb-4 text-2xl sm:text-5xl lg:text-7xl font-semibold text-balance">
             The Voice of Western Kenya, Amplified.
           </h1>
 
-          <p className="font-display italic text-sage text-lg sm:text-2xl mb-6 leading-relaxed max-w-3xl">
+          <p className="font-display italic text-sage text-base sm:text-xl lg:text-2xl mb-4 sm:mb-6 leading-relaxed max-w-3xl text-balance">
             A comprehensive, data-backed strategic platform for Nyota FM 107.3 — scaling broadcast reach, digital engagement, and commercial sustainability across 6M+ citizens from 2026 through 2028.
           </p>
 
-          <p className="font-body text-paper/85 text-sm sm:text-base leading-relaxed mb-8 max-w-2xl">
+          <p className="font-body text-paper/85 text-xs sm:text-sm lg:text-base leading-relaxed mb-6 sm:mb-8 max-w-2xl">
             Built on verified Kenyan market realities, empirical audience research, and phased studio economics. Every target is backed by receipts; every revenue stream is costed; every operational gap is resolved.
           </p>
 
           {/* Quick CTA Actions */}
-          <div className="flex flex-wrap items-center gap-3 mb-10">
+          <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 mb-8 sm:mb-10">
             <button
               type="button"
               onClick={() => onNavigate('part-5')}
-              className="inline-flex items-center gap-2 rounded-lg bg-brass px-5 py-3 text-xs font-mono uppercase tracking-wider text-ink font-bold shadow-lg transition-all hover:brightness-110 active:scale-95"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-brass px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-ink font-bold shadow-lg transition-all hover:brightness-110 active:scale-95 min-h-[44px]"
             >
               <span>Explore 21 Action Plans</span>
               <ArrowRight size={14} />
@@ -68,7 +68,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             <button
               type="button"
               onClick={() => onNavigate('part-3')}
-              className="inline-flex items-center gap-2 rounded-lg border border-brass/50 bg-brass/10 px-5 py-3 text-xs font-mono uppercase tracking-wider text-brass font-semibold transition-all hover:bg-brass/20 active:scale-95"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-brass/50 bg-brass/10 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-brass font-semibold transition-all hover:bg-brass/20 active:scale-95 min-h-[44px]"
             >
               <Sliders size={14} />
               <span>Launch Payback Simulator</span>
@@ -77,7 +77,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             <button
               type="button"
               onClick={() => onNavigate('part-2')}
-              className="inline-flex items-center gap-2 rounded-lg border border-hairline bg-ink-2 px-5 py-3 text-xs font-mono uppercase tracking-wider text-sage transition-all hover:border-paper hover:text-paper active:scale-95"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-ink-2 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-sage transition-all hover:border-paper hover:text-paper active:scale-95 min-h-[44px]"
             >
               <Database size={14} />
               <span>Inspect Data Room</span>
@@ -87,7 +87,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               <button
                 type="button"
                 onClick={onOpenBriefing}
-                className="inline-flex items-center gap-2 rounded-lg border border-brass/60 bg-brass/15 px-5 py-3 text-xs font-mono uppercase tracking-wider text-paper font-semibold transition-all hover:bg-brass hover:text-ink active:scale-95 shadow-md"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-brass/60 bg-brass/15 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-paper font-semibold transition-all hover:bg-brass hover:text-ink active:scale-95 shadow-md min-h-[44px]"
               >
                 <Sparkles size={14} className="text-brass" />
                 <span>Executive Board Mode</span>
@@ -97,7 +97,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         </div>
 
         {/* Live Animated Metrics Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-8 sm:mb-12">
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
             <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
               Evidence Standard

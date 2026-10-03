@@ -5,8 +5,8 @@
   --color-ink: #090B0A;
   --color-ink-2: #111513;
   --color-paper: #F7F8F4;
-  --color-sage: #A7B5AC;
-  --color-sage-dim: #66756C;
+  --color-sage: #B4C2B9;
+  --color-sage-dim: #8A9A90;
   --color-brass: #D6A75C;
   --color-hairline: #27312C;
   --color-brick: #9B624C;
@@ -19,10 +19,17 @@
 
 /* Base Configuration */
 html {
-  font-size: 16px;
+  font-size: 15px;
   scroll-behavior: smooth;
   background: #090B0A;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 16px;
+  }
 }
 
 body {
@@ -33,25 +40,84 @@ body {
     var(--color-ink);
   color: var(--color-paper);
   font-family: var(--font-body);
-  line-height: 1.65;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+  overflow-x: hidden;
 }
 
-/* Typography Scale */
-h1 { font-size: clamp(2.75rem, 8vw, 5.9rem); letter-spacing: -.055em; }
-h2 { font-size: clamp(2rem, 5.5vw, 3.6rem); letter-spacing: -.045em; }
-h3 { letter-spacing: -.035em; }
-::selection { background: var(--color-brass); color: var(--color-ink); }
-.text-data { font-family: var(--font-mono); font-size: clamp(1.3rem, 5vw, 2.2rem); }
-.text-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; }
+/* Touch & Mobile Ergonomics */
+button, a, input, select, textarea {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
 
-/* Accessibility */
+/* Typography Scale - Mobile Balanced */
+h1 {
+  font-size: clamp(1.85rem, 6.2vw, 4.5rem);
+  letter-spacing: -.03em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(1.35rem, 4.8vw, 2.8rem);
+  letter-spacing: -.025em;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 3.8vw, 1.85rem);
+  letter-spacing: -.02em;
+  line-height: 1.25;
+}
+
+::selection {
+  background: var(--color-brass);
+  color: var(--color-ink);
+}
+
+.text-data {
+  font-family: var(--font-mono);
+  font-size: clamp(1.2rem, 4.5vw, 2rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.text-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+@media (min-width: 640px) {
+  .text-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+}
+
+/* Mobile Performance: Lazy Layout Rendering for Heavy Sections */
+.mobile-section-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 650px;
+}
+
+/* Accessibility & Touch Targets */
 *:focus-visible {
   outline: 2px solid var(--color-brass);
-  outline-offset: 4px;
+  outline-offset: 3px;
   border-radius: 4px;
-  transition: outline-offset 0.2s ease;
+}
+
+/* Safe Area Inset Support for Modern Phones */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+}
+
+.pt-safe {
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
 }
 
 /* Scrollbar */
