@@ -57,6 +57,18 @@ button, a, input, select, textarea {
 @media (max-width: 639px) {
   body {
     line-height: 1.55;
+    background:
+      radial-gradient(circle at 92% 0%, rgba(214, 167, 92, .06), transparent 18rem),
+      var(--color-ink);
+  }
+
+  main {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  section {
+    scroll-margin-top: 5rem;
   }
 
   p {
@@ -75,6 +87,18 @@ button, a, input, select, textarea {
   .glass-panel,
   .glass-panel-active {
     border-radius: 8px;
+  }
+
+  .mobile-section-deferred {
+    contain-intrinsic-size: 1px 520px;
+  }
+
+  .animate-marquee {
+    animation-duration: 48s;
+  }
+
+  .text-data {
+    letter-spacing: -0.04em;
   }
 }
 

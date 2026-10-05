@@ -74,7 +74,7 @@ export function VisualPlaybook() {
   const story = useMemo(() => storyData[storyTab], [storyTab]);
 
   return (
-    <section id="visual-system" className="relative overflow-hidden border-b border-hairline py-12 sm:py-20">
+    <section id="visual-system" className="relative overflow-hidden border-b border-hairline py-10 sm:py-20">
       <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(var(--color-hairline)_1px,transparent_1px),linear-gradient(90deg,var(--color-hairline)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
       <div className="relative">
         <Reveal>
@@ -83,7 +83,7 @@ export function VisualPlaybook() {
               <div className="mb-4 flex items-center gap-2 text-eyebrow font-mono text-brass">
                 <Sparkles size={13} /> NYOTA FM / THE SIGNAL IN MOTION
               </div>
-              <h2 className="max-w-3xl font-display text-5xl leading-[.95] text-paper sm:text-7xl">
+              <h2 className="max-w-3xl font-display text-[clamp(2.35rem,11vw,4.5rem)] leading-[.94] text-paper sm:text-7xl">
                 A living case for the station&apos;s next signal.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-sage sm:text-lg">

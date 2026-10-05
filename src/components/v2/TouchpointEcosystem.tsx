@@ -128,14 +128,14 @@ export function TouchpointEcosystem() {
   const total = TOUCHPOINT_GROUPS.reduce((sum, group) => sum + group.total, 0);
 
   return (
-    <section id="touchpoint-ecosystem" className="mobile-section-deferred scroll-mt-24 py-8 sm:py-10">
+    <section id="touchpoint-ecosystem" className="mobile-section-deferred scroll-mt-24 border-y border-hairline/70 py-10 sm:py-14">
       <Reveal>
         <div className="mb-6 max-w-3xl">
           <div className="mb-3 flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.22em] text-brass">
             <Sparkles size={14} />
             Commercial inventory · Digital expansion
           </div>
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-paper sm:text-4xl">
+          <h2 className="font-display text-[clamp(1.9rem,8vw,2.5rem)] font-semibold tracking-tight text-paper sm:text-4xl">
             The Touchpoint Ecosystem
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-sage sm:text-base">
@@ -145,7 +145,7 @@ export function TouchpointEcosystem() {
       </Reveal>
 
       <Reveal delay={100}>
-        <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mb-6 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3">
           <div className="rounded border border-brass/40 bg-ink-2 p-4 sm:col-span-2">
             <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-sage-dim">
               <BadgeDollarSign size={14} className="text-brass" />
