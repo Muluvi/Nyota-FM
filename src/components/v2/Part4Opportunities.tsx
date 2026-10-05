@@ -5,6 +5,7 @@ import { Reveal } from '../ledger/Reveal';
 import { AdCampaignCalculator } from '../website/AdCampaignCalculator';
 import { AdvertiserQuoteBuilder } from '../website/AdvertiserQuoteBuilder';
 import { PodcastArchivePlayer } from '../website/PodcastArchivePlayer';
+import TouchpointFilter from '../TouchpointFilter';
 
 interface Opportunity {
   rank: number;
@@ -295,6 +296,28 @@ export function Part4Opportunities() {
             </div>
           </div>
         </div>
+      </Reveal>
+
+      {/* Social and streaming touchpoint rate card */}
+      <Reveal>
+        <section className="bg-ink-2 border border-brass/40 rounded p-4 sm:p-5" aria-labelledby="touchpoint-rate-card-title">
+          <div className="flex flex-col gap-2 border-b border-hairline pb-4">
+            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold">
+              PART 4A · DIGITAL COMMERCIAL INVENTORY
+            </span>
+            <h4 id="touchpoint-rate-card-title" className="font-display text-paper text-lg font-semibold">
+              The Touchpoint Ecosystem — Buy More Than Airtime
+            </h4>
+            <p className="max-w-3xl text-sm leading-relaxed text-sage">
+              Companies and institutions can now buy targeted visibility across Nyota FM&apos;s social, video, streaming, metadata, and community channels—not only traditional radio spots. Each touchpoint can be purchased individually or bundled into a campaign.
+            </p>
+          </div>
+          <div className="mt-4 flex flex-col gap-1">
+            <h5 className="font-display text-paper text-sm font-semibold">Social, Streaming &amp; Activation Rate Card</h5>
+            <p className="text-xs text-sage-dim">Indicative prices in KSh. Final proposals are packaged around campaign objectives, production requirements, reach, and exclusivity.</p>
+          </div>
+          <TouchpointFilter />
+        </section>
       </Reveal>
 
       {/* Interactive Advertising Rate Card & Campaign Builder */}
