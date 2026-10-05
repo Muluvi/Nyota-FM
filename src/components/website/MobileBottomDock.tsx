@@ -43,7 +43,7 @@ export function MobileBottomDock({
           onClick={() => setSectionsSheetOpen(false)}
         >
           <div
-            className="w-full rounded-t-2xl border-t border-brass/50 bg-ink-2 p-4 pb-safe space-y-3 max-h-[75vh] overflow-y-auto"
+            className="w-full max-h-[75vh] overflow-y-auto rounded-t-2xl border-t border-brass/50 bg-ink-2 p-4 pb-safe"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Grab handle */}

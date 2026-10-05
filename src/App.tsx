@@ -75,7 +75,7 @@ export default function App() {
       )}
 
       {/* Main Content Stream - Optimized for mobile edge spacing and touch safe area */}
-      <main className="mx-auto w-full max-w-7xl px-3 sm:px-6 pt-14 sm:pt-20 pb-20 md:pb-12">
+      <main className="mx-auto w-full max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-12">
         {/* Cover / Strategic Website Hero Block */}
         <DocumentHero
           onNavigate={handleNavigate}

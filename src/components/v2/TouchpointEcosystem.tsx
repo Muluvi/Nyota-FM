@@ -128,7 +128,7 @@ export function TouchpointEcosystem() {
   const total = TOUCHPOINT_GROUPS.reduce((sum, group) => sum + group.total, 0);
 
   return (
-    <section id="touchpoint-ecosystem" className="scroll-mt-24 py-6 sm:py-10">
+    <section id="touchpoint-ecosystem" className="mobile-section-deferred scroll-mt-24 py-8 sm:py-10">
       <Reveal>
         <div className="mb-6 max-w-3xl">
           <div className="mb-3 flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.22em] text-brass">

@@ -34,6 +34,7 @@ html {
 
 body {
   min-width: 320px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   background:
     radial-gradient(circle at 88% 0%, rgba(214, 167, 92, .08), transparent 28rem),
     radial-gradient(circle at 0% 35%, rgba(118, 164, 134, .05), transparent 24rem),
@@ -51,6 +52,40 @@ body {
 button, a, input, select, textarea {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 639px) {
+  body {
+    line-height: 1.55;
+  }
+
+  p {
+    max-width: 68ch;
+  }
+
+  button, a {
+    min-height: 44px;
+  }
+
+  .text-eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.2px;
+  }
+
+  .glass-panel,
+  .glass-panel-active {
+    border-radius: 8px;
+  }
+}
+
+@media (hover: none) {
+  .animate-marquee {
+    animation-duration: 42s;
+  }
+
+  .wave-bar {
+    animation-duration: 2.8s;
+  }
 }
 
 /* Typography Scale - Mobile Balanced */
