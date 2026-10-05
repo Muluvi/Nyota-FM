@@ -19,6 +19,7 @@ import { Part6TheBuild } from './components/v2/Part6TheBuild';
 import { Part7GapAudit } from './components/v2/Part7GapAudit';
 import { SourceListAndAsks } from './components/v2/SourceListAndAsks';
 import { VisualPlaybook } from './components/v2/VisualPlaybook';
+import { TouchpointEcosystem } from './components/v2/TouchpointEcosystem';
 import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
 
 export default function App() {
@@ -75,7 +76,7 @@ export default function App() {
       )}
 
       {/* Main Content Stream - Optimized for mobile edge spacing and touch safe area */}
-      <main className="mx-auto w-full max-w-7xl px-3 sm:px-6 pt-14 sm:pt-20 pb-20 md:pb-12">
+      <main className="mx-auto w-full max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-12">
         {/* Cover / Strategic Website Hero Block */}
         <DocumentHero
           onNavigate={handleNavigate}
@@ -87,6 +88,9 @@ export default function App() {
 
         {/* DATA-ENRICHED FIGURES — COMPLETE SOURCED ANNEXURE */}
         <DataEnrichedAnnexure />
+
+        {/* COMMERCIAL TOUCHPOINTS — SOCIAL + STREAMING RATE-CARD INVENTORY */}
+        <TouchpointEcosystem />
 
         {/* PART 1 — THE OBJECTIVES */}
         <ChapterSection id="part-1" number="01" title="The Objectives — 5 Strategic Mandates">
