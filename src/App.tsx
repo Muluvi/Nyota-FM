@@ -21,6 +21,8 @@ import { SourceListAndAsks } from './components/v2/SourceListAndAsks';
 import { VisualPlaybook } from './components/v2/VisualPlaybook';
 import { TouchpointEcosystem } from './components/v2/TouchpointEcosystem';
 import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
+import { scrollToSection } from './lib/scroll';
+import { sections } from './content/sections';
 
 export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -46,10 +48,8 @@ export default function App() {
   }, []);
 
   const handleNavigate = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 74;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+    if (sections.some((section) => section.id === id)) {
+      scrollToSection(id);
     }
   };
 
