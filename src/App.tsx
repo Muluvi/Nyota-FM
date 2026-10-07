@@ -22,6 +22,7 @@ import { VisualPlaybook } from './components/v2/VisualPlaybook';
 import { TouchpointEcosystem } from './components/v2/TouchpointEcosystem';
 import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
 import { scrollToSection } from './lib/scroll';
+import { sections } from './content/sections';
 
 export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -47,7 +48,9 @@ export default function App() {
   }, []);
 
   const handleNavigate = (id: string) => {
-    scrollToSection(id);
+    if (sections.some((section) => section.id === id)) {
+      scrollToSection(id);
+    }
   };
 
   return (
