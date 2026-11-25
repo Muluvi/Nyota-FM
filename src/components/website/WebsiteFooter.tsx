@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Radio, Mail, MapPin, ExternalLink, ShieldCheck, Send, MessageCircle } from 'lucide-react';
 import { station } from '../../data/station';
+import { sections } from '../../content/sections';
 
 const LEVERS = [
   'Outside Broadcast (OB) Market Activation',
@@ -97,15 +98,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                 Platform Blueprint
               </h4>
               <ul className="space-y-2 text-xs font-mono">
-                {[
-                  { id: 'part-1', label: '1. Ownership Objectives' },
-                  { id: 'part-2', label: '2. Sourced Master Data' },
-                  { id: 'part-3', label: '3. Payback & ROI Model' },
-                  { id: 'part-4', label: '4. Revenue Matrix' },
-                  { id: 'part-5', label: '5. 21 Action Plans' },
-                  { id: 'part-6', label: '6. Phased Studio Build' },
-                  { id: 'part-7', label: '7. Gap Audit Centerpiece' },
-                ].map((link) => (
+                {sections.map((s) => ({ id: s.id, label: `${s.number}. ${s.shortTitle}` })).map((link) => (
                   <li key={link.id}>
                     <button
                       type="button"
@@ -153,7 +146,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                 <li>
                   <button
                     type="button"
-                    onClick={() => onNavigate('part-asks')}
+                    onClick={() => onNavigate('asks')}
                     className="text-sage hover:text-paper transition-colors"
                   >
                     Governance & Resolutions

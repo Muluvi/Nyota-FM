@@ -5,12 +5,7 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
-import { CountyCoverageExplorer } from '../website/CountyCoverageExplorer';
-import { CountyEconomicExplorer } from '../website/CountyEconomicExplorer';
 import { CompetitorDialMap } from '../website/CompetitorDialMap';
-import { TransmitterElevationTool } from '../website/TransmitterElevationTool';
-import { AgriCommodityIndex } from '../website/AgriCommodityIndex';
-import { CMORoyaltyCalculator } from '../website/CMORoyaltyCalculator';
 
 export function Part2MasterData() {
   const [activeTab, setActiveTab] = useState<'market' | 'competitors' | 'ad_econ' | 'digital' | 'studio' | 'regulatory' | 'audience' | 'levers'>('market');
@@ -138,28 +133,13 @@ export function Part2MasterData() {
                 Note on v1.0 Discrepancy (Audited Correction)
               </div>
               <p className="text-sage text-xs leading-relaxed">
-                v1.0 stated <em className="text-paper italic">"approximately 7.2 million people."</em> The KNBS-based 2025 projection is approximately 6.6 million. v1.0's figure appears to have been inflated by applying growth rates without adjusting for the 2019 census revision. v2.0 strictly uses the KNBS-derived baseline of <strong>6,632,427 (2025)</strong> and <strong>6,762,168 (2026)</strong>.
+                v1.0 stated <em className="text-paper italic">"approximately 7.2 million people."</em> The KNBS-based 2025 projection is approximately 6.6 million. v1.0's figure appears to have been inflated by applying growth rates without adjusting for the 2019 census revision. v2.0 uses a KNBS-based baseline of <strong>≈6.6 million (2025)</strong> and <strong>≈6.8 million (2026)</strong>, rounded because no official county projection method is published.
               </p>
             </div>
           </div>
 
-          {/* Interactive 5-County Signal Coverage Explorer */}
-          <CountyCoverageExplorer />
-
-          {/* Interactive Western Kenya County Economic & Commercial Engine */}
-          <CountyEconomicExplorer />
-
-          {/* Interactive Transmitter Elevation & Propagation Profile Tool */}
-          <TransmitterElevationTool />
-
           {/* Comparative Radio Dial Map & Competitor Spectrum */}
           <CompetitorDialMap />
-
-          {/* Agri-Commodity Live Price Ticker & Market Soko Index */}
-          <AgriCommodityIndex />
-
-          {/* Music royalties under the 2026–2028 tariff */}
-          <CMORoyaltyCalculator />
 
           {/* 2.1.2 Radio Penetration & 2.1.3 Device Ownership */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

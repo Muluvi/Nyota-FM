@@ -1,17 +1,8 @@
+import { sections } from '../../content/sections';
 import React, { useState, useEffect } from 'react';
 import { ArrowUp, Compass } from 'lucide-react';
 
-const SECTIONS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'part-1', label: '1. Objectives' },
-  { id: 'part-2', label: '2. Data Room' },
-  { id: 'part-3', label: '3. Payback Model' },
-  { id: 'part-4', label: '4. Opportunities' },
-  { id: 'part-5', label: '5. Action Plan' },
-  { id: 'part-6', label: '6. Studio Capex' },
-  { id: 'part-7', label: '7. Gap Audit' },
-  { id: 'part-asks', label: '8. Board Asks' },
-];
+const SECTIONS = sections.map((s) => ({ id: s.id, label: s.number === '00' ? s.shortTitle : `${s.number}. ${s.shortTitle}` }));
 
 export function FloatingNavRail() {
   const [activeSection, setActiveSection] = useState('overview');

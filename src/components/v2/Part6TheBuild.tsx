@@ -7,12 +7,6 @@ import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { capex, phaseGates, phaseTotal, capexTotal, studioPhasesTotal, unquotedLines, PHASES, type Phase } from '../../data/capex';
 import { formatKshRange, displayValue } from '../../data/format';
-import { InteractiveStudioPlan } from '../website/InteractiveStudioPlan';
-import { VisualRadioStudioSimulator } from '../website/VisualRadioStudioSimulator';
-import { PowerResilienceMatrix } from '../website/PowerResilienceMatrix';
-import { OBVanExplorer } from '../website/OBVanExplorer';
-import { EquipmentLifecycleLog } from '../website/EquipmentLifecycleLog';
-import { BrandIdentityViewer } from '../website/BrandIdentityViewer';
 
 const PHASE_KEY = { p1: 'P1', p2: 'P2', p3: 'P3' } as const;
 
@@ -192,36 +186,6 @@ export function Part6TheBuild() {
             ))}
           </div>
         </div>
-      </Reveal>
-
-      {/* Interactive Studio Floor Plan & Equipment Inspector */}
-      <Reveal>
-        <InteractiveStudioPlan />
-      </Reveal>
-
-      {/* Interactive Visual Radio Multi-Cam Studio Switcher */}
-      <Reveal>
-        <VisualRadioStudioSimulator />
-      </Reveal>
-
-      {/* Studio Power Resilience & Zero-Downtime Grid Failover */}
-      <Reveal>
-        <PowerResilienceMatrix />
-      </Reveal>
-
-      {/* "Hapa Tulipo" Outside Broadcast (OB) Van & Roadshow Unit */}
-      <Reveal>
-        <OBVanExplorer />
-      </Reveal>
-
-      {/* Station Equipment Registry & Maintenance Lifecycle Log */}
-      <Reveal>
-        <EquipmentLifecycleLog />
-      </Reveal>
-
-      {/* Official Brand Identity & Design System Specifications */}
-      <Reveal>
-        <BrandIdentityViewer />
       </Reveal>
 
       {/* 6.2 Consolidated Studio Capex Schedule */}

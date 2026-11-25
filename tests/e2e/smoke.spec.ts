@@ -51,3 +51,24 @@ test('the Western reach fact renders the same in Hero, Search and Deck', async (
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('dialog')).toContainText(reach);
 });
+
+test('sections render in decision order and the rail lists every section', async ({page, isMobile}) => {
+  const {sections} = await import('../../src/content/sections');
+  await page.goto('/');
+  const order = await page.evaluate((ids) => ids.map((id) => document.getElementById(id)!.getBoundingClientRect().top + window.scrollY), sections.map((s) => s.id));
+  expect([...order].sort((a, b) => a - b)).toEqual(order);
+  if (!isMobile) {
+    const rail = page.locator('nav, aside').filter({hasText: 'B. Preview'}).first();
+    for (const s of sections) await expect(rail).toContainText(s.shortTitle);
+  }
+});
+
+test('no 2026 quarter milestones remain in the chapters', async ({page}) => {
+  const {chapterSections} = await import('../../src/content/sections');
+  await page.goto('/');
+  for (const s of chapterSections) {
+    // Source titles in Appendix A may legitimately cite 2026 reports; plan chapters may not.
+    const text = await page.locator(`[id="${s.id}"]`).innerText();
+    expect(text, s.id).not.toMatch(/Q[1-4] 2026/);
+  }
+});

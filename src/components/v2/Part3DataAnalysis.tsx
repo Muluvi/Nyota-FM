@@ -7,7 +7,8 @@ import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { InteractivePaybackSimulator } from '../website/InteractivePaybackSimulator';
 
-export function Part3DataAnalysis() {
+/** `money`: revenue concentration, whitespace, revenue index and payback model. `risks`: v1 vs evidence and the biggest risks. */
+export function Part3DataAnalysis({ view = 'money' }: { view?: 'money' | 'risks' }) {
   const [selectedQuarter, setSelectedQuarter] = useState<number>(7); // Q4 2028 = Month 24 (index 7)
 
   const quarters = [
@@ -25,6 +26,8 @@ export function Part3DataAnalysis() {
 
   return (
     <div className="space-y-6">
+      {view === 'money' && (
+        <>
       {/* 3.1 Where Revenue Actually Concentrates */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
@@ -87,6 +90,10 @@ export function Part3DataAnalysis() {
         </div>
       </Reveal>
 
+        </>
+      )}
+      {view === 'risks' && (
+        <>
       {/* 3.2 Which v1.0 Assumptions Survive Contact with Evidence */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
@@ -191,6 +198,10 @@ export function Part3DataAnalysis() {
         </div>
       </Reveal>
 
+        </>
+      )}
+      {view === 'money' && (
+        <>
       {/* 3.3 The Real Whitespace */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
@@ -239,6 +250,10 @@ export function Part3DataAnalysis() {
         </div>
       </Reveal>
 
+        </>
+      )}
+      {view === 'money' && (
+        <>
       {/* 3.4 Payback Model & Sensitivity */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-5">
@@ -355,6 +370,10 @@ export function Part3DataAnalysis() {
       </Reveal>
 
 
+        </>
+      )}
+      {view === 'risks' && (
+        <>
       {/* 3.5 The Single Biggest Risks */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
@@ -396,6 +415,8 @@ export function Part3DataAnalysis() {
           </div>
         </div>
       </Reveal>
+        </>
+      )}
     </div>
   );
 }

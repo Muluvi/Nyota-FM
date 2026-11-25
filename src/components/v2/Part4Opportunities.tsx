@@ -3,9 +3,6 @@ import { Award, TrendingUp, Sparkles, Filter, CheckCircle2, ArrowRight } from 'l
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { levers } from '../../data/levers';
-import { AdCampaignCalculator } from '../website/AdCampaignCalculator';
-import { AdvertiserQuoteBuilder } from '../website/AdvertiserQuoteBuilder';
-import { PodcastArchivePlayer } from '../website/PodcastArchivePlayer';
 
 type Opportunity = {
   rank: number;
@@ -36,7 +33,6 @@ export function Part4Opportunities() {
     highlight: i < 5,
     rationale: l.rationale,
   }));
-
 
   const filtered = opportunities.filter((op) => {
     if (filterDifficulty === 'all') return true;
@@ -219,20 +215,6 @@ export function Part4Opportunities() {
         </section>
       </Reveal>
 
-      {/* Interactive Advertising Rate Card & Campaign Builder */}
-      <Reveal>
-        <AdCampaignCalculator />
-      </Reveal>
-
-      {/* Official Commercial Rate Card & Pro-Forma Invoice Generator */}
-      <Reveal>
-        <AdvertiserQuoteBuilder />
-      </Reveal>
-
-      {/* Digital Podcasting & Flagship On-Demand Audio Archive */}
-      <Reveal>
-        <PodcastArchivePlayer />
-      </Reveal>
     </div>
   );
 }

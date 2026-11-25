@@ -18,7 +18,8 @@ import { Part5Strategies } from './components/v2/Part5Strategies';
 import { Part6TheBuild } from './components/v2/Part6TheBuild';
 import { Part7GapAudit } from './components/v2/Part7GapAudit';
 import { SourceListAndAsks } from './components/v2/SourceListAndAsks';
-import { VisualPlaybook } from './components/v2/VisualPlaybook';
+import { Flywheel } from './components/v2/Flywheel';
+import { ProductPreview, SeeItWorking } from './appendix/ProductPreview';
 import { TouchpointEcosystem } from './components/v2/TouchpointEcosystem';
 import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
 import { scrollToSection } from './lib/scroll';
@@ -84,54 +85,55 @@ export default function App() {
           onOpenBriefing={() => setBriefingOpen(true)}
         />
 
-        {/* VISUAL SYSTEM — HANDBOOK-LED PROPOSAL LAYER */}
-        <VisualPlaybook />
-
-        {/* DATA-ENRICHED FIGURES — COMPLETE SOURCED ANNEXURE */}
-        <DataEnrichedAnnexure />
-
-        {/* COMMERCIAL TOUCHPOINTS — SOCIAL + STREAMING RATE-CARD INVENTORY */}
-        <TouchpointEcosystem />
-
-        {/* PART 1 — THE OBJECTIVES */}
-        <ChapterSection id="part-1" number="01" title="The Objectives — 5 Strategic Mandates">
-          <Part1Objectives />
-        </ChapterSection>
-
-        {/* PART 2 — THE DATA (MASTER DATA ANNEXURE) */}
-        <ChapterSection id="part-2" number="02" title="Sourced Master Data Room & Benchmark Tables">
+        {/* 01–08: the board case, in decision order */}
+        <ChapterSection id="situation" number="01" title="The Situation: Market Evidence">
           <Part2MasterData />
+          <p className="mt-6"><SeeItWorking group="preview-evidence">Explore the county, coverage and royalty tools</SeeItWorking></p>
         </ChapterSection>
 
-        {/* PART 3 — DATA ANALYSIS & PAYBACK MODEL */}
-        <ChapterSection id="part-3" number="03" title="Data Analysis, Sensitivity & Payback Simulator">
-          <Part3DataAnalysis />
+        <ChapterSection id="objectives" number="02" title="The Objectives (A–E)">
+          <Part1Objectives />
+          <p className="mt-6"><SeeItWorking group="preview-listener">See the programming and listener tools working</SeeItWorking></p>
         </ChapterSection>
 
-        {/* PART 4 — THE OPPORTUNITIES MATRIX */}
-        <ChapterSection id="part-4" number="04" title="The Commercial Opportunities & Expected Value Matrix">
+        <ChapterSection id="opportunity" number="03" title="The Opportunity: Revenue Levers & Rate Card">
           <Part4Opportunities />
+          <TouchpointEcosystem />
+          <p className="mt-6"><SeeItWorking group="preview-advertiser">Try the media plan and quote</SeeItWorking></p>
         </ChapterSection>
 
-        {/* PART 5 — STRATEGIES TO CAPTURE */}
-        <ChapterSection id="part-5" number="05" title="Action Execution Plans (21 Concrete Strategies)">
+        <ChapterSection id="plan" number="04" title="The Plan: 21 Strategies from Month 0">
+          <Flywheel />
           <Part5Strategies />
         </ChapterSection>
 
-        {/* PART 6 — THE BUILD */}
-        <ChapterSection id="part-6" number="06" title="Studio Build, Phased Capex & Governance Roadmap">
+        <ChapterSection id="build" number="05" title="The Build: Studio, Power, OB & People">
           <Part6TheBuild />
+          <p className="mt-6"><SeeItWorking group="preview-operations">See the studio, power and OB tools working</SeeItWorking></p>
         </ChapterSection>
 
-        {/* PART 7 — THE GAP AUDIT */}
-        <ChapterSection id="part-7" number="07" title="The Gap Audit (Comprehensive Centerpiece Checklists)">
+        <ChapterSection id="money" number="06" title="The Money: Revenue Index & Payback">
+          <Part3DataAnalysis view="money" />
+        </ChapterSection>
+
+        <ChapterSection id="risks" number="07" title="Risks & Gap Audit">
+          <Part3DataAnalysis view="risks" />
           <Part7GapAudit />
         </ChapterSection>
 
-        {/* SOURCE LIST & THE SIX ASKS OF OWNERSHIP */}
-        <div id="part-asks" className="scroll-mt-20 sm:scroll-mt-24 pt-12">
-          <SourceListAndAsks />
-        </div>
+        <ChapterSection id="asks" number="08" title="The Asks & Governance">
+          <SourceListAndAsks show="asks" />
+        </ChapterSection>
+
+        {/* Appendices */}
+        <ChapterSection id="appendix-data" number="A" title="Appendix A: Data Room & Sources">
+          <DataEnrichedAnnexure />
+          <SourceListAndAsks show="sources" />
+        </ChapterSection>
+
+        <ChapterSection id="appendix-preview" number="B" title="Appendix B: Product Preview">
+          <ProductPreview />
+        </ChapterSection>
       </main>
 
       {/* Standard Website Footer */}

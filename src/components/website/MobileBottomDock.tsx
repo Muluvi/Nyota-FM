@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Radio, Layers, Search, Sparkles, ArrowUp, X, Play, Pause, ChevronRight } from 'lucide-react';
+import { sections as allSections } from '../../content/sections';
 
 interface MobileBottomDockProps {
   onOpenSearch: () => void;
@@ -14,16 +15,7 @@ export function MobileBottomDock({
 }: MobileBottomDockProps) {
   const [sectionsSheetOpen, setSectionsSheetOpen] = useState(false);
 
-  const sections = [
-    { id: 'overview', num: '00', title: 'Executive Overview' },
-    { id: 'part-1', num: '01', title: '5 Strategic Mandates' },
-    { id: 'part-2', num: '02', title: 'Sourced Master Data Room' },
-    { id: 'part-3', num: '03', title: 'Payback & Financial Model' },
-    { id: 'part-4', num: '04', title: 'Commercial Opportunities' },
-    { id: 'part-5', num: '05', title: '21 Action Strategies' },
-    { id: 'part-6', num: '06', title: 'Phased Studio Build' },
-    { id: 'part-7', num: '07', title: 'Centerpiece Gap Audit' },
-  ];
+  const sections = allSections.map((s) => ({ id: s.id, num: s.number, title: s.title }));
 
   const handleSectionJump = (id: string) => {
     setSectionsSheetOpen(false);

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Database, Calculator, HelpCircle, ArrowRight, Layers, Radio, Sparkles, CheckCircle2, TrendingUp, Sliders, ExternalLink } from 'lucide-react';
 import { factValue } from '../../data/facts';
 import { Reveal } from '../ledger/Reveal';
+import { chapterSections } from '../../content/sections';
+import { DecisionSummary } from './DecisionSummary';
 
 interface DocumentHeroProps {
   onNavigate: (sectionId: string) => void;
@@ -11,15 +13,19 @@ interface DocumentHeroProps {
 export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) {
   const [activeTierTab, setActiveTierTab] = useState<1 | 2 | 0>(1);
 
-  const sections = [
-    { id: 'part-1', num: '01', title: 'Ownership Objectives', desc: '5 strategic mandates tested against current Kenyan ad market evidence.', badge: 'Part 1' },
-    { id: 'part-2', num: '02', title: 'Sourced Data Room', desc: '8 empirical data domains, 2019 Census, ad rates & vendor quotes.', badge: 'Part 2' },
-    { id: 'part-3', num: '03', title: 'Analysis & Payback', desc: 'v1 assumptions vs evidence, 8-quarter revenue index, risks. Payback model under revision.', badge: 'Part 3' },
-    { id: 'part-4', num: '04', title: 'Opportunities Matrix', desc: '12 commercial revenue streams ranked by Expected Value formula.', badge: 'Part 4' },
-    { id: 'part-5', num: '05', title: '21 Action Execution Plans', desc: 'Full implementation playbooks with verifiable receipts & KPIs.', badge: 'Part 5' },
-    { id: 'part-6', num: '06', title: 'Phased Studio Build', desc: '24-month roadmap from Month 0, Phase 1 capex KSh 627K–837K, staffing & governance.', badge: 'Part 6' },
-    { id: 'part-7', num: '07', title: 'Centerpiece Gap Audit', desc: 'Checklist A (20 Gaps), B (40 Build Items) & C (12 Reclaimed Levers).', badge: 'Part 7' },
-  ];
+  const DESCRIPTIONS: Record<string, string> = {
+    situation: 'Radio reach, listening by language, the ad market and devices: the evidence the plan rests on.',
+    objectives: 'Five mandates (A–E), each tested against current evidence and restated as a proposed v2 target.',
+    opportunity: '12 revenue levers and the single social and streaming rate card.',
+    plan: '21 strategies dated from Month 0, with owners, budgets and KPIs.',
+    build: 'Studio phases, power, outside broadcasts and people, with phase gates.',
+    money: 'Revenue concentration, the revenue index and the payback model (under revision).',
+    risks: 'What v1 got wrong, the biggest risks, and the gap audit.',
+    asks: 'The six decisions, the honest self-check and the printable resolution sheet.',
+  };
+  const sections = chapterSections
+    .filter((s) => s.id !== 'overview' && s.id !== 'asks')
+    .map((s) => ({ id: s.id, num: s.number, title: s.shortTitle, desc: DESCRIPTIONS[s.id] ?? s.title, badge: `Part ${s.number}` }));
 
   return (
     <section id="overview" className="pt-6 sm:pt-10 pb-16 border-b border-hairline">
@@ -58,7 +64,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
           <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 mb-8 sm:mb-10">
             <button
               type="button"
-              onClick={() => onNavigate('part-5')}
+              onClick={() => onNavigate('plan')}
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-brass px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-ink font-bold shadow-lg transition-all hover:brightness-110 active:scale-95 min-h-[44px]"
             >
               <span>Explore 21 Action Plans</span>
@@ -67,7 +73,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
 
             <button
               type="button"
-              onClick={() => onNavigate('part-3')}
+              onClick={() => onNavigate('money')}
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-brass/50 bg-brass/10 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-brass font-semibold transition-all hover:bg-brass/20 active:scale-95 min-h-[44px]"
             >
               <Sliders size={14} />
@@ -76,7 +82,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
 
             <button
               type="button"
-              onClick={() => onNavigate('part-2')}
+              onClick={() => onNavigate('situation')}
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-ink-2 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-sage transition-all hover:border-paper hover:text-paper active:scale-95 min-h-[44px]"
             >
               <Database size={14} />
@@ -94,6 +100,10 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               </button>
             )}
           </div>
+        </div>
+
+        <div className="mb-10">
+          <DecisionSummary onNavigate={onNavigate} />
         </div>
 
         {/* Live Animated Metrics Grid */}
@@ -274,7 +284,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-sage flex items-center gap-2">
               <Layers size={14} className="text-brass" />
-              <span>THE SEVEN PARTS OF THE PROPOSAL, PLUS THE ASKS</span>
+              <span>THE EIGHT CHAPTERS OF THE PROPOSAL</span>
             </h3>
             <span className="text-xs font-mono text-brass">Click any card to jump</span>
           </div>
@@ -308,7 +318,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             {/* Closing Conclusions & Board Asks Card */}
             <button
               type="button"
-              onClick={() => onNavigate('part-asks')}
+              onClick={() => onNavigate('asks')}
               className="group p-4 bg-brass/10 hover:bg-brass/20 border border-brass/40 hover:border-brass rounded-xl text-left transition-all duration-200 shadow-md hover:shadow-xl flex flex-col justify-between min-h-[130px]"
             >
               <div>

@@ -349,3 +349,14 @@ h3 {
     display: none !important;
   }
 }
+
+@keyframes flywheel {
+  to {
+    stroke-dashoffset: -160;
+  }
+}
+
+/* Closed popovers stay hidden even if a utility class sets display. */
+[popover]:not(:popover-open) {
+  display: none !important;
+}

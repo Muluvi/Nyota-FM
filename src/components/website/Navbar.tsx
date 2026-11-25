@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Search, Radio, Volume2, ArrowUp, ChevronRight, Layers, ExternalLink } from 'lucide-react';
 import { PresentationModeToggle } from './PresentationModeToggle';
+import { sections, chapterSections } from '../../content/sections';
 
 interface NavItem {
   id: string;
@@ -8,15 +9,9 @@ interface NavItem {
   number: string;
 }
 
-const PRIMARY_NAV: NavItem[] = [
-  { id: 'overview', label: 'Overview', number: '00' },
-  { id: 'part-1', label: 'Objectives', number: '01' },
-  { id: 'part-2', label: 'Data Room', number: '02' },
-  { id: 'part-3', label: 'Payback Model', number: '03' },
-  { id: 'part-4', label: 'Opportunities', number: '04' },
-  { id: 'part-5', label: 'Action Plan', number: '05' },
-  { id: 'part-6', label: 'Studio Capex', number: '06' },
-];
+/** Derived from src/content/sections.ts (chapters only; appendices are in the rail and footer). */
+const PRIMARY_NAV: NavItem[] = chapterSections.map((s) => ({ id: s.id, label: s.shortTitle, number: s.number }));
+const MENU_NAV: NavItem[] = sections.map((s) => ({ id: s.id, label: s.title, number: s.number }));
 
 export function Navbar({
   onOpenSearch,
@@ -112,15 +107,9 @@ export function Navbar({
                 </span>
               </div>
             </button>
-
-            {/* Live Indicator Pill */}
-            <div className="hidden lg:flex items-center gap-1.5 rounded-full border border-moss/40 bg-moss/10 px-2 py-0.5 text-[10px] font-mono text-moss">
-              <span className="size-1.5 rounded-full bg-moss animate-ping" />
-              <span>ON AIR NOW</span>
-            </div>
           </div>
 
-          {/* Desktop 7 Primary Navigation Links */}
+          {/* Desktop chapter links (from sections.ts) */}
           <nav
             className="hidden md:flex items-center gap-1 lg:gap-1.5 text-xs font-mono"
             aria-label="Main Navigation"
@@ -223,7 +212,7 @@ export function Navbar({
           </div>
 
           <nav className="flex-1 overflow-y-auto px-6 py-6 divide-y divide-hairline">
-            {PRIMARY_NAV.map((item) => (
+            {MENU_NAV.map((item) => (
               <button
                 key={item.id}
                 type="button"
@@ -242,33 +231,6 @@ export function Navbar({
               </button>
             ))}
 
-            <button
-              type="button"
-              onClick={() => scrollToSection('part-7')}
-              className="flex w-full items-center justify-between py-4 text-left font-body text-base text-paper hover:text-brass min-h-[48px]"
-            >
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs text-sage-dim border border-hairline px-2 py-0.5 rounded">
-                  07
-                </span>
-                <span>The Gap Audit</span>
-              </div>
-              <ChevronRight size={16} className="text-sage-dim" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => scrollToSection('part-asks')}
-              className="flex w-full items-center justify-between py-4 text-left font-body text-base text-paper hover:text-brass min-h-[48px]"
-            >
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs text-emerald-400 border border-emerald-400/40 px-2 py-0.5 rounded">
-                  08
-                </span>
-                <span>The Six Board Asks</span>
-              </div>
-              <ChevronRight size={16} className="text-sage-dim" />
-            </button>
           </nav>
 
           <div className="border-t border-hairline p-6 bg-ink-2 space-y-3">

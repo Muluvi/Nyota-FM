@@ -18,7 +18,8 @@ interface SourceItem {
   deep?: boolean;
 }
 
-export function SourceListAndAsks() {
+/** `asks`: the six asks and the self-check. `sources`: the source registry (Appendix A). */
+export function SourceListAndAsks({ show = 'asks' }: { show?: 'asks' | 'sources' }) {
   const [sourceSearch, setSourceSearch] = useState('');
 
   // Source registry lives in src/data/sources.ts.
@@ -64,6 +65,113 @@ export function SourceListAndAsks() {
 
   return (
     <div className="space-y-6 pt-6">
+      {show === 'asks' && (
+        <>
+      {/* THE SIX ASKS OF OWNERSHIP */}
+      <Reveal>
+        <div id="board-resolutions" className="bg-ink-2 border border-brass/60 rounded p-5 sm:p-6 space-y-5 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-brass/10 rounded-full blur-3xl pointer-events-none print:hidden" />
+
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-4">
+            <div>
+              <span className="text-[11px] font-mono text-brass uppercase tracking-widest font-bold block">
+                DECISIONS REQUESTED
+              </span>
+              <h3 className="font-display text-paper text-xl sm:text-2xl font-semibold">
+                The Six Asks of Ownership
+              </h3>
+              <p className="text-xs text-sage mt-1 max-w-xl font-body">
+                Six decisions move the Twang&apos;aa Transformation from proposal to execution. Timing is relative to Month 0, the month of board approval.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => printSection('board-resolutions')}
+              className="self-start sm:self-auto px-3 py-2 rounded text-xs font-mono font-semibold bg-brass/20 text-brass border border-brass/50 hover:bg-brass hover:text-ink transition-colors flex items-center gap-1.5 print:hidden"
+            >
+              <Stamp size={12} />
+              <span>Print resolution sheet</span>
+            </button>
+          </div>
+
+          <ol className="space-y-3">
+            {asks.map((ask) => (
+              <li key={ask.id} className="p-4 rounded border bg-ink border-hairline">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-0.5 border border-brass/50 text-brass bg-brass/10">
+                    {ask.id}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h5 className="font-display text-sm sm:text-base text-paper font-semibold">
+                        {ask.title}
+                      </h5>
+                      <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-ink-2 text-sage border border-hairline">
+                        {ask.timing}
+                      </span>
+                      {ask.amount && (
+                        <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-brass/10 text-brass border border-brass/40">
+                          {ask.amount}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-sage font-body mt-1 leading-relaxed">{ask.detail}</p>
+                    <p className="text-[11px] text-sage-dim font-mono mt-1">Owner: {ask.owner}</p>
+                    <p className="hidden print:block text-xs mt-2">☐ Approved &nbsp;&nbsp; ☐ Not approved &nbsp;&nbsp; ☐ Deferred</p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="hidden print:block text-xs pt-6">
+            Signed: ______________________ &nbsp;&nbsp; ______________________ &nbsp;&nbsp; Date: ____________
+          </div>
+
+          <div className="p-4 bg-ink rounded border border-hairline text-center text-xs font-mono text-sage-dim">
+            Submitted by Firefly Management · Board proposal v2.1 · Draft for discussion
+          </div>
+        </div>
+      </Reveal>
+      {/* SELF-CHECK AUDIT SCORECARD */}
+      <Reveal>
+        <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
+          <div className="border-b border-hairline pb-3">
+            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              SELF-CHECK
+            </span>
+            <h4 className="font-display text-paper text-base font-semibold">
+              Self-Check: {selfChecks.filter((c) => c.status === 'pass').length} of {selfChecks.length} criteria met
+            </h4>
+            <p className="text-xs text-sage mt-0.5">
+              Stated honestly for this revision. Open items are tracked in the improvement roadmap.
+            </p>
+          </div>
+
+          <IntegrityPanel />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs font-mono">
+            {selfChecks.map((sc) => (
+              <div key={sc.num} className="p-2.5 bg-ink rounded border border-hairline space-y-1">
+                <div className="flex items-start justify-between gap-2">
+                  <span className="text-paper/90 text-xs font-body leading-snug">
+                    {sc.num}. {sc.text}
+                  </span>
+                  <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded border shrink-0 ${statusStyle[sc.status].cls}`}>
+                    {statusStyle[sc.status].label}
+                  </span>
+                </div>
+                <p className="text-[11px] text-sage-dim font-body leading-snug">{sc.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+        </>
+      )}
+      {show === 'sources' && (
+        <>
       {/* 37-SOURCE MASTER LIST */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
@@ -133,107 +241,8 @@ export function SourceListAndAsks() {
         </div>
       </Reveal>
 
-      {/* SELF-CHECK AUDIT SCORECARD */}
-      <Reveal>
-        <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
-          <div className="border-b border-hairline pb-3">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
-              SELF-CHECK
-            </span>
-            <h4 className="font-display text-paper text-base font-semibold">
-              Self-Check: {selfChecks.filter((c) => c.status === 'pass').length} of {selfChecks.length} criteria met
-            </h4>
-            <p className="text-xs text-sage mt-0.5">
-              Stated honestly for this revision. Open items are tracked in the improvement roadmap.
-            </p>
-          </div>
-
-          <IntegrityPanel />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs font-mono">
-            {selfChecks.map((sc) => (
-              <div key={sc.num} className="p-2.5 bg-ink rounded border border-hairline space-y-1">
-                <div className="flex items-start justify-between gap-2">
-                  <span className="text-paper/90 text-xs font-body leading-snug">
-                    {sc.num}. {sc.text}
-                  </span>
-                  <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded border shrink-0 ${statusStyle[sc.status].cls}`}>
-                    {statusStyle[sc.status].label}
-                  </span>
-                </div>
-                <p className="text-[11px] text-sage-dim font-body leading-snug">{sc.note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
-      {/* THE SIX ASKS OF OWNERSHIP */}
-      <Reveal>
-        <div id="board-resolutions" className="bg-ink-2 border border-brass/60 rounded p-5 sm:p-6 space-y-5 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-brass/10 rounded-full blur-3xl pointer-events-none print:hidden" />
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-4">
-            <div>
-              <span className="text-[11px] font-mono text-brass uppercase tracking-widest font-bold block">
-                DECISIONS REQUESTED
-              </span>
-              <h3 className="font-display text-paper text-xl sm:text-2xl font-semibold">
-                The Six Asks of Ownership
-              </h3>
-              <p className="text-xs text-sage mt-1 max-w-xl font-body">
-                Six decisions move the Twang&apos;aa Transformation from proposal to execution. Timing is relative to Month 0, the month of board approval.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => printSection('board-resolutions')}
-              className="self-start sm:self-auto px-3 py-2 rounded text-xs font-mono font-semibold bg-brass/20 text-brass border border-brass/50 hover:bg-brass hover:text-ink transition-colors flex items-center gap-1.5 print:hidden"
-            >
-              <Stamp size={12} />
-              <span>Print resolution sheet</span>
-            </button>
-          </div>
-
-          <ol className="space-y-3">
-            {asks.map((ask) => (
-              <li key={ask.id} className="p-4 rounded border bg-ink border-hairline">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-0.5 border border-brass/50 text-brass bg-brass/10">
-                    {ask.id}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h5 className="font-display text-sm sm:text-base text-paper font-semibold">
-                        {ask.title}
-                      </h5>
-                      <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-ink-2 text-sage border border-hairline">
-                        {ask.timing}
-                      </span>
-                      {ask.amount && (
-                        <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-brass/10 text-brass border border-brass/40">
-                          {ask.amount}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs text-sage font-body mt-1 leading-relaxed">{ask.detail}</p>
-                    <p className="text-[11px] text-sage-dim font-mono mt-1">Owner: {ask.owner}</p>
-                    <p className="hidden print:block text-xs mt-2">☐ Approved &nbsp;&nbsp; ☐ Not approved &nbsp;&nbsp; ☐ Deferred</p>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-
-          <div className="hidden print:block text-xs pt-6">
-            Signed: ______________________ &nbsp;&nbsp; ______________________ &nbsp;&nbsp; Date: ____________
-          </div>
-
-          <div className="p-4 bg-ink rounded border border-hairline text-center text-xs font-mono text-sage-dim">
-            Submitted by Firefly Management · Board proposal v2.1 · Draft for discussion
-          </div>
-        </div>
-      </Reveal>
+        </>
+      )}
     </div>
   );
 }

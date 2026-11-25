@@ -24,7 +24,10 @@ function visit(file) {
   if (!file || visited.has(file)) return
   visited.add(file)
   const source = readFileSync(file, 'utf8')
-  const imports = [...source.matchAll(/(?:import|export)\s+(?:[^'";]+?\s+from\s+)?['"]([^'"]+)['"]/g)]
+  const imports = [
+    ...source.matchAll(/(?:import|export)\s+(?:[^'";]+?\s+from\s+)?['"]([^'"]+)['"]/g),
+    ...source.matchAll(/import\(\s*['"]([^'"]+)['"]\s*\)/g),
+  ]
   for (const [, specifier] of imports) visit(resolveImport(file, specifier))
 }
 

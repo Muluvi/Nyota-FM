@@ -63,7 +63,7 @@ export function TierBadge(props: TierBadgeProps) {
       <span
         id={popoverId}
         popover="auto"
-        className="m-auto block w-[min(92vw,26rem)] rounded-lg border border-hairline bg-ink-2 p-4 text-left font-body text-sm text-paper shadow-2xl backdrop:bg-ink/60"
+        className="m-auto w-[min(92vw,26rem)] rounded-lg border border-hairline bg-ink-2 p-4 text-left font-body text-sm text-paper shadow-2xl backdrop:bg-ink/60"
       >
         <span className="mb-2 flex items-start justify-between gap-3">
           <span className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 font-mono text-[11px] font-semibold ${s.cls}`}>

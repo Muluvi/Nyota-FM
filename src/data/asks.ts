@@ -28,7 +28,7 @@ export const asks: readonly Ask[] = [
       'Endorse the v2 thesis and the roadmap, with every milestone dated relative to Month 0 (assumed January 2027) and anchored to the IEBC 2027 election calendar.',
     owner: 'Board',
     timing: 'Month 0',
-    sectionId: 'part-5',
+    sectionId: 'plan',
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ export const asks: readonly Ask[] = [
     amount: `≤ KSh ${toMillions(p1.high)} M`,
     owner: 'Board → Station Engineer',
     timing: 'Month 0–1',
-    sectionId: 'part-6',
+    sectionId: 'build',
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ export const asks: readonly Ask[] = [
       'Engage a WhatsApp Business Solution Provider (per-message pricing), apply for a USSD code via Africa\'s Talking (Safaricom dedicated code KSh 70,000/month), and register with the ODPC as data controller before the listener database opens.',
     owner: 'Head of Digital',
     timing: 'Month 1',
-    sectionId: 'part-5',
+    sectionId: 'plan',
   },
   {
     id: 4,
@@ -59,7 +59,7 @@ export const asks: readonly Ask[] = [
       'Asubuhi ya Imani, Hapa Tulipo Mix, Sauti ya Nchi and Wanawake wa Twang\'aa become sponsorable, repeatable content that can be sold ahead of air.',
     owner: 'Programme Controller',
     timing: 'Month 2',
-    sectionId: 'part-5',
+    sectionId: 'plan',
   },
   {
     id: 5,
@@ -69,7 +69,7 @@ export const asks: readonly Ask[] = [
       'File with the Government Advertising Agency (which authorises national-government advertising) and pursue county supplier prequalification separately, starting with Bungoma and Kakamega.',
     owner: 'General Manager',
     timing: 'Month 1–3',
-    sectionId: 'part-5',
+    sectionId: 'plan',
   },
   {
     id: 6,
@@ -81,6 +81,6 @@ export const asks: readonly Ask[] = [
     amount: 'KSh 0.5–1 M',
     owner: 'Board + Firefly Management',
     timing: 'Month 0',
-    sectionId: 'part-7',
+    sectionId: 'risks',
   },
 ]

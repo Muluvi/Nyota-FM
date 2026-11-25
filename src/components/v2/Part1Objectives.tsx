@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { Target, TrendingUp, Users, Award, Radio, AlertTriangle, CheckCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
-import { InteractiveSchedule } from '../website/InteractiveSchedule';
-import { TwangaaLexicon } from '../website/TwangaaLexicon';
-import { PresenterRoster } from '../website/PresenterRoster';
-import { EmergencyAlertConsole } from '../website/EmergencyAlertConsole';
 
 interface ObjectiveItem {
   id: string;
@@ -232,25 +228,6 @@ export function Part1Objectives() {
       })}
       </div>
 
-      {/* Interactive 24-Hour Programming Clock & Lineup */}
-      <Reveal>
-        <InteractiveSchedule />
-      </Reveal>
-
-      {/* Cultural Moat & Dialect Audio Lexicon */}
-      <Reveal>
-        <TwangaaLexicon />
-      </Reveal>
-
-      {/* On-Air Presenter Roster & Commercial Endorsers */}
-      <Reveal>
-        <PresenterRoster />
-      </Reveal>
-
-      {/* Emergency Broadcast & Weather/Flood Alert System */}
-      <Reveal>
-        <EmergencyAlertConsole />
-      </Reveal>
     </div>
   );
 }

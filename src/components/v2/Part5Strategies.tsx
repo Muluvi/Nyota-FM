@@ -7,13 +7,6 @@ import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { strategies } from '../../data/strategies';
 import { StrategyTracker } from '../website/StrategyTracker';
-import { TwangaaMobileSimulator } from '../website/TwangaaMobileSimulator';
-import { CivicNoticeBuilder } from '../website/CivicNoticeBuilder';
-import { PoliticalRateCardEngine } from '../website/PoliticalRateCardEngine';
-import { DiasporaHub } from '../website/DiasporaHub';
-import { LoyaltyClubEngine } from '../website/LoyaltyClubEngine';
-import { EditorialPolicyHandbook } from '../website/EditorialPolicyHandbook';
-
 
 export function Part5Strategies() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -40,40 +33,6 @@ export function Part5Strategies() {
 
   return (
     <div className="space-y-6">
-      {/* Interactive 21 Strategies Implementation & Board Endorsement Matrix */}
-      <Reveal>
-        <StrategyTracker />
-      </Reveal>
-
-      {/* Interactive USSD & WhatsApp Mobile Listener Journey Simulator */}
-      <Reveal>
-        <TwangaaMobileSimulator />
-      </Reveal>
-
-      {/* County Government Public Civic Notice & Townhall Generator */}
-      <Reveal>
-        <CivicNoticeBuilder />
-      </Reveal>
-
-      {/* 2027 Election Political Advertising & Statutory Compliance Engine */}
-      <Reveal>
-        <PoliticalRateCardEngine />
-      </Reveal>
-
-      {/* Global Western Diaspora Streaming Hub & Remittance Media Gateway */}
-      <Reveal>
-        <DiasporaHub />
-      </Reveal>
-
-      {/* Twang'aa Club Listener Loyalty & M-Pesa Rewards Engine */}
-      <Reveal>
-        <LoyaltyClubEngine />
-      </Reveal>
-
-      {/* Code of Editorial Conduct & Fact-Checking Handbook */}
-      <Reveal>
-        <EditorialPolicyHandbook />
-      </Reveal>
 
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
@@ -281,6 +240,10 @@ export function Part5Strategies() {
             })}
           </div>
         </div>
+      </Reveal>
+      {/* Shortlist view of the same 21 strategies */}
+      <Reveal>
+        <StrategyTracker />
       </Reveal>
     </div>
   );
