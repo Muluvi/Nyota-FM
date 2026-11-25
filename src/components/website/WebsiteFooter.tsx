@@ -1,24 +1,53 @@
 import React, { useState } from 'react';
-import { Radio, Mail, Phone, MapPin, ExternalLink, ShieldCheck, Heart, ArrowUp, Send, Check } from 'lucide-react';
+import { Radio, Mail, MapPin, ExternalLink, ShieldCheck, Send, MessageCircle } from 'lucide-react';
+import { station } from '../../data/station';
+
+const LEVERS = [
+  'Outside Broadcast (OB) Market Activation',
+  'Spot Advertising & Radio Jingle Campaign',
+  'Flagship Show Title Sponsorship',
+  'WhatsApp & USSD Direct Listener Campaign',
+  'Civic & County Government Desk',
+  'Strategic Long-Term Brand Partnership',
+] as const;
 
 export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void }) {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
-  const [inquirySubmitted, setInquirySubmitted] = useState(false);
   const [email, setEmail] = useState('');
   const [org, setOrg] = useState('');
+  const [lever, setLever] = useState<string>(LEVERS[0]);
   const [message, setMessage] = useState('');
 
-  const handleInquirySubmit = (e: React.FormEvent) => {
+  const hasChannel = Boolean(station.salesEmail || station.salesWhatsApp);
+
+  const inquiryText = () =>
+    [
+      `Commercial inquiry — ${station.name}`,
+      `Organisation: ${org}`,
+      `Contact email: ${email}`,
+      `Interested in: ${lever}`,
+      message ? `Notes: ${message}` : '',
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+  const openInquiry = (preset?: string) => {
+    if (preset) setLever(preset);
+    setInquiryModalOpen(true);
+  };
+
+  // The inquiry is handed to the visitor's own email or WhatsApp app, addressed to the
+  // sales desk, so a lead is never silently dropped by a form that posts nowhere.
+  const handleInquirySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setInquirySubmitted(true);
-    setTimeout(() => {
-      setInquirySubmitted(false);
-      setInquiryModalOpen(false);
-      setEmail('');
-      setOrg('');
-      setMessage('');
-    }, 2500);
+    const via = (e.nativeEvent as SubmitEvent).submitter?.getAttribute('data-via');
+    const text = inquiryText();
+    if (via === 'whatsapp' && station.salesWhatsApp) {
+      window.open(`https://wa.me/${station.salesWhatsApp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+    } else if (station.salesEmail) {
+      window.location.href = `mailto:${station.salesEmail}?subject=${encodeURIComponent(`Advertising inquiry: ${org}`)}&body=${encodeURIComponent(text)}`;
+    }
   };
 
   return (
@@ -46,18 +75,18 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
               </div>
 
               <p className="text-sm leading-relaxed text-sage/90 max-w-md font-body">
-                Western Kenya&apos;s leading commercial and community voice. Broadcasting across Bungoma, Kakamega, Busia, Vihiga, and Trans Nzoia, reaching 1.8M+ weekly listeners across Swahili, Bukusu, and regional languages.
+                A commercial and community station broadcasting from Bungoma across Bungoma, Kakamega, Busia, Vihiga, and Trans Nzoia in Swahili, Bukusu, and regional languages. Audience size is a declared data gap until a Western Kenya survey is commissioned.
               </p>
 
               <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-sage-dim">
                 <span className="flex items-center gap-1.5">
-                  <MapPin size={13} className="text-brass" /> Bungoma & Kakamega Studios
+                  <MapPin size={13} className="text-brass" /> Bungoma studio · Kakamega planned (Phase 2)
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Radio size={13} className="text-moss" /> Frequency: 107.3 MHz
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <ShieldCheck size={13} className="text-brass" /> CA Kenya 10-Yr License
+                  <ShieldCheck size={13} className="text-brass" /> CA-licensed FM broadcaster
                 </span>
               </div>
             </div>
@@ -69,7 +98,6 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
               </h4>
               <ul className="space-y-2 text-xs font-mono">
                 {[
-                  { id: 'overview', label: 'Strategic Overview' },
                   { id: 'part-1', label: '1. Ownership Objectives' },
                   { id: 'part-2', label: '2. Sourced Master Data' },
                   { id: 'part-3', label: '3. Payback & ROI Model' },
@@ -100,7 +128,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                 <li>
                   <button
                     type="button"
-                    onClick={() => setInquiryModalOpen(true)}
+                    onClick={() => openInquiry()}
                     className="text-brass hover:underline flex items-center gap-1 font-semibold"
                   >
                     <span>Partner & Ad Rates</span>
@@ -108,16 +136,19 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                   </button>
                 </li>
                 <li>
-                  <span className="text-sage-dim">Outside Broadcast Booking</span>
+                  <button type="button" onClick={() => openInquiry(LEVERS[0])} className="text-sage hover:text-brass transition-colors text-left">
+                    Outside Broadcast Booking
+                  </button>
                 </li>
                 <li>
-                  <span className="text-sage-dim">WhatsApp & USSD Campaigns</span>
+                  <button type="button" onClick={() => openInquiry(LEVERS[3])} className="text-sage hover:text-brass transition-colors text-left">
+                    WhatsApp & USSD Campaigns
+                  </button>
                 </li>
                 <li>
-                  <span className="text-sage-dim">Civic & County Government Desk</span>
-                </li>
-                <li>
-                  <span className="text-sage-dim">Presenter Endorsements</span>
+                  <button type="button" onClick={() => openInquiry(LEVERS[4])} className="text-sage hover:text-brass transition-colors text-left">
+                    Civic & County Government Desk
+                  </button>
                 </li>
                 <li>
                   <button
@@ -137,19 +168,19 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                 Governance & Standards
               </h4>
               <p className="text-xs text-sage leading-relaxed mb-3">
-                Every metric is validated against 37 verified industry sources including KNBS, CA Kenya, GeoPoll, and ReelAnalytics.
+                Every figure carries an evidence tier. Tier 1 cites a published source (KNBS, CA Kenya, ReelAnalytics, and others); Tier 2 is modelled; Tier 0 is a declared gap that needs primary research.
               </p>
               <div className="space-y-1.5 text-[11px] font-mono">
-                <div className="flex items-center gap-2 text-emerald-400">
-                  <span className="size-1.5 rounded-full bg-emerald-400" />
+                <div className="flex items-center gap-2 text-moss">
+                  <span className="size-1.5 rounded-full bg-moss" />
                   <span>Tier 1 · Hard Data Citations</span>
                 </div>
-                <div className="flex items-center gap-2 text-amber-300">
-                  <span className="size-1.5 rounded-full bg-amber-400" />
+                <div className="flex items-center gap-2 text-brass">
+                  <span className="size-1.5 rounded-full bg-brass" />
                   <span>Tier 2 · Modelled Econometrics</span>
                 </div>
-                <div className="flex items-center gap-2 text-rose-300">
-                  <span className="size-1.5 rounded-full bg-rose-400" />
+                <div className="flex items-center gap-2 text-brick">
+                  <span className="size-1.5 rounded-full bg-brick" />
                   <span>Tier 0 · Primary Research Gaps</span>
                 </div>
               </div>
@@ -159,7 +190,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                 onClick={() => setPrivacyModalOpen(true)}
                 className="mt-4 text-xs font-mono text-sage-dim hover:text-paper underline block"
               >
-                Data Privacy & Regulatory Compliance
+                Planned Compliance Actions
               </button>
             </div>
           </div>
@@ -172,11 +203,11 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
 
             <div className="flex items-center gap-4 text-center sm:text-right">
               <span className="text-sage-dim">
-                Licensed by Communications Authority of Kenya (CA) · ODPC Registered
+                Licensed by the Communications Authority of Kenya (CA)
               </span>
               <span className="hidden md:inline text-hairline">|</span>
               <span className="text-brass/70">
-                Strategic Proposal v2.0
+                Board proposal v2.1 · Draft for discussion
               </span>
             </div>
           </div>
@@ -205,38 +236,40 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
               <button
                 type="button"
                 onClick={() => setInquiryModalOpen(false)}
-                className="text-sage hover:text-paper"
+                className="text-sage hover:text-paper p-2"
+                aria-label="Close"
               >
                 ✕
               </button>
             </div>
 
-            {inquirySubmitted ? (
-              <div className="py-8 text-center space-y-2">
-                <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-moss/20 text-moss">
-                  <Check size={24} />
-                </div>
-                <h4 className="font-display text-xl text-paper font-semibold">Inquiry Dispatched</h4>
+            {!hasChannel ? (
+              <div className="py-6 text-center space-y-2" role="status">
+                <h4 className="font-display text-xl text-paper font-semibold">Sales desk contact pending</h4>
                 <p className="text-xs text-sage max-w-sm mx-auto">
-                  Thank you. Nyota FM&apos;s commercial sales desk will share our 2026 media kit, rate cards, and outside broadcast packages within 24 hours.
+                  The sales desk email and WhatsApp number have not been configured for this build, so this form is
+                  switched off rather than collecting inquiries that nobody receives. Set VITE_SALES_EMAIL or
+                  VITE_SALES_WHATSAPP to enable it.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleInquirySubmit} className="space-y-3.5 font-body">
                 <div>
-                  <label className="text-xs font-mono text-sage block mb-1">Brand or Organization Name</label>
+                  <label htmlFor="inq-org" className="text-xs font-mono text-sage block mb-1">Brand or Organisation Name</label>
                   <input
+                    id="inq-org"
                     type="text"
                     required
                     value={org}
                     onChange={(e) => setOrg(e.target.value)}
-                    placeholder="e.g. Safaricom Western, County Government of Bungoma"
+                    placeholder="e.g. your company, SACCO, or county department"
                     className="w-full rounded bg-ink border border-hairline px-3.5 py-2 text-sm text-paper focus:border-brass focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-mono text-sage block mb-1">Contact Email Address</label>
+                  <label htmlFor="inq-email" className="text-xs font-mono text-sage block mb-1">Contact Email Address</label>
                   <input
+                    id="inq-email"
                     type="email"
                     required
                     value={email}
@@ -246,18 +279,17 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-mono text-sage block mb-1">Target Commercial Levers</label>
-                  <select className="w-full rounded bg-ink border border-hairline px-3.5 py-2 text-xs font-mono text-paper focus:border-brass focus:outline-none">
-                    <option>Outside Broadcast (OB) Market Activation</option>
-                    <option>Spot Advertising & Radio Jingle Campaign</option>
-                    <option>Flagship Show Title Sponsorship</option>
-                    <option>WhatsApp & USSD Direct Listener Campaign</option>
-                    <option>Strategic Long-Term Brand Partnership</option>
+                  <label htmlFor="inq-lever" className="text-xs font-mono text-sage block mb-1">Interested in</label>
+                  <select id="inq-lever" value={lever} onChange={(e) => setLever(e.target.value)} className="w-full rounded bg-ink border border-hairline px-3.5 py-2 text-xs font-mono text-paper focus:border-brass focus:outline-none">
+                    {LEVERS.map((l) => (
+                      <option key={l}>{l}</option>
+                    ))}
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-mono text-sage block mb-1">Campaign Notes or Brief</label>
+                  <label htmlFor="inq-notes" className="text-xs font-mono text-sage block mb-1">Campaign Notes or Brief</label>
                   <textarea
+                    id="inq-notes"
                     rows={3}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -265,12 +297,29 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                     className="w-full rounded bg-ink border border-hairline px-3.5 py-2 text-sm text-paper focus:border-brass focus:outline-none resize-none"
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="w-full rounded bg-brass py-3 font-mono text-xs uppercase tracking-wider text-ink font-bold hover:brightness-105 transition-all flex items-center justify-center gap-2"
-                >
-                  <Send size={14} /> Send Commercial Inquiry
-                </button>
+                <p className="text-[11px] text-sage-dim">
+                  Your inquiry opens in your own email or WhatsApp app, addressed to the sales desk, so you keep a copy.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  {station.salesEmail && (
+                    <button
+                      type="submit"
+                      data-via="email"
+                      className="flex-1 rounded bg-brass py-3 font-mono text-xs uppercase tracking-wider text-ink font-bold hover:brightness-105 transition-all flex items-center justify-center gap-2"
+                    >
+                      <Mail size={14} /> Send by email
+                    </button>
+                  )}
+                  {station.salesWhatsApp && (
+                    <button
+                      type="submit"
+                      data-via="whatsapp"
+                      className="flex-1 rounded border border-moss/60 bg-moss/15 py-3 font-mono text-xs uppercase tracking-wider text-paper font-bold hover:bg-moss/25 transition-all flex items-center justify-center gap-2"
+                    >
+                      <MessageCircle size={14} /> Send on WhatsApp
+                    </button>
+                  )}
+                </div>
               </form>
             )}
           </div>
@@ -289,25 +338,31 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
           >
             <div className="flex items-center justify-between border-b border-hairline pb-3">
               <h3 className="font-display text-xl text-paper font-semibold">
-                Data Protection & Regulatory Compliance
+                Planned Compliance Actions
               </h3>
               <button
                 type="button"
                 onClick={() => setPrivacyModalOpen(false)}
-                className="text-sage hover:text-paper"
+                className="text-sage hover:text-paper p-2"
+                aria-label="Close"
               >
                 ✕
               </button>
             </div>
             <div className="text-xs text-sage space-y-3 font-body leading-relaxed">
               <p>
-                <strong>Office of the Data Protection Commissioner (ODPC):</strong> Nyota Frequency Modulation Limited complies fully with the Kenya Data Protection Act (DPA 2019). Listener registrations through USSD, WhatsApp, and SMS promotions adhere strictly to opt-in consent protocols.
+                These are actions the plan commits to, not completed registrations. Status is tracked in Part 7 (Gap Audit).
               </p>
               <p>
-                <strong>Communications Authority of Kenya (CA):</strong> Broadcast programming maintains CA Kenya Programming Code compliance, 40% local content quotas, and watershed provisions (05:00–22:00 EAT).
+                <strong>Data protection (ODPC):</strong> register as a data controller/processor under the Data Protection Act 2019 before any
+                WhatsApp, USSD, or SMS listener database is built; collect opt-in consent at sign-up; renew the certificate every 24 months.
               </p>
               <p>
-                <strong>Music & Copyright Licensing:</strong> Commercial broadcast and digital streaming operate under licenses cleared with the Music Copyright Society of Kenya (MCSK), PRISK, and KAMP.
+                <strong>Broadcast code (CA):</strong> maintain Programming Code compliance, local-content obligations, and watershed rules.
+              </p>
+              <p>
+                <strong>Music licensing (KECOBO):</strong> pay royalties under the Consolidated Music Tariffs 2026–2028 only to CMOs licensed for the
+                year. MCSK was not licensed for 2025–26; KAMP&apos;s licence was suspended for 90 days from 1 July 2026; 2027 licences are pending.
               </p>
             </div>
             <div className="pt-2 text-right">

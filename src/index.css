@@ -304,3 +304,46 @@ h3 {
     width: 100%;
   }
 }
+
+/* Scoped printing (see src/lib/print.ts): the chosen section is cloned into #print-root,
+   everything else is removed from the printed layout, and the clone is forced to
+   dark-on-white so it reads on paper. */
+#print-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 16mm;
+  }
+
+  body[data-print] {
+    background: #fff !important;
+    padding: 0 !important;
+  }
+
+  body[data-print] > :not(#print-root) {
+    display: none !important;
+  }
+
+  body[data-print] #print-root {
+    display: block;
+  }
+
+  #print-root,
+  #print-root * {
+    color: #111 !important;
+    background: transparent !important;
+    border-color: #bbb !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #print-root .print\:hidden {
+    display: none !important;
+  }
+}

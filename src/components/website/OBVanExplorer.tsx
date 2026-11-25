@@ -20,7 +20,7 @@ const TOUR_STOPS: TourStop[] = [
     county: 'Bungoma',
     day: 'Wednesdays & Saturdays',
     crowdSize: '35,000+ Active Traders',
-    primaryAdvertisers: ['Kenya Seed Company', 'One Acre Fund', 'Equity Bank Kilimo'],
+    primaryAdvertisers: ['Sponsor slots available'],
     expectedYield: 'KSh 250,000 – 380,000',
     highlight: '2nd largest open market in Kenya. Live agricultural commodity pricing and farmer interviews.',
   },
@@ -30,7 +30,7 @@ const TOUR_STOPS: TourStop[] = [
     county: 'Kakamega',
     day: 'Thursdays',
     crowdSize: '18,000 Pastoralists & Butchers',
-    primaryAdvertisers: ['Veterinary Pharmaceutical Brands', 'Safaricom M-Pesa Till', 'Cooper K-Brands'],
+    primaryAdvertisers: ['Sponsor slots available'],
     expectedYield: 'KSh 180,000 – 260,000',
     highlight: 'East Africa’s premier cattle hub. High cash-velocity market with immediate retail activation.',
   },
@@ -40,7 +40,7 @@ const TOUR_STOPS: TourStop[] = [
     county: 'Busia',
     day: 'Fridays',
     crowdSize: '22,000 Transporters & Border Traders',
-    primaryAdvertisers: ['Logistics Transporters', 'Forex Bureaus', 'Energy Drinks'],
+    primaryAdvertisers: ['Sponsor slots available'],
     expectedYield: 'KSh 220,000 – 320,000',
     highlight: 'High cross-border transit volume. Currency exchange trends and cross-border music DJ battles.',
   },
@@ -50,7 +50,7 @@ const TOUR_STOPS: TourStop[] = [
     county: 'Bungoma',
     day: 'Mondays',
     crowdSize: '15,000 Farmers & Co-ops',
-    primaryAdvertisers: ['New KCC Dairy', 'Agro-Chemical Dealers', 'Motorbike Dealers'],
+    primaryAdvertisers: ['Sponsor slots available'],
     expectedYield: 'KSh 160,000 – 240,000',
     highlight: 'Rich agricultural hinterland on the slopes of Mt. Elgon. Co-operative SACCO sponsorships.',
   },
@@ -68,7 +68,7 @@ export function OBVanExplorer() {
             <Truck size={14} />
             <span className="uppercase tracking-widest font-semibold">Mobile Studio Unit · Hapa Tulipo Rig</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Empirical Local Vehicle Conversion & Broadcast RF Quotes" />
+            <TierBadge tier={0} gapMethod="Three vehicle and conversion quotes; crowd sizes from county market records" timeline="Before Phase 2 gate" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             "Hapa Tulipo" Outside Broadcast (OB) Van & Roadshow Unit

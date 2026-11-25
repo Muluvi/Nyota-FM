@@ -5,7 +5,6 @@ import { Reveal } from '../ledger/Reveal';
 import { AdCampaignCalculator } from '../website/AdCampaignCalculator';
 import { AdvertiserQuoteBuilder } from '../website/AdvertiserQuoteBuilder';
 import { PodcastArchivePlayer } from '../website/PodcastArchivePlayer';
-import TouchpointFilter from '../TouchpointFilter';
 
 interface Opportunity {
   rank: number;
@@ -93,10 +92,10 @@ export function Part4Opportunities() {
       name: 'Political Advertising (2027 General Election)',
       revenue: 'KSh 2M – 10M (episodic)',
       cost: 'Low',
-      time: 'Q3 2027',
-      difficulty: 'Low',
+      time: 'Q2–Q3 2027 (campaign 29 May–7 Aug)',
+      difficulty: 'High',
       score: 6.2,
-      rationale: 'Massive cyclical cash injection across Western Kenya gubernatorial, senatorial, and parliamentary contests.'
+      rationale: 'Large episodic revenue across Western Kenya gubernatorial, senatorial and parliamentary contests, with a heavy compliance and reputational load (IEBC, NCIC, MCK). IEBC spending limits are currently stayed by the High Court, so budgets are less predictable.'
     },
     {
       rank: 8,
@@ -316,7 +315,13 @@ export function Part4Opportunities() {
             <h5 className="font-display text-paper text-sm font-semibold">Social, Streaming &amp; Activation Rate Card</h5>
             <p className="text-xs text-sage-dim">Indicative prices in KSh. Final proposals are packaged around campaign objectives, production requirements, reach, and exclusivity.</p>
           </div>
-          <TouchpointFilter />
+          <p className="mt-3 text-xs text-sage">
+            The single social and streaming rate card (50 touchpoints) is in the{' '}
+            <a href="#touchpoint-ecosystem" className="text-brass underline underline-offset-2 hover:text-paper">
+              Touchpoint Ecosystem
+            </a>{' '}
+            section.
+          </p>
         </section>
       </Reveal>
 

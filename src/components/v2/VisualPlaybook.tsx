@@ -30,22 +30,23 @@ import { Reveal } from '../ledger/Reveal';
 type StoryTab = 'reach' | 'revenue' | 'operations';
 
 const kpis = [
-  { label: 'Weekly reach', value: '1.8M', change: '+18.4%', note: 'vs. last quarter', icon: Users },
-  { label: 'Digital share', value: '32%', change: '+8.2 pts', note: 'stream + podcast', icon: Globe2 },
-  { label: 'Commercial yield', value: '4.6×', change: '+1.4×', note: 'campaign return', icon: BarChart3 },
+  // Illustrative 24-month targets from the plan (Tier 2), not current performance.
+  { label: 'Revenue index', value: '2.0×', change: 'Target', note: 'base case by Month 24, vs audited baseline', icon: BarChart3 },
+  { label: 'Non-spot share', value: '40%', change: 'Target', note: 'of revenue by Month 24', icon: Globe2 },
+  { label: 'Opt-in contacts', value: '150K', change: 'Target', note: 'WhatsApp + USSD by Month 24 (base)', icon: Users },
 ];
 
 const storyData: Record<StoryTab, { label: string; value: string; copy: string; bars: number[] }> = {
-  reach: { label: 'Audience reach', value: '1.8M', copy: 'A wider signal, carried by radio, mobile and community presence.', bars: [34, 42, 39, 55, 61, 68, 79, 88] },
-  revenue: { label: 'Commercial yield', value: '4.6×', copy: 'A portfolio that turns attention into accountable partner value.', bars: [28, 36, 48, 44, 60, 72, 69, 91] },
-  operations: { label: 'Execution readiness', value: '82%', copy: 'Clear owners, visible milestones and fewer invisible handoffs.', bars: [48, 52, 58, 66, 62, 73, 78, 82] },
+  reach: { label: 'Opt-in contacts (target)', value: '150K', copy: 'A wider signal, carried by radio, mobile and community presence. Illustrative path to the Month 24 target.', bars: [34, 42, 39, 55, 61, 68, 79, 88] },
+  revenue: { label: 'Revenue index (target)', value: '2.0×', copy: 'A portfolio that turns attention into accountable partner value. Illustrative path to the Month 24 base case.', bars: [28, 36, 48, 44, 60, 72, 69, 91] },
+  operations: { label: 'Non-spot share (target)', value: '40%', copy: 'Clear owners, visible milestones and fewer invisible handoffs. Illustrative path to the Month 24 target.', bars: [48, 52, 58, 66, 62, 73, 78, 82] },
 };
 
 const programmes = [
-  { time: '06:00', title: 'The Morning Signal', host: 'Achieng & Otieno', type: 'LIVE', color: 'bg-brass' },
-  { time: '10:00', title: 'Mulembe Midday', host: 'Miriam Wekesa', type: 'NEXT', color: 'bg-moss' },
+  { time: '06:00', title: 'The Morning Signal', host: 'Host TBC', type: 'LIVE', color: 'bg-brass' },
+  { time: '10:00', title: 'Mulembe Midday', host: 'Host TBC', type: 'NEXT', color: 'bg-moss' },
   { time: '14:00', title: 'The Community Desk', host: 'Nyota Newsroom', type: 'LATER', color: 'bg-brick' },
-  { time: '18:00', title: 'Drive Home', host: 'Juma & Sifa', type: 'LATER', color: 'bg-sage-dim' },
+  { time: '18:00', title: 'Drive Home', host: 'Host TBC', type: 'LATER', color: 'bg-sage-dim' },
 ];
 
 function AnimatedBars({ values, muted = false }: { values: number[]; muted?: boolean }) {
@@ -140,7 +141,10 @@ export function VisualPlaybook() {
         </Reveal>
 
         <Reveal>
-          <div className="mt-14 grid gap-3 sm:grid-cols-3">
+          <div className="mt-14 mb-3 text-eyebrow font-mono text-sage-dim">
+            Illustrative 24-month targets (Tier 2) · not current performance
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
             {kpis.map(({ label, value, change, note, icon: Icon }) => (
               <div
                 key={label}
@@ -152,10 +156,7 @@ export function VisualPlaybook() {
                 </div>
                 <div className="mt-4 flex items-end justify-between gap-2">
                   <span className="font-mono text-4xl tabular-nums text-paper">{value}</span>
-                  <span className="flex items-center gap-1 text-xs font-mono text-moss">
-                    <ArrowDownRight size={13} />
-                    {change}
-                  </span>
+                  <span className="text-xs font-mono text-brass">{change}</span>
                 </div>
                 <div className="mt-2 text-xs text-sage">{note}</div>
               </div>
@@ -312,10 +313,9 @@ export function VisualPlaybook() {
                   <div className="mt-7">
                     <AnimatedBars values={story.bars} muted={lowBandwidth} />
                     <div className="mt-2 flex justify-between text-[10px] font-mono text-sage-dim">
-                      <span>Q1</span>
-                      <span>Q2</span>
-                      <span>Q3</span>
-                      <span>Q4</span>
+                      <span>Month 0</span>
+                      <span>Illustrative path</span>
+                      <span>Month 24</span>
                     </div>
                   </div>
                 </div>
@@ -387,7 +387,7 @@ export function VisualPlaybook() {
                   <div className="text-eyebrow font-mono text-brass">04 / Proof in motion</div>
                   <h3 className="mt-2 font-display text-3xl text-paper sm:text-4xl">A proposal with receipts.</h3>
                 </div>
-                <div className="hidden text-right text-xs font-mono text-sage sm:block">Last updated / today, 09:42</div>
+                
               </div>
               <div className="grid gap-3 sm:grid-cols-3">
                 <div className="group overflow-hidden rounded border border-hairline bg-ink-2 sm:col-span-2">
@@ -412,8 +412,8 @@ export function VisualPlaybook() {
                 <div className="flex flex-col gap-3">
                   <div className="rounded border border-hairline bg-ink-2 p-5">
                     <div className="text-eyebrow font-mono text-brass">Partner signal</div>
-                    <div className="mt-3 font-display text-3xl text-paper">4.6×</div>
-                    <div className="mt-1 text-xs text-sage">campaign return, modelled</div>
+                    <div className="mt-3 font-display text-3xl text-paper">Receipts</div>
+                    <div className="mt-1 text-xs text-sage">participation data per campaign, once the contact base exists</div>
                   </div>
                   <div className="flex-1 rounded border border-brass/50 bg-brass/10 p-5">
                     <MessageCircle className="text-brass" size={18} />

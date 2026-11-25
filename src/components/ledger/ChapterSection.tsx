@@ -1,5 +1,4 @@
 import React from 'react';
-import { LedgerStamp } from './LedgerStamp';
 import { SignalRule } from './SignalRule';
 import { Reveal } from './Reveal';
 

@@ -17,19 +17,20 @@ export function Part6TheBuild() {
 
   const roadmapQuarters = [
     {
-      q: 'Q1 2026',
+      q: 'Q1 2027 (Months 1–3)',
       title: 'Foundation & Procurement',
       milestones: [
         'Brand build begins & visual identity refresh',
         'Studio Phase 1 procurement & acoustic installation begins',
         'Social media channel audit & handle rationalization',
         'WhatsApp BSP onboarding with Africa’s Talking',
-        'GAA National Register prequalification submission',
-        'CA Kenya USSD shortcode application filed'
+        'GAA filing and county supplier prequalification submitted',
+        'USSD code application filed via Africa’s Talking',
+        'Political rate card (station policy) published before primaries (8 May 2027)'
       ]
     },
     {
-      q: 'Q2 2026',
+      q: 'Q2 2027 (Months 4–6)',
       title: 'Live Visual Launch & Shows 1–2',
       milestones: [
         'Brand book officially launched across station',
@@ -37,11 +38,12 @@ export function Part6TheBuild() {
         'Live video streaming on air (2×/week YouTube/FB)',
         'First two pre-recorded shows broadcast (Asubuhi ya Imani, Hapa Tulipo Mix)',
         'YouTube channel relaunch & initial SEO push',
-        'Podcast distribution live on Spotify & Apple'
+        'Podcast distribution live on Spotify & Apple',
+        'Election campaign window opens 29 May 2027: political bookings under station policy'
       ]
     },
     {
-      q: 'Q3 2026',
+      q: 'Q3 2027 (Months 7–9)',
       title: 'Mobile Scale & Field Roadshow',
       milestones: [
         'Studio Phase 2 multi-cam build begins',
@@ -49,11 +51,12 @@ export function Part6TheBuild() {
         'Nyota FM mobile application v1.0 internal beta',
         'Hapa Tulipo Outside Broadcast circuit launches',
         'Shows 3 & 4 broadcast (Sauti ya Nchi, Wanawake wa Twang’aa)',
-        '12-SKU merchandise catalogue launched'
+        '12-SKU merchandise catalogue launched',
+        'Election campaign closes 7 Aug; election day 10 Aug 2027'
       ]
     },
     {
-      q: 'Q4 2026',
+      q: 'Q4 2027 (Months 10–12)',
       title: 'Commercial Automation & Loyalty',
       milestones: [
         'Studio Phase 2 complete & control room operational',
@@ -64,16 +67,15 @@ export function Part6TheBuild() {
       ]
     },
     {
-      q: 'Q1 2027',
+      q: 'Q1 2028 (Months 13–15)',
       title: 'Hub Expansion & Civic Prequalification',
       milestones: [
         'Studio Phase 3 secondary studio construction begins',
-        'Bungoma & Kakamega county IFMIS media prequalification',
-        '2027 General Election political rate card release & advance bookings'
+        'County communications contracts renewed with the new county administrations'
       ]
     },
     {
-      q: 'Q2 2027',
+      q: 'Q2 2028 (Months 16–18)',
       title: 'Syndication & Diaspora Bridge',
       milestones: [
         'Nyota App v1.1 update with livestream chat',
@@ -82,21 +84,20 @@ export function Part6TheBuild() {
       ]
     },
     {
-      q: 'Q3 2027',
+      q: 'Q3 2028 (Months 19–21)',
       title: 'Asset Completion & Election Cycle',
       milestones: [
         'Studio Phase 3 complete (DAM & AI auto-clipping running)',
-        'Second regional syndication affiliate onboarded',
-        'High-volume 2027 political advertising execution'
+        'Second regional syndication affiliate onboarded'
       ]
     },
     {
-      q: 'Q4 2027',
+      q: 'Q4 2028 (Months 22–24)',
       title: 'Leadership Assertion & Year 3 Scale',
       milestones: [
         'Market-leadership assertion across Western Kenya',
         'Independent GeoPoll audience measurement validation audit',
-        'Presentation of Year-3 2028 strategic horizon to Ownership'
+        'Presentation of the Year 3 strategic horizon to Ownership'
       ]
     },
   ];
@@ -110,7 +111,7 @@ export function Part6TheBuild() {
             <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
               SECTION 6.1
             </span>
-            <h4 className="font-display text-paper text-base font-semibold">Master 24-Month Roadmap (Q1 2026 – Q4 2027)</h4>
+            <h4 className="font-display text-paper text-base font-semibold">Master 24-Month Roadmap (Months 1–24: Q1 2027 – Q4 2028)</h4>
             <p className="text-xs text-sage mt-0.5">Quarter-by-quarter operational delivery schedule from day 1 to market leadership</p>
           </div>
 
@@ -442,7 +443,7 @@ export function Part6TheBuild() {
                 <strong className="text-paper block">WhatsApp BSP Setup</strong>
                 <span className="text-sage">Africa’s Talking onboarding</span>
               </div>
-              <span className="text-brass font-bold">$85 + $50/mo (Q1 2026)</span>
+              <span className="text-brass font-bold">$85 + $50/mo (Months 1–3)</span>
             </div>
 
             <div className="p-2 bg-ink rounded border border-hairline flex justify-between">
@@ -450,7 +451,7 @@ export function Part6TheBuild() {
                 <strong className="text-paper block">USSD Shortcode Allocation</strong>
                 <span className="text-sage">CA Kenya & Africa’s Talking</span>
               </div>
-              <span className="text-brass font-bold">KES 145K + 70K/mo (Q1–Q3)</span>
+              <span className="text-brass font-bold">KSh 70K/mo (Safaricom, Months 1–9)</span>
             </div>
 
             <div className="p-2 bg-ink rounded border border-hairline flex justify-between">
@@ -466,7 +467,7 @@ export function Part6TheBuild() {
                 <strong className="text-paper block">County Prequalification</strong>
                 <span className="text-sage">Bungoma & Kakamega IFMIS</span>
               </div>
-              <span className="text-brass font-bold">KSh 50,000 (Q2 2026)</span>
+              <span className="text-brass font-bold">KSh 50,000 (Months 4–6)</span>
             </div>
 
             <div className="p-2 bg-ink rounded border border-hairline flex justify-between">

@@ -11,7 +11,7 @@ interface AssetRecord {
   maintenanceSchedule: string;
   localServiceAgent: string;
   kraDepreciationRate: string;
-  status: 'Operational' | 'Scheduled Maintenance' | 'Procurement Pending';
+  status: 'Planned' | 'Ordered' | 'Installed' | 'Scheduled Maintenance' | 'Procurement Pending';
 }
 
 const ASSET_REGISTRY: AssetRecord[] = [
@@ -24,7 +24,7 @@ const ASSET_REGISTRY: AssetRecord[] = [
     maintenanceSchedule: 'Quarterly lens calibration & firmware check',
     localServiceAgent: 'Nairobi Camera Center / Jiji Pro Kenya',
     kraDepreciationRate: '25% Annual Wear & Tear',
-    status: 'Operational',
+    status: 'Planned',
   },
   {
     id: 'EQ-02',
@@ -35,7 +35,7 @@ const ASSET_REGISTRY: AssetRecord[] = [
     maintenanceSchedule: 'Semi-annual thermal cleaning & macro backup',
     localServiceAgent: 'Sound Wave Audio Nairobi',
     kraDepreciationRate: '25% Annual',
-    status: 'Operational',
+    status: 'Planned',
   },
   {
     id: 'EQ-03',
@@ -46,7 +46,7 @@ const ASSET_REGISTRY: AssetRecord[] = [
     maintenanceSchedule: 'Monthly windscreen sanitation & shockmount check',
     localServiceAgent: 'Yamaha Music Point Eldoret',
     kraDepreciationRate: '12.5% Annual',
-    status: 'Operational',
+    status: 'Planned',
   },
   {
     id: 'EQ-04',
@@ -54,10 +54,10 @@ const ASSET_REGISTRY: AssetRecord[] = [
     category: 'Transmission',
     costKsh: 1850000,
     warrantyYears: 3,
-    maintenanceSchedule: 'Monthly SWR & RF filter check at Chetambe Mast',
+    maintenanceSchedule: 'Monthly SWR & RF filter check at the transmitter site',
     localServiceAgent: 'Broadcast Engineering Systems Kenya',
     kraDepreciationRate: '25% Annual',
-    status: 'Operational',
+    status: 'Planned',
   },
   {
     id: 'EQ-05',
@@ -68,7 +68,7 @@ const ASSET_REGISTRY: AssetRecord[] = [
     maintenanceSchedule: 'Every 250 running hours (Oil, filters & ATS test)',
     localServiceAgent: 'Car & General Kisumu / Bungoma Service',
     kraDepreciationRate: '25% Annual',
-    status: 'Operational',
+    status: 'Planned',
   },
   {
     id: 'EQ-06',
@@ -79,7 +79,7 @@ const ASSET_REGISTRY: AssetRecord[] = [
     maintenanceSchedule: 'Quarterly terminal torque & dust filter clean',
     localServiceAgent: 'Davis & Shirtliff Bungoma Branch',
     kraDepreciationRate: '12.5% Annual',
-    status: 'Operational',
+    status: 'Planned',
   },
   {
     id: 'EQ-07',
@@ -90,7 +90,7 @@ const ASSET_REGISTRY: AssetRecord[] = [
     maintenanceSchedule: 'Quarterly packet loss & buffer audit',
     localServiceAgent: 'Telecommunication Solutions Nairobi',
     kraDepreciationRate: '25% Annual',
-    status: 'Operational',
+    status: 'Planned',
   },
 ];
 
@@ -117,18 +117,18 @@ export function EquipmentLifecycleLog() {
             <Wrench size={14} />
             <span className="uppercase tracking-widest font-semibold">Governance & Asset Management</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Equipment Manufacturer Warranties & KRA Income Tax Act" />
+            <TierBadge tier={2} method="Planned asset register; prices from vendor listings, to be re-quoted. KRA wear-and-tear rates to be checked against the current Income Tax Act Second Schedule." />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
-            Station Equipment Registry & Maintenance Lifecycle Log
+            Planned Asset Register & Maintenance Plan
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Audit capital equipment assets, verified Kenyan service agents, preventive maintenance intervals, and statutory KRA depreciation allowances.
+            Equipment the plan would buy, with service agents, maintenance intervals and depreciation. Nothing here is installed yet; statuses move from Planned to Ordered to Installed.
           </p>
         </div>
 
         <div className="text-left sm:text-right font-mono text-xs">
-          <span className="text-sage-dim block">Audited Asset Value</span>
+          <span className="text-sage-dim block">Planned Asset Value</span>
           <span className="text-lg font-bold text-brass tabular-nums">
             KSh {totalCost.toLocaleString()}
           </span>

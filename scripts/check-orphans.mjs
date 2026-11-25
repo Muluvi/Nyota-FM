@@ -34,7 +34,7 @@ function collect(directory) {
   for (const name of readdirSync(directory, { withFileTypes: true })) {
     const file = resolve(directory, name.name)
     if (name.isDirectory()) collect(file)
-    else if (['.ts', '.tsx'].includes(extname(file))) files.push(file)
+    else if (['.ts', '.tsx'].includes(extname(file)) && !file.endsWith('.d.ts')) files.push(file)
   }
 }
 const { readdirSync } = await import('node:fs')

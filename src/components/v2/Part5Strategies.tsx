@@ -49,11 +49,11 @@ export function Part5Strategies() {
       title: 'Content Creation & The Four Pre-Recorded Shows',
       category: 'Content & Programming',
       strategy:
-        'Produce four pristine, pre-recorded show formats — Asuhi ya Imani (Sunday morning gospel), Hapa Tulipo Mix (Friday night DJ set), Sauti ya Nchi (Sunday evening civic education), and Wanawake wa Twang\'aa (Saturday mid-morning women\'s lifestyle) — each packaged for title sponsorship, segment sponsorship, and derivative content across YouTube, TikTok, Instagram, and WhatsApp.',
+        'Produce four pristine, pre-recorded show formats — Asubuhi ya Imani (Sunday morning gospel), Hapa Tulipo Mix (Friday night DJ set), Sauti ya Nchi (Sunday evening civic education), and Wanawake wa Twang\'aa (Saturday mid-morning women\'s lifestyle) — each packaged for title sponsorship, segment sponsorship, and derivative content across YouTube, TikTok, Instagram, and WhatsApp.',
       whyThisWorks:
-        'Radio remains the most consumed medium in rural Kenya, with 81% listenership in Western Kenya (CA Kenya, Tier 1). Branded content commands a premium over spot advertising (2–3× spot CPM). The four shows cover four distinct advertiser categories: faith, music, civic, and women’s FMCG.',
+        'Radio remains the most consumed medium in rural Kenya, with 83% radio reach in Western Kenya (CA Kenya, Apr–Jun 2026, Tier 1). Branded content commands a premium over spot advertising (2–3× spot CPM). The four shows cover four distinct advertiser categories: faith, music, civic, and women’s FMCG.',
       dataReceipts: [
-        'Radio listenership Western Kenya: 81% (CA Kenya Q2 2025/26) → Justifies high production investment',
+        'Radio reach Western Kenya: 83% (CA Kenya, Apr–Jun 2026) → justifies high production investment',
         'Betting ad spend collapsed 89% (ReelAnalytics) → Diversify away from betting reliance',
         'Financial services top radio sector (21%) → Target financial institutions for civic/lifestyle shows',
         'YouTube RPM Kenya: $0.67 (Dynamoi Data) → Derivative video creates incremental monetization'
@@ -61,7 +61,7 @@ export function Part5Strategies() {
       execution: {
         lead: 'Head of Digital + Content Producer',
         budget: 'KSh 150,000–250,000 per show / month',
-        timeline: 'Shows 1 & 2 launch Q2 2026; Shows 3 & 4 launch Q3 2026'
+        timeline: 'Shows 1 & 2 launch Q2 2027 (Months 4–6); Shows 3 & 4 launch Q3 2027 (Months 7–9)'
       },
       revenueMechanism:
         'Title sponsor (KSh 80,000–150,000/month), Segment sponsor (KSh 30,000–50,000/month), Spot package (KSh 50,000–100,000/month), and YouTube AdSense revenue share.',
@@ -157,15 +157,15 @@ export function Part5Strategies() {
       strategy:
         'Onboard Africa\'s Talking as verified WhatsApp BSP. Deploy WhatsApp Channels, broadcast lists, and status updates for hyper-local daily engagement. Build opt-in database through on-air presenter CTAs and USSD cross-promotions.',
       whyThisWorks:
-        'WhatsApp boasts 19.8% direct usage in Kenya (Media Council 2025). Direct push notifications bypass unpredictable social media algorithms.',
+        'WhatsApp is used monthly by 72.5% of Kenyan internet users aged 16+ (GWI via DataReportal, Digital 2027: Kenya). Direct messages bypass unpredictable social media algorithms.',
       dataReceipts: [
-        'WhatsApp utility rate: $0.0040 (~KSh 0.52) per conversation (Meta/Ominiflow, Tier 1)',
+        'WhatsApp utility message: $0.004 (~KSh 0.52) per message, Rest of Africa; marketing $0.0225 (Meta per-message pricing since 1 Jul 2025, Tier 1)',
         'Africa\'s Talking BSP setup: $85 setup + $50/month maintenance (Tier 1)'
       ],
       execution: {
         lead: 'Head of Digital + Community Manager',
         budget: 'KSh 50,000 setup + KSh 30,000/month messaging credit',
-        timeline: 'Onboarding in Q1 2026; live on-air Q2 2026'
+        timeline: 'Onboarding in Q1 2027 (Months 1–3); live on-air Q2 2027 (Months 4–6)'
       },
       revenueMechanism:
         'Sponsored community announcements, paid event reminders, local agribusiness job alerts, and premium WhatsApp classified bulletins.',
@@ -184,18 +184,18 @@ export function Part5Strategies() {
       whyThisWorks:
         'Bridges the 27.42 million Kenyan feature phone connections (CA Kenya). Reaches rural listeners with zero mobile data bundles required.',
       dataReceipts: [
-        'USSD setup: KES 145,000 setup + KES 70,000/mo maintenance (Africa\'s Talking, Tier 1)',
+        'USSD: Safaricom dedicated code KSh 70,000/month, VAT incl.; Airtel KSh 116,000 + 46,400/month (Africa\'s Talking, Tier 1)',
         'Feature phone user base: 27.42M active connections in Kenya (CA Kenya Sector Stats, Tier 1)'
       ],
       execution: {
         lead: 'Head of Digital + Developer Lead',
         budget: 'KSh 250,000 setup + KSh 80,000/month',
-        timeline: 'Application Q1 2026; live on air by Q3 2026'
+        timeline: 'Application Q1 2027 (Months 1–3); live on air by Q3 2027 (Months 7–9)'
       },
       revenueMechanism:
         'Sponsored agricultural tips (KSh 10/query), premium on-air talent voting, SME classified listings, and mobile airtime sweepstakes.',
       simpleKpis: [
-        'USSD shortcode fully live and operational in Q3 2026',
+        'USSD shortcode fully live and operational in Q3 2027 (Months 7–9)',
         '20,000 active monthly user sessions by Month 12',
         'KSh 600,000/month recurring gross mobile session revenue by Month 24'
       ]
@@ -211,7 +211,7 @@ export function Part5Strategies() {
         'Prevents lazy duplicate posting. Each platform fulfills a distinct audience conversion job in the listener funnel.',
       dataReceipts: [
         'Nyota baseline: ~5,740 Facebook followers (v1.0 audited baseline)',
-        'Smartphone penetration: 92.9% across mobile devices in Kenya (CA Kenya, Tier 1)'
+        'Smartphone connections: 52.26M in Kenya, June 2026 (CA Kenya, Tier 1)'
       ],
       execution: {
         lead: 'Social Media Manager',
@@ -242,7 +242,7 @@ export function Part5Strategies() {
       execution: {
         lead: 'Video Producer + Head of Digital',
         budget: 'KSh 70,000/month editing & thumbnails',
-        timeline: 'Relaunch in Q2 2026'
+        timeline: 'Relaunch in Q2 2027 (Months 4–6)'
       },
       revenueMechanism:
         'YouTube Partner Program AdSense revenue, YouTube Channel Memberships, and integrated mid-video branded shout-outs.',
@@ -267,7 +267,7 @@ export function Part5Strategies() {
       execution: {
         lead: 'Audio Sound Designer / Producer',
         budget: 'KSh 30,000/month hosting & mastering',
-        timeline: 'Launch Q2 2026'
+        timeline: 'Launch Q2 2027 (Months 4–6)'
       },
       revenueMechanism:
         'Dynamic ad insertion (DAI), host-read sponsor endorsements, and branded corporate podcast miniseries.',
@@ -309,12 +309,12 @@ export function Part5Strategies() {
       whyThisWorks:
         'Physical presence cements vernacular community loyalty and provides commercial brands with experiential BTL sampling booths.',
       dataReceipts: [
-        'Western Kenya radio reach: 81% in rural regions (CA Kenya, Tier 1)'
+        'Western Kenya radio reach: 83% (CA Kenya, Apr–Jun 2026, Tier 1)'
       ],
       execution: {
         lead: 'Commercial Director + Events Coordinator',
         budget: 'KSh 250,000–400,000 per OB activation',
-        timeline: 'First activation Q3 2026; monthly cadence in Year 2'
+        timeline: 'First activation Q3 2027 (Months 7–9); monthly cadence in Year 2'
       },
       revenueMechanism:
         'Anchor brand experiential naming rights (KSh 300K–600K/stop), booth vendor setup fees, and county health sponsorship.',
@@ -338,7 +338,7 @@ export function Part5Strategies() {
       execution: {
         lead: 'Head of Sales + Commercial Traffic Lead',
         budget: 'Existing sales commission structures',
-        timeline: 'Sales collateral roll-out in Q2 2026'
+        timeline: 'Sales collateral roll-out in Q2 2027 (Months 4–6)'
       },
       revenueMechanism:
         'Monthly retainer show sponsorships (Tier 2 model: KSh 150,000–350,000/month per show).',
@@ -362,12 +362,12 @@ export function Part5Strategies() {
       execution: {
         lead: 'Head of Digital + Web Lead',
         budget: 'KSh 200,000–350,000 portal development',
-        timeline: 'Go-live in Q4 2026'
+        timeline: 'Go-live in Q4 2027 (Months 10–12)'
       },
       revenueMechanism:
         'Direct automated M-Pesa till receipts for digital classifieds (KSh 1,000–5,000) and display banner packages (KSh 10,000–30,000).',
       simpleKpis: [
-        'Advertiser portal live in Q4 2026',
+        'Advertiser portal live in Q4 2027 (Months 10–12)',
         '30 active self-serve digital advertisers and KSh 300,000/month revenue by Month 24'
       ]
     },
@@ -377,7 +377,7 @@ export function Part5Strategies() {
       title: 'Government & Development Partner Funding',
       category: 'Commercial & Revenue',
       strategy:
-        'Complete registration on the GAA National Register of Accredited Media Providers; submit IFMIS prequalification for Bungoma and Kakamega counties; package "Sauti ya Nchi" for grant funding from USAID, DFID, and climate NGOs.',
+        'File with the Government Advertising Agency, which authorises national-government advertising; pursue county supplier prequalification separately for Bungoma and Kakamega; package "Sauti ya Nchi" for media-development funders currently active in Kenya (e.g. FCDO-funded programmes, the EU, BBC Media Action, Internews, IMS; each to be verified). USAID closed in 2025 and DFID merged into the FCDO in 2020.',
       whyThisWorks:
         'Government and development partners represent the largest single institutional spenders on civic education and health campaigns in Kenya.',
       dataReceipts: [
@@ -387,12 +387,12 @@ export function Part5Strategies() {
       execution: {
         lead: 'General Manager + Firefly Advisory',
         budget: 'KSh 150,000 compliance filing and legal costs',
-        timeline: 'GAA application in Q1 2026; approvals Q2 2026'
+        timeline: 'GAA application in Q1 2027 (Months 1–3); approvals Q2 2027 (Months 4–6)'
       },
       revenueMechanism:
         'Annual county communication framework contracts and NGO civic airtime underwriting.',
       simpleKpis: [
-        'GAA registration secured by Q2 2026',
+        'GAA registration secured by Q2 2027 (Months 4–6)',
         'KSh 2,000,000 institutional revenue in Year 1; KSh 5,000,000 in Year 2'
       ]
     },
@@ -411,7 +411,7 @@ export function Part5Strategies() {
       execution: {
         lead: 'Community Manager',
         budget: 'KSh 100,000 sample runs & promotional inventory',
-        timeline: 'Catalogue launch in Q3 2026'
+        timeline: 'Catalogue launch in Q3 2027 (Months 7–9)'
       },
       revenueMechanism:
         'Direct retail sales on-air, at OB roadshows, and bundled with loyalty VIP memberships.',
@@ -435,7 +435,7 @@ export function Part5Strategies() {
       execution: {
         lead: 'Commercial Director',
         budget: 'KSh 50,000 syndication contract agreements',
-        timeline: 'Initial deals in Year 2 (Q2 2027)'
+        timeline: 'Initial deals in Year 2, Q2 2028 (Months 16–18)'
       },
       revenueMechanism:
         'Monthly show licensing fees (KSh 30,000–80,000/month per affiliate station) or airtime barter barter-split.',
@@ -454,12 +454,12 @@ export function Part5Strategies() {
       whyThisWorks:
         'The Luhya diaspora maintains massive familial financial flow back to Western Kenya for agriculture, land, and school fees.',
       dataReceipts: [
-        'Central Bank of Kenya diaspora remittance inflows exceed $4 billion annually'
+        'Diaspora remittances reached US$5.04 billion in 2025 (CBK); 2026 is on track for the first annual decline in 17 years. The US sends 43.5% of cash remittances, the UK 2.4% (Remittances Household Survey 2025). There is no regional split.'
       ],
       execution: {
         lead: 'Head of Sales + Weekend Producer',
         budget: 'KSh 100,000 marketing to diaspora social groups',
-        timeline: 'Launch in Q2 2027'
+        timeline: 'Launch in Q2 2028 (Months 16–18)'
       },
       revenueMechanism:
         'Sponsored diaspora family greetings, property developer title sponsorships, and remittance promo codes.',
@@ -483,7 +483,7 @@ export function Part5Strategies() {
       execution: {
         lead: 'Community Manager + Data Insights Lead',
         budget: 'KSh 100,000 loyalty software setup + airtime reward pool',
-        timeline: 'Roll-out in Q4 2026'
+        timeline: 'Roll-out in Q4 2027 (Months 10–12)'
       },
       revenueMechanism:
         'Sponsored loyalty reward partners (e.g. FMCG brands offering airtime discounts in exchange for survey answers).',
@@ -526,12 +526,12 @@ export function Part5Strategies() {
       whyThisWorks:
         'Agriculture is the undisputed economic bedrock of Bungoma and Trans Nzoia counties, largely unimpacted by urban media shifts.',
       dataReceipts: [
-        'Bungoma & Trans Nzoia produce >40% of Western Kenya commercial maize'
+        'Bungoma and Trans Nzoia are major maize-producing counties (production share to be sourced from KNBS / Ministry of Agriculture); NCPB set a KSh 4,000 per 90 kg floor in January 2026'
       ],
       execution: {
         lead: 'Commercial Director + Agribusiness Show Host',
         budget: 'KSh 50,000 collateral packaging',
-        timeline: 'Deploy ahead of planting season in Q3 2026'
+        timeline: 'Deploy ahead of planting season in Q3 2027 (Months 7–9)'
       },
       revenueMechanism:
         'Annual agro-dealer marketing packages and per-session sponsored USSD agricultural market-price queries.',
@@ -550,7 +550,7 @@ export function Part5Strategies() {
       whyThisWorks:
         'Kenyan general elections inject billions of shillings into media campaigns. Advance planning captures premium cash flow while insulating the station from licensing fines.',
       dataReceipts: [
-        '2022 General Election media spend in Western Kenya exceeded KSh 150M across regional outlets'
+        'IEBC calendar: primaries by 8 May 2027, campaign 29 May–7 Aug 2027, election 10 Aug 2027. Western Kenya political media spend in 2022 is not published (Tier 0).'
       ],
       execution: {
         lead: 'General Manager + Commercial Director + Legal Counsel',
@@ -560,7 +560,7 @@ export function Part5Strategies() {
       revenueMechanism:
         'Premium political town hall broadcast packages, live outdoor rally OB coverage, and candidate profile spots.',
       simpleKpis: [
-        'Political rate card published and circulated by Q1 2027',
+        'Political rate card published and circulated before party primaries (by April 2027)',
         'KSh 3,000,000+ incremental political ad revenue collected across 2027 with 0 CA sanctions'
       ]
     }

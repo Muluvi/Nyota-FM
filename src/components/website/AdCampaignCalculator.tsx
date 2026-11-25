@@ -37,7 +37,6 @@ export function AdCampaignCalculator() {
   const netInvestment = totalGross - discountAmount;
 
   // Audience reach modelled
-  const estimatedGrossImpressions = Math.round(totalSpots * 45000 + (includeOB ? 25000 : 0) + (includeWhatsApp ? 20000 : 0));
 
   const copyProposal = () => {
     const text = `NYOTA FM 107.3 · TAILORED MEDIA CAMPAIGN SUMMARY
@@ -48,12 +47,16 @@ Add-ons: ${includeOB ? '1× Outside Broadcast Market Activation (KSh 180,000)' :
 Gross Investment: KSh ${totalGross.toLocaleString()}
 Volume Partner Discount (${(discountRate * 100).toFixed(0)}%): -KSh ${discountAmount.toLocaleString()}
 NET INVESTMENT: KSh ${netInvestment.toLocaleString()}
-Estimated Impressions: ${estimatedGrossImpressions.toLocaleString()} Listener Touches
+Reach: Tier 0, pending a Western Kenya audience survey
 Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
 
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      })
+      .catch(() => setCopied(false));
   };
 
   return (
@@ -73,7 +76,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
             Designed for brand managers, agencies, and county desks. Select dayparts, airtime frequency, and field activations to calculate immediate investment requirements and volume discounts.
           </p>
         </div>
-        <TierBadge tier={1} citation="ReelAnalytics Prevailing Radio Ad Rate Cards & Regional Benchmark" url="reelanalytics.net" />
+        <TierBadge tier={2} method="Illustrative spot rates pending one published Nyota rate card" inputs="Daypart rate × spots × weeks, volume discount, optional add-ons" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -271,7 +274,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
                 KSh {netInvestment.toLocaleString()}
               </div>
               <div className="text-[11px] font-mono text-emerald-400 mt-1">
-                ≈ {estimatedGrossImpressions.toLocaleString()} Listener Impressions
+                Reach: Tier 0 · survey pending
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Users, Mic, Sparkles, Heart, Radio, ShieldCheck, Check } from 'lucide-react';
-import { TierBadge } from '../v2/TierBadge';
+import { IllustrativeChip } from '../v2/IllustrativeChip';
 
 interface Presenter {
   id: string;
@@ -17,47 +17,47 @@ interface Presenter {
 const PRESENTERS: Presenter[] = [
   {
     id: 'p-1',
-    name: 'Achieng & Otieno',
+    name: 'Breakfast co-hosts (to be cast)',
     show: 'The Morning Signal (Kumekucha)',
     slot: '06:00 – 10:00 Weekdays',
-    vernacular: 'Swahili, Bukusu & Luo Blended',
+    vernacular: 'Swahili & Bukusu',
     catchphrase: 'Kumekucha Western! Amka twang\'aa, jasho ya mkulima hailali!',
-    bio: 'Western Kenya’s commanding breakfast duo. Hard-hitting county governance accountability, rural citizen advocacy, and real-time Chwele wholesale commodity prices.',
-    endorsements: ['Equity Bank Kilimo', 'Kenya Seed Company', 'Safaricom M-Pesa'],
-    followerCount: '145,000+ Cross-Platform',
+    bio: 'Proposed format: a breakfast pairing with county governance accountability, rural citizen advocacy, and real-time Chwele wholesale commodity prices.',
+    endorsements: ['Agricultural lender', 'Seed & agro-input supplier', 'Mobile money provider'],
+    followerCount: 'TBC',
   },
   {
     id: 'p-2',
-    name: 'Miriam Wekesa',
+    name: 'Midday host (to be cast)',
     show: 'Soko Nyota & Mulembe Midday',
     slot: '10:00 – 14:00 Weekdays',
     vernacular: 'Conversational Swahili & Bukusu',
     catchphrase: 'Soko imefunguka! Pesa mfukoni, furaha nyumbani!',
-    bio: 'Beloved household radio companion for market traders, rural mothers, and cooperative society leaders. Focuses on maternal health, agribusiness tips, and Luhya classics.',
-    endorsements: ['Unga Limited (Taifa)', 'Kenchic Feeds', 'SHIF / Healthcare Brands'],
-    followerCount: '98,000+ Cross-Platform',
+    bio: 'Proposed format: a household companion show for market traders, rural mothers, and cooperative society leaders. Focuses on maternal health, agribusiness tips, and Luhya classics.',
+    endorsements: ['Flour & FMCG brand', 'Animal-feed supplier', 'Health services'],
+    followerCount: 'TBC',
   },
   {
     id: 'p-3',
-    name: 'Juma & Sifa',
+    name: 'Drive co-hosts (to be cast)',
     show: 'Drive Home 107.3 (Kurejea Nyumbani)',
     slot: '16:00 – 19:00 Weekdays',
     vernacular: 'Sheng, Swahili & Wanga Dialect',
     catchphrase: 'Tuko kwa barabara, ngoma kwa mpigo! Hapa Tulipo, Twang\'aa!',
-    bio: 'High-octane evening drive show featuring Malaba border freight logistics updates, regional sports banter (AFC Leopards & Kakamega Homeboyz), and viral comedy.',
-    endorsements: ['TotalEnergies Kenya', 'Boda-Boda SACCOs', 'Energy Drinks'],
-    followerCount: '120,000+ Cross-Platform',
+    bio: 'Proposed format: an evening drive show with Malaba border freight logistics updates, regional sports banter (AFC Leopards & Kakamega Homeboyz), and viral comedy.',
+    endorsements: ['Fuel retailer', 'Boda-boda SACCOs', 'Beverage brand'],
+    followerCount: 'TBC',
   },
   {
     id: 'p-4',
-    name: 'Brenda Nekesa',
+    name: 'Weekend women’s show host (to be cast)',
     show: 'Wanawake wa Twang\'aa',
     slot: '08:00 – 12:00 Saturdays',
     vernacular: 'Bukusu & Swahili',
     catchphrase: 'Mwanamke hodari, taa ya jamii nzima!',
-    bio: 'Award-winning community champion profiling women entrepreneurs, table-banking SACCO networks, and championing girl-child education across Mt. Elgon and Sirisia.',
-    endorsements: ['Co-operative Bank Wezesha', 'Solar Water Pump Manufacturers'],
-    followerCount: '76,000+ Cross-Platform',
+    bio: 'Proposed format: a weekend show profiling women entrepreneurs, table-banking SACCO networks, and girl-child education across Mt. Elgon and Sirisia.',
+    endorsements: ['Bank women’s-enterprise product', 'Solar equipment supplier'],
+    followerCount: 'TBC',
   },
 ];
 
@@ -70,15 +70,15 @@ export function PresenterRoster() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono text-brass">
             <Mic size={14} />
-            <span className="uppercase tracking-widest font-semibold">Broadcast Talent & On-Air Roster</span>
+            <span className="uppercase tracking-widest font-semibold">Talent Model · Roles We Will Cast</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Audience Panel Recognition & Vernacular Authenticity Study" />
+            <IllustrativeChip note="Roles to be cast; no named presenters or brand endorsements until contracted" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
-            Nyota FM Anchor Lineup & Commercial Endorsers
+            Proposed On-Air Roles & Sponsor Categories
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Meet the authentic on-air voices that command listener trust across Western Kenya. Presenters driving 68% peak morning share and high-conversion commercial live mentions.
+            The on-air roles the v2 schedule needs, with the kinds of sponsor each format suits. Real Nyota presenters, with consent, replace these placeholders; brand names appear only once contracts exist.
           </p>
         </div>
       </div>
@@ -104,8 +104,8 @@ export function PresenterRoster() {
                   <span className="text-[10px] text-brass font-mono">{p.show}</span>
                   <span className="text-[10px] text-sage-dim block font-mono">{p.slot}</span>
                 </div>
-                <span className="text-xs font-mono text-emerald-400 font-bold">
-                  {p.followerCount}
+                <span className="text-xs font-mono text-sage-dim font-bold">
+                  Followers: {p.followerCount}
                 </span>
               </button>
             );
@@ -139,7 +139,7 @@ export function PresenterRoster() {
 
           <div className="pt-2 border-t border-hairline space-y-1.5">
             <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block font-bold">
-              TRUSTED ADVERTISER ENDORSEMENTS
+              SPONSOR CATEGORIES THIS FORMAT SUITS
             </span>
             <div className="flex flex-wrap gap-1.5">
               {activePresenter.endorsements.map((end, idx) => (

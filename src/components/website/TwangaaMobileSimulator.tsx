@@ -16,7 +16,7 @@ export function TwangaaMobileSimulator() {
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'user' | 'bot'; text: string; time: string }>>([
     {
       sender: 'bot',
-      text: 'Mulembe! Karibu Nyota FM 107.3 Twang\'aa Official WhatsApp Channel. Jibu na namba:\n1. 🗳️ Kura ya Kumekucha Leo\n2. 🎵 Omba Wimbo wa Luhya/Gospel\n3. 🌾 Bei ya Mazao Sokoni (Chwele/Kakamega)\n4. 📻 Sikiliza Matangazo Mubashara',
+      text: 'Mulembe! Karibu Nyota FM 107.3 Twang\'aa WhatsApp (mfano / demo). Jibu na namba:\n1. 🗳️ Kura ya Kumekucha Leo\n2. 🎵 Omba Wimbo wa Luhya/Gospel\n3. 🌾 Bei ya Mazao Sokoni (Chwele/Kakamega)\n4. 📻 Sikiliza Matangazo Mubashara',
       time: '07:15',
     },
   ]);
@@ -67,7 +67,7 @@ export function TwangaaMobileSimulator() {
   const submitUSSD = () => {
     const input = ussdInput.trim();
     if (ussdStep === 0) {
-      if (input === '*483*107#' || input === '*483#' || input === '107') {
+      if (input === '*XXX#' || input === '107') {
         setUssdStep(1);
         setUssdInput('');
       } else {
@@ -90,7 +90,7 @@ export function TwangaaMobileSimulator() {
 
   const resetUSSD = () => {
     setUssdStep(0);
-    setUssdInput('*483*107#');
+    setUssdInput('*XXX#');
   };
 
   // WhatsApp reply engine
@@ -107,11 +107,11 @@ export function TwangaaMobileSimulator() {
     setTimeout(() => {
       let botResponse = '';
       if (userText === '1' || userText.toLowerCase().includes('kura') || userText.toLowerCase().includes('poll')) {
-        botResponse = '✅ Kura yako imepokelewa kwenye Kumekucha Morning Poll! 68% ya wasikilizaji wa Bungoma wanakubaliana nawe. Endelea kusikiliza 107.3 FM matokeo rasmi yakitangazwa saa 08:30.';
+        botResponse = '✅ Kura yako imepokelewa kwenye Kumekucha Morning Poll! Endelea kusikiliza 107.3 FM matokeo rasmi yakitangazwa saa 08:30.';
       } else if (userText === '2' || userText.toLowerCase().includes('wimbo') || userText.toLowerCase().includes('song')) {
         botResponse = '🎵 Asante kwa ombi la wimbo! Tumemtumia Mtangazaji Miriam Wekesa wimbo wako kwenye Soko Nyota (10:00–14:00). Nyota FM: Sauti Yetu, Fahari Yetu!';
       } else if (userText === '3' || userText.toLowerCase().includes('bei') || userText.toLowerCase().includes('mazao') || userText.toLowerCase().includes('chwele')) {
-        botResponse = '🌾 BEI ZA MAZAO LEO (CHWELE MARKET - BUNGOMA):\n• Mahindi (90kg): KSh 3,400\n• Maharagwe (Rosecoco 90kg): KSh 7,800\n• Vitunguu (Kg): KSh 110\n• Nyanya (Crater): KSh 2,200\nImedhaminiwa na One Acre Fund & Nyota FM Agribusiness Desk.';
+        botResponse = '🌾 BEI ZA MAZAO LEO (CHWELE MARKET - BUNGOMA):\n• Mahindi (90kg): KSh 4,000\n• Maharagwe (Rosecoco 90kg): KSh 7,800\n• Vitunguu (Kg): KSh 110\n• Nyanya (Crater): KSh 2,200\nImedhaminiwa na One Acre Fund & Nyota FM Agribusiness Desk.';
       } else {
         botResponse = '🌟 Asante kwa kuwasiliana na Nyota FM 107.3! Ujumbe wako umerekodiwa kwenye database ya wasikilizaji wa Western Kenya. Umepokea alama 5 za uaminifu (Twang\'aa Loyalty Points).';
       }
@@ -129,7 +129,7 @@ export function TwangaaMobileSimulator() {
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-[10px] font-mono text-brass font-bold uppercase tracking-wider">
               <Sparkles size={12} />
-              Interactive Prototype · Strategy 5.7
+              Interactive Prototype · Strategies 5.5 & 5.6
             </span>
             <TierBadge tier={1} citation="CA Kenya Q1 2025/26 (27.42M Feature Phones) & Africa's Talking API" />
           </div>
@@ -137,7 +137,7 @@ export function TwangaaMobileSimulator() {
             Mobile Listener Journey & USSD / WhatsApp Simulator
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Test the exact zero-data USSD shortcode (<code className="text-brass font-mono">*483*107#</code>) and automated WhatsApp Business API pipeline that captures Western Kenya's 27.42M feature phone listeners into a first-party monetizable audience CRM.
+            Test the exact zero-data USSD shortcode (<code className="text-brass font-mono">*XXX#</code>, code to be allocated) and automated WhatsApp Business API pipeline that captures Western Kenya's 27.42M feature phone listeners into a first-party monetizable audience CRM.
           </p>
         </div>
 
@@ -151,7 +151,7 @@ export function TwangaaMobileSimulator() {
             }`}
           >
             <Phone size={14} />
-            <span>USSD Shortcode (*483#)</span>
+            <span>USSD (code TBC)</span>
           </button>
           <button
             type="button"
@@ -161,7 +161,7 @@ export function TwangaaMobileSimulator() {
             }`}
           >
             <MessageSquare size={14} />
-            <span>WhatsApp BSP Channel</span>
+            <span>WhatsApp Business chat</span>
           </button>
         </div>
       </div>
@@ -189,7 +189,7 @@ export function TwangaaMobileSimulator() {
                     <div className="space-y-2">
                       <div className="font-bold text-center">Piga namba ya huduma:</div>
                       <div className="rounded bg-[#6d8a70] p-2 text-center text-sm font-bold tracking-widest text-black">
-                        {ussdInput || '*483*107#'}
+                        {ussdInput || '*XXX#'}
                       </div>
                       <p className="text-[10px] text-center opacity-80">
                         Bofya "PIGA" au tumia vitufe vya simu
@@ -204,7 +204,7 @@ export function TwangaaMobileSimulator() {
                         <p>1. Piga Kura ya Kumekucha</p>
                         <p>2. Omba Wimbo wa Luhya/Gospel</p>
                         <p>3. Bei ya Mazao (Chwele Market)</p>
-                        <p>4. Jiunge na Twang'aa Cash Club</p>
+                        <p>4. Jiunge na Twang'aa Club (pointi)</p>
                       </div>
                       <div className="mt-2 text-[10px] font-bold">Jibu [1-4]: {ussdInput}</div>
                     </div>
@@ -234,7 +234,7 @@ export function TwangaaMobileSimulator() {
                   {ussdStep === 4 && (
                     <div className="space-y-1">
                       <div className="font-bold text-[11px]">CHWELE SOKO PRICES:</div>
-                      <p className="text-[10px]">1. Gunia ya Mahindi: KSh 3,400</p>
+                      <p className="text-[10px]">1. Gunia ya Mahindi: KSh 4,000</p>
                       <p className="text-[10px]">2. Maharagwe (Rosecoco): KSh 7,800</p>
                       <p className="text-[10px]">3. Kuku wa Kienyeji: KSh 850</p>
                       <div className="mt-2 text-[10px] font-bold">1. Tuma SMS ya Bei | 0. Nyuma: {ussdInput}</div>
@@ -243,9 +243,8 @@ export function TwangaaMobileSimulator() {
 
                   {ussdStep === 5 && (
                     <div className="space-y-1">
-                      <div className="font-bold text-[11px]">TWANG'AA CASH CLUB:</div>
-                      <p className="text-[10px]">Umesajiliwa nambari {Math.floor(1000 + Math.random() * 9000)}.</p>
-                      <p className="text-[10px]">Sikiliza Hapa Tulipo saa 17:00 kwa droo ya KSh 5,000 ya leo!</p>
+                      <div className="font-bold text-[11px]">TWANG'AA CLUB:</div>
+                      <p className="text-[10px]">Umesajiliwa kwa idhini yako. Pata pointi kwa kushiriki kura; pointi hubadilishwa kuwa airtime.</p>
                       <div className="mt-2 text-[10px] font-bold">0. Toka: {ussdInput}</div>
                     </div>
                   )}
@@ -254,9 +253,9 @@ export function TwangaaMobileSimulator() {
                     <div className="space-y-2 text-center">
                       <div className="font-bold text-xs">ASANTE!</div>
                       <p className="text-[10px]">
-                        Ujumbe wako umepokewa na watangazaji wa Nyota FM 107.3. Umepokea nafasi ya bure kwenye droo ya leo.
+                        Ujumbe wako umepokewa na watangazaji wa Nyota FM 107.3. Asante kwa kushiriki.
                       </p>
-                      <p className="text-[9px] opacity-75">Tumeokoa data yako: USSD ni bila gharama ya mtandao.</p>
+                      <p className="text-[9px] opacity-75">USSD haitumii data. Kituo kinalipia kila kipindi (session).</p>
                     </div>
                   )}
                 </div>
@@ -294,7 +293,7 @@ export function TwangaaMobileSimulator() {
                   className="flex-1 flex items-center justify-center gap-1.5 rounded-lg bg-moss hover:bg-moss/90 text-ink py-2 text-xs font-mono font-bold shadow"
                 >
                   <Phone size={13} />
-                  <span>{ussdStep === 0 ? 'Piga (*483#)' : 'Tuma Jibu'}</span>
+                  <span>{ussdStep === 0 ? 'Piga (*XXX#)' : 'Tuma Jibu'}</span>
                 </button>
                 <button
                   type="button"
@@ -315,18 +314,18 @@ export function TwangaaMobileSimulator() {
                 WHY ZERO-DATA USSD WINS WESTERN KENYA
               </span>
               <p className="text-sage text-xs font-sans leading-relaxed">
-                Smartphone mobile internet penetration in rural Bungoma and Kakamega hovers below 48%. Yet 94% of adult residents own a feature phone with Safaricom or Airtel connectivity.
+                Kenya had 27.42M feature-phone connections alongside 52.26M smartphone connections in June 2026 (CA). USSD needs no data, so it reaches listeners without smartphones. County-level ownership in Western Kenya is a Tier 0 gap.
               </p>
               <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                 <div className="rounded border border-hairline bg-ink-2 p-2.5">
                   <span className="text-[10px] text-sage-dim block">Setup Capex</span>
-                  <span className="text-sm font-bold text-paper">KSh 145,000</span>
-                  <span className="text-[10px] text-moss block mt-0.5">Africa's Talking Shortcode</span>
+                  <span className="text-sm font-bold text-paper">Per operator</span>
+                  <span className="text-[10px] text-moss block mt-0.5">Airtel KSh 116,000; Telkom KSh 58,000 (AT)</span>
                 </div>
                 <div className="rounded border border-hairline bg-ink-2 p-2.5">
                   <span className="text-[10px] text-sage-dim block">Monthly Access</span>
                   <span className="text-sm font-bold text-brass">KSh 70,000 / mo</span>
-                  <span className="text-[10px] text-sage-dim block mt-0.5">Telco link fees</span>
+                  <span className="text-[10px] text-sage-dim block mt-0.5">Safaricom dedicated code (VAT incl.)</span>
                 </div>
               </div>
             </div>
@@ -338,15 +337,15 @@ export function TwangaaMobileSimulator() {
               <ul className="space-y-1.5 text-xs font-sans text-sage">
                 <li className="flex items-start gap-2">
                   <Check size={14} className="text-moss shrink-0 mt-0.5" />
-                  <span><strong>Agri-inputs:</strong> One Acre Fund or Kenya Seed can sponsor commodity price queries (e.g., "Press 3 for Chwele fertilizer and seed prices").</span>
+                  <span><strong>Agri-inputs:</strong> a seed or fertiliser brand can sponsor commodity price queries (e.g., "Press 3 for Chwele fertilizer and seed prices").</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check size={14} className="text-moss shrink-0 mt-0.5" />
-                  <span><strong>Telco Airtime Rewards:</strong> Safaricom M-Pesa B2C sends instant 10 KSh airtime incentives to listeners who complete morning polls.</span>
+                  <span><strong>Airtime rewards:</strong> small airtime incentives for listeners who complete polls, with the cost per session and per reward built into the model.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check size={14} className="text-moss shrink-0 mt-0.5" />
-                  <span><strong>First-Party Voter / Citizen Database:</strong> Builds an ODPC-registered opt-in voter and consumer panel of 150,000+ verifiable county residents.</span>
+                  <span><strong>Consented listener panel:</strong> an ODPC-registered, opt-in listener and consumer panel. No political-opinion data is stored: it is sensitive personal data under the Data Protection Act 2019.</span>
                 </li>
               </ul>
             </div>

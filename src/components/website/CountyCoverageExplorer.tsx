@@ -21,14 +21,14 @@ const COUNTIES: CountyData[] = [
     id: 'bungoma',
     name: 'Bungoma County',
     census2019: '1,670,570',
-    projected2026: '1,932,168',
+    projected2026: '≈1.93M',
     signalStrength: '72–85 dBµV/m (Pristine Line-of-Sight)',
     coverageStatus: 'Primary 100%',
     languages: ['Bukusu (Primary)', 'Tachoni', 'Sabaot', 'Swahili'],
     keyTowns: ['Bungoma Town', 'Webuye', 'Kimilili', 'Chwele (Kenya\'s 2nd largest open market)', 'Sirisia'],
     economicAnchors: ['Sugar belt (Nzoia)', 'Chwele Agri-market', 'Maize milling', 'County Government'],
     adOpportunity: 'KSh 1.2M–2.5M/mo in local retail, agro-vet stores, SACCOs, and county announcements.',
-    stationStrategy: 'Home base studio. Establish unassailable vernacular dominance (#2 behind Sulwe FM by Q4 2027, #1 by 2028).',
+    stationStrategy: 'Home base studio. Establish unassailable vernacular dominance (target: #2 behind Sulwe FM by Month 12, measured by audience survey).',
   },
   {
     id: 'kakamega',
@@ -54,7 +54,7 @@ const COUNTIES: CountyData[] = [
     keyTowns: ['Kitale', 'Endebess', 'Kiminini', 'Cherangany', 'Sibanga'],
     economicAnchors: ['Kenya\'s Breadbasket (Large-scale seed maize)', 'Kenya Seed Company', 'Dairy co-ops', 'Horticulture'],
     adOpportunity: 'KSh 1.5M–3.0M/mo from agricultural inputs, seed distributors, tractor machinery, and fertiliser campaigns.',
-    stationStrategy: '#1 vernacular position target by Q2 2028. Daily dawn agricultural market reports and farmers\' advisory shows.',
+    stationStrategy: '#1 position target by Month 18 (survey-measured). Daily dawn agricultural market reports and farmers\' advisory shows.',
   },
   {
     id: 'busia',
@@ -88,7 +88,7 @@ export function CountyCoverageExplorer() {
   const [selectedCountyId, setSelectedCountyId] = useState<string>('bungoma');
   const selectedCounty = COUNTIES.find((c) => c.id === selectedCountyId) || COUNTIES[0];
 
-  const totalMarket = '6,762,168'; // 2026 projected total
+  const totalMarket = '≈6.8M'; // 2026 projected total
 
   return (
     <div className="rounded-xl border border-brass/50 bg-ink-2 p-5 sm:p-7 shadow-xl space-y-6">
@@ -210,7 +210,7 @@ export function CountyCoverageExplorer() {
         {/* Overall Basin Summary */}
         <div className="pt-3 border-t border-hairline flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono text-sage-dim">
           <span>5-County Total Addressable Population: <strong className="text-paper">≈ {totalMarket} citizens</strong></span>
-          <span className="text-brass">Over 81% regional radio listenership rate (CA Kenya Q2 2025/26)</span>
+          <span className="text-brass">83% radio reach in Western Kenya (CA Kenya, Apr–Jun 2026)</span>
         </div>
       </div>
     </div>

@@ -62,7 +62,7 @@ export function VisualRadioStudioSimulator() {
               <Sparkles size={12} />
               Interactive Hardware Simulator · Studio Build
             </span>
-            <TierBadge tier={1} citation="Blackmagic ATEM Studio HD & 2× PTZ NDI Rig (KSh 627,299 Capex)" />
+            <TierBadge tier={2} method="Simulation of the planned Phase 1 rig (ATEM Television Studio HD + 2 PTZ cameras); images are stock placeholders" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             Visual Radio Live Production Switcher (Blackmagic ATEM)
@@ -106,7 +106,7 @@ export function VisualRadioStudioSimulator() {
               <div className="flex items-center gap-2">
                 {sponsorBugActive && (
                   <span className="rounded bg-ink/85 border border-brass/50 px-2 py-0.5 text-[9px] font-mono font-bold text-brass uppercase shadow">
-                    SPONSOR: SAFARICOM M-PESA
+                    SPONSOR SLOT
                   </span>
                 )}
                 <div className="rounded bg-brass text-ink font-mono font-bold text-xs px-2 py-0.5 shadow">
@@ -152,7 +152,7 @@ export function VisualRadioStudioSimulator() {
                   WHATSAPP 0720...
                 </span>
                 <div className="animate-marquee whitespace-nowrap text-paper">
-                  Mulembe Nyota FM! Sisi wakulima wa Chwele tunapongeza bei mpya za mbolea. Tuko ndani kabisa ya 107.3 FM! · Chwele Market: Mahindi 90kg KSh 3,400 ·
+                  Mulembe Nyota FM! Sisi wakulima wa Chwele tunapongeza bei mpya za mbolea. Tuko ndani kabisa ya 107.3 FM! · Chwele Market: Mahindi 90kg KSh 4,000 ·
                 </div>
               </div>
             )}
@@ -284,7 +284,7 @@ export function VisualRadioStudioSimulator() {
                       : 'border-hairline bg-ink-2 text-sage hover:text-paper'
                   }`}
                 >
-                  <span>Corner Sponsor Bug (Safaricom)</span>
+                  <span>Corner Sponsor Bug (generic)</span>
                   <span className={`text-[10px] ${sponsorBugActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
                     {sponsorBugActive ? 'LIVE' : 'MUTED'}
                   </span>

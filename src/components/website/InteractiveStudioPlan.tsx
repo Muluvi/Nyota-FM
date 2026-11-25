@@ -39,7 +39,7 @@ const ROOMS: StudioRoom[] = [
     code: 'ROOM 02',
     phase: 'Phase 2',
     dimensions: '3.2m × 3.0m (Isolated Booth)',
-    purpose: 'Production studio for the 4 weekly pre-recorded shows (Asuhi ya Imani, Hapa Tulipo Mix, Sauti ya Nchi, Wanawake wa Twang\'aa) and diaspora interviews.',
+    purpose: 'Production studio for the 4 weekly pre-recorded shows (Asubuhi ya Imani, Hapa Tulipo Mix, Sauti ya Nchi, Wanawake wa Twang\'aa) and diaspora interviews.',
     gearList: [
       { name: 'Rode Rodecaster Pro II Production Console', vendor: 'Local Audio Distributor (Tier 2)', cost: 'KSh 95,000', tier: 2, why: 'Dedicated podcast recording with onboard sound pads and phone call audio Bluetooth routing.' },
       { name: '2× Shure SM7B Microphones + Cloudlifters', vendor: 'Broadcast Solutions Int', cost: 'KSh 120,000', tier: 1, why: 'Industry-standard broadcast vocal clarity and excellent rejection of room resonance.' },

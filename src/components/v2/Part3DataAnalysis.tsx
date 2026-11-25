@@ -6,20 +6,19 @@ import {
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { InteractivePaybackSimulator } from '../website/InteractivePaybackSimulator';
-import { CapexWaterfallSimulator } from '../website/CapexWaterfallSimulator';
 
 export function Part3DataAnalysis() {
-  const [selectedQuarter, setSelectedQuarter] = useState<number>(7); // Q4 2027 (index 7)
+  const [selectedQuarter, setSelectedQuarter] = useState<number>(7); // Q4 2028 = Month 24 (index 7)
 
   const quarters = [
-    { q: 'Q1 2026', spot: 100, nonSpot: 0, total: 100, mix: '0%' },
-    { q: 'Q2 2026', spot: 100, nonSpot: 5, total: 105, mix: '5%' },
-    { q: 'Q3 2026', spot: 102, nonSpot: 15, total: 117, mix: '13%' },
-    { q: 'Q4 2026', spot: 105, nonSpot: 30, total: 135, mix: '22%' },
-    { q: 'Q1 2027', spot: 108, nonSpot: 45, total: 153, mix: '29%' },
-    { q: 'Q2 2027', spot: 112, nonSpot: 55, total: 167, mix: '33%' },
-    { q: 'Q3 2027', spot: 115, nonSpot: 65, total: 180, mix: '36%' },
-    { q: 'Q4 2027', spot: 120, nonSpot: 80, total: 200, mix: '40%' },
+    { q: 'Q1 2027', spot: 100, nonSpot: 0, total: 100, mix: '0%' },
+    { q: 'Q2 2027', spot: 100, nonSpot: 5, total: 105, mix: '5%' },
+    { q: 'Q3 2027', spot: 102, nonSpot: 15, total: 117, mix: '13%' },
+    { q: 'Q4 2027', spot: 105, nonSpot: 30, total: 135, mix: '22%' },
+    { q: 'Q1 2028', spot: 108, nonSpot: 45, total: 153, mix: '29%' },
+    { q: 'Q2 2028', spot: 112, nonSpot: 55, total: 167, mix: '33%' },
+    { q: 'Q3 2028', spot: 115, nonSpot: 65, total: 180, mix: '36%' },
+    { q: 'Q4 2028', spot: 120, nonSpot: 80, total: 200, mix: '40%' },
   ];
 
   const currentQ = quarters[selectedQuarter];
@@ -36,49 +35,52 @@ export function Part3DataAnalysis() {
               </span>
               <h4 className="font-display text-paper text-base font-semibold">Where Radio Revenue Actually Concentrates</h4>
             </div>
-            <TierBadge tier={1} citation="ReelAnalytics & CA Kenya Competition Study" url="khusoko.com" />
+            <TierBadge tier={1} citation="CA Audience Measurement & Industry Trends Report Q4 FY2025/26, Tables 8 & 11 (Apr–Jun 2026)" url="https://www.ca.go.ke/sites/default/files/2026-08/%20Audience%20Measurement%20and%20Industry%20Trends%20Report%20Quarter%204%202025-2026.pdf" accessDate="2026-11-25" />
           </div>
 
           <p className="text-xs sm:text-sm text-sage leading-relaxed font-body">
-            Empirical broadcast ad-spend records demonstrate that revenue in Western Kenya radio is heavily concentrated in five anchor sectors:
+            National radio ad spend in Apr–Jun 2026 totalled KES 5,073 M. The five largest sectors (CA data, national, not Western-only):
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-2.5 text-xs font-mono">
             <div className="p-3 bg-ink rounded border border-brass/50">
-              <span className="text-brass font-bold block text-sm">1. Financial</span>
-              <span className="text-paper font-semibold block mt-1">KSh 1.3 Billion</span>
-              <span className="text-sage text-[10px]">21% national radio share</span>
+              <span className="text-brass font-bold block text-sm">1. Banking & Finance</span>
+              <span className="text-paper font-semibold block mt-1">KES 1,291 M</span>
+              <span className="text-sage text-[11px]">25% of radio spend</span>
             </div>
             <div className="p-3 bg-ink rounded border border-hairline">
-              <span className="text-paper font-bold block text-sm">2. Transport</span>
-              <span className="text-paper font-semibold block mt-1">KSh 727 Million</span>
-              <span className="text-sage text-[10px]">11% national radio share</span>
+              <span className="text-paper font-bold block text-sm">2. Servicing</span>
+              <span className="text-paper font-semibold block mt-1">KES 623 M</span>
+              <span className="text-sage text-[11px]">12% of radio spend</span>
             </div>
             <div className="p-3 bg-ink rounded border border-hairline">
-              <span className="text-paper font-bold block text-sm">3. Banking & SACCOs</span>
-              <span className="text-paper font-semibold block mt-1">11% Share</span>
-              <span className="text-sage text-[10px]">Western Kenya rural SACCOs</span>
+              <span className="text-paper font-bold block text-sm">3. Agriculture & gardening equipment</span>
+              <span className="text-paper font-semibold block mt-1">KES 494 M</span>
+              <span className="text-sage text-[11px]">10% · supports Strategy 5.20</span>
             </div>
             <div className="p-3 bg-ink rounded border border-hairline">
-              <span className="text-paper font-bold block text-sm">4. County Gov</span>
-              <span className="text-paper font-semibold block mt-1">High Budget</span>
-              <span className="text-sage text-[10px]">Bungoma & Kakamega IFMIS</span>
+              <span className="text-paper font-bold block text-sm">4. Entertainment</span>
+              <span className="text-paper font-semibold block mt-1">KES 444 M</span>
+              <span className="text-sage text-[11px]">9% of radio spend</span>
             </div>
             <div className="p-3 bg-ink rounded border border-hairline">
-              <span className="text-paper font-bold block text-sm">5. Agriculture</span>
-              <span className="text-paper font-semibold block mt-1">Core Trans Nzoia</span>
-              <span className="text-sage text-[10px]">Inputs, seeds & co-ops</span>
+              <span className="text-paper font-bold block text-sm">5. Media</span>
+              <span className="text-paper font-semibold block mt-1">KES 354 M</span>
+              <span className="text-sage text-[11px]">7% of radio spend</span>
             </div>
           </div>
+          <p className="text-xs text-sage font-body">
+            County governments and SACCOs are important local buyers but are not separated in the CA data; their Western Kenya budgets are a Tier 0 gap.
+          </p>
 
           <div className="p-3.5 bg-brick/20 border border-brick/60 rounded flex items-start gap-3">
             <AlertTriangle className="text-rose-400 shrink-0 mt-0.5" size={16} />
             <div className="text-xs space-y-1">
               <strong className="text-rose-400 font-mono uppercase tracking-wider block">
-                The Betting Ad Collapse — Critical Finding
+                Betting: a choice, not a market fact
               </strong>
               <p className="text-paper/90 leading-relaxed font-body">
-                Betting is no longer a concentration. The <strong>89% collapse in betting radio advertising (KSh 513M → KSh 51M)</strong> following regulatory crackdowns is the single most important commercial finding in this research. Any legacy v1.0 assumption relying on betting sponsorships must be completely excised. Financial services and agriculture are the reliable anchors.
+                Betting radio advertising fell <strong>89% in a single quarter</strong> (KSh 513M in Apr–Jun 2025 to KSh 51M in Jul–Sep 2025) after regulatory action. It has since recovered market-wide: ReelAnalytics ranks Betting &amp; Gambling the <strong>#3 ad sector in H1 2026 at KES 2.33 B</strong>. The plan does not rely on betting money as a values and regulatory position. Financial services and agriculture are the anchors it builds on.
               </p>
             </div>
           </div>
@@ -245,10 +247,10 @@ export function Part3DataAnalysis() {
               <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
                 SECTION 3.4
               </span>
-              <h4 className="font-display text-paper text-base font-semibold">The 8-Quarter Payback Model (Base Case: 2.0× Growth)</h4>
-              <p className="text-xs text-sage">Traditional Spot vs Non-Spot revenue trajectory from Q1 2026 through Q4 2027</p>
+              <h4 className="font-display text-paper text-base font-semibold">The 8-Quarter Revenue Index (Base Case: 2.0×)</h4>
+              <p className="text-xs text-sage">A revenue index only (no costs or cash), from Q1 2027 (Month 0) to Q4 2028 (Month 24). Payback is in the model below.</p>
             </div>
-            <TierBadge tier={2} citation="Base Case Derivation Model" method="15% spot compounding + 35% non-spot mix" />
+            <TierBadge tier={2} citation="Base Case Derivation Model" method="Spot index 100 → 120 over 8 quarters (≈9.5%/yr) plus a non-spot ramp to a 40% revenue mix" />
           </div>
 
           {/* Interactive Slider / Quarter Selector */}
@@ -269,7 +271,7 @@ export function Part3DataAnalysis() {
                       : 'bg-ink-2 text-sage hover:text-paper hover:bg-hairline'
                   }`}
                 >
-                  <div className="font-semibold">{q.q.split(' ')[0]}</div>
+                  <div className="font-semibold">{q.q.replace(' 20', " '")}</div>
                   <div className="text-[9px] opacity-80">{q.total}</div>
                 </button>
               ))}
@@ -294,7 +296,7 @@ export function Part3DataAnalysis() {
 
           {/* Sensitivity Table */}
           <div className="space-y-2">
-            <h5 className="font-display text-sm text-paper font-semibold">Stress-Test Sensitivity Analysis (Q4 2027)</h5>
+            <h5 className="font-display text-sm text-paper font-semibold">Stress-Test Sensitivity Analysis (Month 24, Q4 2028)</h5>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
@@ -310,13 +312,13 @@ export function Part3DataAnalysis() {
                     <td className="py-2.5 pr-3 text-rose-400 font-bold">Worst Case</td>
                     <td className="py-2.5 px-3 font-mono font-bold text-paper">140 (1.4×)</td>
                     <td className="py-2.5 px-3 text-amber-300">25%</td>
-                    <td className="py-2.5 pl-3 text-sage">No GAA registration; USSD delayed past Q4; spot falls 10% in line with market</td>
+                    <td className="py-2.5 pl-3 text-sage">No GAA registration; USSD delayed past Month 12; spot falls 10% in line with market</td>
                   </tr>
                   <tr className="hover:bg-ink bg-brass/10">
                     <td className="py-2.5 pr-3 text-brass font-bold">Base Case</td>
                     <td className="py-2.5 px-3 font-mono font-bold text-brass">200 (2.0×)</td>
                     <td className="py-2.5 px-3 text-emerald-400 font-bold">40%</td>
-                    <td className="py-2.5 pl-3 text-paper font-medium">GAA registered; USSD live Q3; spot +5% (share gains offset market contraction)</td>
+                    <td className="py-2.5 pl-3 text-paper font-medium">GAA registered; USSD live by Month 6; spot +5% (share gains offset market contraction)</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 text-emerald-400 font-bold">Best Case</td>
@@ -336,12 +338,12 @@ export function Part3DataAnalysis() {
               <span>What Must Be True for Base Case (2.0×) to Materialise:</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sage text-[11px]">
-              <div>1. USSD shortcode live by Q3 2026 (Africa's Talking timeline)</div>
-              <div>2. WhatsApp BSP fully onboarded by Q2 2026</div>
-              <div>3. GAA registration completed by Q2 2027</div>
-              <div>4. At least one county government retainer signed by Q1 2027</div>
-              <div>5. Studio Phase 1 completed by Q2 2026</div>
-              <div>6. At least two pre-recorded shows broadcast by Q3 2026</div>
+              <div>1. USSD code live by Month 6 (Africa&apos;s Talking: 3–4 weeks to provision once approved)</div>
+              <div>2. WhatsApp Business Solution Provider onboarded by Month 3</div>
+              <div>3. GAA filing completed by Month 6</div>
+              <div>4. At least one county government contract signed by Month 12</div>
+              <div>5. Studio Phase 1 completed by Month 3</div>
+              <div>6. At least two pre-recorded shows on air by Month 6</div>
             </div>
           </div>
         </div>
@@ -352,10 +354,6 @@ export function Part3DataAnalysis() {
         <InteractivePaybackSimulator />
       </Reveal>
 
-      {/* Interactive Month-by-Month Capex Waterfall Recovery */}
-      <Reveal>
-        <CapexWaterfallSimulator />
-      </Reveal>
 
       {/* 3.5 The Single Biggest Risks */}
       <Reveal>
@@ -378,7 +376,7 @@ export function Part3DataAnalysis() {
                 <strong>Failure to secure GAA registration and county government contracts.</strong> These are relationship-dependent, timeline-uncertain, and politically exposed. If neither materialises, the non-spot mix stalls at ~25%, and total station revenue reverts to the worst-case scenario (140 index).
               </p>
               <div className="text-sage text-[10px] pt-1">
-                Mitigation: Firefly GM leads direct bureaucratic liaison in Q1 2026; prepare IFMIS prequalification paperwork immediately.
+                Mitigation: Firefly GM leads direct liaison from Month 1; prepare IFMIS prequalification paperwork immediately.
               </div>
             </div>
 
@@ -389,7 +387,7 @@ export function Part3DataAnalysis() {
                 <span>Single Biggest Risk to Audience Case</span>
               </div>
               <p className="text-paper/90 font-body leading-relaxed text-xs">
-                <strong>The continuing structural decline in radio listenership (75% → 41% in two years)</strong> outpacing the station's ability to convert listeners into directly-addressable contacts. If listenership decline accelerates in Western Kenya, the 250,000-contact target becomes unachievable regardless of studio quality.
+                <strong>Daily radio listenership keeps falling (75% → 41% nationally, MCK 2023–2025)</strong> faster than the station can convert listeners into directly addressable contacts. Weekly reach in Western Kenya is still 83% (CA, Apr–Jun 2026), so the window is open, but it is closing. If listenership decline accelerates in Western Kenya, the 250,000-contact target becomes unachievable regardless of studio quality.
               </p>
               <div className="text-sage text-[10px] pt-1">
                 Mitigation: Immediate deployment of WhatsApp on-air CTAs + USSD shortcode to capture listeners before they drift off linear radio.

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Presentation, ChevronLeft, ChevronRight, X, Maximize2, Minimize2, FileText, CheckCircle2, Sparkles, Printer } from 'lucide-react';
-import { TierBadge } from '../v2/TierBadge';
+import { asks } from '../../data/asks';
 
 interface Slide {
   id: number;
@@ -18,116 +18,114 @@ const SLIDES: Slide[] = [
     id: 1,
     kicker: 'Slide 01 of 08 · Board Proposal',
     title: 'The Strategic Mandates',
-    headline: 'Scaling Nyota FM from Traditional Audio to Western Kenya\'s Multi-Channel Leader',
-    leadParagraph: 'A comprehensive, empirically costed business plan scaling broadcast reach, digital engagement, and commercial sustainability from 2026 to 2028.',
+    headline: 'From a spot-dependent FM station to a multi-channel Western Kenya platform',
+    leadParagraph: 'A costed 24-month plan, dated from Month 0 (board approval, assumed January 2027), to grow and diversify revenue.',
     bullets: [
-      'Diversify from spot-heavy reliance to an 8-stream commercial portfolio.',
-      'Achieve 40% non-spot revenue mix by Q4 2027.',
-      'Deploy visual radio live streaming across YouTube, Facebook, and TikTok.',
+      'Diversify from spot-heavy reliance to a multi-stream commercial portfolio.',
+      'Target 40% non-spot revenue mix by Month 24.',
+      'Add visual radio live streaming across YouTube, Facebook and TikTok.',
     ],
-    keyMetric: { value: '2.4×', label: 'Target Revenue Multiplier' },
-    speakerNotes: 'Remind the Board that traditional Kenyan radio ad spend shrank by 5% in 2025. Diversification into digital and mobile is not optional—it is essential for survival.',
+    keyMetric: { value: '2.0×', label: 'Base-case revenue target by Month 24 (Tier 2)' },
+    speakerNotes:
+      'Radio ad spend fell 5% in 2025 and radio took KES 11.9 B in H1 2026 (ReelAnalytics). The 2.0× multiplier is a target measured against an audited baseline we do not yet have; Ask 6 funds that baseline.',
   },
   {
     id: 2,
     kicker: 'Slide 02 of 08 · Market Realities',
-    title: 'Empirical Market Baseline',
-    headline: 'Navigating the 2026 Kenyan Advertising Contraction',
-    leadParagraph: 'Every figure in this plan is verified against CA Kenya, KNBS Census, and ReelAnalytics audited reports.',
+    title: 'Market Baseline',
+    headline: 'Fewer people listen daily, but most of Western Kenya still listens',
+    leadParagraph: 'Figures are tiered by evidence. Tier 1 items cite CA Kenya, KNBS, MCK and ReelAnalytics; gaps are marked Tier 0.',
     bullets: [
-      'Betting and gaming advertising collapsed 89% on radio (falling to KSh 51M).',
-      'Financial services, FMCG, and county government are now the top broadcast ad spenders.',
-      'Western Kenya retains high radio loyalty with 81% daily penetration.',
+      'Radio reach in Western Kenya is 83% (CA, Apr–Jun 2026); national daily listenership fell 75% → 57% → 41% (MCK, 2023–2025).',
+      'Only 16% of radio listening in Western is vernacular; Swahili dominates (CA). That supports a Swahili-first, Bukusu-flavoured format.',
+      'Betting ad spend on radio fell 89% in one quarter (Jul–Sep 2025), but betting was the #3 sector market-wide in H1 2026. Nyota chooses not to depend on it.',
     ],
-    keyMetric: { value: '81%', label: 'Western Listenership Rate' },
-    speakerNotes: 'Emphasize that we have explicitly eliminated speculative gambling sponsor dependencies and pivoted to agriculture, banks, and county public notices.',
+    keyMetric: { value: '83%', label: 'Radio reach, Western (CA, Apr–Jun 2026)' },
+    speakerNotes:
+      'Leaving betting money is a values and regulatory choice, not a market fact. Lead with banking, agriculture (KES 494 M on radio in Apr–Jun 2026) and public-sector notices.',
   },
   {
     id: 3,
     kicker: 'Slide 03 of 08 · Addressable Audience',
     title: 'Regional Footprint',
-    headline: '6.63 Million Citizens Across 5 Contiguous Counties',
-    leadParagraph: 'Audited KNBS demographics covering Bungoma, Kakamega, Busia, Trans Nzoia, and Vihiga.',
+    headline: '≈6.0 million people across five contiguous counties (KNBS 2019)',
+    leadParagraph: 'Bungoma, Kakamega, Busia, Trans Nzoia and Vihiga: 6,012,184 people at the 2019 census, ≈6.6–6.8 M projected for 2025–26.',
     bullets: [
-      '3.45M adult listener demographic with high commercial agricultural cashflow.',
-      '27.42M feature phone users in Kenya require zero-data USSD participation.',
-      'Bungoma headquarters gives an irreplaceable local physical presence over remote Nairobi stations.',
+      'Kenya had 27.42 M feature-phone connections in June 2026 (CA): USSD reaches listeners without data.',
+      'A Bungoma base gives local presence at market days that Nairobi-run stations do not have.',
+      'Nyota’s own audience share is a Tier 0 gap until a Western Kenya survey is commissioned.',
     ],
-    keyMetric: { value: '6.63M', label: 'KNBS Population Baseline' },
-    speakerNotes: 'National radio stations broadcast from Nairobi and do not understand local market day rhythms like Chwele or Lubao. That is our moat.',
+    keyMetric: { value: '6.01M', label: 'Five-county population (KNBS 2019)' },
+    speakerNotes: 'Projections are rounded because KNBS has not published county projections with a stated method for these years.',
   },
   {
     id: 4,
     kicker: 'Slide 04 of 08 · Studio Build Capex',
     title: 'Phased Capital Deployment',
-    headline: 'Phase 1 Capex: KSh 627,299 (Saving KSh 1.5M vs Speculative Estimates)',
-    leadParagraph: 'Pragmatic, commercially viable hardware quotes sourced from verified Kenyan broadcast suppliers.',
+    headline: 'Phase 1 capex: KSh 627,299 – 837,299',
+    leadParagraph: 'Phase 1 only. Later phases return to the board once their revenue gates are met, and the all-phase total is being recomputed to include power and the OB rig.',
     bullets: [
-      '2× Robotic PTZ Cameras (KSh 228,000) for automated visual switching.',
-      'Blackmagic ATEM Television Studio HD (KSh 154,999) hardware video switcher.',
-      'Studio acoustic paneling (KSh 110,000) eliminating street reverberation in Bungoma.',
+      '2× robotic PTZ cameras for automated visual switching.',
+      'Blackmagic ATEM Television Studio HD switcher.',
+      'Studio acoustic treatment for the Bungoma on-air room.',
     ],
-    keyMetric: { value: 'KSh 627K', label: 'Phase 1 Capex Commitment' },
-    speakerNotes: 'We are not overspending on luxury studio furniture. Every shilling invested directly generates monetizable digital video and stream inventory.',
+    keyMetric: { value: '≤ KSh 0.84M', label: 'Phase 1 capital requested' },
+    speakerNotes: 'Vendor quotes need re-dating before procurement; prices are imported and exposed to the USD exchange rate.',
   },
   {
     id: 5,
-    kicker: 'Slide 05 of 08 · Payback Waterfall',
+    kicker: 'Slide 05 of 08 · Payback',
     title: 'Capital Recovery',
-    headline: 'Full Breakeven by Month 5 (Base Case) and +332% Year 1 ROI',
-    leadParagraph: 'An 8-quarter financial recovery model stress-tested across downside and upside sensitivities.',
+    headline: 'Payback: to be confirmed after the baseline audit',
+    leadParagraph: 'The earlier simulator credited all station revenue to the studio. It is being rebuilt on incremental cash flow with opex, capex and a discount rate.',
     bullets: [
-      'Conservative scenario recovers initial capital by Month 7.',
-      'Base case achieves full breakeven in Month 5 with KSh 1.8M retained surplus by Month 12.',
-      'Accelerated scenario recovers capital in Month 4 through early GAA registration.',
+      'The model will compare “with the plan” against “do nothing”, not total station revenue.',
+      'Inputs: audited baseline revenue, new-hire costs (KSh 370–630K/month), messaging, USSD and royalties.',
+      'Outputs: payback month (or “not within 24 months”), NPV, peak funding need and a sensitivity tornado.',
     ],
-    keyMetric: { value: 'Month 5', label: 'Base Case Breakeven' },
-    speakerNotes: 'The rapid payback is enabled by activating immediate high-margin revenue streams: WhatsApp push footers and OB roadshows in month one.',
+    keyMetric: { value: 'TBC', label: 'Payback, pending baseline audit' },
+    speakerNotes: 'Do not quote a payback month until the baseline audit is complete. This is why Ask 6 matters.',
   },
   {
     id: 6,
     kicker: 'Slide 06 of 08 · Digital & Mobile Pipeline',
     title: 'First-Party Audience CRM',
-    headline: 'Zero-Data USSD (*483*107#) and WhatsApp Business API',
-    leadParagraph: 'Capturing un-monetized radio listeners into an ODPC-compliant verified consumer database.',
+    headline: 'USSD (code TBC) and the WhatsApp Business Platform',
+    leadParagraph: 'Turning radio listeners into a consented, ODPC-registered contact base.',
     bullets: [
-      'Africa\'s Talking USSD shortcode bridges the 27M Kenyan feature phone user base.',
-      'WhatsApp BSP gateway drives automated commodity price alerts with paid sponsor tags.',
-      'Safaricom M-Pesa B2C integration sends instant listener airtime rewards.',
+      'A dedicated Safaricom USSD code via Africa’s Talking costs KSh 70,000/month; 3–4 weeks to provision.',
+      'WhatsApp is priced per message since 1 Jul 2025 (Rest of Africa: marketing $0.0225, utility $0.004).',
+      'ODPC registration and opt-in consent come before any data is collected.',
     ],
-    keyMetric: { value: '50,000+', label: 'Year 1 Opt-In Contacts' },
-    speakerNotes: 'Advertisers no longer want vague listenership claims; they want verified phone numbers and audience participation receipts.',
+    keyMetric: { value: '150K', label: 'Opt-in contacts by Month 24 (base target)' },
+    speakerNotes: 'Advertisers want verified participation, not claimed listenership. The contact base starts near zero.',
   },
   {
     id: 7,
-    kicker: 'Slide 07 of 08 · Centerpiece Gap Audit',
+    kicker: 'Slide 07 of 08 · Gap Audit',
     title: 'Operational Readiness',
-    headline: 'All 20 Proposal Completeness Gaps & 40 Build Items Resolved',
-    leadParagraph: 'Systematic resolution of baseline audits, competitor metrics, regulatory compliance, and personnel budgets.',
+    headline: 'Known gaps are declared, owned and scheduled',
+    leadParagraph: 'Part 7 lists every gap with one of three statuses: fixed, declared with a plan, or open.',
     bullets: [
-      'CA Kenya 10-year broadcast license fee audited (KSh 120,000 annual).',
-      'ODPC statutory registration completed (KSh 4,000 Tier 1 compliance).',
-      'Blanket CMO music licensing tariffs formalized (MCSK, PRISK, KAMP).',
+      'ODPC registration: planned before the listener database opens (fees KSh 4,000–40,000 by tier).',
+      'Music royalties: pay only CMOs licensed for the year under the 2026–2028 tariff (MCSK was not licensed for 2025–26).',
+      'Audited revenue baseline and audience survey: open, funded through Ask 6.',
     ],
-    keyMetric: { value: '100%', label: 'Gaps Systematically Resolved' },
-    speakerNotes: 'Ownership can review the interactive gap audit checklist in Part 7. There are zero uncosted assumptions in this plan.',
+    keyMetric: { value: '3 statuses', label: 'Fixed · Declared · Open' },
+    speakerNotes: 'We are not claiming everything is resolved. We are showing what is open and who owns it.',
   },
-  {
-    id: 8,
-    kicker: 'Slide 08 of 08 · Actionable Endorsements',
-    title: 'The Six Asks of Ownership',
-    headline: 'Immediate Board Approvals Required to Execute',
-    leadParagraph: 'Five decisive governance endorsements authorizing management to commence procurement and hiring.',
-    bullets: [
-      '1. Authorize Phase 1 Studio Capex (KSh 627,299 – 837,299).',
-      '2. Approve WhatsApp BSP & USSD infrastructure procurement with Africa\'s Talking (KSh 156,000).',
-      '3. Authorize GAA national advertising register prequalification fee (KSh 100,000).',
-      '4. Endorse the 4 flagship pre-recorded show packages and talent recruitment.',
-      '5. Adopt the 8-quarter EBITDA payback and governance cadence.',
-    ],
-    keyMetric: { value: '5 Actions', label: 'Board Endorsements Requested' },
-    speakerNotes: 'Once approved today, procurement commences immediately in Week 1, with visual radio streaming launching before Q2.',
-  },
+  ...[
+    {
+      id: 8,
+      kicker: 'Slide 08 of 08 · Decisions',
+      title: 'The Six Asks of Ownership',
+      headline: 'Six decisions to start execution at Month 0',
+      leadParagraph: 'The same six asks as the proposal and the executive briefing.',
+      bullets: asks.map((a) => `${a.id}. ${a.title}${a.amount ? ` (${a.amount})` : ''}.`),
+      keyMetric: { value: `${asks.length} asks`, label: 'Board decisions requested' },
+      speakerNotes: 'If approved, procurement and filings start in Month 1. Payback is reported once the baseline audit is complete.',
+    },
+  ],
 ];
 
 export function PresentationModeToggle() {
@@ -142,7 +140,7 @@ export function PresentationModeToggle() {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'Space') {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
         setCurrentSlideIndex((prev) => Math.min(SLIDES.length - 1, prev + 1));
       } else if (e.key === 'ArrowLeft') {
@@ -291,7 +289,7 @@ export function PresentationModeToggle() {
                   type="button"
                   onClick={() => setCurrentSlideIndex(idx)}
                   className={`h-2 rounded-full transition-all ${
-                    currentSlideIndex === idx ? 'w-8 bg-brass' : 'w-2 bg-stone-700 hover:bg-stone-500'
+                    currentSlideIndex === idx ? 'w-8 bg-brass' : 'w-2 bg-hairline hover:bg-sage-dim'
                   }`}
                   aria-label={`Jump to slide ${idx + 1}`}
                 />

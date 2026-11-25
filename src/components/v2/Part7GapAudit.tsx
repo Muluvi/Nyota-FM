@@ -36,47 +36,50 @@ export function Part7GapAudit() {
   ];
 
   // Checklist B: 40 Operational Build Items
+  const gapsDeclared = checklistA.filter((g) => /gap declared|data gap/i.test(g.fix)).length;
+  const gapsFixed = checklistA.length - gapsDeclared;
+
   const checklistB = [
-    { id: 1, item: '2× PTZ cameras (KTUH86)', cat: 'Equipment', when: 'Q1 2026', cost: '228,000', owner: 'Engineer', v1: 'Named' },
-    { id: 2, item: 'ATEM Television Studio HD', cat: 'Equipment', when: 'Q1 2026', cost: '154,999', owner: 'Engineer', v1: 'Named' },
-    { id: 3, item: 'LED lighting kit (VISICO 3-light)', cat: 'Equipment', when: 'Q1 2026', cost: '34,300', owner: 'Engineer', v1: 'Named' },
-    { id: 4, item: 'Acoustic panels (20 m²)', cat: 'Equipment', when: 'Q1 2026', cost: '110,000–250,000', owner: 'Engineer', v1: 'Implied' },
-    { id: 5, item: 'Streaming hardware encoder', cat: 'Equipment', when: 'Q1 2026', cost: '50,000–120,000', owner: 'Engineer', v1: 'Implied' },
-    { id: 6, item: '4× PTZ cameras (Phase 2)', cat: 'Equipment', when: 'Q3 2026', cost: '456,000–652,000', owner: 'Engineer', v1: 'Named' },
-    { id: 7, item: 'ATEM Television Studio HD8', cat: 'Equipment', when: 'Q3 2026', cost: '455,800', owner: 'Engineer', v1: 'Named' },
-    { id: 8, item: 'vMix / OBS Production PC', cat: 'Equipment', when: 'Q3 2026', cost: '150,000–300,000', owner: 'Engineer', v1: 'Implied' },
-    { id: 9, item: 'Talk-back intercom system', cat: 'Equipment', when: 'Q3 2026', cost: '80,000–150,000', owner: 'Engineer', v1: 'Implied' },
-    { id: 10, item: 'Control room build-out', cat: 'Equipment', when: 'Q3 2026', cost: '500,000–1,000,000', owner: 'Engineer', v1: 'Implied' },
-    { id: 11, item: 'Second studio (podcast/pre-records)', cat: 'Equipment', when: 'Q1 2027', cost: '1,500,000–3,000,000', owner: 'Engineer', v1: 'Named' },
-    { id: 12, item: 'DAM system (server & indexing)', cat: 'Software', when: 'Q1 2027', cost: '500,000–1,500,000', owner: 'Head of Digital', v1: 'Named' },
-    { id: 13, item: 'Auto-clipping AI tooling', cat: 'Software', when: 'Q1 2027', cost: '200,000–500,000', owner: 'Head of Digital', v1: 'Named' },
-    { id: 14, item: 'WhatsApp BSP integration', cat: 'Software', when: 'Q1 2026', cost: '$85 + $50/mo', owner: 'Head of Digital', v1: 'Named' },
-    { id: 15, item: 'USSD shortcode setup & access', cat: 'Software', when: 'Q1–Q3 2026', cost: '145,000 + 70,000/mo', owner: 'Head of Digital', v1: 'Named' },
-    { id: 16, item: 'App development (v1.0 & v1.1)', cat: 'Software', when: 'Q3 2026', cost: '500,000–1,500,000', owner: 'Head of Digital', v1: 'Named' },
-    { id: 17, item: 'Advertiser self-serve portal', cat: 'Software', when: 'Q4 2026', cost: '200,000–500,000', owner: 'Head of Digital', v1: 'Absent' },
-    { id: 18, item: 'Head of Digital salary', cat: 'Personnel', when: 'Q1 2026', cost: '120,000–200,000/mo', owner: 'GM', v1: 'Named' },
-    { id: 19, item: 'Video Producer salary', cat: 'Personnel', when: 'Q1 2026', cost: '60,000–100,000/mo', owner: 'GM', v1: 'Named' },
-    { id: 20, item: 'Social Media Manager salary', cat: 'Personnel', when: 'Q1 2026', cost: '60,000–100,000/mo', owner: 'GM', v1: 'Named' },
-    { id: 21, item: 'Community Manager salary', cat: 'Personnel', when: 'Q1 2026', cost: '50,000–80,000/mo', owner: 'GM', v1: 'Named' },
-    { id: 22, item: 'Data & Insights Lead salary', cat: 'Personnel', when: 'Q2 2026', cost: '80,000–150,000/mo', owner: 'GM', v1: 'Named' },
-    { id: 23, item: 'GAA prequalification filing', cat: 'Regulatory', when: 'Q1–Q2 2026', cost: '100,000', owner: 'GM', v1: 'Named' },
-    { id: 24, item: 'County prequalification fees', cat: 'Regulatory', when: 'Q2 2026', cost: '50,000', owner: 'GM', v1: 'Absent' },
-    { id: 25, item: 'DPA registration (ODPC)', cat: 'Regulatory', when: 'Q1 2026', cost: '4,000–16,000', owner: 'GM', v1: 'Named' },
-    { id: 26, item: 'Music sync rights clearance', cat: 'Regulatory', when: 'Q2 2026', cost: 'DATA GAP (direct neg)', owner: 'GM', v1: 'Named' },
+    { id: 1, item: '2× PTZ cameras (KTUH86)', cat: 'Equipment', when: 'Q1 2027 (Months 1–3)', cost: '228,000', owner: 'Engineer', v1: 'Named' },
+    { id: 2, item: 'ATEM Television Studio HD', cat: 'Equipment', when: 'Q1 2027 (Months 1–3)', cost: '154,999', owner: 'Engineer', v1: 'Named' },
+    { id: 3, item: 'LED lighting kit (VISICO 3-light)', cat: 'Equipment', when: 'Q1 2027 (Months 1–3)', cost: '34,300', owner: 'Engineer', v1: 'Named' },
+    { id: 4, item: 'Acoustic panels (20 m²)', cat: 'Equipment', when: 'Q1 2027 (Months 1–3)', cost: '110,000–250,000', owner: 'Engineer', v1: 'Implied' },
+    { id: 5, item: 'Streaming hardware encoder', cat: 'Equipment', when: 'Q1 2027 (Months 1–3)', cost: '50,000–120,000', owner: 'Engineer', v1: 'Implied' },
+    { id: 6, item: '4× PTZ cameras (Phase 2)', cat: 'Equipment', when: 'Q3 2027 (Months 7–9)', cost: '456,000–652,000', owner: 'Engineer', v1: 'Named' },
+    { id: 7, item: 'ATEM Television Studio HD8', cat: 'Equipment', when: 'Q3 2027 (Months 7–9)', cost: '455,800', owner: 'Engineer', v1: 'Named' },
+    { id: 8, item: 'vMix / OBS Production PC', cat: 'Equipment', when: 'Q3 2027 (Months 7–9)', cost: '150,000–300,000', owner: 'Engineer', v1: 'Implied' },
+    { id: 9, item: 'Talk-back intercom system', cat: 'Equipment', when: 'Q3 2027 (Months 7–9)', cost: '80,000–150,000', owner: 'Engineer', v1: 'Implied' },
+    { id: 10, item: 'Control room build-out', cat: 'Equipment', when: 'Q3 2027 (Months 7–9)', cost: '500,000–1,000,000', owner: 'Engineer', v1: 'Implied' },
+    { id: 11, item: 'Second studio (podcast/pre-records)', cat: 'Equipment', when: 'Q1 2028 (Months 13–15)', cost: '1,500,000–3,000,000', owner: 'Engineer', v1: 'Named' },
+    { id: 12, item: 'DAM system (server & indexing)', cat: 'Software', when: 'Q1 2028 (Months 13–15)', cost: '500,000–1,500,000', owner: 'Head of Digital', v1: 'Named' },
+    { id: 13, item: 'Auto-clipping AI tooling', cat: 'Software', when: 'Q1 2028 (Months 13–15)', cost: '200,000–500,000', owner: 'Head of Digital', v1: 'Named' },
+    { id: 14, item: 'WhatsApp BSP integration', cat: 'Software', when: 'Q1 2027 (Months 1–3)', cost: '$85 + $50/mo', owner: 'Head of Digital', v1: 'Named' },
+    { id: 15, item: 'USSD shortcode setup & access', cat: 'Software', when: 'Q1–Q3 2027 (Months 1–9)', cost: '70,000/mo (Safaricom dedicated code)', owner: 'Head of Digital', v1: 'Named' },
+    { id: 16, item: 'App development (v1.0 & v1.1)', cat: 'Software', when: 'Q3 2027 (Months 7–9)', cost: '500,000–1,500,000', owner: 'Head of Digital', v1: 'Named' },
+    { id: 17, item: 'Advertiser self-serve portal', cat: 'Software', when: 'Q4 2027 (Months 10–12)', cost: '200,000–500,000', owner: 'Head of Digital', v1: 'Absent' },
+    { id: 18, item: 'Head of Digital salary', cat: 'Personnel', when: 'Q1 2027 (Months 1–3)', cost: '120,000–200,000/mo', owner: 'GM', v1: 'Named' },
+    { id: 19, item: 'Video Producer salary', cat: 'Personnel', when: 'Q1 2027 (Months 1–3)', cost: '60,000–100,000/mo', owner: 'GM', v1: 'Named' },
+    { id: 20, item: 'Social Media Manager salary', cat: 'Personnel', when: 'Q1 2027 (Months 1–3)', cost: '60,000–100,000/mo', owner: 'GM', v1: 'Named' },
+    { id: 21, item: 'Community Manager salary', cat: 'Personnel', when: 'Q1 2027 (Months 1–3)', cost: '50,000–80,000/mo', owner: 'GM', v1: 'Named' },
+    { id: 22, item: 'Data & Insights Lead salary', cat: 'Personnel', when: 'Q2 2027 (Months 4–6)', cost: '80,000–150,000/mo', owner: 'GM', v1: 'Named' },
+    { id: 23, item: 'GAA prequalification filing', cat: 'Regulatory', when: 'Q1–Q2 2027 (Months 1–6)', cost: '100,000', owner: 'GM', v1: 'Named' },
+    { id: 24, item: 'County prequalification fees', cat: 'Regulatory', when: 'Q2 2027 (Months 4–6)', cost: '50,000', owner: 'GM', v1: 'Absent' },
+    { id: 25, item: 'DPA registration (ODPC)', cat: 'Regulatory', when: 'Q1 2027 (Months 1–3)', cost: '4,000–16,000', owner: 'GM', v1: 'Named' },
+    { id: 26, item: 'Music sync rights clearance', cat: 'Regulatory', when: 'Q2 2027 (Months 4–6)', cost: 'DATA GAP (direct neg)', owner: 'GM', v1: 'Named' },
     { id: 27, item: 'CA radio operating licence', cat: 'Regulatory', when: 'Ongoing', cost: '100,000/yr', owner: 'GM', v1: 'Named' },
-    { id: 28, item: 'Africa’s Talking master contract', cat: 'Partnership', when: 'Q1 2026', cost: 'Commercial tariff', owner: 'Head of Digital', v1: 'Named' },
-    { id: 29, item: 'PAVRISK / KAMP / MCSK pacts', cat: 'Partnership', when: 'Q2 2026', cost: 'DATA GAP', owner: 'GM', v1: 'Implied' },
-    { id: 30, item: 'Bungoma County partnership', cat: 'Partnership', when: 'Q2 2026', cost: 'Framework agreement', owner: 'GM', v1: 'Absent' },
-    { id: 31, item: 'Kakamega County partnership', cat: 'Partnership', when: 'Q2 2026', cost: 'Framework agreement', owner: 'GM', v1: 'Absent' },
-    { id: 32, item: 'Development partner agreements', cat: 'Partnership', when: 'Q3 2026', cost: 'Grant co-financing', owner: 'GM', v1: 'Named' },
-    { id: 33, item: 'GeoPoll baseline study', cat: 'Data', when: 'Q1 2026', cost: '500,000–1,000,000', owner: 'Data Lead', v1: 'Absent' },
-    { id: 34, item: 'KARF subscription', cat: 'Data', when: 'Q2 2026', cost: 'DATA GAP', owner: 'Data Lead', v1: 'Absent' },
-    { id: 35, item: 'Station listener survey (field)', cat: 'Data', when: 'Q2 2026', cost: '300,000–500,000', owner: 'Data Lead', v1: 'Absent' },
-    { id: 36, item: 'Brand book compilation', cat: 'Brand', when: 'Q2 2026', cost: '300,000–500,000', owner: 'Head of Digital', v1: 'Named' },
-    { id: 37, item: 'Visual identity system', cat: 'Brand', when: 'Q1–Q2 2026', cost: '200,000–400,000', owner: 'Head of Digital', v1: 'Named' },
-    { id: 38, item: 'Sonic logo & jingle package', cat: 'Brand', when: 'Q2 2026', cost: '100,000–200,000', owner: 'Head of Digital', v1: 'Named' },
-    { id: 39, item: 'Merchandise catalogue setup', cat: 'Brand', when: 'Q3 2026', cost: '100,000', owner: 'Community Manager', v1: 'Named' },
-    { id: 40, item: '12-week staff training induction', cat: 'Capability', when: 'Q1–Q2 2026', cost: '200,000–400,000', owner: 'Firefly', v1: 'Named' },
+    { id: 28, item: 'Africa’s Talking master contract', cat: 'Partnership', when: 'Q1 2027 (Months 1–3)', cost: 'Commercial tariff', owner: 'Head of Digital', v1: 'Named' },
+    { id: 29, item: 'Licences with CMOs licensed for the year (PAVRISK / KAMP; MCSK unlicensed 2025–26)', cat: 'Partnership', when: 'Q2 2027 (Months 4–6)', cost: 'DATA GAP', owner: 'GM', v1: 'Implied' },
+    { id: 30, item: 'Bungoma County partnership', cat: 'Partnership', when: 'Q2 2027 (Months 4–6)', cost: 'Framework agreement', owner: 'GM', v1: 'Absent' },
+    { id: 31, item: 'Kakamega County partnership', cat: 'Partnership', when: 'Q2 2027 (Months 4–6)', cost: 'Framework agreement', owner: 'GM', v1: 'Absent' },
+    { id: 32, item: 'Development partner agreements', cat: 'Partnership', when: 'Q3 2027 (Months 7–9)', cost: 'Grant co-financing', owner: 'GM', v1: 'Named' },
+    { id: 33, item: 'GeoPoll baseline study', cat: 'Data', when: 'Q1 2027 (Months 1–3)', cost: '500,000–1,000,000', owner: 'Data Lead', v1: 'Absent' },
+    { id: 34, item: 'KARF subscription', cat: 'Data', when: 'Q2 2027 (Months 4–6)', cost: 'DATA GAP', owner: 'Data Lead', v1: 'Absent' },
+    { id: 35, item: 'Station listener survey (field)', cat: 'Data', when: 'Q2 2027 (Months 4–6)', cost: '300,000–500,000', owner: 'Data Lead', v1: 'Absent' },
+    { id: 36, item: 'Brand book compilation', cat: 'Brand', when: 'Q2 2027 (Months 4–6)', cost: '300,000–500,000', owner: 'Head of Digital', v1: 'Named' },
+    { id: 37, item: 'Visual identity system', cat: 'Brand', when: 'Q1–Q2 2027 (Months 1–6)', cost: '200,000–400,000', owner: 'Head of Digital', v1: 'Named' },
+    { id: 38, item: 'Sonic logo & jingle package', cat: 'Brand', when: 'Q2 2027 (Months 4–6)', cost: '100,000–200,000', owner: 'Head of Digital', v1: 'Named' },
+    { id: 39, item: 'Merchandise catalogue setup', cat: 'Brand', when: 'Q3 2027 (Months 7–9)', cost: '100,000', owner: 'Community Manager', v1: 'Named' },
+    { id: 40, item: '12-week staff training induction', cat: 'Capability', when: 'Q1–Q2 2027 (Months 1–6)', cost: '200,000–400,000', owner: 'Firefly', v1: 'Named' },
   ];
 
   // Checklist C: 12 Strategy Gaps Firefly v1.0 Omitted
@@ -86,8 +89,8 @@ export function Part7GapAudit() {
     { id: 3, lever: 'Diaspora engagement & remittances', why: 'Untapped affluent Luhya diaspora in Nairobi & abroad', value: 'KSh 500K–2M / yr', cost: 'KSh 100,000', diff: 'High', ref: '5.17' },
     { id: 4, lever: 'Advertiser self-serve portal', why: 'Unlocks frictionless M-Pesa bookings for regional SMEs', value: 'KSh 500K–1.5M / yr', cost: 'KSh 200K–500K', diff: 'Medium', ref: '5.13' },
     { id: 5, lever: 'SMS / CRM automated marketing', why: 'Continuous direct audience messaging beyond USSD sessions', value: 'KSh 300K–1M / yr', cost: 'KSh 50,000', diff: 'Low', ref: 'Rec. Future' },
-    { id: 6, lever: 'Google Ad Grants for Civic Initiatives', why: 'Provides up to $10,000/mo in free in-kind search marketing', value: 'Up to $10,000/mo (in-kind)', cost: 'KSh 0', diff: 'Low', ref: 'Rec. Future' },
-    { id: 7, lever: 'Meta Journalism Project grant funding', why: 'External non-dilutive grant capital for regional newsrooms', value: 'Variable grant capital', cost: 'KSh 0', diff: 'Medium', ref: 'Rec. Future' },
+    { id: 6, lever: 'Community-media and civic-tech partnerships', why: 'Google Ad Grants is for registered charities only, so Nyota (a limited company) is not eligible; partner NGOs that hold grants can co-fund civic campaigns', value: 'Variable (partner-funded)', cost: 'KSh 0', diff: 'Medium', ref: 'Rec. Future' },
+    { id: 7, lever: 'Meta Journalism Project grant funding', why: 'External non-dilutive grant capital for regional newsrooms; current availability in Kenya to be verified', value: 'Variable grant capital', cost: 'KSh 0', diff: 'Medium', ref: 'Rec. Future' },
     { id: 8, lever: 'Airtime-for-equity / barter deals', why: 'Enables ownership stakes in high-growth regional startups', value: 'Asset appreciation', cost: 'KSh 0', diff: 'Low', ref: 'Rec. Future' },
     { id: 9, lever: 'Podcast dynamic ad insertion (DAI)', why: 'Automates programmatic podcast monetization at scale', value: 'KSh 300K–1M / yr', cost: 'Low', diff: 'Medium', ref: '5.9' },
     { id: 10, lever: 'GeoPoll / KARF validation credential', why: 'Empirical audience validation justifies premium ad rates', value: 'Indirect (rate premium)', cost: 'KSh 500K–1M', diff: 'Medium', ref: '2.7' },
@@ -113,12 +116,12 @@ export function Part7GapAudit() {
                 The Three Board-Mandated Audit Checklists
               </h4>
               <p className="text-xs text-sage mt-0.5">
-                The centrepiece Ownership requested: Every proposal omission, operational item, and forgotten strategy systematically verified.
+                The centrepiece Ownership requested. Each gap is either fixed in v2 or declared with a plan; declared gaps still need work.
               </p>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="text-xs font-mono px-2 py-0.5 rounded bg-moss/20 text-emerald-300 border border-moss/60 font-semibold">
-                Audit Status: 100% Resolved
+              <span className="text-xs font-mono px-2 py-0.5 rounded bg-brass/10 text-brass border border-brass/50 font-semibold">
+                Checklist A: {gapsFixed} fixed · {gapsDeclared} declared with a plan
               </span>
             </div>
           </div>
@@ -173,8 +176,8 @@ export function Part7GapAudit() {
           {activeChecklist === 'A' && (
             <div className="space-y-3">
               <div className="text-xs text-sage font-mono flex items-center justify-between">
-                <span>Displaying 20 Foundational Proposal Gaps Fixed in v2.0</span>
-                <span className="text-emerald-400 font-semibold">20 / 20 Closed</span>
+                <span>Displaying 20 foundational proposal gaps addressed in v2</span>
+                <span className="text-brass font-semibold">{gapsFixed} fixed · {gapsDeclared} declared gap</span>
               </div>
 
               <div className="overflow-x-auto">

@@ -28,7 +28,8 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [briefingOpen, setBriefingOpen] = useState(false);
 
-  // Global keyboard shortcut: Cmd+K / Ctrl+K / '/' to open search, 'b' to open briefing
+  // Global keyboard shortcuts: Cmd/Ctrl+K or '/' opens search; Shift+B opens the briefing.
+  // Single-letter 'b' is avoided because screen readers use it for quick navigation.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -37,7 +38,7 @@ export default function App() {
       } else if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
         e.preventDefault();
         setSearchOpen(true);
-      } else if ((e.key === 'b' || e.key === 'B') && !e.metaKey && !e.ctrlKey && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+      } else if (e.key === 'B' && e.shiftKey && !e.metaKey && !e.ctrlKey && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
         e.preventDefault();
         setBriefingOpen((prev) => !prev);
       }

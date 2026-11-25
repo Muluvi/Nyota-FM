@@ -41,7 +41,7 @@ export function DiasporaHub() {
 
         <div className="flex items-center gap-2">
           <span className="px-3 py-1.5 rounded text-xs font-mono text-brass bg-brass/10 border border-brass/30 font-semibold">
-            CBK Western Remittances: $420M+ Annual
+            Kenya remittances: US$5.04B (2025, CBK) · no regional split
           </span>
         </div>
       </div>

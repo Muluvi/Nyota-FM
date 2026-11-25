@@ -23,7 +23,6 @@ interface TouchpointGroup {
   id: string;
   platform: string;
   subtitle: string;
-  total: number;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   accent: string;
   touchpoints: Touchpoint[];
@@ -34,7 +33,6 @@ const TOUCHPOINT_GROUPS: TouchpointGroup[] = [
     id: 'youtube',
     platform: 'YouTube',
     subtitle: 'Long-form video, livestreams & searchable archive',
-    total: 95000,
     icon: Play,
     accent: 'text-red-300',
     touchpoints: [
@@ -59,7 +57,6 @@ const TOUCHPOINT_GROUPS: TouchpointGroup[] = [
     id: 'instagram',
     platform: 'Instagram',
     subtitle: 'Visual discovery, Reels, Stories & product features',
-    total: 33500,
     icon: Instagram,
     accent: 'text-pink-300',
     touchpoints: [
@@ -79,7 +76,6 @@ const TOUCHPOINT_GROUPS: TouchpointGroup[] = [
     id: 'tiktok',
     platform: 'TikTok',
     subtitle: 'Short-form cultural discovery & participatory formats',
-    total: 24000,
     icon: Video,
     accent: 'text-cyan-200',
     touchpoints: [
@@ -97,27 +93,36 @@ const TOUCHPOINT_GROUPS: TouchpointGroup[] = [
     id: 'multi',
     platform: 'Multi-platform & exclusive',
     subtitle: 'X, Facebook, conversion links and premium content',
-    total: 75500,
     icon: BriefcaseBusiness,
     accent: 'text-brass',
     touchpoints: [
-      { name: 'Tweet / post — brand tag', price: 1500 },
-      { name: 'Tweet / post — product photo', price: 2500 },
-      { name: 'Thread / post — brand feature', price: 3000 },
-      { name: 'Quote tweet / retweet mention', price: 1500 },
-      { name: 'Pinned tweet (1 week)', price: 3500 },
-      { name: 'Facebook story / live shoutout', price: 2000 },
-      { name: 'Facebook event sponsor listing', price: 3000 },
+      { name: 'X — tweet brand tag', price: 1500 },
+      { name: 'X — tweet product photo', price: 2500 },
+      { name: 'X — thread brand feature', price: 3000 },
+      { name: 'X — quote tweet', price: 1500 },
+      { name: 'X — retweet brand mention', price: 1500 },
+      { name: 'X — pinned tweet (1 week)', price: 3500 },
+      { name: 'Facebook — post brand tag', price: 1500 },
+      { name: 'Facebook — post product feature', price: 2500 },
+      { name: 'Facebook — story brand mention', price: 1500 },
+      { name: 'Facebook — video logo watermark', price: 2000 },
+      { name: 'Facebook — event sponsor listing', price: 3000 },
+      { name: 'Facebook — live brand shoutout', price: 2000 },
       { name: 'Promo code integration', price: 2500 },
       { name: 'Affiliate link', price: 3000 },
       { name: 'Hashtag campaign', price: 4000 },
-      { name: 'Dedicated social video', price: 25000 },
-      { name: 'Behind-the-scenes content', price: 15000 },
+      { name: 'Exclusive — dedicated social video', price: 25000 },
+      { name: 'Exclusive — behind-the-scenes content', price: 15000 },
     ],
   },
 ];
 
 const money = (value: number) => `KSh ${value.toLocaleString('en-KE')}`;
+
+// Totals are always computed from the line items, never typed in. (The source .docx
+// states YouTube = 95,000, but its own items sum to 97,000; the true total is 230,000.)
+const groupTotal = (group: TouchpointGroup) => group.touchpoints.reduce((sum, t) => sum + t.price, 0);
+const TOUCHPOINT_COUNT = TOUCHPOINT_GROUPS.reduce((n, g) => n + g.touchpoints.length, 0);
 
 export function TouchpointEcosystem() {
   const [selectedId, setSelectedId] = useState('youtube');
@@ -125,7 +130,7 @@ export function TouchpointEcosystem() {
     () => TOUCHPOINT_GROUPS.find((group) => group.id === selectedId) ?? TOUCHPOINT_GROUPS[0],
     [selectedId],
   );
-  const total = TOUCHPOINT_GROUPS.reduce((sum, group) => sum + group.total, 0);
+  const total = TOUCHPOINT_GROUPS.reduce((sum, group) => sum + groupTotal(group), 0);
 
   return (
     <section id="touchpoint-ecosystem" className="mobile-section-deferred scroll-mt-24 border-y border-hairline/70 py-10 sm:py-14">
@@ -152,12 +157,12 @@ export function TouchpointEcosystem() {
               Total rate-card inventory
             </div>
             <div className="mt-2 font-mono text-2xl font-semibold text-brass">{money(total)}</div>
-            <div className="mt-1 text-xs text-sage">50 commercial touchpoints across the ecosystem</div>
+            <div className="mt-1 text-xs text-sage">{TOUCHPOINT_COUNT} commercial touchpoints across the ecosystem</div>
           </div>
           <div className="rounded border border-hairline bg-ink-2 p-4">
             <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">Highest-value channel</div>
             <div className="mt-2 font-display text-lg text-paper">YouTube</div>
-            <div className="mt-1 font-mono text-xs text-brass">{money(95000)}</div>
+            <div className="mt-1 font-mono text-xs text-brass">{money(groupTotal(TOUCHPOINT_GROUPS[0]))}</div>
           </div>
           <div className="rounded border border-hairline bg-ink-2 p-4">
             <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">Premium formats</div>
@@ -192,7 +197,7 @@ export function TouchpointEcosystem() {
                         <span className="mt-0.5 block text-[11px] text-sage-dim">{group.touchpoints.length} touchpoints</span>
                       </span>
                     </span>
-                    <span className="font-mono text-xs text-brass">{money(group.total)}</span>
+                    <span className="font-mono text-xs text-brass">{money(groupTotal(group))}</span>
                   </button>
                 );
               })}
@@ -212,7 +217,7 @@ export function TouchpointEcosystem() {
               </div>
               <div className="rounded bg-brass/10 px-3 py-2 text-right">
                 <div className="text-[9px] font-mono uppercase tracking-wider text-sage-dim">Channel total</div>
-                <div className="font-mono text-sm font-semibold text-brass">{money(selected.total)}</div>
+                <div className="font-mono text-sm font-semibold text-brass">{money(groupTotal(selected))}</div>
               </div>
             </div>
             <div className="mt-4 grid gap-2 sm:grid-cols-2">

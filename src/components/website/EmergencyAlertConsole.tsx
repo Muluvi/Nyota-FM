@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AlertTriangle, Volume2, ShieldAlert, Radio, Check, Sparkles } from 'lucide-react';
-import { TierBadge } from '../v2/TierBadge';
+import { IllustrativeChip } from '../v2/IllustrativeChip';
 
 interface AlertItem {
   id: string;
@@ -65,7 +65,7 @@ export function EmergencyAlertConsole() {
       osc.frequency.linearRampToValueAtTime(item.toneHz, ctx.currentTime + 0.5);
       osc.frequency.linearRampToValueAtTime(item.toneHz * 1.5, ctx.currentTime + 0.75);
 
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.setValueAtTime(0.05, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
 
       osc.connect(gain);
@@ -87,13 +87,13 @@ export function EmergencyAlertConsole() {
             <ShieldAlert size={14} />
             <span className="uppercase tracking-widest font-semibold">Civic Safety & Public Emergency Service</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="National Disaster Operations Centre & Kenya Meteorological Dept" />
+            <IllustrativeChip note="Sample alerts showing the proposed workflow; translations need native-speaker review" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             Emergency Civic Broadcast & Disaster Weather Alert Console
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Experience Nyota FM’s emergency broadcast override protocol. Rapid multi-dialect bulletins dispatched during River Nzoia floods, Mt. Elgon mudslides, and county livestock quarantines.
+            The proposed emergency-broadcast workflow: KMD or county alert → duty editor → bilingual script (Swahili/Bukusu) → on air → WhatsApp/USSD push. Sample alerts below. Grid outages are a real risk: the 7 Aug 2026 Musaga substation fire blacked out five Western counties.
           </p>
         </div>
 
@@ -102,12 +102,12 @@ export function EmergencyAlertConsole() {
           onClick={() => triggerAlertSiren(activeAlert)}
           className={`px-3.5 py-2 rounded font-mono text-xs font-bold transition-all flex items-center gap-1.5 shadow ${
             isPlayingSiren
-              ? 'bg-red-600 text-white animate-pulse'
+              ? 'bg-red-600 text-white'
               : 'bg-red-500/20 border border-red-500/50 text-red-400 hover:bg-red-500/30'
           }`}
         >
           <Volume2 size={14} />
-          <span>{isPlayingSiren ? 'BROADCASTING SIREN' : 'TEST EMERGENCY TONE'}</span>
+          <span>{isPlayingSiren ? 'Playing test tone…' : 'Play test tone (sound)'}</span>
         </button>
       </div>
 
@@ -120,10 +120,7 @@ export function EmergencyAlertConsole() {
               <button
                 key={item.id}
                 type="button"
-                onClick={() => {
-                  setActiveAlert(item);
-                  triggerAlertSiren(item);
-                }}
+                onClick={() => setActiveAlert(item)}
                 className={`w-full text-left p-3 rounded-lg border transition-all ${
                   isSelected
                     ? 'border-red-500/80 bg-red-950/20 text-paper font-semibold shadow'
@@ -174,7 +171,7 @@ export function EmergencyAlertConsole() {
           </div>
 
           <div className="flex items-center justify-between text-[10px] font-mono text-sage-dim pt-1 border-t border-hairline">
-            <span>Disaster Response: Red Cross Western & Bungoma County Police</span>
+            <span>Response partners: Kenya Red Cross &amp; county emergency services</span>
             <span className="text-brass">Toll Free: 1199</span>
           </div>
         </div>

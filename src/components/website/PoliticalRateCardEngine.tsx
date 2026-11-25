@@ -28,13 +28,13 @@ export function PoliticalRateCardEngine() {
             <Scale size={14} />
             <span className="uppercase tracking-widest font-semibold">Regulatory Compliance · Strategy 5.21</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Communications Authority of Kenya (CA) & NCIC Section 46 Regulations" />
+            <TierBadge tier={2} method="Station policy, not law. Legal references (Election Campaign Financing Act 2013; NCIC Act 2008 s.13; Media Council Act 2013 Code of Conduct; CA programming code) to be confirmed by counsel." />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             Political Campaign Advertising & Statutory Compliance Engine
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Simulate rate card commitments, mandatory advance cash escrow deposits, and NCIC hate-speech indemnity verification for 2027 General Election candidates.
+            Model the station’s proposed political-advertising policy for the 2027 election (primaries by 8 May 2027; campaign 29 May–7 Aug 2027; vote 10 Aug 2027): cash in advance, one rate card for all candidates, and a signed content undertaking. IEBC spending limits gazetted on 7 Aug 2026 are currently stayed by the High Court.
           </p>
         </div>
 
@@ -45,7 +45,7 @@ export function PoliticalRateCardEngine() {
               : 'bg-red-500/15 border-red-500/50 text-red-400'
           }`}>
             <span className={`h-2 w-2 rounded-full ${isCompliant ? 'bg-emerald-400' : 'bg-red-400'}`} />
-            <span>{isCompliant ? 'CA COMPLIANCE CLEARED' : 'PENDING INDEMNITY / CASH'}</span>
+            <span>{isCompliant ? 'Meets station policy' : 'Pending deposit / undertaking'}</span>
           </span>
         </div>
       </div>
@@ -137,26 +137,26 @@ export function PoliticalRateCardEngine() {
                 <span className="text-paper font-bold tabular-nums">KSh {cost.toLocaleString()}</span>
               </div>
               <div className="flex justify-between pt-2">
-                <span className="text-sage">Statutory Defamation Escrow Bond</span>
+                <span className="text-sage">Content-review deposit (station policy)</span>
                 <span className="text-paper font-bold tabular-nums">KSh {statutoryEscrowKsh.toLocaleString()}</span>
               </div>
               <div className="flex justify-between pt-2">
-                <span className="text-sage">Equitable Access Registry Entry</span>
-                <span className="text-emerald-400 font-semibold">CA Verified</span>
+                <span className="text-sage">Equal-rate register entry (station policy)</span>
+                <span className="text-sage font-semibold">Recorded</span>
               </div>
             </div>
 
             <div className="rounded-lg bg-ink-2 border border-hairline p-3 flex items-center justify-between">
-              <span className="text-sage-dim">Total Cleared Commitment</span>
+              <span className="text-sage-dim">Total commitment</span>
               <span className="font-display text-xl font-bold text-brass tabular-nums">
                 KSh {totalCommitment.toLocaleString()}
               </span>
             </div>
 
             <div className="p-3 rounded bg-ink-2 border border-hairline/80 text-[11px] font-sans text-sage leading-relaxed space-y-1">
-              <p className="font-semibold text-paper">Communications Authority Section 46 Mandate:</p>
+              <p className="font-semibold text-paper">Station policy (good practice, to be confirmed by counsel):</p>
               <p>
-                Broadcasters must ensure all political campaign messages are vetted by the station legal editor. Live call-in segments require a minimum 7-second audio delay to prevent live broadcast of inciting remarks.
+                All political messages are vetted by the station’s legal editor against the NCIC Act and the Media Council Code of Conduct. Live call-ins run on a 7-second delay. These are station rules, not statutory requirements.
               </p>
             </div>
           </div>

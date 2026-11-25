@@ -15,22 +15,22 @@ const SEARCH_INDEX: SearchResult[] = [
   { id: 'sec-overview', category: 'Section', title: 'Platform Overview & Strategic Summary', snippet: 'The visual system, core evidence tiers and board decision framework for Nyota FM 107.3.', targetId: 'overview', badge: 'Hero' },
   { id: 'sec-objectives', category: 'Section', title: 'Part 1 — The Five Ownership Objectives (A–E)', snippet: 'Revenue diversification, regional brand leadership, local language dominance, and digital migration.', targetId: 'part-1', badge: 'Part 1' },
   { id: 'sec-data', category: 'Section', title: 'Part 2 — Sourced Master Data Room', snippet: '8 empirical data domains, 2019 Census benchmarks, prevailing ad rates, and vendor quotations.', targetId: 'part-2', badge: 'Part 2' },
-  { id: 'sec-payback', category: 'Section', title: 'Part 3 — Data Analysis & Payback Model', snippet: 'Interactive 8-quarter EBITDA trajectory, sensitivity test (-20% to +35%), and studio break-even model.', targetId: 'part-3', badge: 'Part 3' },
-  { id: 'sec-opps', category: 'Section', title: 'Part 4 — Revenue Opportunities Matrix', snippet: '12 commercial levers evaluated by Expected Value formula EV = Yield × P(S) / Time.', targetId: 'part-4', badge: 'Part 4' },
+  { id: 'sec-payback', category: 'Section', title: 'Part 3 — Data Analysis & Payback Model', snippet: '8-quarter revenue index, sensitivity test (−20% to +25%), risks; payback model under revision pending the baseline audit.', targetId: 'part-3', badge: 'Part 3' },
+  { id: 'sec-opps', category: 'Section', title: 'Part 4 — Revenue Opportunities Matrix', snippet: '12 commercial levers ranked by yield, probability of success and time to revenue.', targetId: 'part-4', badge: 'Part 4' },
   { id: 'sec-strategies', category: 'Section', title: 'Part 5 — 21 Action Execution Plans (5.1–5.21)', snippet: 'Fully costed implementation plans with verifiable receipts, deliverables, and milestone KPIs.', targetId: 'part-5', badge: 'Part 5' },
-  { id: 'sec-build', category: 'Section', title: 'Part 6 — Studio Build, Phased Capex & Staffing', snippet: '24-month roadmap, 3-phase studio schedule (KSh 627K–9.60M), and team organogram.', targetId: 'part-6', badge: 'Part 6' },
+  { id: 'sec-build', category: 'Section', title: 'Part 6 — Studio Build, Phased Capex & Staffing', snippet: '24-month roadmap from Month 0, 3-phase studio schedule (Phase 1 KSh 627K–837K), and team organogram.', targetId: 'part-6', badge: 'Part 6' },
   { id: 'sec-audit', category: 'Section', title: 'Part 7 — The Centerpiece Gap Audit', snippet: 'Checklist A (20 Gaps), Checklist B (40 Operational Items), and Checklist C (12 Reclaimed Levers).', targetId: 'part-7', badge: 'Part 7' },
-  { id: 'sec-asks', category: 'Section', title: 'Closing — The Six Asks of Ownership & Source Registry', snippet: '37 verified citations, governance endorsements, and formal capital authorisation resolutions.', targetId: 'part-asks', badge: 'Closing' },
+  { id: 'sec-asks', category: 'Section', title: 'Closing — The Six Asks of Ownership & Source Registry', snippet: 'Source registry, honest self-check, and the six board resolutions.', targetId: 'part-asks', badge: 'Closing' },
 
   // Key Metrics
-  { id: 'm-reach', category: 'Metric', title: '1.8M+ Weekly Radio Listeners', snippet: '81% radio penetration across Western Kenya and Lake Region (CA Kenya Q2 2025/26).', targetId: 'part-2', badge: 'Tier 1' },
-  { id: 'm-smartphones', category: 'Metric', title: '92.9% Smartphone Penetration', snippet: 'Active smartphones exceeding 48.7M devices in Kenya (CA Kenya, Dec 2025).', targetId: 'part-2', badge: 'Tier 1' },
-  { id: 'm-market', category: 'Metric', title: 'KSh 25.9B Radio Ad Spend Market', snippet: 'Radio sector contracted 5% in 2025; financial services and transport lead expenditures.', targetId: 'part-1', badge: 'Tier 1' },
+  { id: 'm-reach', category: 'Metric', title: '83% Radio Reach in Western Kenya', snippet: 'Radio reach in Western Kenya, Apr–Jun 2026 (CA Audience Measurement Q4 FY2025/26). Nyota’s own audience is a Tier 0 gap.', targetId: 'part-2', badge: 'Tier 1' },
+  { id: 'm-smartphones', category: 'Metric', title: '52.26M Smartphone Connections', snippet: '52.26M smartphone and 27.42M feature-phone connections in Kenya, June 2026 (CA). Connections, not people.', targetId: 'part-2', badge: 'Tier 1' },
+  { id: 'm-market', category: 'Metric', title: 'KSh 25.9B Radio Ad Spend Market', snippet: 'Radio contracted 5% in 2025; banking & finance and agriculture lead radio spend (CA, Apr–Jun 2026).', targetId: 'part-1', badge: 'Tier 1' },
   { id: 'm-capex', category: 'Metric', title: 'KSh 627,000 – 837,000 Phase 1 Studio Capex', snippet: 'Researched local equipment procurement vs v1.0 initial KSh 2.2M–3.8M estimate.', targetId: 'part-6', badge: 'Tier 1' },
-  { id: 'm-ussd', category: 'Metric', title: 'KSh 145,000 USSD Shortcode Activation', snippet: 'Africa\'s Talking dedicated interactive code for feature phone polling and listener payments.', targetId: 'part-5', badge: 'Tier 1' },
+  { id: 'm-ussd', category: 'Metric', title: 'KSh 70,000 / month USSD Dedicated Code', snippet: 'Africa\'s Talking dedicated Safaricom code (VAT incl.); 3–4 weeks to provision.', targetId: 'part-5', badge: 'Tier 1' },
 
   // Counties
-  { id: 'c-bungoma', category: 'County', title: 'Bungoma County — Population 1,670,570', snippet: 'Primary station home base. 2026 projection: 1,932,168. Vernacular: Bukusu, Tachoni, Sabaot.', targetId: 'part-2', badge: 'KNBS' },
+  { id: 'c-bungoma', category: 'County', title: 'Bungoma County — Population 1,670,570', snippet: 'Primary station home base. 2026 projection ≈1.93M. Vernacular: Bukusu, Tachoni, Sabaot.', targetId: 'part-2', badge: 'KNBS' },
   { id: 'c-kakamega', category: 'County', title: 'Kakamega County — Population 1,867,579', snippet: 'Core commercial hub. 2026 projection: 2,110,000. Vernacular: Maragoli, Isukha, Idakho, Tiriki.', targetId: 'part-2', badge: 'KNBS' },
   { id: 'c-transnzoia', category: 'County', title: 'Trans Nzoia County — Population 990,341', snippet: 'Northern agricultural corridor (Kitale). 2026 projection: 1,080,000. Agro-business ad cluster.', targetId: 'part-2', badge: 'KNBS' },
   { id: 'c-busia', category: 'County', title: 'Busia County — Population 893,681', snippet: 'Cross-border commerce corridor. 2026 projection: 990,000. Vernacular: Samia, Khayo, Marachi, Teso.', targetId: 'part-2', badge: 'KNBS' },
@@ -39,8 +39,8 @@ const SEARCH_INDEX: SearchResult[] = [
   // Revenue Levers & Strategies
   { id: 'str-ob', category: 'Strategy', title: 'Strategy 5.11 — Outside Broadcast (OB) Commercial Units', snippet: 'Targeting weekly market days, agricultural expos, and county rallies. Yield: KSh 150K–350K per OB.', targetId: 'part-5', badge: 'Action 5.11' },
   { id: 'str-whatsapp', category: 'Strategy', title: 'Strategy 5.5 — WhatsApp Business API & Channel Integration', snippet: 'Official Africa\'s Talking WhatsApp BSP onboarding. Direct listener conversion and SMS backup.', targetId: 'part-5', badge: 'Action 5.5' },
-  { id: 'str-shows', category: 'Strategy', title: 'Strategy 5.1 — Four Flagship Pre-Recorded Show Packages', snippet: 'Asuhi ya Imani, Hapa Tulipo Mix, Sauti ya Nchi, and Wanawake wa Twang\'aa derivative syndication.', targetId: 'part-5', badge: 'Action 5.1' },
-  { id: 'str-gaa', category: 'Strategy', title: 'Strategy 5.14 — Government Advertising Agency (GAA) Prequalification', snippet: 'Prequalifying Nyota FM for KSh 100K to access national public sector civic campaign budgets.', targetId: 'part-5', badge: 'Action 5.14' },
+  { id: 'str-shows', category: 'Strategy', title: 'Strategy 5.1 — Four Flagship Pre-Recorded Show Packages', snippet: 'Asubuhi ya Imani, Hapa Tulipo Mix, Sauti ya Nchi, and Wanawake wa Twang\'aa derivative syndication.', targetId: 'part-5', badge: 'Action 5.1' },
+  { id: 'str-gaa', category: 'Strategy', title: 'Strategy 5.14 — Government Advertising Agency (GAA) & County Desk', snippet: 'Filing with the Government Advertising Agency (national-government advertising); counties procure separately.', targetId: 'part-5', badge: 'Action 5.14' },
   { id: 'str-loyalty', category: 'Strategy', title: 'Strategy 5.18 — Twang\'aa Club Listener Loyalty Engine', snippet: 'USSD + WhatsApp points system driving repeat engagement and SMS poll monetization.', targetId: 'part-5', badge: 'Action 5.18' },
   { id: 'str-studio', category: 'Studio Hardware', title: 'Studio Phase 1 Fitout Hardware Matrix', snippet: 'Shure SM7B mics, Rodecaster Pro II, Blackmagic Atem Mini, and soundproof acoustic panelling.', targetId: 'part-6', badge: 'Hardware' },
 ];
@@ -163,7 +163,7 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             <div className="p-8 text-center text-sage">
               <p className="text-sm">No results found for &ldquo;{query}&rdquo;</p>
               <p className="text-xs text-sage-dim mt-1 font-mono">
-                Try searching for &lsquo;Bungoma&rsquo;, &lsquo;EBITDA&rsquo;, &lsquo;USSD&rsquo;, &lsquo;Phase 1&rsquo;, or &lsquo;ReelAnalytics&rsquo;.
+                Try searching for &lsquo;Bungoma&rsquo;, &lsquo;Payback&rsquo;, &lsquo;USSD&rsquo;, &lsquo;Phase 1&rsquo;, or &lsquo;ReelAnalytics&rsquo;.
               </p>
             </div>
           ) : (

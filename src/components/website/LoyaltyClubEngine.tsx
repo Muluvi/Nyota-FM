@@ -14,9 +14,9 @@ export function LoyaltyClubEngine() {
   ];
 
   const rewardCatalog = [
-    { id: 'r1', title: 'KSh 50 Safaricom Airtime (Instant M-Pesa)', costPts: 100, sponsor: 'Safaricom B2C' },
+    { id: 'r1', title: 'KSh 50 airtime', costPts: 100, sponsor: 'Station-funded (cost in model)' },
     { id: 'r2', title: 'Official Nyota FM 107.3 Branded Cap', costPts: 250, sponsor: 'Nyota Merch Hub' },
-    { id: 'r3', title: 'Solar Lantern with Mobile Charger', costPts: 600, sponsor: 'D.Light Solar Western' },
+    { id: 'r3', title: 'Solar Lantern with Mobile Charger', costPts: 600, sponsor: 'Sponsor slot available' },
     { id: 'r4', title: 'VIP Bungoma Studio Co-Host Experience', costPts: 1500, sponsor: 'Editorial Board' },
   ];
 
@@ -40,10 +40,10 @@ export function LoyaltyClubEngine() {
             <Award size={14} />
             <span className="uppercase tracking-widest font-semibold">Audience Gamification · Strategy 5.8</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Safaricom B2C M-Pesa API & First-Party Listener Retention Data" />
+            <TierBadge tier={2} method="Illustrative points scheme: 100 pts = KSh 50 airtime; reward liability to be modelled per active member" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
-            "Twang'aa Club" Listener Loyalty & Instant M-Pesa Rewards
+            "Twang'aa Club" Listener Loyalty Concept
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
             Simulate how Nyota FM incentivizes daily radio listening and mobile participation. Listeners accumulate first-party verified points redeemable for automated airtime and local sponsor merchandise.
@@ -69,7 +69,7 @@ export function LoyaltyClubEngine() {
       {redeemedItem && (
         <div className="p-3 rounded-lg bg-emerald-500/20 border border-emerald-500 text-emerald-300 text-xs font-mono flex items-center gap-2 animate-section-entrance">
           <Check size={16} />
-          <span>Success! Redeemed <strong>{redeemedItem}</strong>. Dispatched to registered Safaricom mobile line.</span>
+          <span>Success! Redeemed <strong>{redeemedItem}</strong>. (Demo only: no reward is sent.)</span>
         </div>
       )}
 

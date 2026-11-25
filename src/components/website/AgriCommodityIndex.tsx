@@ -20,11 +20,11 @@ const COMMODITIES: CommodityItem[] = [
     crop: 'Dry Maize (Grain)',
     unit: '90kg Bag',
     market: 'Chwele (Bungoma)',
-    currentPriceKsh: 3400,
-    previousPriceKsh: 3200,
+    currentPriceKsh: 4000,
+    previousPriceKsh: 3800,
     trend: 'up',
-    seasonalNote: 'Post-harvest tightening; millers active.',
-    advertiserSponsor: 'Kenya Seed Company',
+    seasonalNote: 'NCPB floor KSh 4,000 (Jan 2026); producing areas KSh 3,800–4,100 (Aug 2026).',
+    advertiserSponsor: 'Sponsor slot available',
   },
   {
     id: 'c2',
@@ -35,7 +35,7 @@ const COMMODITIES: CommodityItem[] = [
     previousPriceKsh: 8200,
     trend: 'down',
     seasonalNote: 'Supply influx from Uganda cross-border.',
-    advertiserSponsor: 'One Acre Fund',
+    advertiserSponsor: 'Sponsor slot available',
   },
   {
     id: 'c3',
@@ -46,7 +46,7 @@ const COMMODITIES: CommodityItem[] = [
     previousPriceKsh: 850,
     trend: 'stable',
     seasonalNote: 'Steady weekend family demand.',
-    advertiserSponsor: 'Kenchic Feeds Western',
+    advertiserSponsor: 'Sponsor slot available',
   },
   {
     id: 'c4',
@@ -57,7 +57,7 @@ const COMMODITIES: CommodityItem[] = [
     previousPriceKsh: 48,
     trend: 'up',
     seasonalNote: 'Dry spell reduction in pasture.',
-    advertiserSponsor: 'New KCC Dairy Co-op',
+    advertiserSponsor: 'Sponsor slot available',
   },
   {
     id: 'c5',
@@ -68,7 +68,7 @@ const COMMODITIES: CommodityItem[] = [
     previousPriceKsh: 125,
     trend: 'down',
     seasonalNote: 'High transit volume through Malaba.',
-    advertiserSponsor: 'Co-op Bank Kilimo',
+    advertiserSponsor: 'Sponsor slot available',
   },
 ];
 
@@ -87,13 +87,13 @@ export function AgriCommodityIndex() {
             <Wheat size={14} />
             <span className="uppercase tracking-widest font-semibold">Agribusiness Intelligence · Soko Nyota</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Ministry of Agriculture Wholesale Price Bulletins & Field Audits" />
+            <TierBadge tier={2} method="Indicative prices; maize anchored to NCPB (Jan 2026) and KNA market reports (Aug 2026). Other crops to be sourced from KAMIS with a date stamp." url="https://www.kenyanews.go.ke/dry-maize-stocks-steady-as-prices-fluctuate/" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             Western Kenya Agri-Commodity Wholesale Index
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Live commodity benchmarks broadcast daily on *Soko Nyota* (10:00–14:00). Direct high-value monetization gateway for agrochemical, seed, and fertilizer sponsors.
+            Indicative (not live) commodity prices of the kind Soko Nyota (10:00–14:00) would read on air. Each board is a sponsor slot for agro-input, seed and fertiliser brands. Prices will come from the Ministry of Agriculture KAMIS system with a date stamp.
           </p>
         </div>
 

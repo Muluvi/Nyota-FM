@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FileText, Printer, Copy, Check, DollarSign, Calendar, Sparkles, Building2, ShieldCheck } from 'lucide-react';
 import { TierBadge } from '../v2/TierBadge';
+import { printSection } from '../../lib/print';
 
 export function AdvertiserQuoteBuilder() {
-  const [clientName, setClientName] = useState('Nzoia Sugar Farmers Co-operative');
+  const [clientName, setClientName] = useState('Sample Client Ltd');
   const [sector, setSector] = useState<'Agribusiness' | 'Banking & SACCO' | 'Healthcare' | 'FMCG' | 'Public Sector'>('Agribusiness');
   const [campaignWeeks, setCampaignWeeks] = useState<number>(4);
   const [spotsPerDay, setSpotsPerDay] = useState<number>(4);
@@ -33,12 +34,12 @@ export function AdvertiserQuoteBuilder() {
   const vatAmount = Math.round((grossTotal - discountAmount) * 0.16); // 16% Kenyan VAT
   const netTotal = (grossTotal - discountAmount) + vatAmount;
 
-  const handlePrint = () => {
-    window.print();
-  };
+  const quoteDate = new Intl.DateTimeFormat('en-KE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Africa/Nairobi' }).format(new Date());
+
+  const handlePrint = () => printSection('media-quote');
 
   const handleCopy = () => {
-    const quoteText = `NYOTA FM 107.3 · OFFICIAL COMMERCIAL MEDIA QUOTATION
+    const quoteText = `NYOTA FM 107.3 · ILLUSTRATIVE MEDIA QUOTE (not an invoice; rates subject to the published rate card)\nDate: ${quoteDate}
 Client: ${clientName} (${sector})
 Campaign Flight: ${campaignWeeks} Weeks (${totalSpots} Total Spots)
 Selected Daypart: ${daypart} @ KSh ${spotRate.toLocaleString()} / spot
@@ -50,9 +51,13 @@ Volume Discount (${(discountRate * 100).toFixed(0)}%): -KSh ${discountAmount.toL
 TOTAL NET INVESTMENT: KSh ${netTotal.toLocaleString()}
 Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
 
-    navigator.clipboard.writeText(quoteText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    navigator.clipboard
+      .writeText(quoteText)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      })
+      .catch(() => setCopied(false));
   };
 
   return (
@@ -63,13 +68,13 @@ Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
             <DollarSign size={14} />
             <span className="uppercase tracking-widest font-semibold">Commercial Directorate · Rate Card Engine</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Standard Commercial Rate Cards & KRA 16% VAT Guidelines" />
+            <TierBadge tier={2} method="Illustrative spot rates pending one published rate card; 16% VAT applied" inputs="Daypart rate × spots × weeks, volume discount, optional OB and WhatsApp add-ons" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
-            Advertiser Self-Serve Rate Card & Pro-Forma Invoice Builder
+            Advertiser Quote Builder (Illustrative)
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Configure tailored advertising flight packages, apply volume incentives, and generate an authentic pro-forma media quotation for corporate and SME partners.
+            Configure a sample advertising flight to see how a quote is built. Rates are illustrative until the station publishes one rate card; this is not an invoice.
           </p>
         </div>
 
@@ -195,7 +200,7 @@ Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
                   onChange={(e) => setIncludeWhatsAppPush(e.target.checked)}
                   className="accent-brass"
                 />
-                <span>Include WhatsApp Listener Push to 50,000+ Opt-In Contacts (+KSh 35,000/mo)</span>
+                <span>Include WhatsApp listener push to opted-in contacts, once the base exists (+KSh 35,000 per fortnight)</span>
               </label>
             </div>
           </div>
@@ -203,18 +208,18 @@ Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
 
         {/* Live Pro-Forma Invoice Summary */}
         <div className="lg:col-span-6 space-y-4">
-          <div className="rounded-xl border border-hairline bg-ink p-5 space-y-4 shadow-lg text-xs font-mono">
+          <div id="media-quote" className="rounded-xl border border-hairline bg-ink p-5 space-y-4 shadow-lg text-xs font-mono">
             <div className="flex items-start justify-between border-b border-hairline pb-3">
               <div>
-                <span className="text-[10px] text-brass uppercase tracking-widest font-bold block">
-                  PRO-FORMA INVOICE
+                <span className="text-[11px] text-brass uppercase tracking-widest font-bold block">
+                  ILLUSTRATIVE QUOTE · NOT AN INVOICE
                 </span>
                 <span className="text-sm font-bold text-paper mt-0.5 block">NYOTA FM 107.3</span>
-                <span className="text-[10px] text-sage-dim">PIN: P051284920K · Bungoma Studios</span>
+                <span className="text-[10px] text-sage-dim">Bungoma studio · rates subject to the published rate card</span>
               </div>
               <div className="text-right">
                 <span className="text-[10px] text-sage-dim block">Date</span>
-                <span className="text-paper font-bold">October 2026</span>
+                <span className="text-paper font-bold">{quoteDate}</span>
               </div>
             </div>
 
