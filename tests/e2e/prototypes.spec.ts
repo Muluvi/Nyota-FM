@@ -4,7 +4,6 @@ test('no AudioContext is created on page load', async ({page}) => {
   await page.addInitScript(() => {
     (window as unknown as {__audioCtx: number}).__audioCtx = 0;
     const Orig = window.AudioContext;
-    // @ts-expect-error test shim
     window.AudioContext = class extends Orig {
       constructor(...a: ConstructorParameters<typeof AudioContext>) {
         super(...a);
