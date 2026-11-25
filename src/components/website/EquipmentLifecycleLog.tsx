@@ -165,7 +165,7 @@ export function EquipmentLifecycleLog() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-lg border border-hairline">
+      <div tabIndex={0} className="overflow-x-auto rounded-lg border border-hairline">
         <table className="w-full text-left text-xs font-mono">
           <thead className="bg-ink text-sage-dim uppercase tracking-wider border-b border-hairline">
             <tr>

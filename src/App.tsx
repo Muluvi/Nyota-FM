@@ -19,6 +19,9 @@ import { Part6TheBuild } from './components/v2/Part6TheBuild';
 import { Part7GapAudit } from './components/v2/Part7GapAudit';
 import { SourceListAndAsks } from './components/v2/SourceListAndAsks';
 import { Flywheel } from './components/v2/Flywheel';
+import { SituationCharts } from './components/v2/SituationCharts';
+import { Gantt } from './components/charts/Gantt';
+import { CapexWaterfall } from './components/charts/CapexWaterfall';
 import { ProductPreview, SeeItWorking } from './appendix/ProductPreview';
 import { TouchpointEcosystem } from './components/v2/TouchpointEcosystem';
 import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
@@ -87,6 +90,7 @@ export default function App() {
 
         {/* 01–08: the board case, in decision order */}
         <ChapterSection id="situation" number="01" title="The Situation: Market Evidence">
+          <SituationCharts />
           <Part2MasterData />
           <p className="mt-6"><SeeItWorking group="preview-evidence">Explore the county, coverage and royalty tools</SeeItWorking></p>
         </ChapterSection>
@@ -104,10 +108,12 @@ export default function App() {
 
         <ChapterSection id="plan" number="04" title="The Plan: 21 Strategies from Month 0">
           <Flywheel />
+          <Gantt />
           <Part5Strategies />
         </ChapterSection>
 
         <ChapterSection id="build" number="05" title="The Build: Studio, Power, OB & People">
+          <CapexWaterfall />
           <Part6TheBuild />
           <p className="mt-6"><SeeItWorking group="preview-operations">See the studio, power and OB tools working</SeeItWorking></p>
         </ChapterSection>

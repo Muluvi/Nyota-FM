@@ -204,7 +204,7 @@ export function SourceListAndAsks({ show = 'asks' }: { show?: 'asks' | 'sources'
             />
           </div>
 
-          <div className="overflow-x-auto max-h-96 overflow-y-auto scrollbar-thin">
+          <div tabIndex={0} className="overflow-x-auto max-h-96 overflow-y-auto scrollbar-thin">
             <table className="w-full text-left text-xs font-mono">
               <thead className="sticky top-0 bg-ink-2 border-b border-hairline text-sage-dim z-10">
                 <tr>

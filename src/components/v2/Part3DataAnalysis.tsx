@@ -105,7 +105,7 @@ export function Part3DataAnalysis({ view = 'money' }: { view?: 'money' | 'risks'
             <p className="text-xs text-sage mt-0.5">Rigorous scorecard testing May 2026 hypotheses against September 2026 data receipts</p>
           </div>
 
-          <div className="overflow-x-auto">
+          <div tabIndex={0} className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
               <thead>
                 <tr className="border-b border-hairline text-sage-dim">
@@ -312,7 +312,7 @@ export function Part3DataAnalysis({ view = 'money' }: { view?: 'money' | 'risks'
           {/* Sensitivity Table */}
           <div className="space-y-2">
             <h5 className="font-display text-sm text-paper font-semibold">Stress-Test Sensitivity Analysis (Month 24, Q4 2028)</h5>
-            <div className="overflow-x-auto">
+            <div tabIndex={0} className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
                   <tr className="border-b border-hairline text-sage-dim">

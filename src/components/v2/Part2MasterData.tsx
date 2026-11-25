@@ -70,7 +70,7 @@ export function Part2MasterData() {
               <TierBadge tier={1} citation="KNBS 2019 Census & Bungoma County Projections" url="knbs.or.ke" />
             </div>
 
-            <div className="overflow-x-auto">
+            <div tabIndex={0} className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
                   <tr className="border-b border-hairline text-sage-dim">
@@ -235,7 +235,7 @@ export function Part2MasterData() {
               <TierBadge tier={1} citation="CA Kenya Licensing Database & RMS Official" url="ca.go.ke" />
             </div>
 
-            <div className="overflow-x-auto">
+            <div tabIndex={0} className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
                   <tr className="border-b border-hairline text-sage-dim">
@@ -409,7 +409,7 @@ export function Part2MasterData() {
               <TierBadge tier={1} citation="Radio.co.ke Commercial Buyer's Guide 2025/2026" url="radio.co.ke" />
             </div>
 
-            <div className="overflow-x-auto">
+            <div tabIndex={0} className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
                   <tr className="border-b border-hairline text-sage-dim">
@@ -684,7 +684,7 @@ export function Part2MasterData() {
               <TierBadge tier={1} citation="Kenyan Vendor Catalogues (BS Int, Cellular Kenya, Rondamo)" url="bsint.net" />
             </div>
 
-            <div className="overflow-x-auto">
+            <div tabIndex={0} className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
                   <tr className="border-b border-hairline text-sage-dim">
@@ -911,7 +911,7 @@ export function Part2MasterData() {
               <TierBadge tier={2} citation="Synthesised Tier 2 Derived Model" />
             </div>
 
-            <div className="overflow-x-auto">
+            <div tabIndex={0} className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
                   <tr className="border-b border-hairline text-sage-dim">

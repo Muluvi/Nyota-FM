@@ -72,3 +72,12 @@ test('no 2026 quarter milestones remain in the chapters', async ({page}) => {
     expect(text, s.id).not.toMatch(/Q[1-4] 2026/);
   }
 });
+
+test('axe: no serious or critical accessibility violations in the board chapters', async ({page}) => {
+  const {default: AxeBuilder} = await import('@axe-core/playwright');
+  await page.goto('/');
+  const results = await new AxeBuilder({page}).include('main').exclude('#appendix-preview').analyze();
+  const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
+  console.log(serious.map((v) => `${v.id} (${v.nodes.length})`).join('\n'));
+  expect.soft(serious.length).toBe(0);
+});

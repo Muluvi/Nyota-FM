@@ -22,7 +22,7 @@ function CapexPhaseTable({ phase }: { phase: Phase }) {
           {meta.label} ({meta.months})
         </span>
       </div>
-      <div className="overflow-x-auto">
+      <div tabIndex={0} className="overflow-x-auto">
         <table className="w-full text-left text-xs font-mono">
           <caption className="sr-only">
             {meta.label}: equipment, vendor, cost and evidence tier

@@ -92,35 +92,37 @@ export function Part5Strategies() {
                   className="bg-ink rounded border border-hairline overflow-hidden transition-all duration-200"
                 >
                   {/* Strategy Header */}
-                  <div
+                  <button
+                  type="button"
+                  aria-expanded={isExpanded}
                     onClick={() => setExpandedStrategy(isExpanded ? null : st.id)}
-                    className="p-4 flex items-start sm:items-center justify-between cursor-pointer hover:bg-ink-2 transition-colors gap-3"
+                    className="w-full text-left p-4 flex items-start sm:items-center justify-between cursor-pointer hover:bg-ink-2 transition-colors gap-3"
                   >
-                    <div className="flex items-center gap-3">
+                    <span className="flex items-center gap-3">
                       <span className="font-mono text-xs font-bold px-2 py-1 rounded bg-brass/10 border border-brass/40 text-brass shrink-0">
                         {st.num}
                       </span>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-mono uppercase text-sage-dim tracking-wider">
+                      <span>
+                        <span className="flex items-center gap-2">
+                          <span className="text-[11px] font-mono uppercase text-sage-dim tracking-wider">
                             {st.category}
                           </span>
-                        </div>
-                        <h4 className="font-display text-sm sm:text-base text-paper font-medium">
+                        </span>
+                        <span className="block font-display text-sm sm:text-base text-paper font-medium">
                           {st.title}
-                        </h4>
-                      </div>
-                    </div>
+                        </span>
+                      </span>
+                    </span>
 
-                    <div className="flex items-center gap-3 shrink-0">
+                    <span className="flex items-center gap-3 shrink-0">
                       <span className="hidden md:inline font-mono text-[11px] text-sage">
                         {st.execution.timeline}
                       </span>
-                      <button className="text-sage hover:text-paper p-1">
+                      <span className="text-sage p-1" aria-hidden="true">
                         {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                      </button>
-                    </div>
-                  </div>
+                      </span>
+                    </span>
+                  </button>
 
                   {/* Expanded Body */}
                   {isExpanded && (
@@ -192,7 +194,7 @@ export function Part5Strategies() {
                           <span className="text-paper font-mono text-xs font-semibold block">
                             Milestone Scorecard (Months 3 to 24)
                           </span>
-                          <div className="overflow-x-auto">
+                          <div tabIndex={0} className="overflow-x-auto">
                             <table className="w-full text-left text-xs font-mono">
                               <thead>
                                 <tr className="border-b border-hairline text-sage-dim">

@@ -120,6 +120,7 @@ export function StrategyTracker() {
 
         {/* Category Dropdown / Selector */}
         <select
+          aria-label="Filter"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
           className="rounded-lg bg-ink border border-hairline px-3 py-2 text-xs font-mono text-paper focus:border-brass focus:outline-none"
@@ -134,6 +135,7 @@ export function StrategyTracker() {
 
         {/* Quarter Dropdown */}
         <select
+          aria-label="Filter"
           value={selectedQuarter}
           onChange={(e) => setSelectedQuarter(e.target.value)}
           className="rounded-lg bg-ink border border-hairline px-3 py-2 text-xs font-mono text-paper focus:border-brass focus:outline-none"

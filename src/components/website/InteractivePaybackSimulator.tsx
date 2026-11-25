@@ -193,7 +193,7 @@ export function InteractivePaybackSimulator() {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <div className="overflow-x-auto rounded-lg border border-hairline bg-ink p-3">
+        <div tabIndex={0} className="overflow-x-auto rounded-lg border border-hairline bg-ink p-3">
           <table className="w-full text-xs font-mono">
             <caption className="text-left text-[11px] uppercase tracking-wider text-sage-dim pb-2">Incremental P&amp;L by year ({scenario} case)</caption>
             <thead>

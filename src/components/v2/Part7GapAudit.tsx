@@ -180,7 +180,7 @@ export function Part7GapAudit() {
                 <span className="text-brass font-semibold">{gapsFixed} fixed · {gapsDeclared} declared gap</span>
               </div>
 
-              <div className="overflow-x-auto">
+              <div tabIndex={0} className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">
@@ -233,7 +233,7 @@ export function Part7GapAudit() {
                 </div>
               </div>
 
-              <div className="overflow-x-auto">
+              <div tabIndex={0} className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">
@@ -290,7 +290,7 @@ export function Part7GapAudit() {
                 <span className="text-brass font-semibold">12 Reclaimed Levers</span>
               </div>
 
-              <div className="overflow-x-auto">
+              <div tabIndex={0} className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">

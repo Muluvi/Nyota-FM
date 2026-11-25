@@ -129,34 +129,36 @@ export function Part1Objectives() {
               <Reveal>
                 <div className="bg-ink-2 border border-hairline rounded overflow-hidden transition-all duration-200">
                 {/* Header Row */}
-                <div
+                <button
+                  type="button"
+                  aria-expanded={isExpanded}
                   onClick={() => setExpandedObj(isExpanded ? null : obj.id)}
-                  className="p-4 sm:p-5 flex items-start sm:items-center justify-between cursor-pointer hover:bg-ink transition-colors gap-3"
+                  className="w-full text-left p-4 sm:p-5 flex items-start sm:items-center justify-between cursor-pointer hover:bg-ink transition-colors gap-3"
                 >
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-9 h-9 rounded-full border border-brass/50 bg-brass/10 flex items-center justify-center font-mono text-sm font-bold text-brass shrink-0">
+                  <span className="flex items-center gap-3.5">
+                    <span className="w-9 h-9 rounded-full border border-brass/50 bg-brass/10 flex items-center justify-center font-mono text-sm font-bold text-brass shrink-0">
                       {obj.letter}
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+                    </span>
+                    <span>
+                      <span className="block text-[10px] font-mono uppercase tracking-wider text-sage-dim">
                         Objective {obj.letter}
-                      </div>
-                      <h3 className="font-display text-base sm:text-lg text-paper font-medium">
+                      </span>
+                      <span className="block font-display text-base sm:text-lg text-paper font-medium">
                         {obj.title}
-                      </h3>
-                    </div>
-                  </div>
+                      </span>
+                    </span>
+                  </span>
 
-                  <div className="flex items-center gap-3 shrink-0">
-                    <div className="hidden sm:block text-right">
-                      <div className="font-mono text-xs text-paper font-semibold">{obj.keyStat.value}</div>
-                      <div className="text-[10px] font-mono text-brass">{obj.keyStat.badgeText}</div>
-                    </div>
-                    <button className="text-sage hover:text-paper p-1">
+                  <span className="flex items-center gap-3 shrink-0">
+                    <span className="hidden sm:block text-right">
+                      <span className="block font-mono text-xs text-paper font-semibold">{obj.keyStat.value}</span>
+                      <span className="block text-[10px] font-mono text-brass">{obj.keyStat.badgeText}</span>
+                    </span>
+                    <span className="text-sage p-1" aria-hidden="true">
                       {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                    </button>
-                  </div>
-                </div>
+                    </span>
+                  </span>
+                </button>
 
                 {/* Collapsible Content */}
                 {isExpanded && (
