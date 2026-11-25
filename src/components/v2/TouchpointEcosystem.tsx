@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { flushSync } from 'react-dom';
 import {
   BadgeDollarSign,
   BriefcaseBusiness,
@@ -37,6 +38,13 @@ const TOUCHPOINT_COUNT = touchpointCount;
 
 export function TouchpointEcosystem() {
   const [selectedId, setSelectedId] = useState('youtube');
+  // Same-document View Transition where supported (instant elsewhere and under reduced motion).
+  const selectGroup = (id: string) => {
+    const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown };
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (doc.startViewTransition && !reduced) doc.startViewTransition(() => flushSync(() => setSelectedId(id)));
+    else setSelectedId(id);
+  };
   const selected = useMemo(
     () => TOUCHPOINT_GROUPS.find((group) => group.id === selectedId) ?? TOUCHPOINT_GROUPS[0],
     [selectedId],
@@ -98,7 +106,7 @@ export function TouchpointEcosystem() {
                   <button
                     key={group.id}
                     type="button"
-                    onClick={() => setSelectedId(group.id)}
+                    onClick={() => selectGroup(group.id)}
                     className={`flex items-center justify-between rounded border p-3 text-left transition-colors ${active ? 'border-brass/60 bg-ink text-paper' : 'border-transparent text-sage hover:border-hairline hover:bg-ink'}`}
                   >
                     <span className="flex items-center gap-3">

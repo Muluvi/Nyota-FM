@@ -152,7 +152,7 @@ export function CountyCoverageExplorer() {
           </div>
 
           <div className="flex items-center gap-2 rounded bg-ink-2 px-3 py-1.5 border border-hairline font-mono text-xs text-sage-dim">
-            <Radio size={14} className="text-brass animate-pulse" />
+            <Radio size={14} className="text-brass" />
             <span>Frequency: 107.3 MHz</span>
           </div>
         </div>

@@ -77,7 +77,7 @@ export function CMORoyaltyCalculator() {
               <li key={c.name} className="flex items-start gap-2">
                 {c.status === 'licensed' && <Check size={14} className="text-moss shrink-0 mt-0.5" aria-label="Licensed" />}
                 {c.status === 'review' && <RefreshCw size={14} className="text-brass shrink-0 mt-0.5" aria-label="Under review" />}
-                {c.status === 'unlicensed' && <X size={14} className="text-brick shrink-0 mt-0.5" aria-label="Not licensed" />}
+                {c.status === 'unlicensed' && <X size={14} className="text-brick-text shrink-0 mt-0.5" aria-label="Not licensed" />}
                 <span>
                   <strong className="text-paper">{c.name}</strong> <span className="text-sage">· {c.note}</span>
                 </span>

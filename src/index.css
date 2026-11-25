@@ -17,6 +17,13 @@
   --font-display: "Instrument Serif", serif;
   --font-body: "DM Sans", sans-serif;
   --font-mono: "DM Mono", monospace;
+
+  /* Motion tokens. Collapsed to 0 under reduced motion and in Lite mode. */
+  --dur-quick: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 480ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --stagger: 40ms;
 }
 
 /* Base Configuration */
@@ -95,24 +102,15 @@ button, a, input, select, textarea {
     contain-intrinsic-size: 1px 520px;
   }
 
-  .animate-marquee {
-    animation-duration: 48s;
-  }
-
+  
   .text-data {
     letter-spacing: -0.04em;
   }
 }
 
 @media (hover: none) {
-  .animate-marquee {
-    animation-duration: 42s;
+  
   }
-
-  .wave-bar {
-    animation-duration: 2.8s;
-  }
-}
 
 /* Typography Scale - Mobile Balanced */
 h1 {
@@ -264,47 +262,64 @@ h3 {
 }
 
 /* Marquee */
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
-.animate-marquee {
-  display: flex;
-  width: 200%;
-  animation: marquee 25s linear infinite;
-}
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
 .mask-gradient {
   mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
 /* Wave Bar */
-@keyframes wave-pulse {
-  0%, 100% { transform: scaleY(0.4); opacity: 0.3; }
-  50% { transform: scaleY(1); opacity: 0.8; }
-}
-.wave-bar {
-  animation: wave-pulse 1.8s ease-in-out infinite;
-  transform-origin: bottom;
-}
 
 /* Funnel Trap */
 .funnel-trap {
   clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
 }
 
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .animate-stamp, .animate-draw-rule, .animate-section-entrance {
-    animation: none;
-    transform: none;
-    opacity: 1;
-    width: 100%;
+/* Scroll-driven reveal: progressive enhancement only. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not([data-lite='true']) .reveal {
+      animation: section-entrance linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+    :root:not([data-lite='true']) .signal-rule {
+      animation: draw-rule linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 40%;
+    }
   }
+}
+
+/* Reduced motion and Lite mode: no animation, no smooth scroll, instant transitions. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-quick: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --stagger: 0ms;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0ms !important;
+  }
+}
+
+:root[data-lite='true'] {
+  --dur-quick: 0ms;
+  --dur-base: 0ms;
+  --dur-slow: 0ms;
+  --stagger: 0ms;
+  scroll-behavior: auto;
+}
+:root[data-lite='true'] *,
+:root[data-lite='true'] *::before,
+:root[data-lite='true'] *::after {
+  animation: none !important;
 }
 
 /* Scoped printing (see src/lib/print.ts): the chosen section is cloned into #print-root,

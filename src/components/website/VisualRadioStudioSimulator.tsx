@@ -93,7 +93,7 @@ export function VisualRadioStudioSimulator() {
 
         {/* Live On-Air Indicator */}
         <div className="flex items-center gap-2 rounded-lg border border-red-500/40 bg-red-950/30 px-3 py-1.5 text-xs font-mono text-red-400">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-500 animate-ping" />
+          <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
           <span className="font-bold tracking-wider">PROGRAM · planned 1080p</span>
         </div>
       </div>
@@ -172,7 +172,7 @@ export function VisualRadioStudioSimulator() {
                 <span className="bg-[#25D366] text-ink font-bold px-1.5 py-0.2 rounded shrink-0">
                   WHATSAPP 0720...
                 </span>
-                <div className="animate-marquee whitespace-nowrap text-paper">
+                <div className="truncate text-paper">
                   Mulembe Nyota FM! Sisi wakulima wa Chwele tunapongeza bei mpya za mbolea. Tuko ndani kabisa ya 107.3 FM! · Chwele Market: Mahindi 90kg KSh 4,000 ·
                 </div>
               </div>

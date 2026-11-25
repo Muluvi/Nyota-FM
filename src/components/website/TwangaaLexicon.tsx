@@ -186,7 +186,7 @@ export function TwangaaLexicon() {
                     <span
                       className={`h-8 w-8 rounded-full border flex items-center justify-center transition-colors ${
                         isPlaying
-                          ? 'border-brass bg-brass text-ink animate-pulse'
+                          ? 'border-brass bg-brass text-ink'
                           : 'border-hairline text-sage hover:border-brass hover:text-brass'
                       }`}
                     >

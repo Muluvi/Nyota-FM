@@ -81,3 +81,12 @@ test('axe: no serious or critical accessibility violations in the board chapters
   console.log(serious.map((v) => `${v.id} (${v.nodes.length})`).join('\n'));
   expect.soft(serious.length).toBe(0);
 });
+
+test('with reduced motion, no CSS animations run after load', async ({page}) => {
+  await page.emulateMedia({reducedMotion: 'reduce'});
+  await page.goto('/');
+  await page.mouse.wheel(0, 4000);
+  await page.waitForTimeout(300);
+  const running = await page.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length);
+  expect(running).toBe(0);
+});

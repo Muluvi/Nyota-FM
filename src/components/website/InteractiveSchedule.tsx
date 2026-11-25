@@ -149,7 +149,7 @@ export function InteractiveSchedule() {
                   }`}
                   title="Play show audio stinger"
                 >
-                  {playingShowId === show.id ? <Volume2 size={13} className="animate-ping" /> : <Play size={13} className="ml-0.5" />}
+                  {playingShowId === show.id ? <Volume2 size={13} className="motion-safe:animate-pulse" /> : <Play size={13} className="ml-0.5" />}
                 </button>
               </div>
             );

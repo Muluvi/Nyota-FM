@@ -124,7 +124,7 @@ export function ExecutiveBriefingMode({
         </ol>
 
         <div className="rounded-xl bg-brick/10 p-4 border border-brick/40 flex gap-3">
-          <AlertTriangle size={18} className="text-brick shrink-0 mt-0.5" />
+          <AlertTriangle size={18} className="text-brick-text shrink-0 mt-0.5" />
           <div>
             <h4 className="font-display text-base text-paper font-semibold">What is not yet known</h4>
             <p className="text-xs text-sage font-body leading-relaxed mt-1">

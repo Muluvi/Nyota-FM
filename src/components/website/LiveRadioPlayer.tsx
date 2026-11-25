@@ -199,7 +199,7 @@ export function LiveRadioPlayer() {
 
             {(status === 'error' || status === 'unconfigured') && (
               <div className="mb-3 flex items-start gap-2 rounded border border-brick/40 bg-brick/10 p-2.5 text-[11px] text-paper/90" role="status">
-                <AlertTriangle size={14} className="mt-0.5 shrink-0 text-brick" />
+                <AlertTriangle size={14} className="mt-0.5 shrink-0 text-brick-text" />
                 <span>
                   {status === 'error'
                     ? 'We could not reach the station stream. Tune in on 107.3 FM across Western Kenya.'

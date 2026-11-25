@@ -155,7 +155,7 @@ export function Navbar({
                 title="Open Executive Board Briefing (B)"
                 aria-label="Open Executive Board Briefing"
               >
-                <span className="size-1.5 rounded-full bg-brass animate-pulse group-hover:bg-ink" />
+                <span className="size-1.5 rounded-full bg-brass group-hover:bg-ink" />
                 <span className="font-semibold hidden sm:inline">Board Mode</span>
                 <span className="font-semibold sm:hidden">Board</span>
               </button>

@@ -3,6 +3,7 @@ import { Radio, Mail, MapPin, ExternalLink, ShieldCheck, Send, MessageCircle } f
 import { station } from '../../data/station';
 import { sections } from '../../content/sections';
 import { INQUIRY_ENDPOINT } from '../../config';
+import { setLite } from '../../lib/lite';
 
 const LEVERS = [
   'Outside Broadcast (OB) Market Activation',
@@ -15,6 +16,7 @@ const LEVERS = [
 
 export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void }) {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
+  const [lite, setLiteState] = useState(() => typeof document !== 'undefined' && document.documentElement.dataset.lite === 'true');
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [org, setOrg] = useState('');
@@ -182,7 +184,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                   <span className="size-1.5 rounded-full bg-brass" />
                   <span>Tier 2 · Modelled Econometrics</span>
                 </div>
-                <div className="flex items-center gap-2 text-brick">
+                <div className="flex items-center gap-2 text-brick-text">
                   <span className="size-1.5 rounded-full bg-brick" />
                   <span>Tier 0 · Primary Research Gaps</span>
                 </div>
@@ -212,6 +214,17 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
               <span className="text-brass/70">
                 Board proposal v2.1 · Draft for discussion
               </span>
+              <button
+                type="button"
+                aria-pressed={lite}
+                onClick={() => {
+                  setLite(!lite);
+                  setLiteState(!lite);
+                }}
+                className="rounded border border-hairline px-2 py-1 text-sage hover:text-paper"
+              >
+                Lite mode: {lite ? 'on' : 'off'}
+              </button>
             </div>
           </div>
         </div>

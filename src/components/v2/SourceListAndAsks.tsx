@@ -54,7 +54,7 @@ export function SourceListAndAsks({ show = 'asks' }: { show?: 'asks' | 'sources'
   const statusStyle = {
     pass: { label: 'Met', cls: 'text-moss border-moss/40' },
     partial: { label: 'Partial', cls: 'text-brass border-brass/40' },
-    open: { label: 'Open', cls: 'text-brick border-brick/40' },
+    open: { label: 'Open', cls: 'text-brick-text border-brick/40' },
   } as const;
 
   const filteredSources = sources.filter((s) =>

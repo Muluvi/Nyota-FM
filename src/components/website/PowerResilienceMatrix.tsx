@@ -41,7 +41,7 @@ export function PowerResilienceMatrix() {
             className={`px-3.5 py-1.5 rounded text-xs font-mono font-bold border transition-all flex items-center gap-1.5 ${
               gridStatus === 'online'
                 ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400'
-                : 'bg-red-500/20 border-red-500 text-red-400 animate-pulse'
+                : 'bg-red-500/20 border-red-500 text-red-400'
             }`}
           >
             <span className={`h-2 w-2 rounded-full ${gridStatus === 'online' ? 'bg-emerald-400' : 'bg-red-500'}`} />
@@ -118,7 +118,7 @@ export function PowerResilienceMatrix() {
               Emergency: Perkins 15kVA Gen
             </span>
             <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${
-              generatorRunning ? 'bg-red-500/20 text-red-400 animate-pulse' : 'bg-stone-800 text-stone-400'
+              generatorRunning ? 'bg-red-500/20 text-red-400' : 'bg-stone-800 text-stone-400'
             }`}>
               {generatorRunning ? 'RUNNING' : 'STANDBY'}
             </span>

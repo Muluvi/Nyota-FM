@@ -183,7 +183,7 @@ export function TransmitterElevationTool() {
                 }}
               >
                 <div className="h-10 w-0.5 bg-brass relative">
-                  <span className="absolute -top-2 -left-1.5 h-3 w-3 rounded-full border border-brass bg-ink animate-ping" />
+                  <span className="absolute -top-2 -left-1.5 h-3 w-3 rounded-full border border-brass bg-ink" />
                   <span className="absolute -top-1 -left-1 h-2 w-2 rounded-full bg-brass" />
                 </div>
                 <span className="text-[9px] font-mono text-paper font-bold mt-1 bg-ink px-1 rounded border border-hairline whitespace-nowrap">

@@ -1,16 +1,10 @@
 import React from 'react';
-import { useInView } from './useInView';
 
-export function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) {
-  const { ref, inView } = useInView({ triggerOnce: true });
-  
-  return (
-    <div 
-      ref={ref}
-      className={`${inView ? 'animate-section-entrance' : 'opacity-0'} ${className}`}
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
+/**
+ * Scroll-driven reveal in pure CSS (see `.reveal` in index.css). Content is always
+ * present and visible without JavaScript, in print, under reduced motion, and in
+ * browsers without `animation-timeline`.
+ */
+export function Reveal({ children, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+  return <div className={`reveal ${className}`}>{children}</div>;
 }
