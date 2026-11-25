@@ -116,3 +116,36 @@ export const obEconomics = {
   tier: 0 as Tier,
   note: 'Revenue range from the OB explorer and cost range from Strategy 5.11; both unvalidated. Get three vehicle/conversion quotes and pilot one activation.',
 } as const
+
+/** Add-ons for the media-plan preview (illustrative list prices, Tier 2). */
+export const quoteAddOns = {
+  obDay: { label: 'Outside-broadcast day (one market activation)', price: 180_000 },
+  whatsappPush: { label: 'WhatsApp push to opted-in contacts (per fortnight, once the base exists)', price: 35_000 },
+} as const
+
+/** One volume-discount ladder, applied to airtime only (station policy, to confirm). */
+export const volumeDiscounts: readonly { minWeeks: number; rate: number }[] = [
+  { minWeeks: 8, rate: 0.2 },
+  { minWeeks: 4, rate: 0.15 },
+  { minWeeks: 2, rate: 0.05 },
+  { minWeeks: 0, rate: 0 },
+]
+
+export const discountForWeeks = (weeks: number) => volumeDiscounts.find((d) => weeks >= d.minWeeks)!.rate
+
+/** Kenya standard VAT rate, applied when the client is VAT-registered or the quote is to a business. */
+export const VAT_RATE = 0.16
+
+/** Pure quote calculation, shared by the preview and its tests. */
+export function quote(opts: { daypartId: string; spotsPerDay: number; weeks: number; obDays: number; whatsappPush: boolean; vat: boolean }) {
+  const dp = spotDayparts.find((d) => d.id === opts.daypartId) ?? spotDayparts[0]
+  const spots = opts.spotsPerDay * 7 * opts.weeks
+  const airtime = spots * dp.rate
+  const discountRate = discountForWeeks(opts.weeks)
+  const discount = Math.round(airtime * discountRate)
+  const ob = opts.obDays * quoteAddOns.obDay.price
+  const whatsapp = opts.whatsappPush ? Math.ceil(opts.weeks / 2) * quoteAddOns.whatsappPush.price : 0
+  const subtotal = airtime - discount + ob + whatsapp
+  const vat = opts.vat ? Math.round(subtotal * VAT_RATE) : 0
+  return { daypart: dp, spots, airtime, discountRate, discount, ob, whatsapp, subtotal, vat, total: subtotal + vat }
+}

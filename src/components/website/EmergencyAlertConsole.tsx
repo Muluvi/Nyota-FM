@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AlertTriangle, Volume2, ShieldAlert, Radio, Check, Sparkles } from 'lucide-react';
+import { getAudioContext } from '../../lib/audio';
 import { Illustrative } from '../Illustrative';
 
 interface AlertItem {
@@ -54,8 +55,8 @@ export function EmergencyAlertConsole() {
     setIsPlayingSiren(true);
 
     try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      const ctx = new AudioCtx();
+      const ctx = getAudioContext();
+      if (!ctx) return;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
@@ -93,8 +94,23 @@ export function EmergencyAlertConsole() {
             Emergency Civic Broadcast & Disaster Weather Alert Console
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            The proposed emergency-broadcast workflow: KMD or county alert → duty editor → bilingual script (Swahili/Bukusu) → on air → WhatsApp/USSD push. Sample alerts below. Grid outages are a real risk: the 7 Aug 2026 Musaga substation fire blacked out five Western counties.
+            The proposed emergency-broadcast workflow, with target times from the first alert. Sample alerts below. Grid outages are a
+            real risk: the 7 Aug 2026 Musaga substation fire blacked out five Western counties.
           </p>
+          <ol className="mt-3 grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs" aria-label="Emergency broadcast workflow">
+            {[
+              ['KMD / county alert', 'Minute 0'],
+              ['Duty editor verifies', 'by minute 2'],
+              ['Bilingual script (Swahili / Bukusu)', 'by minute 5'],
+              ['On air', 'by minute 8'],
+              ['WhatsApp / USSD push', 'by minute 10'],
+            ].map(([step, when], i) => (
+              <li key={step} className="rounded border border-hairline bg-ink p-2">
+                <span className="font-mono text-brass">{i + 1}.</span> <span className="text-paper">{step}</span>
+                <span className="block font-mono text-[11px] text-sage-dim">{when} (target)</span>
+              </li>
+            ))}
+          </ol>
         </div>
 
         <button

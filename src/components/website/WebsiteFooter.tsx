@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Radio, Mail, MapPin, ExternalLink, ShieldCheck, Send, MessageCircle } from 'lucide-react';
 import { station } from '../../data/station';
 import { sections } from '../../content/sections';
+import { INQUIRY_ENDPOINT } from '../../config';
 
 const LEVERS = [
   'Outside Broadcast (OB) Market Activation',
@@ -20,7 +21,8 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
   const [lever, setLever] = useState<string>(LEVERS[0]);
   const [message, setMessage] = useState('');
 
-  const hasChannel = Boolean(station.salesEmail || station.salesWhatsApp);
+  const hasChannel = Boolean(INQUIRY_ENDPOINT || station.salesEmail || station.salesWhatsApp);
+  const [sendState, setSendState] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
 
   const inquiryText = () =>
     [
@@ -44,6 +46,14 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
     e.preventDefault();
     const via = (e.nativeEvent as SubmitEvent).submitter?.getAttribute('data-via');
     const text = inquiryText();
+    if (via === 'endpoint' && INQUIRY_ENDPOINT) {
+      // Only report success when the form service confirms receipt.
+      setSendState('sending');
+      fetch(INQUIRY_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ org, email, lever, message }) })
+        .then((r) => setSendState(r.ok ? 'sent' : 'failed'))
+        .catch(() => setSendState('failed'));
+      return;
+    }
     if (via === 'whatsapp' && station.salesWhatsApp) {
       window.open(`https://wa.me/${station.salesWhatsApp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     } else if (station.salesEmail) {
@@ -293,7 +303,19 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                 <p className="text-[11px] text-sage-dim">
                   Your inquiry opens in your own email or WhatsApp app, addressed to the sales desk, so you keep a copy.
                 </p>
+                {sendState !== 'idle' && (
+                  <p role="status" className="text-xs text-paper">
+                    {sendState === 'sending' && 'Sending…'}
+                    {sendState === 'sent' && 'Received by the sales desk. Thank you.'}
+                    {sendState === 'failed' && 'Not sent. Please use email or WhatsApp instead.'}
+                  </p>
+                )}
                 <div className="flex flex-col sm:flex-row gap-2">
+                  {INQUIRY_ENDPOINT && (
+                    <button type="submit" data-via="endpoint" className="flex-1 rounded bg-brass py-3 font-mono text-xs uppercase tracking-wider text-ink font-bold hover:brightness-105 flex items-center justify-center gap-2">
+                      <Send size={14} /> Send
+                    </button>
+                  )}
                   {station.salesEmail && (
                     <button
                       type="submit"

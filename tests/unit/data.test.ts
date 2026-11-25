@@ -60,3 +60,14 @@ describe('asks', () => {
     expect(asks[1].amount).toBe('≤ KSh 0.84 M');
   });
 });
+
+describe('media plan quote', () => {
+  it('discounts airtime only and adds VAT on the subtotal', async () => {
+    const {quote} = await import('../../src/data/rateCard');
+    const q = quote({daypartId: 'breakfast', spotsPerDay: 4, weeks: 4, obDays: 1, whatsappPush: true, vat: true});
+    expect(q.airtime).toBe(4 * 7 * 4 * 2800);
+    expect(q.discount).toBe(Math.round(q.airtime * 0.15));
+    expect(q.subtotal).toBe(q.airtime - q.discount + 180_000 + 2 * 35_000);
+    expect(q.total).toBe(q.subtotal + Math.round(q.subtotal * 0.16));
+  });
+});

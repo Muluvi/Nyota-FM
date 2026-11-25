@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, Radio, Play, Pause, Volume2, User, Sparkles, DollarSign, Award } from 'lucide-react';
+import { getAudioContext } from '../../lib/audio';
 import { TierBadge } from '../v2/TierBadge';
 
 interface ShowItem {
@@ -39,8 +40,8 @@ export function InteractiveSchedule() {
 
   const playShowStinger = (show: ShowItem) => {
     try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      const ctx = new AudioCtx();
+      const ctx = getAudioContext();
+      if (!ctx) return;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 

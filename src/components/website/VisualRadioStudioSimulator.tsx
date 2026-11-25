@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Video, Camera, Play, Pause, Radio, Layers, Volume2, ShieldCheck, Sparkles, Cast, Users, Tv } from 'lucide-react';
 import { TierBadge } from '../v2/TierBadge';
 
-type CamAngle = 'cam1' | 'cam2' | 'cam3';
+type CamAngle = 'cam1' | 'cam2';
 
 export function VisualRadioStudioSimulator() {
   const [activeProgramCam, setActiveProgramCam] = useState<CamAngle>('cam1');
@@ -12,8 +12,19 @@ export function VisualRadioStudioSimulator() {
   const [sponsorBugActive, setSponsorBugActive] = useState<boolean>(true);
   const [vuLevels, setVuLevels] = useState<number[]>([65, 78, 55, 82]);
 
-  // Simulate audio VU meter bounce
+  // VU meter: animates only while the simulator is on screen and motion is allowed.
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  useEffect(() => {
+    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (!visible || reduced || document.documentElement.dataset.lite === 'true') return;
     const timer = setInterval(() => {
       setVuLevels([
         Math.floor(40 + Math.random() * 55),
@@ -21,9 +32,19 @@ export function VisualRadioStudioSimulator() {
         Math.floor(35 + Math.random() * 60),
         Math.floor(50 + Math.random() * 45),
       ]);
-    }, 180);
+    }, 400);
     return () => clearInterval(timer);
-  }, []);
+  }, [visible]);
+
+  // Keyboard: 1 / 2 choose the preview camera, Space cuts preview to program.
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if ((e.target as HTMLElement).closest('input, textarea, select')) return;
+    if (e.key === '1' || e.key === '2') setPreviewCam(e.key === '1' ? 'cam1' : 'cam2');
+    else if (e.key === ' ') {
+      e.preventDefault();
+      cutToPreview();
+    }
+  };
 
   const cutToPreview = () => {
     const prev = activeProgramCam;
@@ -35,25 +56,23 @@ export function VisualRadioStudioSimulator() {
     cam1: {
       name: 'CAM 1 · Lead Presenter (Robotic PTZ)',
       description: 'Tight 50mm framing on primary host mic and acoustic sound baffle.',
-      image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80',
       label: 'MAIN MIC 1',
     },
     cam2: {
       name: 'CAM 2 · Co-Host / Studio Guest (Robotic PTZ)',
       description: 'Framing across guest consultation table and WhatsApp interaction monitor.',
-      image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=800&q=80',
       label: 'GUEST DESK',
-    },
-    cam3: {
-      name: 'CAM 3 · Wide Broadcast Rig (Fixed Wide-Angle)',
-      description: 'Comprehensive studio master view showing acoustic wood fins, on-air neon, and mixing desk.',
-      image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80',
-      label: 'STUDIO WIDE',
     },
   };
 
   return (
-    <div className="rounded-xl border border-brass/50 bg-ink-2 p-5 sm:p-7 shadow-xl space-y-6">
+    <div
+      ref={rootRef}
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+      aria-label="Visual radio switcher preview. Keys: 1 or 2 choose preview camera, Space cuts to program."
+      className="rounded-xl border border-brass/50 bg-ink-2 p-5 sm:p-7 shadow-xl space-y-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-brass"
+    >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
         <div>
@@ -62,7 +81,7 @@ export function VisualRadioStudioSimulator() {
               <Sparkles size={12} />
               Interactive Hardware Simulator · Studio Build
             </span>
-            <TierBadge tier={2} method="Simulation of the planned Phase 1 rig (ATEM Television Studio HD + 2 PTZ cameras); images are stock placeholders" />
+            <TierBadge tier={2} method="Simulation of the planned Phase 1 rig (ATEM Television Studio HD + 2 PTZ cameras); camera images are placeholders until studio footage exists" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             Visual Radio Live Production Switcher (Blackmagic ATEM)
@@ -75,7 +94,7 @@ export function VisualRadioStudioSimulator() {
         {/* Live On-Air Indicator */}
         <div className="flex items-center gap-2 rounded-lg border border-red-500/40 bg-red-950/30 px-3 py-1.5 text-xs font-mono text-red-400">
           <span className="h-2.5 w-2.5 rounded-full bg-red-500 animate-ping" />
-          <span className="font-bold tracking-wider">PROGRAM ON AIR · 1080p 60fps</span>
+          <span className="font-bold tracking-wider">PROGRAM · planned 1080p</span>
         </div>
       </div>
 
@@ -85,11 +104,13 @@ export function VisualRadioStudioSimulator() {
         <div className="lg:col-span-8 space-y-3">
           <div className="relative aspect-video w-full overflow-hidden rounded-xl border-2 border-red-500/60 bg-ink shadow-2xl">
             {/* Background Camera Image */}
-            <img
-              src={cameraFeeds[activeProgramCam].image}
-              alt={cameraFeeds[activeProgramCam].name}
-              className="h-full w-full object-cover brightness-90 transition-all duration-300"
-            />
+            <div className="grid h-full w-full place-items-center bg-gradient-to-br from-ink-2 via-ink to-brass/20 text-center">
+              <div>
+                <Camera size={40} className="mx-auto text-sage-dim" aria-hidden="true" />
+                <p className="mt-2 font-mono text-xs text-sage">{cameraFeeds[activeProgramCam].name}</p>
+                <p className="font-mono text-[11px] text-sage-dim">Placeholder · Nyota studio footage to come</p>
+              </div>
+            </div>
 
             {/* Top Overlay: Tally & Station Watermark */}
             <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
@@ -173,7 +194,7 @@ export function VisualRadioStudioSimulator() {
                 <Tv size={14} className="text-brass" />
                 ATEM Switcher Console
               </span>
-              <span className="text-[10px] font-mono text-sage-dim">Model: HD8 Studio</span>
+              <span className="text-[10px] font-mono text-sage-dim">ATEM Television Studio HD</span>
             </div>
 
             {/* Program Row (Red Tally) */}
@@ -182,7 +203,7 @@ export function VisualRadioStudioSimulator() {
                 PROGRAM (ON AIR):
               </span>
               <div className="grid grid-cols-3 gap-1.5">
-                {(['cam1', 'cam2', 'cam3'] as CamAngle[]).map((cam) => (
+                {(['cam1', 'cam2'] as CamAngle[]).map((cam) => (
                   <button
                     key={cam}
                     type="button"
@@ -208,7 +229,7 @@ export function VisualRadioStudioSimulator() {
                 PREVIEW (NEXT):
               </span>
               <div className="grid grid-cols-3 gap-1.5">
-                {(['cam1', 'cam2', 'cam3'] as CamAngle[]).map((cam) => (
+                {(['cam1', 'cam2'] as CamAngle[]).map((cam) => (
                   <button
                     key={cam}
                     type="button"

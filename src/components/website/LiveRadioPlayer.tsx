@@ -83,7 +83,7 @@ export function LiveRadioPlayer() {
     loading: 'Connecting to stream…',
     playing: 'Streaming live',
     error: 'Stream offline right now — try again later',
-    unconfigured: 'Live stream link not yet configured',
+    unconfigured: 'Stream link pending',
   };
 
   const PlayIcon = status === 'loading' ? Loader2 : isPlaying ? Pause : Play;
@@ -108,6 +108,7 @@ export function LiveRadioPlayer() {
       <audio
         ref={audioRef}
         preload="none"
+        onCanPlay={() => setStatus((s) => (s === 'loading' ? 'playing' : s))}
         onPlaying={() => setStatus('playing')}
         onWaiting={() => setStatus((s) => (s === 'playing' ? 'loading' : s))}
         onError={() => setStatus((s) => (s === 'idle' || s === 'unconfigured' ? s : 'error'))}
@@ -202,7 +203,7 @@ export function LiveRadioPlayer() {
                 <span>
                   {status === 'error'
                     ? 'We could not reach the station stream. Tune in on 107.3 FM across Western Kenya.'
-                    : 'The station stream URL has not been set for this build (VITE_STREAM_URL). Tune in on 107.3 FM.'}
+                    : 'Stream link pending: the station has not yet supplied its stream address. Tune in on 107.3 FM.'}
                 </span>
               </div>
             )}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Radio, Mountain, Zap, ArrowRight, Compass, ShieldCheck } from 'lucide-react';
-import { TierBadge } from '../v2/TierBadge';
+import { Illustrative } from '../Illustrative';
 
 export function TransmitterElevationTool() {
   const [towerHeight, setTowerHeight] = useState<number>(65); // meters
@@ -34,7 +34,6 @@ export function TransmitterElevationTool() {
   // Radio horizon formula: d (km) ≈ 4.12 * sqrt(h (m))
   const theoreticalHorizonKm = Math.round(4.12 * Math.sqrt(totalAltitude - 1200));
   const effectivePowerKw = (transmitterPower * 0.001 * 4.2).toFixed(1); // ERP with 4-bay dipole array
-  const populationReached = Math.min(6.8, +(theoreticalHorizonKm * 0.078).toFixed(2));
 
   return (
     <div className="rounded-xl border border-hairline bg-ink-2 p-5 sm:p-7 space-y-6">
@@ -42,15 +41,15 @@ export function TransmitterElevationTool() {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono text-brass">
             <Radio size={14} />
-            <span className="uppercase tracking-widest font-semibold">Engineering Simulator · 107.3 MHz</span>
+            <span className="uppercase tracking-widest font-semibold">Simplified illustration · 107.3 MHz</span>
             <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Communications Authority of Kenya (CA) Technical Standards" />
+            <Illustrative note="Simplified illustration: real coverage needs a propagation study from the CA licence parameters" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             Transmitter Elevation & FM Propagation Tool
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Simulate Nyota FM’s 107.3 MHz broadcast signal coverage based on mast coordinates, antenna mast height, and transmitter wattage across Western Kenya.
+            A simplified line-of-sight illustration only. It ignores terrain detail, antenna pattern and power, so it cannot predict real coverage or population reached. The real 54 dBµV/m contour must be computed from the licensed site, height and ERP (Tier 0).
           </p>
         </div>
       </div>
@@ -153,17 +152,7 @@ export function TransmitterElevationTool() {
               <span className="font-display text-lg font-bold text-brass tabular-nums">
                 {theoreticalHorizonKm} km
               </span>
-              <span className="text-[10px] text-emerald-400 font-mono block">54 dBµV/m protected contour</span>
-            </div>
-
-            <div className="rounded-lg border border-hairline bg-ink p-3 space-y-1 col-span-2 sm:col-span-1">
-              <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
-                Gross Population Reach
-              </span>
-              <span className="font-display text-lg font-bold text-paper tabular-nums">
-                {populationReached}M
-              </span>
-              <span className="text-[10px] text-moss font-mono block">Western Kenya footprint</span>
+              <span className="text-[11px] text-sage-dim font-mono block">Radio horizon only, not a coverage contour</span>
             </div>
           </div>
 

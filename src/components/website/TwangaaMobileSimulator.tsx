@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Phone, MessageSquare, Send, CheckCheck, RefreshCw, Volume2, Sparkles, Smartphone, Check, ArrowRight } from 'lucide-react';
+import { getAudioContext } from '../../lib/audio';
+import { USSD_SESSION_COST_KSH } from '../../data/opex';
 import { TierBadge } from '../v2/TierBadge';
 
 export function TwangaaMobileSimulator() {
@@ -10,7 +12,8 @@ export function TwangaaMobileSimulator() {
   const [ussdInput, setUssdInput] = useState<string>('');
   const [ussdHistory, setUssdHistory] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<'swahili' | 'bukusu'>('swahili');
-  const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(false); // sound is opt-in
+  const [sessions, setSessions] = useState<number>(0);
 
   // WhatsApp State
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'user' | 'bot'; text: string; time: string }>>([
@@ -27,8 +30,8 @@ export function TwangaaMobileSimulator() {
   const playDTMFTone = (freq1: number, freq2: number) => {
     if (!soundEnabled) return;
     try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      const ctx = new AudioCtx();
+      const ctx = getAudioContext();
+      if (!ctx) return;
       const osc1 = ctx.createOscillator();
       const osc2 = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -67,13 +70,13 @@ export function TwangaaMobileSimulator() {
   const submitUSSD = () => {
     const input = ussdInput.trim();
     if (ussdStep === 0) {
-      if (input === '*XXX#' || input === '107') {
-        setUssdStep(1);
-        setUssdInput('');
-      } else {
-        setUssdStep(1);
-        setUssdInput('');
-      }
+      // Every dial opens a billable session for the station.
+      setSessions((n) => n + 1);
+      setUssdStep(7); // consent first
+      setUssdInput('');
+    } else if (ussdStep === 7) {
+      setUssdStep(input === '1' ? 1 : 8);
+      setUssdInput('');
     } else if (ussdStep === 1) {
       if (input === '1') setUssdStep(2); // Poll
       else if (input === '2') setUssdStep(3); // Song request
@@ -137,7 +140,7 @@ export function TwangaaMobileSimulator() {
             Mobile Listener Journey & USSD / WhatsApp Simulator
           </h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Test the exact zero-data USSD shortcode (<code className="text-brass font-mono">*XXX#</code>, code to be allocated) and automated WhatsApp Business API pipeline that captures Western Kenya's 27.42M feature phone listeners into a first-party monetizable audience CRM.
+            Try the planned USSD menu (<code className="text-brass font-mono">*XXX#</code>, code to be allocated) and a two-way WhatsApp Business chat. Both ask for consent before storing anything. A WhatsApp Channel, by contrast, is one-way broadcast and would only carry announcements.
           </p>
         </div>
 
@@ -194,6 +197,23 @@ export function TwangaaMobileSimulator() {
                       <p className="text-[10px] text-center opacity-80">
                         Bofya "PIGA" au tumia vitufe vya simu
                       </p>
+                    </div>
+                  )}
+
+                  {ussdStep === 7 && (
+                    <div className="space-y-1">
+                      <div className="font-bold text-[11px]">NYOTA FM · IDHINI (CONSENT)</div>
+                      <p className="text-[10px]">
+                        Nyota FM itahifadhi nambari yako na majibu yako kwa ajili ya kura na zawadi tu, kwa mujibu wa Sheria ya Ulinzi wa Data 2019. Unaweza kujiondoa wakati wowote.
+                      </p>
+                      <p className="text-[10px]">1. Nakubali  2. Sikubali</p>
+                    </div>
+                  )}
+
+                  {ussdStep === 8 && (
+                    <div className="space-y-1 text-center">
+                      <div className="font-bold text-xs">SAWA</div>
+                      <p className="text-[10px]">Hatujahifadhi taarifa zako. Endelea kusikiliza 107.3 FM.</p>
                     </div>
                   )}
 
@@ -263,7 +283,7 @@ export function TwangaaMobileSimulator() {
                 {/* Screen Footer Buttons */}
                 <div className="flex justify-between border-t border-[#5e7760] pt-1 text-[9px] font-bold">
                   <button type="button" onClick={submitUSSD} className="hover:underline">
-                    {ussdStep === 0 ? 'PIGA' : ussdStep === 6 ? 'MALIZA' : 'TUMA'}
+                    {ussdStep === 0 ? 'PIGA' : ussdStep === 6 || ussdStep === 8 ? 'MALIZA' : 'TUMA'}
                   </button>
                   <button type="button" onClick={resetUSSD} className="hover:underline">
                     FUTA
@@ -310,6 +330,14 @@ export function TwangaaMobileSimulator() {
           {/* Technical Architecture & Commercial Derivation */}
           <div className="lg:col-span-6 space-y-4 text-xs font-mono">
             <div className="rounded-lg border border-hairline bg-ink p-4 space-y-3">
+              <div className="mb-3 rounded border border-brass/40 bg-brass/10 p-2.5 text-xs" aria-live="polite">
+                <span className="text-sage">Cost meter: </span>
+                <strong className="text-paper">{sessions}</strong> <span className="text-sage">session(s) × </span>
+                <strong className="text-paper">KSh {USSD_SESSION_COST_KSH.toFixed(2)}</strong>
+                <span className="text-sage"> = </span>
+                <strong className="text-brass">KSh {(sessions * USSD_SESSION_COST_KSH).toFixed(2)}</strong>
+                <span className="block text-[11px] text-sage-dim">The listener pays nothing; the station pays per session (Tier 2, confirm on an Africa&apos;s Talking quote).</span>
+              </div>
               <span className="text-[10px] text-brass uppercase tracking-wider font-bold block">
                 WHY ZERO-DATA USSD WINS WESTERN KENYA
               </span>

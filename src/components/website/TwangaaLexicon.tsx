@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Volume2, Sparkles, BookOpen, Music, Play, Check, Globe2 } from 'lucide-react';
+import { getAudioContext } from '../../lib/audio';
 import { TierBadge } from '../v2/TierBadge';
 
 interface LexiconWord {
@@ -87,8 +88,8 @@ export function TwangaaLexicon() {
 
     // Play harmonious synth stinger
     try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      const ctx = new AudioCtx();
+      const ctx = getAudioContext();
+      if (!ctx) return;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 

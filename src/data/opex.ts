@@ -25,3 +25,9 @@ export function monthlyOpex(m: number): KshRange {
 
 export const newHiresMonthly = (): KshRange =>
   opex.filter((l) => l.id.startsWith('hire-')).reduce((t, l) => ({ low: t.low + l.monthly!.low, high: t.high + l.monthly!.high }), { low: 0, high: 0 })
+
+/**
+ * Cost to the station of one ~20-second USSD session (Safaricom KSh 1.00 + Africa's Talking
+ * KSh 0.25), as stated in the v2.0 data room. Tier 2 until confirmed on an Africa's Talking quote.
+ */
+export const USSD_SESSION_COST_KSH = 1.25
