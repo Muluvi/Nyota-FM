@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Copy, Check, Printer, ArrowRight, AlertTriangle, X } from 'lucide-react';
 import { asks } from '../../data/asks';
 import { monthZero } from '../../data/station';
+import { paybackStatement } from '../../model/finance';
 import { printSection } from '../../lib/print';
 
 export function ExecutiveBriefingMode({
@@ -19,7 +20,7 @@ export function ExecutiveBriefingMode({
     '',
     ...asks.map((a) => `${a.id}. ${a.resolution}${a.amount ? ` [${a.amount}]` : ''}\n   Owner: ${a.owner} · Timing: ${a.timing}`),
     '',
-    'Payback: to be confirmed after the baseline audit (Ask 6). The payback model is under revision.',
+    `Payback: ${paybackStatement().headline}. ${paybackStatement().detail}`,
   ].join('\n');
 
   const copyResolutions = async () => {
@@ -127,9 +128,8 @@ export function ExecutiveBriefingMode({
           <div>
             <h4 className="font-display text-base text-paper font-semibold">What is not yet known</h4>
             <p className="text-xs text-sage font-body leading-relaxed mt-1">
-              Payback is <strong className="text-paper">to be confirmed after the baseline audit</strong>. The station has no audited revenue
-              baseline and no Western Kenya audience survey yet, so the payback model is being rebuilt on incremental cash flow. Ask 6
-              funds both.
+              Payback is <strong className="text-paper">{paybackStatement().headline.toLowerCase()}</strong>. {paybackStatement().detail} The
+              station has no audited revenue baseline and no Western Kenya audience survey yet; Ask 6 funds both.
             </p>
           </div>
         </div>

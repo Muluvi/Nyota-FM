@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Presentation, ChevronLeft, ChevronRight, X, Maximize2, Minimize2, FileText, CheckCircle2, Sparkles, Printer } from 'lucide-react';
 import { factValue } from '../../data/facts';
+import { paybackStatement } from '../../model/finance';
 import { asks } from '../../data/asks';
 
 interface Slide {
@@ -13,6 +14,8 @@ interface Slide {
   keyMetric: { value: string; label: string };
   speakerNotes: string;
 }
+
+const PAYBACK = paybackStatement();
 
 const SLIDES: Slide[] = [
   {
@@ -77,15 +80,15 @@ const SLIDES: Slide[] = [
     id: 5,
     kicker: 'Slide 05 of 08 · Payback',
     title: 'Capital Recovery',
-    headline: 'Payback: to be confirmed after the baseline audit',
-    leadParagraph: 'The earlier simulator credited all station revenue to the studio. It is being rebuilt on incremental cash flow with opex, capex and a discount rate.',
+    headline: `Payback: ${PAYBACK.headline.toLowerCase()}`,
+    leadParagraph: 'The model compares the plan with “do nothing”: new revenue minus displaced spot sales, new staff and services, royalties and capex.',
     bullets: [
-      'The model will compare “with the plan” against “do nothing”, not total station revenue.',
-      'Inputs: audited baseline revenue, new-hire costs (KSh 370–630K/month), messaging, USSD and royalties.',
-      'Outputs: payback month (or “not within 24 months”), NPV, peak funding need and a sensitivity tornado.',
+      PAYBACK.detail,
+      'The audited baseline (Ask 6) validates the lever ranges and unlocks the revenue index.',
+      'Chapter 06 shows the cash curve, yearly P&L and which assumptions move NPV most.',
     ],
     keyMetric: { value: 'TBC', label: 'Payback, pending baseline audit' },
-    speakerNotes: 'Do not quote a payback month until the baseline audit is complete. This is why Ask 6 matters.',
+    speakerNotes: 'Quote the illustrative range only with its caveat; the board-ready number comes after the baseline audit (Ask 6).',
   },
   {
     id: 6,

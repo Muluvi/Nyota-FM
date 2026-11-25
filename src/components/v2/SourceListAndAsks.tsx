@@ -44,7 +44,7 @@ export function SourceListAndAsks({ show = 'asks' }: { show?: 'asks' | 'sources'
     { num: 5, text: 'One consistent value per figure across the site', status: 'open', note: 'Rate card, OB economics and capex still appear with different values in different tools.' },
     { num: 6, text: 'Part 7 contains all three checklists', status: 'pass', note: 'Checklists A, B and C are present.' },
     { num: 7, text: 'Board asks are a single list', status: 'pass', note: 'Six asks, shared by this section, the briefing and the deck.' },
-    { num: 8, text: 'Payback model is incremental, costed and stress-tested', status: 'open', note: 'Model under revision; payback to be confirmed after the baseline audit (Ask 6).' },
+    { num: 8, text: 'Payback model is incremental, costed and stress-tested', status: 'partial', note: 'Incremental model with sensitivity built (chapter 06); inputs stay illustrative until the baseline audit (Ask 6).' },
     { num: 9, text: 'All milestones dated from Month 0', status: 'partial', note: 'Plan dates rebased to Month 0 = Jan 2027; some tool copy still being reconciled.' },
     { num: 10, text: 'Biggest revenue and audience risks stated in Part 3', status: 'pass', note: 'Risk register present in Part 3.5.' },
     { num: 11, text: 'Audited revenue baseline available', status: 'open', note: 'Tier 0: requires management accounts for the last 24 months.' },

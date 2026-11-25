@@ -24,7 +24,7 @@ export function Deferred({ children, minHeight = 320, label }: { children: React
           io.disconnect();
         }
       },
-      { rootMargin: '100% 0px' },
+      { rootMargin: '100% 0px' }, // data-ok: UI constant
     );
     io.observe(el);
     const beforePrint = () => setShow(true);

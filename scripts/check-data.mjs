@@ -80,7 +80,13 @@ for (const [rel, n] of Object.entries(counts)) {
 if (updateBaseline) {
   // Only ever lower the baseline (or record a new one on first run).
   const next = {}
-  for (const [rel, n] of Object.entries(counts)) next[rel] = baseline[rel] == null ? n : Math.min(n, baseline[rel])
+  // New files are never grandfathered in: they must not contain hard-coded figures.
+  const first = Object.keys(baseline).length === 0
+  for (const [rel, n] of Object.entries(counts)) {
+    if (baseline[rel] != null) next[rel] = Math.min(n, baseline[rel])
+    else if (first) next[rel] = n
+    else errors.push(`(c) ${rel} is new and has ${n} hard-coded currency/percent literals; move figures to src/data`)
+  }
   writeFileSync(baselinePath, JSON.stringify(Object.fromEntries(Object.entries(next).sort()), null, 2) + '\n')
 }
 
