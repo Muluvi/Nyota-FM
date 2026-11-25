@@ -43,7 +43,7 @@ for (const f of facts) {
 }
 
 // (c) + (e)
-const LITERAL = /KSh\s?[\d,]+|\d+(\.\d+)?\s?%/g
+const LITERAL = /KSh\s?[\d,]+|\d+(\.\d+)?\s?%(?![-\w)])/g // ignores CSS like calc(100%-2rem)
 const files = []
 const walk = (dir) => {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
