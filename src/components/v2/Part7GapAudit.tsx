@@ -4,6 +4,7 @@ import {
   Layers, Package, FileCheck, ArrowUpRight 
 } from 'lucide-react';
 import { Reveal } from '../ledger/Reveal';
+import { onTabListKeyDown } from '../../lib/tabs';
 import { InteractiveGapAuditWorkbench } from '../website/InteractiveGapAuditWorkbench';
 
 export function Part7GapAudit() {
@@ -127,9 +128,11 @@ export function Part7GapAudit() {
           </div>
 
           {/* Checklist Selector Tabs */}
-          <div className="flex items-center gap-2 border-b border-hairline text-xs font-mono">
+          <div role="tablist" aria-label="Checklists" onKeyDown={onTabListKeyDown} className="flex items-center gap-2 border-b border-hairline text-xs font-mono">
             <button
               onClick={() => setActiveChecklist('A')}
+                role="tab"
+                aria-selected={activeChecklist === 'A'}
               className={`pb-2.5 px-3 border-b-2 font-semibold transition-all ${
                 activeChecklist === 'A'
                   ? 'border-brass text-brass'
@@ -140,6 +143,8 @@ export function Part7GapAudit() {
             </button>
             <button
               onClick={() => setActiveChecklist('B')}
+                role="tab"
+                aria-selected={activeChecklist === 'B'}
               className={`pb-2.5 px-3 border-b-2 font-semibold transition-all ${
                 activeChecklist === 'B'
                   ? 'border-brass text-brass'
@@ -150,6 +155,8 @@ export function Part7GapAudit() {
             </button>
             <button
               onClick={() => setActiveChecklist('C')}
+                role="tab"
+                aria-selected={activeChecklist === 'C'}
               className={`pb-2.5 px-3 border-b-2 font-semibold transition-all ${
                 activeChecklist === 'C'
                   ? 'border-brass text-brass'

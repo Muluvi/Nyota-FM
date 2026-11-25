@@ -1,0 +1,90 @@
+/*
+ * Whole-page print = the board pack. (Printing one section uses body[data-print],
+ * see src/lib/print.ts and index.css.) Light theme, chrome and prototypes hidden,
+ * one chapter per page run, decision summary on page 1.
+ */
+@media print {
+  body:not([data-print]) {
+    background: #fff !important;
+    min-width: 0 !important;
+  }
+
+  body:not([data-print]) *,
+  body:not([data-print]) *::before,
+  body:not([data-print]) *::after {
+    color: #111 !important;
+    background: transparent !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* SVG charts keep their fills so bars stay visible. */
+  body:not([data-print]) svg * {
+    color: inherit !important;
+  }
+
+  /* Chrome, players, prototypes and controls are not part of the board pack. */
+  body:not([data-print]) header,
+  body:not([data-print]) footer,
+  body:not([data-print]) .fixed,
+  body:not([data-print]) #appendix-preview,
+  body:not([data-print]) .print\:hidden,
+  body:not([data-print]) input[type='range'],
+  body:not([data-print]) [role='tablist'],
+  body:not([data-print]) dialog {
+    display: none !important;
+  }
+
+  body:not([data-print]) main {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  body:not([data-print]) [data-chapter] {
+    break-before: page;
+    padding-top: 0 !important;
+  }
+
+  body:not([data-print]) figure,
+  body:not([data-print]) table,
+  body:not([data-print]) li {
+    break-inside: avoid;
+  }
+
+  /* Show where links go. */
+  body:not([data-print]) main a[href^='http']:not(td a):not(figure a)::after {
+    content: ' (' attr(href) ')';
+    font-size: 9pt;
+    word-break: break-all;
+  }
+
+  body:not([data-print]) .overflow-x-auto,
+  body:not([data-print]) .overflow-y-auto {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+}
+
+/* Board-pack trims: duplicate views and reference detail stay on screen only. */
+@media print {
+  body:not([data-print]) #data-annexure,
+  body:not([data-print]) [data-print-skip] {
+    display: none !important;
+  }
+}
+
+@media print {
+  body:not([data-print]) #appendix-data table,
+  body:not([data-print]) #risks table {
+    font-size: 8pt !important;
+  }
+  body:not([data-print]) #appendix-data td,
+  body:not([data-print]) #risks td {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+  }
+}

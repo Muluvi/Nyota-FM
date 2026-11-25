@@ -11,7 +11,7 @@ interface ChapterSectionProps {
 
 export function ChapterSection({ id, number, title, children }: ChapterSectionProps) {
   return (
-    <section id={id} className="pt-20 sm:pt-28 pb-16 border-b border-hairline last:border-0 scroll-mt-20 sm:scroll-mt-24">
+    <section id={id} data-chapter className="pt-20 sm:pt-28 pb-16 border-b border-hairline last:border-0 scroll-mt-20 sm:scroll-mt-24">
       <Reveal>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-3.5">
@@ -20,7 +20,7 @@ export function ChapterSection({ id, number, title, children }: ChapterSectionPr
             </div>
             <div>
               <span className="font-mono text-xs uppercase tracking-widest text-brass font-bold block">
-                PART {number} · STRATEGIC MODULE
+                {/^[A-Z]$/.test(number) ? `APPENDIX ${number}` : `CHAPTER ${number}`}
               </span>
               <h2 className="font-display text-2xl sm:text-4xl text-paper font-semibold m-0 leading-tight">
                 {title}

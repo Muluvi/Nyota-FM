@@ -4,6 +4,7 @@ import { station } from '../../data/station';
 import { sections } from '../../content/sections';
 import { INQUIRY_ENDPOINT } from '../../config';
 import { setLite } from '../../lib/lite';
+import { Modal } from '../Modal';
 
 const LEVERS = [
   'Outside Broadcast (OB) Market Activation',
@@ -214,7 +215,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
               </span>
               <span className="hidden md:inline text-hairline">|</span>
               <span className="text-brass/70">
-                Board proposal v2.1 · Draft for discussion
+                Board proposal v2.1 · Confidential · Draft for discussion
               </span>
               <button
                 type="button"
@@ -233,21 +234,14 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
       </footer>
 
       {/* Commercial Inquiry / Rate Card Modal */}
-      {inquiryModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/80 p-4 backdrop-blur-sm animate-section-entrance"
-          onClick={() => setInquiryModalOpen(false)}
-        >
-          <div
-            className="w-full max-w-lg rounded-xl border border-brass/50 bg-ink-2 p-6 shadow-2xl space-y-4"
-            onClick={(e) => e.stopPropagation()}
-          >
+      <Modal open={inquiryModalOpen} onClose={() => setInquiryModalOpen(false)} labelledBy="inquiry-title" className="m-auto w-[calc(100%-2rem)] max-w-lg">
+          <div className="w-full rounded-xl border border-brass/50 bg-ink-2 p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-hairline pb-3">
               <div>
                 <span className="text-xs font-mono uppercase tracking-wider text-brass font-bold">
                   COMMERCIAL INQUIRY
                 </span>
-                <h3 className="font-display text-2xl text-paper font-semibold">
+                <h3 id="inquiry-title" className="font-display text-2xl text-paper font-semibold">
                   Partner with Nyota FM 107.3
                 </h3>
               </div>
@@ -353,21 +347,13 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
               </form>
             )}
           </div>
-        </div>
-      )}
+      </Modal>
 
       {/* Privacy Policy & Data Protection Modal */}
-      {privacyModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/80 p-4 backdrop-blur-sm animate-section-entrance"
-          onClick={() => setPrivacyModalOpen(false)}
-        >
-          <div
-            className="w-full max-w-xl max-h-[80vh] overflow-y-auto rounded-xl border border-hairline bg-ink-2 p-6 shadow-2xl space-y-4"
-            onClick={(e) => e.stopPropagation()}
-          >
+      <Modal open={privacyModalOpen} onClose={() => setPrivacyModalOpen(false)} labelledBy="privacy-title" className="m-auto w-[calc(100%-2rem)] max-w-xl">
+          <div className="w-full max-h-[80vh] overflow-y-auto rounded-xl border border-hairline bg-ink-2 p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-hairline pb-3">
-              <h3 className="font-display text-xl text-paper font-semibold">
+              <h3 id="privacy-title" className="font-display text-xl text-paper font-semibold">
                 Planned Compliance Actions
               </h3>
               <button
@@ -405,8 +391,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
               </button>
             </div>
           </div>
-        </div>
-      )}
+      </Modal>
     </>
   );
 }

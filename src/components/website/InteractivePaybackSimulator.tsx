@@ -227,7 +227,7 @@ export function InteractivePaybackSimulator() {
         </div>
       </div>
 
-      <details className="rounded-lg border border-hairline bg-ink p-3 text-xs">
+      <details data-print-skip className="rounded-lg border border-hairline bg-ink p-3 text-xs">
         <summary className="cursor-pointer text-sage">Month-by-month cumulative cash (accessible table)</summary>
         <table className="mt-2 w-full font-mono">
           <thead>

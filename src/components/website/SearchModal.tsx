@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { factValue } from '../../data/facts';
+import { Modal } from '../Modal';
 import { Search, X, ArrowRight, Database, TrendingUp, Radio, DollarSign, Wrench, FileText, CheckCircle2 } from 'lucide-react';
 
 export interface SearchResult {
@@ -52,13 +53,7 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
+    if (isOpen) setTimeout(() => inputRef.current?.focus(), 50);
   }, [isOpen]);
 
   const filtered = query.trim() === ''
@@ -92,21 +87,13 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     } else if (e.key === 'Enter' && filtered[selectedIndex]) {
       e.preventDefault();
       handleSelect(filtered[selectedIndex].targetId);
-    } else if (e.key === 'Escape') {
-      onClose();
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-ink/80 p-4 pt-16 sm:pt-24 backdrop-blur-md animate-section-entrance"
-      onClick={onClose}
-    >
+    <Modal open={isOpen} onClose={onClose} label="Search the proposal" className="mx-auto mt-16 sm:mt-24 w-[calc(100%-2rem)] max-w-2xl">
       <div
-        className="w-full max-w-2xl overflow-hidden rounded-xl border border-brass/50 bg-ink-2 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
+        className="w-full overflow-hidden rounded-xl border border-brass/50 bg-ink-2 shadow-2xl"
         onKeyDown={handleKeyDown}
       >
         {/* Search Input Bar */}
@@ -115,6 +102,11 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
           <input
             ref={inputRef}
             type="text"
+            role="combobox"
+            aria-label="Search"
+            aria-expanded={filtered.length > 0}
+            aria-controls="search-results"
+            aria-activedescendant={filtered[selectedIndex] ? `search-opt-${filtered[selectedIndex].id}` : undefined}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search figures, counties, payback model, studio, or strategies..."
@@ -159,7 +151,7 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
         </div>
 
         {/* Results List */}
-        <div className="max-h-96 overflow-y-auto divide-y divide-hairline/60">
+        <div id="search-results" role="listbox" aria-label="Results" className="max-h-96 overflow-y-auto divide-y divide-hairline/60">
           {filtered.length === 0 ? (
             <div className="p-8 text-center text-sage">
               <p className="text-sm">No results found for &ldquo;{query}&rdquo;</p>
@@ -171,6 +163,9 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             filtered.map((item, idx) => (
               <div
                 key={item.id}
+                id={`search-opt-${item.id}`}
+                role="option"
+                aria-selected={selectedIndex === idx}
                 onClick={() => handleSelect(item.targetId)}
                 onMouseEnter={() => setSelectedIndex(idx)}
                 className={`group flex items-start justify-between gap-4 px-4 py-3.5 cursor-pointer transition-colors ${
@@ -216,6 +211,6 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
           <span className="text-brass">37 Verified Data Sources</span>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }

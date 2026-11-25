@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
+import { onTabListKeyDown } from '../../lib/tabs';
 import { CompetitorDialMap } from '../website/CompetitorDialMap';
 
 export function Part2MasterData() {
@@ -31,7 +32,7 @@ export function Part2MasterData() {
       </Reveal>
 
       {/* Sub-Navigation Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none border-b border-hairline text-xs font-mono">
+      <div role="tablist" aria-label="Data room sections" onKeyDown={onTabListKeyDown} className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none border-b border-hairline text-xs font-mono">
         {[
           { id: 'market', label: '2.1 Market Sizing', icon: <Users size={12} /> },
           { id: 'competitors', label: '2.2 Competitor Landscape', icon: <Radio size={12} /> },
@@ -45,6 +46,8 @@ export function Part2MasterData() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
+                role="tab"
+                aria-selected={activeTab === tab.id}
             className={`px-3 py-2 rounded-t flex items-center gap-1.5 whitespace-nowrap transition-all ${
               activeTab === tab.id
                 ? 'bg-ink-2 text-brass border-t border-x border-hairline font-semibold'

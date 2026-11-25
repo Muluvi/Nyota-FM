@@ -6,6 +6,7 @@ import {
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { capex, phaseGates, phaseTotal, capexTotal, studioPhasesTotal, unquotedLines, PHASES, type Phase } from '../../data/capex';
+import { onTabListKeyDown } from '../../lib/tabs';
 import { formatKshRange, displayValue } from '../../data/format';
 
 const PHASE_KEY = { p1: 'P1', p2: 'P2', p3: 'P3' } as const;
@@ -199,11 +200,13 @@ export function Part6TheBuild() {
               <h4 className="font-display text-paper text-base font-semibold">Studio Build — Consolidated Cost Schedule</h4>
               <p className="text-xs text-sage mt-0.5">One register for every equipment line; totals are computed</p>
             </div>
-            <div className="flex items-center gap-1">
+            <div role="tablist" aria-label="Capex phase" onKeyDown={onTabListKeyDown} className="flex items-center gap-1">
               {(['p1', 'p2', 'p3'] as const).map((ph) => (
                 <button
                   key={ph}
                   onClick={() => setActivePhase(ph)}
+                role="tab"
+                aria-selected={activePhase === ph}
                   className={`px-2.5 py-1 rounded text-xs font-mono font-semibold uppercase ${
                     activePhase === ph ? 'bg-brass text-ink' : 'bg-ink text-sage hover:text-paper'
                   }`}

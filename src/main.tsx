@@ -5,6 +5,7 @@ import '@fontsource/instrument-serif/latin-400.css';
 import '@fontsource/instrument-serif/latin-400-italic.css';
 import '@fontsource-variable/dm-sans/wght.css';
 import './index.css';
+import './print.css';
 import { initLite } from './lib/lite';
 
 initLite();

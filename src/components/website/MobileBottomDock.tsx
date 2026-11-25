@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Radio, Layers, Search, Sparkles, ArrowUp, X, Play, Pause, ChevronRight } from 'lucide-react';
 import { sections as allSections } from '../../content/sections';
+import { Modal } from '../Modal';
 
 interface MobileBottomDockProps {
   onOpenSearch: () => void;
@@ -29,15 +30,8 @@ export function MobileBottomDock({
   return (
     <>
       {/* Sections Quick Sheet Drawer */}
-      {sectionsSheetOpen && (
-        <div
-          className="fixed inset-0 z-50 flex flex-col justify-end bg-black/70 backdrop-blur-sm md:hidden animate-section-entrance"
-          onClick={() => setSectionsSheetOpen(false)}
-        >
-          <div
-            className="w-full max-h-[75vh] overflow-y-auto rounded-t-2xl border-t border-brass/50 bg-ink-2 p-4 pb-safe"
-            onClick={(e) => e.stopPropagation()}
-          >
+      <Modal open={sectionsSheetOpen} onClose={() => setSectionsSheetOpen(false)} label="Jump to a section" className="mb-0 mt-auto w-full max-w-none md:hidden">
+          <div className="w-full max-h-[75vh] overflow-y-auto rounded-t-2xl border-t border-brass/50 bg-ink-2 p-4 pb-safe">
             {/* Grab handle */}
             <div className="h-1 w-10 bg-hairline rounded-full mx-auto" />
 
@@ -72,8 +66,7 @@ export function MobileBottomDock({
               ))}
             </div>
           </div>
-        </div>
-      )}
+      </Modal>
 
       {/* Fixed Ergonomic Bottom Dock (strictly adheres to 15% sticky height rule) */}
       <nav

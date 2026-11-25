@@ -27,10 +27,12 @@ import { TouchpointEcosystem } from './components/v2/TouchpointEcosystem';
 import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
 import { scrollToSection } from './lib/scroll';
 import { sections } from './content/sections';
+import { Modal } from './components/Modal';
 
 export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [briefingOpen, setBriefingOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
 
   // Global keyboard shortcuts: Cmd/Ctrl+K or '/' opens search; Shift+B opens the briefing.
   // Single-letter 'b' is avoided because screen readers use it for quick navigation.
@@ -39,6 +41,9 @@ export default function App() {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setSearchOpen((prev) => !prev);
+      } else if (e.key === '?' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        setHelpOpen(true);
       } else if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
         e.preventDefault();
         setSearchOpen(true);
@@ -65,6 +70,27 @@ export default function App() {
         onOpenSearch={() => setSearchOpen(true)}
         onOpenBriefing={() => setBriefingOpen(true)}
       />
+
+      <Modal open={helpOpen} onClose={() => setHelpOpen(false)} labelledBy="help-title" className="m-auto w-[calc(100%-2rem)] max-w-sm">
+        <div className="rounded-xl border border-hairline bg-ink-2 p-5 space-y-3">
+          <h2 id="help-title" className="font-display text-xl text-paper">Keyboard shortcuts</h2>
+          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
+            <dt className="font-mono text-brass">Ctrl/⌘ K or /</dt>
+            <dd className="text-sage">Search</dd>
+            <dt className="font-mono text-brass">Shift + B</dt>
+            <dd className="text-sage">Executive briefing</dd>
+            <dt className="font-mono text-brass">← → Space</dt>
+            <dd className="text-sage">Move through the presentation deck</dd>
+            <dt className="font-mono text-brass">Esc</dt>
+            <dd className="text-sage">Close any dialog</dd>
+            <dt className="font-mono text-brass">?</dt>
+            <dd className="text-sage">This help</dd>
+          </dl>
+          <button type="button" onClick={() => setHelpOpen(false)} className="rounded border border-hairline px-3 py-2 text-xs font-mono text-sage hover:text-paper">
+            Close
+          </button>
+        </div>
+      </Modal>
 
       {/* Instant Global Search Modal */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />

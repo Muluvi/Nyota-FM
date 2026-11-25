@@ -3,6 +3,7 @@ import { Presentation, ChevronLeft, ChevronRight, X, Maximize2, Minimize2, FileT
 import { factValue } from '../../data/facts';
 import { paybackStatement } from '../../model/finance';
 import { asks } from '../../data/asks';
+import { Modal } from '../Modal';
 
 interface Slide {
   id: number;
@@ -150,8 +151,6 @@ export function PresentationModeToggle() {
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         setCurrentSlideIndex((prev) => Math.max(0, prev - 1));
-      } else if (e.key === 'Escape') {
-        setIsOpen(false);
       }
     };
 
@@ -174,12 +173,8 @@ export function PresentationModeToggle() {
       </button>
 
       {/* Fullscreen Presentation Modal */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex flex-col bg-ink text-paper animate-section-entrance select-none"
-          role="dialog"
-          aria-modal="true"
-        >
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} label="Board presentation deck" className="m-0 h-dvh max-h-none w-screen max-w-none">
+        <div className="flex h-full flex-col bg-ink text-paper select-none">
           {/* Top Control Bar */}
           <div className="flex items-center justify-between border-b border-hairline px-6 py-3.5 bg-ink-2">
             <div className="flex items-center gap-3">
@@ -311,7 +306,7 @@ export function PresentationModeToggle() {
             </button>
           </div>
         </div>
-      )}
+      </Modal>
     </>
   );
 }

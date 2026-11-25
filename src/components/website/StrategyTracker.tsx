@@ -71,7 +71,7 @@ export function StrategyTracker() {
   const endorsedCount = Object.values(endorsed).filter(Boolean).length;
 
   return (
-    <div className="rounded-xl border border-brass/50 bg-ink-2 p-5 sm:p-7 shadow-xl space-y-6">
+    <div data-print-skip className="rounded-xl border border-brass/50 bg-ink-2 p-5 sm:p-7 shadow-xl space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">

@@ -45,7 +45,7 @@ export function ProductPreview() {
 /** "See it working →" link from a chapter to its preview group. */
 export function SeeItWorking({ group, children }: { group: (typeof PREVIEW_GROUPS)[number]['id']; children?: React.ReactNode }) {
   return (
-    <a href={`#${group}`} className="inline-flex items-center gap-1 text-sm font-mono text-brass underline underline-offset-4 hover:text-paper">
+    <a href={`#${group}`} data-print-skip className="inline-flex items-center gap-1 text-sm font-mono text-brass underline underline-offset-4 hover:text-paper">
       {children ?? 'See it working'} →
     </a>
   );

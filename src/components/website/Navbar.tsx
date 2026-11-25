@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Search, Radio, Volume2, ArrowUp, ChevronRight, Layers, ExternalLink } from 'lucide-react';
 import { PresentationModeToggle } from './PresentationModeToggle';
 import { sections, chapterSections } from '../../content/sections';
+import { Modal } from '../Modal';
 
 interface NavItem {
   id: string;
@@ -193,12 +194,8 @@ export function Navbar({
       </header>
 
       {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-50 flex flex-col bg-ink/95 backdrop-blur-md pt-16 animate-section-entrance md:hidden"
-          role="dialog"
-          aria-modal="true"
-        >
+      <Modal open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} label="Navigation menu" className="m-0 h-dvh max-h-none w-screen max-w-none md:hidden">
+        <div className="flex h-full flex-col bg-ink/95 pt-16">
           <div className="flex items-center justify-between border-b border-hairline px-6 py-4">
             <span className="font-mono text-xs uppercase tracking-widest text-brass font-bold">
               Navigation Menu
@@ -248,7 +245,7 @@ export function Navbar({
             </button>
           </div>
         </div>
-      )}
+      </Modal>
     </>
   );
 }

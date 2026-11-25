@@ -15,7 +15,8 @@
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
     "e2e": "playwright test",
-    "check:data": "node scripts/check-data.mjs"
+    "check:data": "node scripts/check-data.mjs",
+    "board-pack": "vite build && node scripts/board-pack.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",

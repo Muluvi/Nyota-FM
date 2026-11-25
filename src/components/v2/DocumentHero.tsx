@@ -3,6 +3,7 @@ import { Database, Calculator, HelpCircle, ArrowRight, Layers, Radio, Sparkles, 
 import { factValue } from '../../data/facts';
 import { Reveal } from '../ledger/Reveal';
 import { chapterSections } from '../../content/sections';
+import { onTabListKeyDown } from '../../lib/tabs';
 import { DecisionSummary } from './DecisionSummary';
 
 interface DocumentHeroProps {
@@ -107,7 +108,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         </div>
 
         {/* Live Animated Metrics Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-8 sm:mb-12">
+        <div data-print-skip className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-8 sm:mb-12">
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
             <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Evidence Standard
@@ -161,7 +162,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         </div>
 
         {/* EVIDENCE STANDARDS & METHODOLOGY EXPLORER */}
-        <div className="bg-ink-2 border border-brass/40 rounded-xl p-5 sm:p-7 mb-14 relative overflow-hidden shadow-xl">
+        <div data-print-skip className="bg-ink-2 border border-brass/40 rounded-xl p-5 sm:p-7 mb-14 relative overflow-hidden shadow-xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4 mb-5">
             <div>
               <div className="flex items-center gap-2">
@@ -176,10 +177,12 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             </div>
 
             {/* Interactive Tier Switcher Tabs */}
-            <div className="flex items-center gap-1.5 font-mono text-xs bg-ink p-1 rounded-lg border border-hairline">
+            <div role="tablist" aria-label="Evidence tiers" onKeyDown={onTabListKeyDown} className="flex items-center gap-1.5 font-mono text-xs bg-ink p-1 rounded-lg border border-hairline">
               <button
                 type="button"
                 onClick={() => setActiveTierTab(1)}
+                role="tab"
+                aria-selected={activeTierTab === 1}
                 className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
                   activeTierTab === 1
                     ? 'bg-moss/10 text-moss font-semibold border border-moss/60'
@@ -193,6 +196,8 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               <button
                 type="button"
                 onClick={() => setActiveTierTab(2)}
+                role="tab"
+                aria-selected={activeTierTab === 2}
                 className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
                   activeTierTab === 2
                     ? 'bg-brass/30 text-brass font-semibold border border-brass/60'
@@ -206,6 +211,8 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               <button
                 type="button"
                 onClick={() => setActiveTierTab(0)}
+                role="tab"
+                aria-selected={activeTierTab === 0}
                 className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
                   activeTierTab === 0
                     ? 'bg-brick/10 text-brick-text font-semibold border border-brick/60'
@@ -280,7 +287,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         </div>
 
         {/* INTERACTIVE TABLE OF CONTENTS / ARCHITECTURE CARDS */}
-        <div>
+        <div data-print-skip>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-sage flex items-center gap-2">
               <Layers size={14} className="text-brass" />
