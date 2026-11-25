@@ -147,7 +147,7 @@ export function OBVanExplorer() {
                 </div>
                 <div className="p-2.5 rounded bg-ink-2 border border-hairline flex justify-between">
                   <span className="text-paper">Cellular Bonding</span>
-                  <span className="text-brass">Dual SIM (Safaricom + Airtel 4G LTE)</span>
+                  <span className="text-brass">Dual SIM (Safaricom + Airtel 4G LTE)</span>{/* data-ok: market fact, not a sponsor */}
                 </div>
                 <div className="p-2.5 rounded bg-ink-2 border border-hairline flex justify-between">
                   <span className="text-paper">Audio Latency</span>

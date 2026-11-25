@@ -11,6 +11,8 @@
   --color-hairline: #27312C;
   --color-brick: #9B624C;
   --color-moss: #76A486;
+  /* Brick at text size on ink: 6.18:1 contrast (plain brick is 3.99:1). */
+  --color-brick-text: #C47F66;
 
   --font-display: "Instrument Serif", serif;
   --font-body: "DM Sans", sans-serif;

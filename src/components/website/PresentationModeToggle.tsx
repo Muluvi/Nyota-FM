@@ -93,7 +93,7 @@ const SLIDES: Slide[] = [
     headline: 'USSD (code TBC) and the WhatsApp Business Platform',
     leadParagraph: 'Turning radio listeners into a consented, ODPC-registered contact base.',
     bullets: [
-      'A dedicated Safaricom USSD code via Africa’s Talking costs KSh 70,000/month; 3–4 weeks to provision.',
+      'A dedicated Safaricom USSD code via Africa’s Talking costs KSh 70,000/month; 3–4 weeks to provision.', // data-ok: market fact, not a sponsor
       'WhatsApp is priced per message since 1 Jul 2025 (Rest of Africa: marketing $0.0225, utility $0.004).',
       'ODPC registration and opt-in consent come before any data is collected.',
     ],

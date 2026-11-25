@@ -111,7 +111,7 @@ export function TwangaaMobileSimulator() {
       } else if (userText === '2' || userText.toLowerCase().includes('wimbo') || userText.toLowerCase().includes('song')) {
         botResponse = '🎵 Asante kwa ombi la wimbo! Tumemtumia Mtangazaji Miriam Wekesa wimbo wako kwenye Soko Nyota (10:00–14:00). Nyota FM: Sauti Yetu, Fahari Yetu!';
       } else if (userText === '3' || userText.toLowerCase().includes('bei') || userText.toLowerCase().includes('mazao') || userText.toLowerCase().includes('chwele')) {
-        botResponse = '🌾 BEI ZA MAZAO LEO (CHWELE MARKET - BUNGOMA):\n• Mahindi (90kg): KSh 4,000\n• Maharagwe (Rosecoco 90kg): KSh 7,800\n• Vitunguu (Kg): KSh 110\n• Nyanya (Crater): KSh 2,200\nImedhaminiwa na One Acre Fund & Nyota FM Agribusiness Desk.';
+        botResponse = '🌾 BEI ZA MAZAO LEO (CHWELE MARKET - BUNGOMA):\n• Mahindi (90kg): KSh 4,000\n• Maharagwe (Rosecoco 90kg): KSh 7,800\n• Vitunguu (Kg): KSh 110\n• Nyanya (Crater): KSh 2,200\nNafasi ya mdhamini inapatikana · Nyota FM Agribusiness Desk.';
       } else {
         botResponse = '🌟 Asante kwa kuwasiliana na Nyota FM 107.3! Ujumbe wako umerekodiwa kwenye database ya wasikilizaji wa Western Kenya. Umepokea alama 5 za uaminifu (Twang\'aa Loyalty Points).';
       }
@@ -325,7 +325,7 @@ export function TwangaaMobileSimulator() {
                 <div className="rounded border border-hairline bg-ink-2 p-2.5">
                   <span className="text-[10px] text-sage-dim block">Monthly Access</span>
                   <span className="text-sm font-bold text-brass">KSh 70,000 / mo</span>
-                  <span className="text-[10px] text-sage-dim block mt-0.5">Safaricom dedicated code (VAT incl.)</span>
+                  <span className="text-[10px] text-sage-dim block mt-0.5">Safaricom dedicated code (VAT incl.)</span>{/* data-ok: market fact, not a sponsor */}
                 </div>
               </div>
             </div>
@@ -469,7 +469,7 @@ export function TwangaaMobileSimulator() {
               <ul className="space-y-1.5 text-xs font-sans text-sage">
                 <li className="flex items-start gap-2">
                   <Check size={14} className="text-moss shrink-0 mt-0.5" />
-                  <span><strong>Sponsored Message Footers:</strong> Every automated commodity price alert includes an advertiser tag (e.g. "Panda na Mbegu za Kenya Seed").</span>
+                  <span><strong>Sponsored Message Footers:</strong> Every automated commodity price alert includes an advertiser tag (e.g. "Imeletwa kwako na [mdhamini]"; sponsor to be contracted).</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check size={14} className="text-moss shrink-0 mt-0.5" />

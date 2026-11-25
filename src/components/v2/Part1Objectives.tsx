@@ -85,14 +85,14 @@ export function Part1Objectives() {
       icon: <Users className="text-brass" size={20} />,
       v1Target: '250,000 directly-addressable contacts by month 24.',
       realityCheck:
-        'v1.0 stated Nyota FM has ~5,740 Facebook followers and ~2,000 concurrent Zeno.fm listeners; both need to be exported from Meta Business Suite and the Zeno dashboard (Tier 0 until then). The 250,000 contact target represents a 43× increase from the Facebook baseline. WhatsApp and USSD together are the only realistic route to this scale. Since 1 July 2025 WhatsApp Business Platform pricing is per message, not per conversation: Rest-of-Africa rates are $0.0225 (marketing) and $0.004 (utility), and utility templates inside the service window are billable again from 1 October 2026. A dedicated Safaricom USSD code through Africa\'s Talking costs KSh 70,000 per month (VAT inclusive). Building to 250,000 contacts requires an opt-in acquisition cost that v1.0 never modelled. At an assumed blended acquisition cost of KSh 20–30 per contact (modelled from USSD session costs and paid-media CPMs), the total acquisition budget is KSh 5.0M–7.5M. This is achievable within the paid-media budget tiers (Tier B/C) but must be explicitly budgeted.',
+        'v1.0 stated Nyota FM has ~5,740 Facebook followers and ~2,000 concurrent Zeno.fm listeners; both need to be exported from Meta Business Suite and the Zeno dashboard (Tier 0 until then). The 250,000 contact target represents a 43× increase from the Facebook baseline. WhatsApp and USSD together are the only realistic route to this scale. Since 1 July 2025 WhatsApp Business Platform pricing is per message, not per conversation: Rest-of-Africa rates are $0.0225 (marketing) and $0.004 (utility), and utility templates inside the service window are billable again from 1 October 2026. A dedicated Safaricom USSD code through Africa\'s Talking costs KSh 70,000 per month (VAT inclusive). Building to 250,000 contacts requires an opt-in acquisition cost that v1.0 never modelled. At an assumed blended acquisition cost of KSh 20–30 per contact (modelled from USSD session costs and paid-media CPMs), the total acquisition budget is KSh 5.0M–7.5M. This is achievable within the paid-media budget tiers (Tier B/C) but must be explicitly budgeted.', // data-ok: market fact, not a sponsor
       v2Target:
         '250,000 contacts retained as the stretch target; 150,000 contacts as the base-case target by month 24, with 250,000 contingent on securing a USSD code by Month 6 and maintaining Tier B/C paid-media spend.',
       derivation: "WhatsApp per-message pricing from Meta developer docs (Tier 1); USSD costs from Africa's Talking Help Center (Tier 1); acquisition cost modelled estimate.",
       tier: 2,
       tierCitation: "Meta WhatsApp Business Platform pricing & Africa's Talking USSD pricing",
       tierMethod: 'Blended acquisition model: KSh 20–30 per contact over USSD + WhatsApp + paid Meta ads',
-      tierInputs: 'Meta per-message $0.004 utility / $0.0225 marketing; AT Safaricom dedicated code KSh 70K/month',
+      tierInputs: 'Meta per-message $0.004 utility / $0.0225 marketing; AT Safaricom dedicated code KSh 70K/month', // data-ok: market fact, not a sponsor
       keyStat: { label: 'Base vs Stretch Base', value: '150K / 250K', badgeText: 'Month 24 Contacts' }
     },
     {

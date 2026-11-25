@@ -7,7 +7,7 @@ const sections = [
     ['Radio advertising market', 'KSh 25.9B', 'Down 5% in 2025'],
     ['Smartphone connections', '52.26M', 'June 2026 (CA); connections, not people'],
     ['YouTube RPM Kenya', '$0.6719', 'Per 1,000 views'],
-    ['USSD dedicated code', 'KSh 70,000/month', 'Safaricom via Africa’s Talking, VAT incl.'],
+    ['USSD dedicated code', 'KSh 70,000/month', 'Safaricom via Africa’s Talking, VAT incl.'], // data-ok: market fact, not a sponsor
     ['WhatsApp marketing', '$0.0225', 'Per message, Rest of Africa (Meta, since 1 Jul 2025)'],
     ['ODPC registration', 'KSh 4,000', 'Micro/small entities'],
   ]},
@@ -17,7 +17,7 @@ const sections = [
     ['TV advertising', 'KSh 39.1B', 'Down 22%'],
     ['Print advertising', 'KSh 1.4B', 'Down 25%'],
     ['2026 forecast', 'KSh 52.7B', 'Further 20% decline projected by Reelanalytics'],
-    ['Safaricom share', '8%', 'Of total mainstream ad expenditure; leading individual advertiser'],
+    ['Safaricom share', '8%', 'Of total mainstream ad expenditure; leading individual advertiser'], // data-ok: market fact, not a sponsor
     ['Western radio reach', '83%', 'Q4 2025/26 (Apr–Jun 2026); 81% in Q2'],
     ['Lower Eastern', '83%', 'Q2 2025/26'],
     ['Lake Region', '82%', 'Q2 2025/26'],
@@ -61,7 +61,7 @@ const sections = [
     ['4G subscriptions', '44.2M', 'Up 10.4% between Q1 and Q2 FY24/25'],
     ['5G subscriptions', '1.7M', 'Up 15.9%'],
     ['5G monthly data', '46.4 GB', 'Per subscriber in Q2; 4G 14.1 GB · 3G 8.8 GB'],
-    ['Mobile broadband share', 'Safaricom 64.3% / Airtel 32.0%', 'Market share'],
+    ['Mobile broadband share', 'Safaricom 64.3% / Airtel 32.0%', 'Market share'], // data-ok: market fact, not a sponsor
   ]},
   { title: 'Social media & digital', eyebrow: '06 / platform economics', items: [
     ['Social media identities', '23.9M', 'October 2026, 40.6% of population (DataReportal, Digital 2027: Kenya)'],
@@ -88,7 +88,7 @@ const sections = [
   ]},
   { title: '12 opportunity levers', eyebrow: '08 / commercial design', items: [
     ['#1 GAA / county government', 'KSh 24.5M/week', 'Government advertising spend, old contract'],
-    ['#2 WhatsApp / USSD', '$0.0225/marketing message · KSh 70K/month', 'Meta per-message pricing / Safaricom dedicated code'],
+    ['#2 WhatsApp / USSD', '$0.0225/marketing message · KSh 70K/month', 'Meta per-message pricing / Safaricom dedicated code'], // data-ok: market fact, not a sponsor
     ['#3 Branded pre-recorded shows', 'KSh 150,000/episode', 'Radio production'],
     ['#4 Outside broadcast', 'Tier 0', 'Revenue per activation to be validated (OOH is not a proxy)'],
     ['#5 YouTube + social', '$0.6719 RPM · $1.1314 CPM', 'Kenya YouTube economics'],
@@ -106,9 +106,9 @@ const sections = [
     ['Full song production', 'KSh 10,000/song', 'Sourced cost'],
     ['WhatsApp rates', '$0.0225 marketing · $0.004 utility', 'Per message, Rest of Africa (Meta, since 1 Jul 2025); BSP mark-ups extra'],
     ['WhatsApp session', 'KSh 0.60–2.50', 'Kenya per 24-hour conversation'],
-    ['USSD Safaricom / Airtel / Telkom', 'KSh 70K/mo · KSh 116K + 46.4K/mo · KSh 58K + 116K/mo', 'Setup + monthly, VAT incl. (Africa’s Talking)'],
+    ['USSD Safaricom / Airtel / Telkom', 'KSh 70K/mo · KSh 116K + 46.4K/mo · KSh 58K + 116K/mo', 'Setup + monthly, VAT incl. (Africa’s Talking)'], // data-ok: market fact, not a sponsor
     ['Shared USSD 384X#', 'Free setup + KSh 40K/month', 'Africa’s Talking'],
-    ['USSD extras', 'KSh 28,500 deposit · KSh 17,400 testbed · KSh 75,000 connection · KSh 10,000 testbed/month', 'One-off / Safaricom fees'],
+    ['USSD extras', 'KSh 28,500 deposit · KSh 17,400 testbed · KSh 75,000 connection · KSh 10,000 testbed/month', 'One-off / Safaricom fees'], // data-ok: market fact, not a sponsor
     ['ODPC micro/small', 'KSh 4,000 / KSh 2,000 renewal', 'Two-year registration / renewal'],
     ['ODPC medium', 'KSh 16,000 / KSh 9,000 renewal', 'Two-year registration / renewal'],
     ['ODPC large', 'KSh 40,000 / KSh 25,000 renewal', 'Two-year registration / renewal'],
@@ -152,7 +152,7 @@ const sections = [
   { title: 'Station context & next steps', eyebrow: '13 / board action', items: [
     ['Station identity', 'Nyota FM 107.3', 'Commercial FM station based in Bungoma; Swahili with Bukusu'],
     ['Licensing', '10-year license', 'Nyota Frequency Modulation (FM) Limited, CA Kenya'],
-    ['Community impact', 'BBC Media Action partnership', 'Life-saving maternal and child health information in Bungoma'],
+    ['Community impact', 'Health programming', 'Past maternal and child health programming reported; partner and dates to verify'],
     ['Digital presence', 'Zeno.FM · MyTuner · Radio Kenya', 'Live stream availability'],
     ['Months 1–3 activation', '$85 + $50/mo · KSh 100K · KSh 630K–665K', 'WhatsApp BSP · GAA prequalification · Phase 1 studio procurement'],
     ['Governance cadence', 'Monthly / quarterly / annual', 'Steering committee · commercial reviews · independent brand audits'],

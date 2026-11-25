@@ -27,7 +27,7 @@ const SEARCH_INDEX: SearchResult[] = [
   { id: 'm-smartphones', category: 'Metric', title: '52.26M Smartphone Connections', snippet: '52.26M smartphone and 27.42M feature-phone connections in Kenya, June 2026 (CA). Connections, not people.', targetId: 'part-2', badge: 'Tier 1' },
   { id: 'm-market', category: 'Metric', title: 'KSh 25.9B Radio Ad Spend Market', snippet: 'Radio contracted 5% in 2025; banking & finance and agriculture lead radio spend (CA, Apr–Jun 2026).', targetId: 'part-1', badge: 'Tier 1' },
   { id: 'm-capex', category: 'Metric', title: 'KSh 627,000 – 837,000 Phase 1 Studio Capex', snippet: 'Researched local equipment procurement vs v1.0 initial KSh 2.2M–3.8M estimate.', targetId: 'part-6', badge: 'Tier 1' },
-  { id: 'm-ussd', category: 'Metric', title: 'KSh 70,000 / month USSD Dedicated Code', snippet: 'Africa\'s Talking dedicated Safaricom code (VAT incl.); 3–4 weeks to provision.', targetId: 'part-5', badge: 'Tier 1' },
+  { id: 'm-ussd', category: 'Metric', title: 'KSh 70,000 / month USSD Dedicated Code', snippet: 'Africa\'s Talking dedicated Safaricom code (VAT incl.); 3–4 weeks to provision.', targetId: 'part-5', badge: 'Tier 1' }, // data-ok: market fact, not a sponsor
 
   // Counties
   { id: 'c-bungoma', category: 'County', title: 'Bungoma County — Population 1,670,570', snippet: 'Primary station home base. 2026 projection ≈1.93M. Vernacular: Bukusu, Tachoni, Sabaot.', targetId: 'part-2', badge: 'KNBS' },

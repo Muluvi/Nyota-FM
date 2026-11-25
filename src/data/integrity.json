@@ -1,0 +1,20 @@
+{
+  "dataHash": "22dcd09689a1",
+  "facts": 30,
+  "factsByTier": {
+    "0": 4,
+    "1": 26,
+    "2": 0
+  },
+  "tier0Gaps": [
+    "Regional-station royalty minimum (≤5 counties)",
+    "Audited baseline revenue (last 24 months)",
+    "Station digital baseline",
+    "Nyota audience share, Western Kenya"
+  ],
+  "sources": 50,
+  "deepLinkedSources": 31,
+  "contradictions": 0,
+  "hardcodedLiteralsRemaining": 560,
+  "componentsWithLiterals": 36
+}

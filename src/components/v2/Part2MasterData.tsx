@@ -658,7 +658,7 @@ export function Part2MasterData() {
                   <span className="text-emerald-400">KSh 65,000–100,000</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
-                  <span className="text-sage">Africa's Talking USSD (Safaricom dedicated)</span>
+                  <span className="text-sage">Africa's Talking USSD (Safaricom dedicated)</span>{/* data-ok: market fact, not a sponsor */}
                   <span className="text-paper">KSh 70,000 / month</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
@@ -666,7 +666,7 @@ export function Part2MasterData() {
                   <span className="text-paper">KES 70,000 / month</span>
                 </div>
                 <div className="flex justify-between py-1">
-                  <span className="text-sage">Per-Session 20s Safaricom Fee</span>
+                  <span className="text-sage">Per-Session 20s Safaricom Fee</span>{/* data-ok: market fact, not a sponsor */}
                   <span className="text-brass">KES 1.00 + KES 0.25 AT infra</span>
                 </div>
               </div>

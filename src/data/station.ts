@@ -23,11 +23,3 @@ export const station = {
  * the month the board approves the proposal. Assumed Month 0 = January 2027.
  */
 export const monthZero = { label: 'Month 0', assumed: 'January 2027 (Q1 2027)' } as const
-
-/** IEBC 2027 general-election calendar (Business Today / Citizen Digital, accessed 25 Nov 2026). */
-export const electionCalendar = {
-  primariesBy: '8 May 2027',
-  campaignStart: '29 May 2027',
-  campaignEnd: '7 Aug 2027',
-  electionDay: '10 Aug 2027',
-} as const

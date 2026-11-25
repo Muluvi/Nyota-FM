@@ -184,7 +184,7 @@ export function Part5Strategies() {
       whyThisWorks:
         'Bridges the 27.42 million Kenyan feature phone connections (CA Kenya). Reaches rural listeners with zero mobile data bundles required.',
       dataReceipts: [
-        'USSD: Safaricom dedicated code KSh 70,000/month, VAT incl.; Airtel KSh 116,000 + 46,400/month (Africa\'s Talking, Tier 1)',
+        'USSD: Safaricom dedicated code KSh 70,000/month, VAT incl.; Airtel KSh 116,000 + 46,400/month (Africa\'s Talking, Tier 1)', // data-ok: market fact, not a sponsor
         'Feature phone user base: 27.42M active connections in Kenya (CA Kenya Sector Stats, Tier 1)'
       ],
       execution: {
@@ -357,7 +357,7 @@ export function Part5Strategies() {
       whyThisWorks:
         'Reduces sales friction for small rural merchants in Kimilili, Webuye, Kitale, and Bungoma who cannot afford agency bookings.',
       dataReceipts: [
-        'Kenya M-Pesa merchant integration: standard Safaricom Daraja API'
+        'Kenya M-Pesa merchant integration: standard Safaricom Daraja API' // data-ok: market fact, not a sponsor
       ],
       execution: {
         lead: 'Head of Digital + Web Lead',
@@ -377,7 +377,7 @@ export function Part5Strategies() {
       title: 'Government & Development Partner Funding',
       category: 'Commercial & Revenue',
       strategy:
-        'File with the Government Advertising Agency, which authorises national-government advertising; pursue county supplier prequalification separately for Bungoma and Kakamega; package "Sauti ya Nchi" for media-development funders currently active in Kenya (e.g. FCDO-funded programmes, the EU, BBC Media Action, Internews, IMS; each to be verified). USAID closed in 2025 and DFID merged into the FCDO in 2020.',
+        'File with the Government Advertising Agency, which authorises national-government advertising; pursue county supplier prequalification separately for Bungoma and Kakamega; package "Sauti ya Nchi" for media-development funders currently active in Kenya (e.g. FCDO-funded programmes, the EU, BBC Media Action, Internews, IMS; each to be verified). USAID closed in 2025 and DFID merged into the FCDO in 2020.', // data-ok: market fact, not a sponsor
       whyThisWorks:
         'Government and development partners represent the largest single institutional spenders on civic education and health campaigns in Kenya.',
       dataReceipts: [

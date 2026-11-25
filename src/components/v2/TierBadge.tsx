@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import { Database, Calculator, HelpCircle, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useId } from 'react';
+import { Database, Calculator, HelpCircle, ExternalLink, X } from 'lucide-react';
+import { factById } from '../../data/facts';
+import { sourceById } from '../../data/sources';
+import { displayValue } from '../../data/format';
 
 export interface TierBadgeProps {
-  tier: 1 | 2 | 0;
+  /** Preferred: look up tier, source, method and dates from src/data/facts.ts. */
+  factId?: string;
+  /** Legacy props, used while components migrate to factId. */
+  tier?: 1 | 2 | 0;
   citation?: string;
   url?: string;
   accessDate?: string;
@@ -14,107 +20,106 @@ export interface TierBadgeProps {
   inline?: boolean;
 }
 
-export function TierBadge({
-  tier,
-  citation,
-  url,
-  accessDate = '2026-09-30',
-  method,
-  inputs,
-  gapMethod,
-  indicativeCost,
-  timeline,
-  inline = false
-}: TierBadgeProps) {
-  const [isOpen, setIsOpen] = useState(false);
+const STYLE = {
+  1: { label: 'Tier 1 · Published source', cls: 'border-moss/60 bg-moss/15 text-moss', icon: Database },
+  2: { label: 'Tier 2 · Modelled', cls: 'border-brass/60 bg-brass/15 text-brass', icon: Calculator },
+  0: { label: 'Tier 0 · Data gap', cls: 'border-brick/70 bg-brick/15 text-brick-text', icon: HelpCircle },
+} as const;
 
-  const getTierDetails = () => {
-    switch (tier) {
-      case 1:
-        return {
-          label: 'TIER 1 · HARD DATA',
-          bg: 'bg-moss/20 hover:bg-moss/30 border-moss/60 text-emerald-300',
-          dot: 'bg-emerald-400',
-          icon: <Database size={11} className="mr-1 shrink-0" />,
-        };
-      case 2:
-        return {
-          label: 'TIER 2 · MODELLED',
-          bg: 'bg-brass/20 hover:bg-brass/30 border-brass/60 text-amber-300',
-          dot: 'bg-amber-400',
-          icon: <Calculator size={11} className="mr-1 shrink-0" />,
-        };
-      case 0:
-      default:
-        return {
-          label: 'TIER 0 · DATA GAP',
-          bg: 'bg-brick/25 hover:bg-brick/35 border-brick/70 text-rose-300',
-          dot: 'bg-rose-400',
-          icon: <HelpCircle size={11} className="mr-1 shrink-0" />,
-        };
-    }
-  };
+/**
+ * Evidence badge. Opens a native popover (Esc and click-outside close it) with the
+ * source, deep link and access date (Tier 1), method and inputs (Tier 2), or the
+ * research needed (Tier 0).
+ */
+export function TierBadge(props: TierBadgeProps) {
+  const popoverId = useId();
+  const fact = props.factId ? factById(props.factId) : undefined;
+  const source = fact?.sourceId ? sourceById(fact.sourceId) : undefined;
 
-  const details = getTierDetails();
-  const hasMeta = citation || method || gapMethod || indicativeCost || timeline;
+  const tier = (fact?.tier ?? props.tier ?? 0) as 0 | 1 | 2;
+  const citation = source ? `${source.publisher}: ${source.title}` : props.citation;
+  const rawUrl = source?.url ?? props.url;
+  const url = rawUrl ? (rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`) : undefined;
+  const isDeep = source ? source.deep : Boolean(url && new URL(url).pathname.length > 1);
+  const accessed = source?.accessed ?? props.accessDate;
+  const method = fact?.method ?? props.method ?? props.gapMethod;
+  const inputs = fact?.inputs ?? props.inputs;
+
+  const s = STYLE[tier];
+  const Icon = s.icon;
 
   return (
-    <span className={`${inline ? 'inline-flex' : 'flex'} flex-col gap-1 align-middle my-0.5`}>
+    <span className={`${props.inline ? 'inline-flex' : 'flex'} align-middle my-0.5`}>
       <button
         type="button"
-        onClick={() => hasMeta && setIsOpen(!isOpen)}
-        className={`inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded border transition-all duration-150 ${details.bg} ${hasMeta ? 'cursor-pointer' : 'cursor-default'}`}
-        title={hasMeta ? 'Click to inspect methodology & data citation' : undefined}
+        popoverTarget={popoverId}
+        className={`inline-flex min-h-6 items-center gap-1 rounded border px-2 py-0.5 font-mono text-[11px] font-semibold tracking-wide transition-colors hover:brightness-110 ${s.cls}`}
+        aria-label={`${s.label}: show evidence details`}
       >
-        <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${details.dot} animate-pulse`} />
-        {details.icon}
-        <span className="font-semibold tracking-wider">{details.label}</span>
-        {hasMeta && (
-          <span className="ml-1 text-sage-dim hover:text-paper">
-            {isOpen ? <ChevronUp size={10} /> : <ChevronDown size={10} />}
-          </span>
-        )}
+        <Icon size={11} className="shrink-0" aria-hidden="true" />
+        <span>{s.label}</span>
       </button>
 
-      {isOpen && hasMeta && (
-        <span className="block p-2 text-xs font-mono rounded bg-ink-2 border border-hairline text-paper/90 shadow-lg text-left mt-1 z-20 max-w-sm">
-          {tier === 1 && (
-            <span className="space-y-1 block">
-              <span className="text-sage text-[10px] block uppercase tracking-wider font-semibold">Verified Source Citation</span>
-              <span className="block text-paper font-medium">{citation}</span>
-              {url && (
-                <a
-                  href={`https://${url.replace(/^https?:\/\//, '')}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center text-brass hover:underline text-[11px] mt-0.5"
-                >
-                  <span>{url}</span>
-                  <ExternalLink size={10} className="ml-1" />
-                </a>
-              )}
-              {accessDate && <span className="block text-sage-dim text-[10px]">Accessed: {accessDate}</span>}
-            </span>
-          )}
-
-          {tier === 2 && (
-            <span className="space-y-1 block">
-              <span className="text-amber-400 text-[10px] block uppercase tracking-wider font-semibold">Modelled Derivation</span>
-              {method && <span className="block text-paper/90"><span className="text-sage-dim">Method: </span>{method}</span>}
-              {inputs && <span className="block text-sage"><span className="text-sage-dim">Inputs: </span>{inputs}</span>}
-            </span>
-          )}
-
-          {tier === 0 && (
-            <span className="space-y-1 block">
-              <span className="text-rose-400 text-[10px] block uppercase tracking-wider font-semibold">Identified Primary Research Gap</span>
-              {gapMethod && <span className="block text-paper/90"><span className="text-sage-dim">Recommended Method: </span>{gapMethod}</span>}
-              {indicativeCost && <span className="block text-brass"><span className="text-sage-dim">Indicative Budget: </span>{indicativeCost}</span>}
-              {timeline && <span className="block text-sage"><span className="text-sage-dim">Timeline: </span>{timeline}</span>}
-            </span>
-          )}
+      <span
+        id={popoverId}
+        popover="auto"
+        className="m-auto block w-[min(92vw,26rem)] rounded-lg border border-hairline bg-ink-2 p-4 text-left font-body text-sm text-paper shadow-2xl backdrop:bg-ink/60"
+      >
+        <span className="mb-2 flex items-start justify-between gap-3">
+          <span className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 font-mono text-[11px] font-semibold ${s.cls}`}>
+            <Icon size={11} aria-hidden="true" /> {s.label}
+          </span>
+          <button
+            type="button"
+            popoverTarget={popoverId}
+            popoverTargetAction="hide"
+            className="grid h-8 w-8 place-items-center rounded text-sage hover:text-paper"
+            aria-label="Close"
+          >
+            <X size={14} />
+          </button>
         </span>
-      )}
+
+        {fact && (
+          <span className="block mb-2">
+            <span className="text-sage">{fact.label}: </span>
+            <strong>{displayValue(fact.value)}</strong>
+            {fact.period && <span className="text-sage-dim"> ({fact.period})</span>}
+          </span>
+        )}
+
+        {tier === 1 && (
+          <span className="block space-y-1">
+            <span className="block text-paper/90">{citation ?? 'Source not recorded'}</span>
+            {url && (
+              <a href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 break-all text-brass hover:underline">
+                {isDeep ? 'Open the source document' : `${new URL(url).hostname} (home page only; deep link needed)`}
+                <ExternalLink size={11} aria-hidden="true" />
+              </a>
+            )}
+            <span className="block font-mono text-xs text-sage-dim">Accessed: {accessed ?? 'not recorded'}</span>
+            {fact?.note && <span className="block text-xs text-sage">{fact.note}</span>}
+          </span>
+        )}
+
+        {tier === 2 && (
+          <span className="block space-y-1 text-paper/90">
+            {props.citation && !fact && <span className="block">{props.citation}</span>}
+            {method && <span className="block"><span className="text-sage">Method: </span>{method}</span>}
+            {inputs && <span className="block"><span className="text-sage">Inputs: </span>{inputs}</span>}
+            {!method && !inputs && !props.citation && <span className="block text-sage">Method not yet documented.</span>}
+          </span>
+        )}
+
+        {tier === 0 && (
+          <span className="block space-y-1 text-paper/90">
+            <span className="block text-sage">This figure is not yet known. It needs primary research or station records.</span>
+            {method && <span className="block"><span className="text-sage">How to close the gap: </span>{method}</span>}
+            {props.indicativeCost && <span className="block"><span className="text-sage">Indicative budget: </span>{props.indicativeCost}</span>}
+            {props.timeline && <span className="block"><span className="text-sage">Timeline: </span>{props.timeline}</span>}
+          </span>
+        )}
+      </span>
     </span>
   );
 }

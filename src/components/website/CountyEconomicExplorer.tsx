@@ -80,7 +80,7 @@ const COUNTIES: Record<string, CountyData> = {
     bodaCount: '32,000 Registered Operators',
     countyGovCommsBudget: 'KSh 30M – 42M Annual',
     topCommercialOpportunities: [
-      'Kenya Seed Company and multinational agrochemical manufacturers seasonal product launches.',
+      'Seed companies and agrochemical manufacturers’ seasonal product launches.',
       'Tractor hire, combine harvester leasing, and agricultural equipment credit financing.',
       'Kitale commercial banks and grain storage warehouse receipts campaigns.',
     ],

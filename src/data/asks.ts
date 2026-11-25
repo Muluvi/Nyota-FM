@@ -3,6 +3,11 @@
  * presentation deck all read from here so the count and wording never diverge.
  * Asks are decisions; the payback model is evidence, not an ask.
  */
+import { phaseTotal } from './capex.ts'
+import { formatKsh, toMillions } from './format.ts'
+
+const p1 = phaseTotal('P1')
+
 export type Ask = {
   id: number
   title: string
@@ -28,10 +33,10 @@ export const asks: readonly Ask[] = [
   {
     id: 2,
     title: 'Commit Studio Phase 1 capital',
-    resolution: 'Approve Phase 1 visual-radio capex not exceeding KSh 0.84 M.',
+    resolution: `Approve Phase 1 visual-radio capex not exceeding KSh ${toMillions(p1.high)} M.`,
     detail:
-      'Commit capital for Studio Phase 1 within the quoted envelope of KSh 627,299–837,299 (PTZ cameras, switcher, lighting, acoustics). Phases 2 and 3 return to the board once their gates are met.',
-    amount: '≤ KSh 0.84 M',
+      `Commit capital for Studio Phase 1 within the quoted envelope of ${formatKsh(p1.low)}–${p1.high.toLocaleString('en-KE')} (PTZ cameras, switcher, lighting, acoustics). Phases 2 and 3 return to the board once their gates are met.`,
+    amount: `≤ KSh ${toMillions(p1.high)} M`,
     owner: 'Board → Station Engineer',
     timing: 'Month 0–1',
     sectionId: 'part-6',

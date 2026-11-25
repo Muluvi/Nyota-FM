@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AlertTriangle, Volume2, ShieldAlert, Radio, Check, Sparkles } from 'lucide-react';
-import { IllustrativeChip } from '../v2/IllustrativeChip';
+import { Illustrative } from '../Illustrative';
 
 interface AlertItem {
   id: string;
@@ -87,7 +87,7 @@ export function EmergencyAlertConsole() {
             <ShieldAlert size={14} />
             <span className="uppercase tracking-widest font-semibold">Civic Safety & Public Emergency Service</span>
             <span className="text-sage-dim">·</span>
-            <IllustrativeChip note="Sample alerts showing the proposed workflow; translations need native-speaker review" />
+            <Illustrative note="Sample alerts showing the proposed workflow; translations need native-speaker review" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             Emergency Civic Broadcast & Disaster Weather Alert Console

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Headphones, Calendar, Youtube } from 'lucide-react';
-import { IllustrativeChip } from '../v2/IllustrativeChip';
+import { Illustrative } from '../Illustrative';
 
 /**
  * Season 1 plan. No episodes have been recorded yet, so this shows planned
@@ -55,7 +55,7 @@ export function PodcastArchivePlayer() {
           <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-brass">
             <Headphones size={14} />
             <span className="uppercase tracking-widest font-semibold">Podcasts · Strategy 5.9</span>
-            <IllustrativeChip note="Planned episodes; nothing recorded yet" />
+            <Illustrative note="Planned episodes; nothing recorded yet" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">Season 1 plan</h3>
           <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">

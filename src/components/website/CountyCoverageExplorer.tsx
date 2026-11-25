@@ -40,7 +40,7 @@ const COUNTIES: CountyData[] = [
     languages: ['Maragoli', 'Isukha', 'Idakho', 'Tiriki', 'Swahili'],
     keyTowns: ['Kakamega Town', 'Mumias', 'Malava', 'Khwisero', 'Shinyalu'],
     economicAnchors: ['Gold mining basin (Rosterman)', 'Masinde Muliro Univ (MMUST)', 'Healthcare hub', 'Commercial banking'],
-    adOpportunity: 'KSh 2.0M–4.0M/mo from national FMCGs (Safaricom, KCB, Equity), regional universities, and healthcare clinics.',
+    adOpportunity: 'KSh 2.0M–4.0M/mo from national FMCG and financial brands, regional universities, and healthcare clinics.',
     stationStrategy: 'Secondary remote studio in Phase 2. Target youth and university demographic via TikTok and weekend DJ mixes.',
   },
   {
@@ -52,7 +52,7 @@ const COUNTIES: CountyData[] = [
     coverageStatus: 'Secondary 90%',
     languages: ['Bukusu', 'Sabaot', 'Swahili (Dominant Trade Language)', 'English'],
     keyTowns: ['Kitale', 'Endebess', 'Kiminini', 'Cherangany', 'Sibanga'],
-    economicAnchors: ['Kenya\'s Breadbasket (Large-scale seed maize)', 'Kenya Seed Company', 'Dairy co-ops', 'Horticulture'],
+    economicAnchors: ['Kenya\'s Breadbasket (Large-scale seed maize)', 'Kenya Seed Company', 'Dairy co-ops', 'Horticulture'], // data-ok: market fact, not a sponsor
     adOpportunity: 'KSh 1.5M–3.0M/mo from agricultural inputs, seed distributors, tractor machinery, and fertiliser campaigns.',
     stationStrategy: '#1 position target by Month 18 (survey-measured). Daily dawn agricultural market reports and farmers\' advisory shows.',
   },

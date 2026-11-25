@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { resolve, dirname, extname } from 'node:path'
 
 const root = resolve('src')
@@ -29,6 +29,11 @@ function visit(file) {
 }
 
 visit(entry)
+// The data layer is also an entry point: scripts/check-data.mjs reads it, and the
+// future public station site is meant to reuse it.
+for (const name of readdirSync(resolve(root, 'data'))) {
+  if (/\.(ts|tsx)$/.test(name) && !name.endsWith('.d.ts')) visit(resolve(root, 'data', name))
+}
 const files = []
 function collect(directory) {
   for (const name of readdirSync(directory, { withFileTypes: true })) {
@@ -37,7 +42,6 @@ function collect(directory) {
     else if (['.ts', '.tsx'].includes(extname(file)) && !file.endsWith('.d.ts')) files.push(file)
   }
 }
-const { readdirSync } = await import('node:fs')
 collect(root)
 const orphaned = files.filter((file) => !visited.has(file))
 if (orphaned.length) {

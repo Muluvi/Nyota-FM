@@ -47,7 +47,7 @@ export function Part6TheBuild() {
       title: 'Mobile Scale & Field Roadshow',
       milestones: [
         'Studio Phase 2 multi-cam build begins',
-        'Dedicated USSD shortcode live with Safaricom & AT',
+        'Dedicated USSD shortcode live with Safaricom & AT', // data-ok: market fact, not a sponsor
         'Nyota FM mobile application v1.0 internal beta',
         'Hapa Tulipo Outside Broadcast circuit launches',
         'Shows 3 & 4 broadcast (Sauti ya Nchi, Wanawake wa Twang’aa)',
@@ -451,7 +451,7 @@ export function Part6TheBuild() {
                 <strong className="text-paper block">USSD Shortcode Allocation</strong>
                 <span className="text-sage">CA Kenya & Africa’s Talking</span>
               </div>
-              <span className="text-brass font-bold">KSh 70K/mo (Safaricom, Months 1–9)</span>
+              <span className="text-brass font-bold">KSh 70K/mo (Safaricom, Months 1–9)</span>{/* data-ok: market fact, not a sponsor */}
             </div>
 
             <div className="p-2 bg-ink rounded border border-hairline flex justify-between">

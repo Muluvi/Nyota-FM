@@ -54,7 +54,7 @@ export function Part7GapAudit() {
     { id: 12, item: 'DAM system (server & indexing)', cat: 'Software', when: 'Q1 2028 (Months 13–15)', cost: '500,000–1,500,000', owner: 'Head of Digital', v1: 'Named' },
     { id: 13, item: 'Auto-clipping AI tooling', cat: 'Software', when: 'Q1 2028 (Months 13–15)', cost: '200,000–500,000', owner: 'Head of Digital', v1: 'Named' },
     { id: 14, item: 'WhatsApp BSP integration', cat: 'Software', when: 'Q1 2027 (Months 1–3)', cost: '$85 + $50/mo', owner: 'Head of Digital', v1: 'Named' },
-    { id: 15, item: 'USSD shortcode setup & access', cat: 'Software', when: 'Q1–Q3 2027 (Months 1–9)', cost: '70,000/mo (Safaricom dedicated code)', owner: 'Head of Digital', v1: 'Named' },
+    { id: 15, item: 'USSD shortcode setup & access', cat: 'Software', when: 'Q1–Q3 2027 (Months 1–9)', cost: '70,000/mo (Safaricom dedicated code)', owner: 'Head of Digital', v1: 'Named' }, // data-ok: market fact, not a sponsor
     { id: 16, item: 'App development (v1.0 & v1.1)', cat: 'Software', when: 'Q3 2027 (Months 7–9)', cost: '500,000–1,500,000', owner: 'Head of Digital', v1: 'Named' },
     { id: 17, item: 'Advertiser self-serve portal', cat: 'Software', when: 'Q4 2027 (Months 10–12)', cost: '200,000–500,000', owner: 'Head of Digital', v1: 'Absent' },
     { id: 18, item: 'Head of Digital salary', cat: 'Personnel', when: 'Q1 2027 (Months 1–3)', cost: '120,000–200,000/mo', owner: 'GM', v1: 'Named' },

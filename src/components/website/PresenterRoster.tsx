@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Users, Mic, Sparkles, Heart, Radio, ShieldCheck, Check } from 'lucide-react';
-import { IllustrativeChip } from '../v2/IllustrativeChip';
+import { Illustrative } from '../Illustrative';
 
 interface Presenter {
   id: string;
@@ -72,7 +72,7 @@ export function PresenterRoster() {
             <Mic size={14} />
             <span className="uppercase tracking-widest font-semibold">Talent Model · Roles We Will Cast</span>
             <span className="text-sage-dim">·</span>
-            <IllustrativeChip note="Roles to be cast; no named presenters or brand endorsements until contracted" />
+            <Illustrative note="Roles to be cast; no named presenters or brand endorsements until contracted" />
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
             Proposed On-Air Roles & Sponsor Categories
