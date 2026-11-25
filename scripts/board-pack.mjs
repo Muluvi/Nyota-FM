@@ -15,12 +15,24 @@ try {
   await page.goto('http://localhost:4317/', { waitUntil: 'networkidle' })
   // Scroll through once so deferred content renders, then open every <details>.
   await page.evaluate(async () => {
-    for (let y = 0; y < document.body.scrollHeight; y += 1200) {
+    for (let y = 0; y < document.body.scrollHeight; y += 800) {
       window.scrollTo(0, y)
-      await new Promise((r) => setTimeout(r, 30))
+      await new Promise((r) => setTimeout(r, 120))
     }
+  })
+  // Lazy chapters render when scrolled near; wait until every chapter placeholder is gone.
+  for (let i = 0; i < 40; i++) {
+    const pending = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-chapter]')].filter((c) => c.id !== 'appendix-preview' && /Loading .*…/.test(c.textContent ?? '')).length,
+    )
+    if (!pending) break
+    await page.evaluate(() => window.scrollBy(0, -window.innerHeight))
+    await page.waitForTimeout(150)
+  }
+  await page.waitForLoadState('networkidle')
+  await page.evaluate(() => {
     window.scrollTo(0, 0)
-    document.querySelectorAll('details').forEach((d) => (d.open = true))
+    document.querySelectorAll('details:not([data-print-skip])').forEach((d) => (d.open = true))
   })
   await page.emulateMedia({ media: 'print' })
   const date = new Date().toISOString().slice(0, 10)

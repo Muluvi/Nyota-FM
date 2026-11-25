@@ -13,6 +13,10 @@ Measured with `pnpm check` (Vite 6.4) before the purpose-alignment work packages
 
 After WP1 (trust fixes): JS 789.85 KB / 204.58 KB gzip, CSS 77.96 KB / 13.79 KB gzip.
 
+After WP11 (delivery): first-view JS 102.8 KB gzip (app 35.5 + React vendor 67.3), down from 205 KB.
+Chapters 01–07, Appendix A, each Appendix B tool group, search, briefing and the deck load as
+separate chunks on demand. A 5.7 KB static decision summary is prerendered into `index.html`.
+
 WP0 adds Vitest (`pnpm test`), Playwright (`pnpm e2e`, desktop + Pixel 7) and `@axe-core/playwright`.
 The smoke test checks that the page loads without script errors, every `sections.ts` id exists exactly
 once with no duplicate ids anywhere, and that none of the removed fabricated claims render.

@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Menu, X, Search, Radio, Volume2, ArrowUp, ChevronRight, Layers, ExternalLink } from 'lucide-react';
-import { PresentationModeToggle } from './PresentationModeToggle';
 import { sections, chapterSections } from '../../content/sections';
 import { Modal } from '../Modal';
+import { useScrollState } from '../../lib/useActiveSection';
+import { scrollToSection as scrollTo } from '../../lib/scroll';
+
+// The deck (slides and dialog) is its own chunk; the trigger appears once it loads.
+const PresentationModeToggle = lazy(() => import('./PresentationModeToggle').then((m) => ({ default: m.PresentationModeToggle })));
 
 interface NavItem {
   id: string;
@@ -23,46 +27,13 @@ export function Navbar({
   onOpenRadio?: () => void;
   onOpenBriefing?: () => void;
 }) {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeSection, setActiveSection] = useState('overview');
+  const { progress: scrollProgress, active: activeSection, scrollY } = useScrollState();
+  const isScrolled = scrollY > 20;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight - windowHeight;
-      const scrolled = window.scrollY;
-      const progress = documentHeight > 0 ? (scrolled / documentHeight) * 100 : 0;
-      setScrollProgress(progress);
-      setIsScrolled(scrolled > 20);
-
-      // Section spy
-      const sectionElements = PRIMARY_NAV.map((item) => document.getElementById(item.id)).filter(Boolean);
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const el = sectionElements[i];
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) {
-            setActiveSection(PRIMARY_NAV[i].id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      const y = element.getBoundingClientRect().top + window.scrollY - 70;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
+    scrollTo(id);
   };
 
   return (
@@ -146,7 +117,9 @@ export function Navbar({
           <div className="flex items-center gap-2">
             {/* Boardroom Presentation Deck Mode */}
             <div className="hidden sm:block">
-              <PresentationModeToggle />
+              <Suspense fallback={null}>
+                <PresentationModeToggle />
+              </Suspense>
             </div>
 
             {/* Executive Board Briefing Button */}

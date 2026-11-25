@@ -1,47 +1,17 @@
+import React from 'react';
 import { sections } from '../../content/sections';
-import React, { useState, useEffect } from 'react';
+import { useScrollState } from '../../lib/useActiveSection';
+import { scrollToSection } from '../../lib/scroll';
 import { ArrowUp, Compass } from 'lucide-react';
 
 const SECTIONS = sections.map((s) => ({ id: s.id, label: s.number === '00' ? s.shortTitle : `${s.number}. ${s.shortTitle}` }));
 
 export function FloatingNavRail() {
-  const [activeSection, setActiveSection] = useState('overview');
-  const [showBackToTop, setShowBackToTop] = useState(false);
-  const [scrollPercent, setScrollPercent] = useState(0);
+  const { active: activeSection, progress, scrollY } = useScrollState();
+  const showBackToTop = scrollY > 400;
+  const scrollPercent = Math.round(progress);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = docHeight > 0 ? Math.round((scrollY / docHeight) * 100) : 0;
-      setScrollPercent(pct);
-      setShowBackToTop(scrollY > 400);
-
-      // Identify active section
-      for (let i = SECTIONS.length - 1; i >= 0; i--) {
-        const el = document.getElementById(SECTIONS[i].id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 140) {
-            setActiveSection(SECTIONS[i].id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 74;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  };
+  const scrollTo = (id: string) => scrollToSection(id);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

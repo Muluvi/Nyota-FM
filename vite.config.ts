@@ -32,6 +32,16 @@ export default defineConfig(({mode}) => {
       },
       dedupe: ['react', 'react-dom'],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          // React rarely changes, so it gets its own long-lived cached chunk.
+          manualChunks(id) {
+            if (/node_modules\/(\.pnpm\/)?(react|react-dom|scheduler)[@/]/.test(id)) return 'react';
+          },
+        },
+      },
+    },
     server: {
       // Set DISABLE_HMR=true to turn off hot reload and file watching (saves CPU in hosted editors).
       hmr: process.env.DISABLE_HMR !== 'true',

@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main, 'claude/**']
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Typecheck, orphan check, data integrity, build + prerender
+        run: pnpm check
+      - name: Unit tests (finance model, data totals, charts, brand tokens)
+        run: pnpm test
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: End-to-end, accessibility (axe) and prototype tests
+        run: pnpm e2e
+        env:
+          CI: 'true'
+      - name: Board pack PDF (fails above 30 pages)
+        run: node scripts/board-pack.mjs
+      - name: Lighthouse CI (mobile budgets)
+        run: npx --yes @lhci/cli@0.14.0 autorun
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: board-pack
+          path: dist/Nyota-FM-Board-Pack.pdf

@@ -32,6 +32,8 @@ function visit(file) {
 }
 
 visit(entry)
+// Build-time entry: scripts/prerender.mjs renders this module.
+visit(resolve(root, 'prerender.tsx'))
 // The data layer is also an entry point: scripts/check-data.mjs reads it, and the
 // future public station site is meant to reuse it.
 for (const name of readdirSync(resolve(root, 'data'))) {

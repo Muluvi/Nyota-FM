@@ -1,38 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+
+const SearchModal = lazy(() => import('./components/website/SearchModal').then((m) => ({ default: m.SearchModal })));
+const ExecutiveBriefingMode = lazy(() => import('./components/website/ExecutiveBriefingMode').then((m) => ({ default: m.ExecutiveBriefingMode })));
 import { Navbar } from './components/website/Navbar';
-import { SearchModal } from './components/website/SearchModal';
 import { LiveRadioPlayer } from './components/website/LiveRadioPlayer';
 import { FloatingNavRail } from './components/website/FloatingNavRail';
 import { WebsiteFooter } from './components/website/WebsiteFooter';
-import { ExecutiveBriefingMode } from './components/website/ExecutiveBriefingMode';
 import { MobileBottomDock } from './components/website/MobileBottomDock';
 import { ChapterSection } from './components/ledger/ChapterSection';
 
 // Core Strategic Modules
 import { DocumentHero } from './components/v2/DocumentHero';
-import { Part1Objectives } from './components/v2/Part1Objectives';
-import { Part2MasterData } from './components/v2/Part2MasterData';
-import { Part3DataAnalysis } from './components/v2/Part3DataAnalysis';
-import { Part4Opportunities } from './components/v2/Part4Opportunities';
-import { Part5Strategies } from './components/v2/Part5Strategies';
-import { Part6TheBuild } from './components/v2/Part6TheBuild';
-import { Part7GapAudit } from './components/v2/Part7GapAudit';
 import { SourceListAndAsks } from './components/v2/SourceListAndAsks';
-import { Flywheel } from './components/v2/Flywheel';
-import { SituationCharts } from './components/v2/SituationCharts';
-import { Gantt } from './components/charts/Gantt';
-import { CapexWaterfall } from './components/charts/CapexWaterfall';
-import { ProductPreview, SeeItWorking } from './appendix/ProductPreview';
-import { TouchpointEcosystem } from './components/v2/TouchpointEcosystem';
-import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
+import { ProductPreview } from './appendix/ProductPreview';
+import { Deferred } from './components/Deferred';
 import { scrollToSection } from './lib/scroll';
 import { sections } from './content/sections';
 import { Modal } from './components/Modal';
+
+// Chapters 01–07 and Appendix A load as separate chunks when scrolled near (Deferred).
+const CHAPTERS: { id: string; Body: React.ComponentType }[] = [
+  { id: 'situation', Body: lazy(() => import('./chapters/Situation')) },
+  { id: 'objectives', Body: lazy(() => import('./chapters/Objectives')) },
+  { id: 'opportunity', Body: lazy(() => import('./chapters/Opportunity')) },
+  { id: 'plan', Body: lazy(() => import('./chapters/Plan')) },
+  { id: 'build', Body: lazy(() => import('./chapters/Build')) },
+  { id: 'money', Body: lazy(() => import('./chapters/Money')) },
+  { id: 'risks', Body: lazy(() => import('./chapters/Risks')) },
+  { id: 'asks', Body: () => null },
+  { id: 'appendix-data', Body: lazy(() => import('./chapters/AppendixData')) },
+];
 
 export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [briefingOpen, setBriefingOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  // Load the search chunk on first use, then keep it mounted.
+  const [searchLoaded, setSearchLoaded] = useState(false);
+  useEffect(() => {
+    if (searchOpen) setSearchLoaded(true);
+  }, [searchOpen]);
 
   // Global keyboard shortcuts: Cmd/Ctrl+K or '/' opens search; Shift+B opens the briefing.
   // Single-letter 'b' is avoided because screen readers use it for quick navigation.
@@ -93,10 +100,15 @@ export default function App() {
       </Modal>
 
       {/* Instant Global Search Modal */}
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      {searchLoaded && (
+        <Suspense fallback={null}>
+          <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+        </Suspense>
+      )}
 
       {/* Executive Board Briefing & Resolutions Mode */}
       {briefingOpen && (
+<Suspense fallback={null}>
         <ExecutiveBriefingMode
           onClose={() => setBriefingOpen(false)}
           onNavigate={(id) => {
@@ -104,6 +116,7 @@ export default function App() {
             handleNavigate(id);
           }}
         />
+        </Suspense>
       )}
 
       {/* Main Content Stream - Optimized for mobile edge spacing and touch safe area */}
@@ -115,53 +128,20 @@ export default function App() {
         />
 
         {/* 01–08: the board case, in decision order */}
-        <ChapterSection id="situation" number="01" title="The Situation: Market Evidence">
-          <SituationCharts />
-          <Part2MasterData />
-          <p className="mt-6"><SeeItWorking group="preview-evidence">Explore the county, coverage and royalty tools</SeeItWorking></p>
-        </ChapterSection>
-
-        <ChapterSection id="objectives" number="02" title="The Objectives (A–E)">
-          <Part1Objectives />
-          <p className="mt-6"><SeeItWorking group="preview-listener">See the programming and listener tools working</SeeItWorking></p>
-        </ChapterSection>
-
-        <ChapterSection id="opportunity" number="03" title="The Opportunity: Revenue Levers & Rate Card">
-          <Part4Opportunities />
-          <TouchpointEcosystem />
-          <p className="mt-6"><SeeItWorking group="preview-advertiser">Try the media plan and quote</SeeItWorking></p>
-        </ChapterSection>
-
-        <ChapterSection id="plan" number="04" title="The Plan: 21 Strategies from Month 0">
-          <Flywheel />
-          <Gantt />
-          <Part5Strategies />
-        </ChapterSection>
-
-        <ChapterSection id="build" number="05" title="The Build: Studio, Power, OB & People">
-          <CapexWaterfall />
-          <Part6TheBuild />
-          <p className="mt-6"><SeeItWorking group="preview-operations">See the studio, power and OB tools working</SeeItWorking></p>
-        </ChapterSection>
-
-        <ChapterSection id="money" number="06" title="The Money: Revenue Index & Payback">
-          <Part3DataAnalysis view="money" />
-        </ChapterSection>
-
-        <ChapterSection id="risks" number="07" title="Risks & Gap Audit">
-          <Part3DataAnalysis view="risks" />
-          <Part7GapAudit />
-        </ChapterSection>
-
-        <ChapterSection id="asks" number="08" title="The Asks & Governance">
-          <SourceListAndAsks show="asks" />
-        </ChapterSection>
-
-        {/* Appendices */}
-        <ChapterSection id="appendix-data" number="A" title="Appendix A: Data Room & Sources">
-          <DataEnrichedAnnexure />
-          <SourceListAndAsks show="sources" />
-        </ChapterSection>
+        {CHAPTERS.map(({ id, Body }) => {
+          const meta = sections.find((s) => s.id === id)!;
+          return (
+            <ChapterSection key={id} id={id} number={meta.number} title={meta.title}>
+              {id === 'asks' ? (
+                <SourceListAndAsks show="asks" />
+              ) : (
+                <Deferred label={meta.shortTitle} minHeight={900}>
+                  <Body />
+                </Deferred>
+              )}
+            </ChapterSection>
+          );
+        })}
 
         <ChapterSection id="appendix-preview" number="B" title="Appendix B: Product Preview">
           <ProductPreview />

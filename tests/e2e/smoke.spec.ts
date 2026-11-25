@@ -41,7 +41,7 @@ test('the Western reach fact renders the same in Hero, Search and Deck', async (
   await expect(page.locator('[data-fact="radio.reach.western"]')).toContainText(reach);
 
   await page.keyboard.press('Control+k');
-  await page.getByRole('textbox').first().fill('Radio Reach');
+  await page.getByRole('combobox', {name: 'Search'}).fill('Radio Reach');
   await expect(page.getByRole('heading', {name: `${reach} Radio Reach in Western Kenya`})).toBeVisible();
   await page.keyboard.press('Escape');
 
@@ -55,6 +55,7 @@ test('the Western reach fact renders the same in Hero, Search and Deck', async (
 test('sections render in decision order and the rail lists every section', async ({page, isMobile}) => {
   const {sections} = await import('../../src/content/sections');
   await page.goto('/');
+  await page.waitForSelector('[data-chapter]');
   const order = await page.evaluate((ids) => ids.map((id) => document.getElementById(id)!.getBoundingClientRect().top + window.scrollY), sections.map((s) => s.id));
   expect([...order].sort((a, b) => a - b)).toEqual(order);
   if (!isMobile) {
@@ -66,6 +67,12 @@ test('sections render in decision order and the rail lists every section', async
 test('no 2026 quarter milestones remain in the chapters', async ({page}) => {
   const {chapterSections} = await import('../../src/content/sections');
   await page.goto('/');
+  // Chapters load as they near the viewport; scroll through so every chapter renders.
+  for (let y = 0; y < 60; y++) {
+    await page.mouse.wheel(0, 1500);
+    await page.waitForTimeout(40);
+  }
+  await expect(page.getByText('Loading', {exact: false})).toHaveCount(0, {timeout: 10_000}).catch(() => {});
   for (const s of chapterSections) {
     // Source titles in Appendix A may legitimately cite 2026 reports; plan chapters may not.
     const text = await page.locator(`[id="${s.id}"]`).innerText();
@@ -89,4 +96,13 @@ test('with reduced motion, no CSS animations run after load', async ({page}) => 
   await page.waitForTimeout(300);
   const running = await page.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length);
   expect(running).toBe(0);
+});
+
+test.describe('without JavaScript', () => {
+  test.use({javaScriptEnabled: false});
+  test('the decision summary is readable', async ({page}) => {
+    await page.goto('/');
+    await expect(page.getByRole('heading', {name: /decisions for the board/})).toBeVisible();
+    await expect(page.locator('body')).toContainText('Approve the transformation thesis');
+  });
 });
