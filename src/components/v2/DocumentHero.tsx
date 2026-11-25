@@ -5,6 +5,12 @@ import { Reveal } from '../ledger/Reveal';
 import { chapterSections } from '../../content/sections';
 import { onTabListKeyDown } from '../../lib/tabs';
 import { DecisionSummary } from './DecisionSummary';
+import { SplitText, Scramble, CycleWords } from '../motion/Text';
+import { CountUp } from '../motion/Numbers';
+import { useTabIndicator } from '../motion/hooks';
+import { counts } from '../../data/counts';
+import { phaseTotal } from '../../data/capex';
+import { formatKshRangeM } from '../../data/format';
 
 interface DocumentHeroProps {
   onNavigate: (sectionId: string) => void;
@@ -13,6 +19,7 @@ interface DocumentHeroProps {
 
 export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) {
   const [activeTierTab, setActiveTierTab] = useState<1 | 2 | 0>(1);
+  const tierInd = useTabIndicator(activeTierTab);
 
   const DESCRIPTIONS: Record<string, string> = {
     situation: 'Radio reach, listening by language, the ad market and devices: the evidence the plan rests on.',
@@ -29,15 +36,29 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
     .map((s) => ({ id: s.id, num: s.number, title: s.shortTitle, desc: DESCRIPTIONS[s.id] ?? s.title, badge: `Part ${s.number}` }));
 
   return (
-    <section id="overview" className="pt-6 sm:pt-10 pb-16 border-b border-hairline">
+    <section id="overview" className="relative isolate pt-6 sm:pt-10 pb-16 border-b border-hairline">
+      {/* Decorative backdrop: drifting aurora and two morphing blobs on parallax layers. */}
+      <div
+        aria-hidden="true"
+        data-print-skip
+        className="pointer-events-none absolute left-1/2 -top-24 -z-10 h-[44rem] w-screen -translate-x-1/2 overflow-hidden"
+        style={{ maskImage: 'linear-gradient(to bottom, #000 55%, transparent)' }}
+      >
+        <div className="fx-aurora fx-parallax-slow absolute inset-0 opacity-80" />
+        <div className="fx-blob fx-parallax-fast absolute right-[-6rem] top-24 size-72 bg-brass/10 blur-3xl" />
+        <div className="fx-blob fx-parallax-slow absolute left-[-4rem] top-80 size-60 bg-moss/10 blur-3xl" />
+      </div>
       <Reveal>
         {/* Top Status Eyebrow Bar */}
         <div className="flex flex-wrap items-center justify-between text-eyebrow text-sage-dim mb-4 tracking-widest pb-3 border-b border-hairline gap-2">
           <span className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-moss" />
-            <span className="text-moss font-semibold">107.3 FM BROADCAST PLATFORM</span>
+            <span className="relative flex size-2">
+              <span className="absolute inset-0 rounded-full bg-moss fx-breathe" />
+              <span className="relative size-2 rounded-full bg-moss" />
+            </span>
+            <Scramble text="107.3 FM BROADCAST PLATFORM" className="text-moss font-semibold" />
           </span>
-          <span className="text-brass font-mono font-semibold">
+          <span className="text-brass font-mono font-semibold fx-track" data-io="">
             WESTERN KENYA & LAKE BASIN HUB
           </span>
         </div>
@@ -45,37 +66,49 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         {/* Primary Station Headline & Lead Narrative */}
         <div className="max-w-4xl">
           <div className="text-eyebrow text-brass mb-2.5 sm:mb-3 font-mono tracking-widest flex items-center gap-1.5 sm:gap-2">
-            <Sparkles size={12} className="shrink-0" />
+            <Sparkles size={12} className="shrink-0 fx-spin-slow" />
             <span className="truncate">HAPA TULIPO, TWANG’AA · STRATEGIC TRANSFORMATION</span>
           </div>
 
-          <h1 className="font-display text-paper leading-[1.08] mb-3 sm:mb-4 text-2xl sm:text-5xl lg:text-7xl font-semibold text-balance">
-            The Voice of Western Kenya, Amplified.
-          </h1>
+          <SplitText
+            as="h1"
+            text="The Voice of Western Kenya, Amplified."
+            className="font-display text-paper leading-[1.08] mb-3 sm:mb-4 text-2xl sm:text-5xl lg:text-7xl font-semibold text-balance"
+          />
+          <p className="mb-3 font-mono text-xs uppercase tracking-widest text-sage-dim" data-reveal="fade">
+            One plan for{' '}
+            <CycleWords words={['Bungoma', 'Kakamega', 'Trans Nzoia', 'Busia', 'Vihiga']} className="text-brass" />
+          </p>
 
-          <p className="font-display italic text-sage text-base sm:text-xl lg:text-2xl mb-4 sm:mb-6 leading-relaxed max-w-3xl text-balance">
+          <p data-reveal="blur" style={{ '--i': 4 } as React.CSSProperties} className="font-display italic text-sage text-base sm:text-xl lg:text-2xl mb-4 sm:mb-6 leading-relaxed max-w-3xl text-balance">
             A comprehensive, data-backed strategic platform for Nyota FM 107.3 — scaling broadcast reach, digital engagement, and commercial sustainability across ≈6 million people (KNBS 2019) over the 24 months from board approval.
           </p>
 
-          <p className="font-body text-paper/85 text-xs sm:text-sm lg:text-base leading-relaxed mb-6 sm:mb-8 max-w-2xl">
-            Built on published Kenyan market data and phased studio economics. Every figure carries an evidence tier, and every gap we could not close is declared, with a plan and an owner.
+          <p data-reveal="up" style={{ '--i': 6 } as React.CSSProperties} className="font-body text-paper/85 text-xs sm:text-sm lg:text-base leading-relaxed mb-6 sm:mb-8 max-w-2xl">
+            Built on published Kenyan market data and phased studio economics. Every figure carries an evidence tier, and{' '}
+            <span className="fx-marker" data-io="">every gap we could not close is declared</span>, with a plan and an owner.
           </p>
 
           {/* Quick CTA Actions */}
-          <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 mb-8 sm:mb-10">
+          <div data-stagger="" className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 mb-8 sm:mb-10">
             <button
               type="button"
               onClick={() => onNavigate('plan')}
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-brass px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-ink font-bold shadow-lg transition-all hover:brightness-110 active:scale-95 min-h-[44px]"
+              data-reveal="pop"
+              data-magnetic=""
+              data-ripple=""
+              className="fx-shine fx-arrow fx-glow-pulse inline-flex items-center justify-center gap-2 rounded-lg bg-brass px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-ink font-bold shadow-lg transition-all hover:brightness-110 active:scale-95 min-h-[44px]"
             >
-              <span>Explore 21 Action Plans</span>
+              <span>Explore {counts.strategies} Action Plans</span>
               <ArrowRight size={14} />
             </button>
 
             <button
               type="button"
               onClick={() => onNavigate('money')}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-brass/50 bg-brass/10 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-brass font-semibold transition-all hover:bg-brass/20 active:scale-95 min-h-[44px]"
+              data-reveal="pop"
+              data-ripple=""
+              className="fx-shine fx-press inline-flex items-center justify-center gap-2 rounded-lg border border-brass/50 bg-brass/10 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-brass font-semibold transition-all hover:bg-brass/20 active:scale-95 min-h-[44px]"
             >
               <Sliders size={14} />
               <span>Analysis &amp; Payback</span>
@@ -84,7 +117,9 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             <button
               type="button"
               onClick={() => onNavigate('situation')}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-ink-2 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-sage transition-all hover:border-paper hover:text-paper active:scale-95 min-h-[44px]"
+              data-reveal="pop"
+              data-ripple=""
+              className="fx-shine fx-press inline-flex items-center justify-center gap-2 rounded-lg border border-hairline bg-ink-2 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-sage transition-all hover:border-paper hover:text-paper active:scale-95 min-h-[44px]"
             >
               <Database size={14} />
               <span>Inspect Data Room</span>
@@ -94,7 +129,9 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               <button
                 type="button"
                 onClick={onOpenBriefing}
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-brass/60 bg-brass/15 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-paper font-semibold transition-all hover:bg-brass hover:text-ink active:scale-95 shadow-md min-h-[44px]"
+                data-reveal="pop"
+                data-ripple=""
+                className="fx-shine fx-press inline-flex items-center justify-center gap-2 rounded-lg border border-brass/60 bg-brass/15 px-4 sm:px-5 py-3 text-xs font-mono uppercase tracking-wider text-paper font-semibold transition-all hover:bg-brass hover:text-ink active:scale-95 shadow-md min-h-[44px]"
               >
                 <Sparkles size={14} className="text-brass" />
                 <span>Executive Board Mode</span>
@@ -108,13 +145,13 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         </div>
 
         {/* Live Animated Metrics Grid */}
-        <div data-print-skip className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-8 sm:mb-12">
-          <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
+        <div data-print-skip data-stagger="" className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-8 sm:mb-12">
+          <div data-reveal="up" data-tilt="" data-spotlight="" className="fx-lift bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 group">
             <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Evidence Standard
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-paper font-bold flex items-center gap-1.5 group-hover:text-brass transition-colors">
-              <span>41</span>
+              <CountUp value={counts.sources} />
               <span className="text-xs font-normal text-moss">Sources</span>
             </div>
             <div className="text-[11px] text-sage mt-1">
@@ -122,24 +159,24 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             </div>
           </div>
 
-          <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
+          <div data-reveal="up" data-tilt="" data-spotlight="" className="fx-lift bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 group">
             <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Phase 1 Studio Capex
             </div>
-            <div className="font-mono text-2xl sm:text-3xl text-brass font-bold flex items-center gap-1 group-hover:brightness-110 transition-colors">
-              <span>KSh 627K–837K</span>
+            <div className="font-mono text-xl sm:text-2xl xl:text-[1.6rem] text-brass font-bold flex items-center gap-1 whitespace-nowrap group-hover:brightness-110 transition-colors">
+              <span>{formatKshRangeM(phaseTotal('P1'))}</span>
             </div>
             <div className="text-[11px] text-sage mt-1">
               Phase 1 only · local vendor quotes
             </div>
           </div>
 
-          <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
+          <div data-reveal="up" data-tilt="" data-spotlight="" className="fx-lift bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 group">
             <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Operational Build
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-paper font-bold flex items-center gap-1.5 group-hover:text-brass transition-colors">
-              <span>40</span>
+              <CountUp value={counts.buildChecklistItems} />
               <span className="text-xs font-normal text-brass">Items</span>
             </div>
             <div className="text-[11px] text-sage mt-1">
@@ -147,12 +184,12 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             </div>
           </div>
 
-          <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
+          <div data-reveal="up" data-tilt="" data-spotlight="" className="fx-lift bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 group">
             <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Action Execution Plans
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-moss font-bold flex items-center gap-1.5 group-hover:brightness-110 transition-colors">
-              <span>21</span>
+              <CountUp value={counts.strategies} />
               <span className="text-xs font-normal text-sage-dim">Strategies</span>
             </div>
             <div className="text-[11px] text-sage mt-1">
@@ -162,7 +199,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         </div>
 
         {/* EVIDENCE STANDARDS & METHODOLOGY EXPLORER */}
-        <div data-print-skip className="bg-ink-2 border border-brass/40 rounded-xl p-5 sm:p-7 mb-14 relative overflow-hidden shadow-xl">
+        <div data-print-skip data-reveal="unfold" data-spotlight="" className="bg-ink-2 border border-brass/40 rounded-xl p-5 sm:p-7 mb-14 relative overflow-hidden shadow-xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4 mb-5">
             <div>
               <div className="flex items-center gap-2">
@@ -177,13 +214,14 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             </div>
 
             {/* Interactive Tier Switcher Tabs */}
-            <div role="tablist" aria-label="Evidence tiers" onKeyDown={onTabListKeyDown} className="flex items-center gap-1.5 font-mono text-xs bg-ink p-1 rounded-lg border border-hairline">
+            <div ref={tierInd.listRef} role="tablist" aria-label="Evidence tiers" onKeyDown={onTabListKeyDown} className="relative flex items-center gap-1.5 font-mono text-xs bg-ink p-1 rounded-lg border border-hairline">
+              <span ref={tierInd.indRef} aria-hidden="true" className="fx-tab-indicator rounded bg-paper/5 ring-1 ring-paper/10" />
               <button
                 type="button"
                 onClick={() => setActiveTierTab(1)}
                 role="tab"
                 aria-selected={activeTierTab === 1}
-                className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
+                className={`relative px-3 py-1.5 rounded transition-all flex items-center gap-1.5 fx-icon-spin ${
                   activeTierTab === 1
                     ? 'bg-moss/10 text-moss font-semibold border border-moss/60'
                     : 'text-sage hover:text-paper'
@@ -198,7 +236,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
                 onClick={() => setActiveTierTab(2)}
                 role="tab"
                 aria-selected={activeTierTab === 2}
-                className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
+                className={`relative px-3 py-1.5 rounded transition-all flex items-center gap-1.5 fx-icon-spin ${
                   activeTierTab === 2
                     ? 'bg-brass/30 text-brass font-semibold border border-brass/60'
                     : 'text-sage hover:text-paper'
@@ -213,7 +251,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
                 onClick={() => setActiveTierTab(0)}
                 role="tab"
                 aria-selected={activeTierTab === 0}
-                className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
+                className={`relative px-3 py-1.5 rounded transition-all flex items-center gap-1.5 fx-icon-spin ${
                   activeTierTab === 0
                     ? 'bg-brick/10 text-brick-text font-semibold border border-brick/60'
                     : 'text-sage hover:text-paper'
@@ -226,7 +264,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
           </div>
 
           {/* Active Tier Explanation Card */}
-          <div className="rounded-lg bg-ink p-4 border border-hairline transition-all">
+          <div key={activeTierTab} className="fx-resolve rounded-lg bg-ink p-4 border border-hairline transition-all">
             {activeTierTab === 1 && (
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
@@ -296,18 +334,21 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             <span className="text-xs font-mono text-brass">Click any card to jump</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <div data-stagger="ripple" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {sections.map((sec) => (
               <button
                 key={sec.id}
                 type="button"
                 onClick={() => onNavigate(sec.id)}
-                className="group p-4 bg-ink-2 hover:bg-ink border border-hairline hover:border-brass/70 rounded-xl text-left transition-all duration-200 shadow-md hover:shadow-xl flex flex-col justify-between min-h-[130px]"
+                data-reveal="up"
+                data-tilt=""
+                data-spotlight=""
+                className="fx-lift fx-border-draw group p-4 bg-ink-2 hover:bg-ink border border-hairline hover:border-brass/70 rounded-xl text-left shadow-md hover:shadow-xl flex flex-col justify-between min-h-[130px]"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-mono text-xs font-bold text-brass group-hover:translate-x-1 transition-transform flex items-center gap-1.5">
-                      <span className="size-1.5 rounded-full bg-brass/60" />
+                      <span className="size-1.5 rounded-full bg-brass/60 fx-breathe" />
                       Part {sec.num}
                     </span>
                     <ArrowRight size={14} className="text-sage-dim group-hover:text-brass group-hover:translate-x-1 transition-all" />
@@ -326,7 +367,10 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             <button
               type="button"
               onClick={() => onNavigate('asks')}
-              className="group p-4 bg-brass/10 hover:bg-brass/20 border border-brass/40 hover:border-brass rounded-xl text-left transition-all duration-200 shadow-md hover:shadow-xl flex flex-col justify-between min-h-[130px]"
+              data-reveal="up"
+              data-tilt=""
+              data-spotlight=""
+              className="fx-lift fx-glow group p-4 bg-brass/10 hover:bg-brass/20 border border-brass/40 hover:border-brass rounded-xl text-left shadow-md hover:shadow-xl flex flex-col justify-between min-h-[130px]"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">

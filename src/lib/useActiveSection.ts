@@ -6,14 +6,15 @@ import { sectionIds } from '../content/sections'
  * IntersectionObserver, no layout reads on scroll) and scroll progress (one passive,
  * rAF-throttled listener). Components subscribe instead of each adding listeners.
  */
-type State = { active: string; progress: number; scrollY: number }
-let state: State = { active: 'overview', progress: 0, scrollY: 0 }
+type State = { active: string; progress: number; scrollY: number; dir: 'up' | 'down' }
+let state: State = { active: 'overview', progress: 0, scrollY: 0, dir: 'up' }
 const listeners = new Set<() => void>()
 let started = false
 
 const emit = (next: Partial<State>) => {
   const merged = { ...state, ...next }
-  if (merged.active === state.active && Math.round(merged.progress) === Math.round(state.progress) && (merged.scrollY > 20) === (state.scrollY > 20) && (merged.scrollY > 400) === (state.scrollY > 400)) {
+  if (merged.active !== state.active) document.documentElement.dataset.activeChapter = merged.active
+  if (merged.active === state.active && merged.dir === state.dir && Math.round(merged.progress) === Math.round(state.progress) && (merged.scrollY > 20) === (state.scrollY > 20) && (merged.scrollY > 400) === (state.scrollY > 400)) {
     state = merged
     return
   }
@@ -25,13 +26,27 @@ function start() {
   if (started || typeof window === 'undefined') return
   started = true
   let ticking = false
+  let lastY = window.scrollY
+  let lastT = performance.now()
+  let decay = 0
+  const root = document.documentElement
   const onScroll = () => {
     if (ticking) return
     ticking = true
     requestAnimationFrame(() => {
       ticking = false
-      const max = document.documentElement.scrollHeight - window.innerHeight
-      emit({ progress: max > 0 ? (window.scrollY / max) * 100 : 0, scrollY: window.scrollY })
+      const y = window.scrollY
+      const t = performance.now()
+      // Scroll velocity (px/ms ×10, clamped) feeds the ticker skew; it decays back to 0.
+      const v = Math.max(-60, Math.min(60, ((y - lastY) / Math.max(1, t - lastT)) * 10))
+      if (root.classList.contains('motion')) root.style.setProperty('--scroll-velocity', v.toFixed(1))
+      window.clearTimeout(decay)
+      decay = window.setTimeout(() => root.style.setProperty('--scroll-velocity', '0'), 120)
+      const dir = Math.abs(y - lastY) < 4 ? state.dir : y > lastY ? 'down' : 'up'
+      lastY = y
+      lastT = t
+      const max = root.scrollHeight - window.innerHeight
+      emit({ progress: max > 0 ? (y / max) * 100 : 0, scrollY: y, dir })
     })
   }
   window.addEventListener('scroll', onScroll, { passive: true })

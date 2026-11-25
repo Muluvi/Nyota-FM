@@ -7,6 +7,7 @@ import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { capex, phaseGates, phaseTotal, capexTotal, studioPhasesTotal, unquotedLines, PHASES, type Phase } from '../../data/capex';
 import { onTabListKeyDown } from '../../lib/tabs';
+import { useTabIndicator } from '../motion/hooks';
 import { formatKshRange, displayValue } from '../../data/format';
 
 const PHASE_KEY = { p1: 'P1', p2: 'P2', p3: 'P3' } as const;
@@ -64,6 +65,7 @@ function CapexPhaseTable({ phase }: { phase: Phase }) {
 
 export function Part6TheBuild() {
   const [activePhase, setActivePhase] = useState<'p1' | 'p2' | 'p3'>('p1');
+  const phaseInd = useTabIndicator(activePhase);
 
   const roadmapQuarters = [
     {
@@ -165,9 +167,9 @@ export function Part6TheBuild() {
             <p className="text-xs text-sage mt-0.5">Quarter-by-quarter operational delivery schedule from day 1 to market leadership</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-mono">
+          <div data-stagger="" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-mono">
             {roadmapQuarters.map((rq, idx) => (
-              <div key={idx} className="p-3.5 bg-ink rounded border border-hairline hover:border-brass/50 transition-colors flex flex-col justify-between">
+              <div key={idx} data-reveal="flip" data-spotlight="" className="fx-lift p-3.5 bg-ink rounded border border-hairline hover:border-brass/50 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="text-brass font-bold text-xs">{rq.q}</span>
@@ -200,15 +202,16 @@ export function Part6TheBuild() {
               <h4 className="font-display text-paper text-base font-semibold">Studio Build — Consolidated Cost Schedule</h4>
               <p className="text-xs text-sage mt-0.5">One register for every equipment line; totals are computed</p>
             </div>
-            <div role="tablist" aria-label="Capex phase" onKeyDown={onTabListKeyDown} className="flex items-center gap-1">
+            <div ref={phaseInd.listRef} role="tablist" aria-label="Capex phase" onKeyDown={onTabListKeyDown} className="relative flex items-center gap-1">
+              <span ref={phaseInd.indRef} aria-hidden="true" className="fx-tab-indicator rounded bg-brass" />
               {(['p1', 'p2', 'p3'] as const).map((ph) => (
                 <button
                   key={ph}
                   onClick={() => setActivePhase(ph)}
                 role="tab"
                 aria-selected={activePhase === ph}
-                  className={`px-2.5 py-1 rounded text-xs font-mono font-semibold uppercase ${
-                    activePhase === ph ? 'bg-brass text-ink' : 'bg-ink text-sage hover:text-paper'
+                  className={`relative px-2.5 py-1 rounded text-xs font-mono font-semibold uppercase transition-colors duration-300 ${
+                    activePhase === ph ? 'text-ink' : 'bg-ink text-sage hover:text-paper'
                   }`}
                 >
                   {ph === 'p1' ? 'Phase 1' : ph === 'p2' ? 'Phase 2' : 'Phase 3'}
@@ -217,7 +220,9 @@ export function Part6TheBuild() {
             </div>
           </div>
 
-          <CapexPhaseTable phase={PHASE_KEY[activePhase]} />
+          <div key={activePhase} className="fx-resolve">
+            <CapexPhaseTable phase={PHASE_KEY[activePhase]} />
+          </div>
 
           {/* Lines that were missing from the original envelope */}
           <div className="space-y-2">

@@ -23,11 +23,12 @@ try {
   // Lazy chapters render when scrolled near; wait until every chapter placeholder is gone.
   for (let i = 0; i < 40; i++) {
     const pending = await page.evaluate(() =>
-      [...document.querySelectorAll('[data-chapter]')].filter((c) => c.id !== 'appendix-preview' && /Loading .*…/.test(c.textContent ?? '')).length,
+      [...document.querySelectorAll('section[data-chapter]')].filter((c) => c.id !== 'appendix-preview' && /Loading .*…/.test(c.textContent ?? '')).map((c) => c.id),
     )
-    if (!pending) break
-    await page.evaluate(() => window.scrollBy(0, -window.innerHeight))
-    await page.waitForTimeout(150)
+    if (process.env.DEBUG) console.log(i, pending)
+    if (!pending.length) break
+    await page.evaluate((id) => document.getElementById(id)?.scrollIntoView(), pending[0])
+    await page.waitForTimeout(250)
   }
   await page.waitForLoadState('networkidle')
   await page.evaluate(() => {

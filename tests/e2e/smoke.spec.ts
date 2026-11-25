@@ -47,7 +47,7 @@ test('the Western reach fact renders the same in Hero, Search and Deck', async (
 
   test.skip(isMobile, 'Deck trigger lives in the desktop navbar');
   await page.reload();
-  await page.getByRole('button', {name: /Presentation Mode/}).click();
+  await page.getByRole('button', {name: /Presentation deck/}).click();
   await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('dialog')).toContainText(reach);
 });

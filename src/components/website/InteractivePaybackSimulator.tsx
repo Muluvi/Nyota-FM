@@ -3,6 +3,7 @@ import { AlertTriangle } from 'lucide-react';
 import { TierBadge } from '../v2/TierBadge';
 import { run, defaultInputs, tornado, yDomain, ASSUMPTION_NOTES, type Scenario } from '../../model/finance';
 import type { Phase } from '../../data/capex';
+import { useTabIndicator } from '../motion/hooks';
 
 const PHASE_SETS: { id: string; label: string; phases: Phase[] }[] = [
   { id: 'p1', label: 'Phase 1 only', phases: ['P1'] },
@@ -25,7 +26,7 @@ function CashChart({ worst, base, best, payback }: { worst: number[]; base: numb
   const band = `${line(best)} ${worst.map((v, i) => `L${x(worst.length - 1 - i).toFixed(1)},${y(worst[worst.length - 1 - i]).toFixed(1)}`).join(' ')} Z`;
   const ticks = [lo, (lo + hi) / 2, hi, 0].filter((v, i, a) => a.indexOf(v) === i);
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-labelledby="cash-title cash-desc">
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full chart" data-io="" role="img" aria-labelledby="cash-title cash-desc">
       <title id="cash-title">Cumulative incremental cash over 24 months</title>
       <desc id="cash-desc">
         Shaded band from worst to best case; line is the base case. Base-case payback: {monthText(payback)}. Month-by-month values
@@ -44,11 +45,23 @@ function CashChart({ worst, base, best, payback }: { worst: number[]; base: numb
           M{mo}
         </text>
       ))}
-      <path d={band} fill="var(--color-brass)" opacity="0.15" />
-      <path d={line(base)} fill="none" stroke="var(--color-brass)" strokeWidth="2.5" />
+      <defs>
+        <linearGradient id="cash-band" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stopColor="var(--color-brass)" stopOpacity="0.35" />
+          <stop offset="1" stopColor="var(--color-brass)" stopOpacity="0.06" />
+        </linearGradient>
+      </defs>
+      {/* Area sweep on entry; paths morph (CSS d) when assumptions change. */}
+      <g className="c-area">
+        <path className="c-path" d={band} style={{ d: `path("${band}")` } as React.CSSProperties} fill="url(#cash-band)" />
+        <path className="c-path" d={line(base)} style={{ d: `path("${line(base)}")` } as React.CSSProperties} fill="none" stroke="var(--color-brass)" strokeWidth="3" strokeLinecap="round" />
+      </g>
       {payback != null && (
         <g>
           <line x1={x(payback - 1)} x2={x(payback - 1)} y1={P.t} y2={H - P.b} stroke="var(--color-moss)" strokeDasharray="4 3" />
+          <circle className="c-pulse-ring" cx={x(payback - 1)} cy={y(0)} r="7" fill="none" stroke="var(--color-moss)" strokeWidth="1.5" />
+          <circle className="c-pulse-ring" cx={x(payback - 1)} cy={y(0)} r="7" fill="none" stroke="var(--color-moss)" strokeWidth="1.5" />
+          <circle className="c-drop" cx={x(payback - 1)} cy={y(0)} r="5" fill="var(--color-moss)" />
           <text x={x(payback - 1) + 4} y={P.t + 12} fontSize="10" fill="var(--color-moss)" fontFamily="var(--font-mono)">
             break-even M{payback}
           </text>
@@ -61,7 +74,7 @@ function CashChart({ worst, base, best, payback }: { worst: number[]; base: numb
 function Tornado({ bars }: { bars: ReturnType<typeof tornado> }) {
   const max = Math.max(1, ...bars.flatMap((b) => [Math.abs(b.low), Math.abs(b.high)]));
   return (
-    <div className="space-y-1.5" role="img" aria-label="Sensitivity of NPV to a 20 percent change in each assumption">
+    <div className="space-y-1.5 chart" data-io="" role="img" aria-label="Sensitivity of NPV to a 20 percent change in each assumption">
       {bars.map((b) => {
         const left = Math.min(b.low, b.high);
         const right = Math.max(b.low, b.high);
@@ -71,7 +84,7 @@ function Tornado({ bars }: { bars: ReturnType<typeof tornado> }) {
             <div className="relative h-4 rounded bg-ink">
               <span className="absolute inset-y-0 left-1/2 w-px bg-hairline" aria-hidden="true" />
               <span
-                className="absolute inset-y-0.5 rounded bg-brass/70"
+                className="c-grow-x absolute inset-y-0.5 rounded bg-gradient-to-r from-brass/40 to-brass"
                 style={{ left: `${50 + (left / max) * 50}%`, width: `${((right - left) / max) * 50}%` }}
                 title={`${m(b.low)} to ${m(b.high)}`}
               />
@@ -87,6 +100,7 @@ function Tornado({ bars }: { bars: ReturnType<typeof tornado> }) {
 /** The Money chapter's model, built on src/model/finance.ts. */
 export function InteractivePaybackSimulator() {
   const [scenario, setScenario] = useState<Scenario>('base');
+  const scnInd = useTabIndicator(scenario);
   const [phaseSet, setPhaseSet] = useState('all');
   const [realisation, setRealisation] = useState(0.5);
   const [cannibalisation, setCannibalisation] = useState(0.1);
@@ -138,9 +152,10 @@ export function InteractivePaybackSimulator() {
       <div className="grid gap-4 lg:grid-cols-3">
         <fieldset className="space-y-3 rounded-lg border border-hairline bg-ink p-4">
           <legend className="px-1 text-[11px] font-mono uppercase tracking-wider text-sage-dim">Assumptions</legend>
-          <div className="flex gap-1" role="group" aria-label="Scenario">
+          <div ref={scnInd.listRef} className="relative flex gap-1" role="group" aria-label="Scenario">
+            <span ref={scnInd.indRef} aria-hidden="true" className="fx-tab-indicator rounded bg-brass" />
             {(['worst', 'base', 'best'] as const).map((s) => (
-              <button key={s} type="button" aria-pressed={scenario === s} onClick={() => setScenario(s)} className={`flex-1 rounded px-2 py-1.5 text-xs font-mono capitalize ${scenario === s ? 'bg-brass text-ink font-bold' : 'border border-hairline text-sage hover:text-paper'}`}>
+              <button key={s} type="button" aria-pressed={scenario === s} onClick={() => setScenario(s)} className={`relative flex-1 rounded border px-2 py-1.5 text-xs font-mono capitalize transition-colors duration-300 ${scenario === s ? 'border-transparent text-ink font-bold' : 'border-hairline text-sage hover:text-paper'}`}>
                 {s}
               </button>
             ))}

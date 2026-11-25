@@ -26,9 +26,15 @@ export function CompetitorDialMap() {
         </p>
       </div>
 
-      <div className="rounded-xl border border-hairline bg-ink p-4">
-        <div className="relative h-24" role="group" aria-label="FM dial, 87.5 to 108 megahertz">
-          <div className="absolute inset-x-0 top-12 h-px bg-hairline" aria-hidden="true" />
+      <div className="rounded-xl border border-hairline bg-gradient-to-b from-ink to-ink-2 p-4 fx-aurora">
+        <div className="chart relative h-24" data-io="" role="group" aria-label="FM dial, 87.5 to 108 megahertz">
+          <div className="absolute inset-x-0 top-12 h-px bg-gradient-to-r from-transparent via-sage-dim to-transparent" aria-hidden="true" />
+          {/* Tuning needle: springs to the selected frequency. */}
+          <div
+            aria-hidden="true"
+            className="absolute -top-1 bottom-6 w-0.5 -translate-x-1/2 rounded bg-brass shadow-[0_0_14px_2px_rgba(214,167,92,0.55)]"
+            style={{ left: `${pos(selected.freq)}%`, transition: 'left 900ms var(--ease-spring)' }}
+          />
           {TICKS.map((t) => (
             <span
               key={t}
@@ -48,10 +54,10 @@ export function CompetitorDialMap() {
                 onClick={() => setSelected(st)}
                 aria-pressed={isSel}
                 aria-label={`${st.name}, ${st.freq.toFixed(1)} FM`}
-                className="absolute -translate-x-1/2 flex flex-col items-center"
-                style={{ left: `${pos(st.freq)}%`, top: i % 2 ? 0 : 18 }}
+                className="c-drop absolute -translate-x-1/2 flex flex-col items-center fx-press"
+                style={{ left: `${pos(st.freq)}%`, top: i % 2 ? 0 : 18, '--i': i } as React.CSSProperties}
               >
-                <span className={`h-6 w-1 rounded ${st.isNyota ? 'bg-brass' : isSel ? 'bg-paper' : 'bg-sage-dim'}`} />
+                <span className={`h-6 w-1 rounded transition-all ${st.isNyota ? 'bg-brass fx-breathe' : isSel ? 'bg-paper scale-y-125' : 'bg-sage-dim'}`} />
                 <span className={`mt-0.5 hidden sm:block font-mono text-[11px] whitespace-nowrap ${isSel || st.isNyota ? 'text-paper' : 'text-sage-dim'}`}>
                   {st.freq.toFixed(1)}
                 </span>

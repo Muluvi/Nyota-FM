@@ -1,0 +1,485 @@
+/*
+ * Motion system. See src/lib/motion.ts for the runtime and the safety model:
+ * every hidden "before" state lives inside `@media screen and (prefers-reduced-motion:
+ * no-preference)` and under `:root.motion` (added by JS, removed in Lite mode), so the
+ * page is always complete without JS, in print, and for reduced-motion users.
+ */
+
+:root {
+  /* Springs and overshoots expressed with linear() easing (CSS-native physics). */
+  --ease-spring: linear(0, 0.18, 0.56 13%, 0.86, 1.03 26%, 1.08 31%, 1.06 37%, 1 47%, 0.99 58%, 1);
+  --ease-elastic: linear(0, 0.4, 0.98 18%, 1.2 28%, 1.08 40%, 0.96 52%, 1.01 66%, 1);
+  --ease-bounce: linear(0, 0.06, 0.25 18%, 1 36%, 0.81 45%, 0.76, 0.77 52%, 1 63%, 0.94 72%, 1 82%, 0.99 91%, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --step: 70ms;
+}
+
+/* ---------------------------------------------------------------- reveals */
+[data-reveal] {
+  transition:
+    opacity 700ms var(--ease-out-expo),
+    transform 800ms var(--ease-out-expo),
+    filter 800ms var(--ease-out-expo),
+    clip-path 900ms var(--ease-out-expo),
+    mask-position 1100ms var(--ease-out-expo);
+  transition-delay: calc(var(--i, 0) * var(--step));
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion [data-reveal]:not([data-inview]) {
+    opacity: 0;
+    /* Reverse stagger when an element leaves (re-firing reveals). */
+    transition-delay: calc((var(--n, 1) - 1 - var(--i, 0)) * 40ms);
+  }
+  :root.motion [data-reveal='up']:not([data-inview]) { transform: translateY(28px); }
+  :root.motion [data-reveal='down']:not([data-inview]) { transform: translateY(-28px); }
+  :root.motion [data-reveal='left']:not([data-inview]) { transform: translateX(-36px); }
+  :root.motion [data-reveal='right']:not([data-inview]) { transform: translateX(36px); }
+  :root.motion [data-reveal='pop']:not([data-inview]) { transform: scale(0.82); }
+  :root.motion [data-reveal='pop'] { transition-timing-function: var(--ease-spring); }
+  :root.motion [data-reveal='settle']:not([data-inview]) { transform: scale(1.08); }
+  :root.motion [data-reveal='blur']:not([data-inview]) { filter: blur(14px); transform: scale(1.02); }
+  :root.motion [data-reveal='wipe']:not([data-inview]) { opacity: 1; clip-path: inset(0 100% 0 0); }
+  :root.motion [data-reveal='wipe-down']:not([data-inview]) { opacity: 1; clip-path: inset(0 0 100% 0); }
+  :root.motion [data-reveal='iris']:not([data-inview]) { opacity: 1; clip-path: circle(0% at 50% 50%); }
+  :root.motion [data-reveal='iris'][data-inview] { clip-path: circle(150% at 50% 50%); }
+  :root.motion [data-reveal='diagonal']:not([data-inview]) { opacity: 1; clip-path: polygon(0 0, 0 0, 0 0, 0 0); }
+  :root.motion [data-reveal='diagonal'][data-inview] { clip-path: polygon(0 0, 200% 0, 0 200%, 0 0); }
+  :root.motion [data-reveal='curtain']:not([data-inview]) { opacity: 1; clip-path: inset(0 50% 0 50%); }
+  :root.motion [data-reveal='shutter']:not([data-inview]) { opacity: 1; clip-path: inset(50% 0 50% 0); }
+  :root.motion [data-reveal='flip']:not([data-inview]) { transform: perspective(900px) rotateX(-70deg); transform-origin: top; }
+  :root.motion [data-reveal='rotate']:not([data-inview]) { transform: rotate(-6deg) translateY(20px); }
+  :root.motion [data-reveal='unfold']:not([data-inview]) { transform: perspective(900px) rotateX(85deg) scaleY(0.4); transform-origin: top; }
+  :root.motion [data-reveal='mask'] {
+    mask-image: linear-gradient(100deg, #000 40%, transparent 60%);
+    mask-size: 300% 100%;
+    mask-position: 0 0;
+  }
+  :root.motion [data-reveal='mask']:not([data-inview]) { opacity: 1; mask-position: 100% 0; }
+}
+
+/* ---------------------------------------------------------- text reveals */
+.split-line,
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.split-inner {
+  display: inline-block;
+  transition: transform 900ms var(--ease-out-expo), opacity 600ms ease;
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+.split-char {
+  display: inline-block;
+  white-space: pre;
+  transition: opacity 400ms ease, transform 500ms var(--ease-spring), filter 500ms ease;
+  transition-delay: calc(var(--i, 0) * 22ms);
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion [data-split]:not([data-inview]) .split-inner { transform: translateY(110%); }
+  :root.motion [data-split]:not([data-inview]) .split-char { opacity: 0; transform: translateY(0.4em) scale(0.6); filter: blur(4px); }
+  :root.motion [data-typewriter]:not([data-inview]) .split-char { transform: none; filter: none; }
+  :root.motion [data-typewriter] .split-char { transition: opacity 1ms linear; transition-delay: calc(var(--i, 0) * 38ms); }
+  :root.motion [data-typewriter]::after {
+    content: '';
+    display: inline-block;
+    width: 0.08em;
+    height: 1em;
+    margin-left: 2px;
+    vertical-align: -0.1em;
+    background: currentColor;
+    animation: caret 900ms steps(1) infinite;
+  }
+}
+@keyframes caret { 50% { opacity: 0; } }
+
+/* Letter-spacing and weight on entry (DM Sans is a variable font). */
+.fx-track {
+  transition: letter-spacing 1000ms var(--ease-out-expo), font-variation-settings 1000ms ease;
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-track:not([data-inview]) { letter-spacing: 0.6em; }
+}
+
+/* Marker highlight sweep behind text (fires on view). */
+.fx-marker {
+  background-image: linear-gradient(transparent 58%, color-mix(in oklab, var(--color-brass) 38%, transparent) 58%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transition: background-size 1100ms var(--ease-out-expo) 200ms;
+  padding: 0 0.1em;
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-marker:not([data-inview]) { background-size: 0% 100%; }
+}
+
+/* Text highlighted as you scroll past (scroll-scrubbed). */
+@supports (animation-timeline: view()) {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    :root.motion .fx-scroll-highlight {
+      background-image: linear-gradient(90deg, var(--color-paper), var(--color-paper));
+      background-repeat: no-repeat;
+      background-size: 0% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: color-mix(in oklab, var(--color-paper) 35%, transparent);
+      animation: highlight-scrub linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 55%;
+    }
+  }
+}
+@keyframes highlight-scrub { to { background-size: 100% 100%; } }
+
+/* Outline-to-fill numerals (chapter numbers). */
+.fx-outline-fill {
+  -webkit-text-stroke: 1px var(--color-brass);
+  color: var(--color-brass);
+  transition: color 900ms var(--ease-out-expo) 250ms;
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-outline-fill:not([data-inview]) { color: transparent; }
+}
+
+/* Gradient text that drifts. */
+.fx-gradient-text {
+  background: linear-gradient(100deg, var(--color-paper) 20%, var(--color-brass) 45%, var(--color-paper) 70%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-gradient-text { animation: gradient-shift 9s ease-in-out infinite alternate; }
+}
+@keyframes gradient-shift { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+
+/* -------------------------------------------------------- odometer digits */
+.odo { display: inline-flex; line-height: 1; overflow: hidden; height: 1em; vertical-align: -0.12em; }
+.odo-col { display: inline-flex; flex-direction: column; transform: translateY(calc(var(--d) * -1em)); transition: transform 1600ms var(--ease-out-expo); transition-delay: calc(var(--i, 0) * 90ms); }
+.odo-col > span { height: 1em; }
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .odo:not([data-inview]) .odo-col { transform: translateY(0); }
+}
+
+/* ------------------------------------------------------- loops (screen only) */
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-float { animation: float 6s ease-in-out infinite; }
+  :root.motion .fx-breathe { animation: breathe 3.2s ease-in-out infinite; }
+  :root.motion .fx-blink { animation: blink 1.6s steps(1) infinite; }
+  :root.motion .fx-spin-slow { animation: spin 24s linear infinite; }
+  :root.motion .fx-orbit { animation: spin 14s linear infinite; transform-origin: center; transform-box: fill-box; }
+  :root.motion .fx-glow-pulse { animation: glow-pulse 2.8s ease-in-out infinite; }
+  :root.motion .fx-nudge[data-inview] { animation: nudge 1.4s var(--ease-elastic) 6s 2 both; }
+}
+@keyframes float { 50% { transform: translateY(-6px); } }
+@keyframes breathe { 50% { transform: scale(1.06); opacity: 0.85; } }
+@keyframes blink { 50% { opacity: 0.25; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes glow-pulse { 50% { box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-brass) 18%, transparent); } }
+@keyframes nudge { 0%, 100% { transform: none; } 30% { transform: translateX(6px) rotate(1deg); } 60% { transform: translateX(-3px); } }
+
+/* Marquee / ticker: pauses on hover, off-screen and under reduced motion; skews with scroll velocity. */
+.fx-marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.fx-marquee-track { display: flex; width: max-content; gap: 3rem; transform: skewX(calc(var(--scroll-velocity, 0) * -0.04deg)); }
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-marquee-track { animation: marquee 45s linear infinite; }
+  :root.motion .fx-marquee:hover .fx-marquee-track,
+  :root.motion .fx-marquee:not([data-inview]) .fx-marquee-track,
+  :root.motion .fx-marquee:focus-within .fx-marquee-track { animation-play-state: paused; }
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Aurora / mesh gradient drift with film grain. */
+.fx-aurora { position: relative; isolation: isolate; overflow: hidden; }
+.fx-aurora::before {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  background:
+    radial-gradient(30% 35% at 20% 30%, color-mix(in oklab, var(--color-brass) 28%, transparent), transparent 70%),
+    radial-gradient(35% 40% at 80% 20%, color-mix(in oklab, var(--color-moss) 22%, transparent), transparent 70%),
+    radial-gradient(40% 35% at 60% 85%, color-mix(in oklab, var(--color-brick) 22%, transparent), transparent 70%);
+  filter: blur(40px);
+}
+.fx-aurora::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-aurora::before { animation: aurora 22s ease-in-out infinite alternate; }
+  :root.motion .fx-aurora::after { animation: grain 1s steps(4) infinite; }
+}
+@keyframes aurora {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(4%, -3%) rotate(8deg) scale(1.08); }
+  100% { transform: translate(-3%, 4%) rotate(-6deg) scale(1.02); }
+}
+@keyframes grain {
+  25% { transform: translate(-2%, 1%); }
+  50% { transform: translate(1%, -2%); }
+  75% { transform: translate(2%, 2%); }
+}
+
+/* Morphing blob. */
+.fx-blob { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-blob { animation: blob 16s ease-in-out infinite alternate; }
+}
+@keyframes blob {
+  50% { border-radius: 63% 37% 41% 59% / 58% 63% 37% 42%; transform: rotate(20deg) scale(1.05); }
+  100% { border-radius: 37% 63% 56% 44% / 49% 37% 63% 51%; transform: rotate(-12deg); }
+}
+
+/* Parallax layers tied to scroll position (scroll-scrubbed). */
+@supports (animation-timeline: scroll()) {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    :root.motion .fx-parallax-slow { animation: parallax-slow linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+    :root.motion .fx-parallax-fast { animation: parallax-fast linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+    :root.motion .fx-blur-out { animation: blur-out linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+    :root.motion .fx-zoom-scrub { animation: zoom-scrub linear both; animation-timeline: view(); animation-range: entry 0% cover 50%; }
+  }
+}
+@keyframes parallax-slow { to { transform: translateY(18vh); } }
+@keyframes parallax-fast { to { transform: translateY(-14vh); } }
+@keyframes blur-out { to { filter: blur(6px); opacity: 0.3; transform: scale(0.97); } }
+@keyframes zoom-scrub { from { transform: scale(0.92); opacity: 0.4; } }
+
+/* ------------------------------------------------------ interaction effects */
+.fx-lift { transition: transform 350ms var(--ease-spring), box-shadow 350ms ease, border-color 300ms ease; }
+.fx-lift:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.7); }
+
+.fx-glow { transition: box-shadow 400ms ease, border-color 300ms ease; }
+.fx-glow:hover { border-color: color-mix(in oklab, var(--color-brass) 70%, transparent); box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-brass) 40%, transparent), 0 0 28px -6px color-mix(in oklab, var(--color-brass) 45%, transparent); }
+
+.fx-press { transition: transform 160ms ease; }
+.fx-press:active { transform: scale(0.96); }
+
+.fx-shine { position: relative; overflow: hidden; isolation: isolate; }
+.fx-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-shine:hover::after { transition: transform 900ms var(--ease-out-expo); transform: translateX(120%); }
+}
+
+.fx-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1.5px;
+  transition: background-size 400ms var(--ease-out-expo);
+}
+.fx-underline:hover, .fx-underline:focus-visible { background-size: 100% 1.5px; }
+
+.fx-border-draw { position: relative; }
+.fx-border-draw::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--color-brass), var(--color-brass)) top left / 0 1.5px no-repeat,
+    linear-gradient(var(--color-brass), var(--color-brass)) top right / 1.5px 0 no-repeat,
+    linear-gradient(var(--color-brass), var(--color-brass)) bottom right / 0 1.5px no-repeat,
+    linear-gradient(var(--color-brass), var(--color-brass)) bottom left / 1.5px 0 no-repeat;
+  transition: background-size 500ms var(--ease-out-expo);
+}
+.fx-border-draw:hover::before { background-size: 100% 1.5px, 1.5px 100%, 100% 1.5px, 1.5px 100%; }
+
+.fx-arrow svg { transition: transform 300ms var(--ease-spring); }
+.fx-arrow:hover svg { transform: translateX(4px); }
+.fx-icon-spin svg { transition: transform 500ms var(--ease-spring); }
+.fx-icon-spin:hover svg { transform: rotate(90deg); }
+
+/* Pointer tilt with perspective, spotlight and magnetic pull (driven by motion.ts). */
+[data-tilt] { transform: perspective(1000px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)); transition: transform 300ms ease-out; transform-style: preserve-3d; }
+[data-magnetic] { transform: translate(var(--tx, 0), var(--ty, 0)); transition: transform 250ms var(--ease-spring); }
+[data-spotlight] { position: relative; isolation: isolate; }
+[data-spotlight]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--color-brass) 14%, transparent), transparent 60%);
+}
+[data-spotlight]:hover::after { opacity: 1; }
+
+/* Elements that both reveal and react to the pointer keep every transition, and drop
+   the stagger delay once revealed so hover feels immediate. Lift and tilt combine. */
+[data-reveal][data-tilt], [data-reveal][data-magnetic], [data-reveal].fx-lift, [data-reveal].fx-glow, [data-reveal].fx-press {
+  transition: opacity 700ms var(--ease-out-expo), transform 600ms var(--ease-out-expo), filter 800ms var(--ease-out-expo), box-shadow 350ms ease, border-color 300ms ease, background-color 300ms ease;
+  transition-delay: calc(var(--i, 0) * var(--step));
+}
+[data-reveal][data-inview][data-tilt]:hover, [data-reveal][data-inview][data-magnetic]:hover, [data-reveal][data-inview].fx-lift:hover, [data-reveal][data-inview].fx-glow:hover, [data-reveal][data-inview].fx-press:active { transition-delay: 0ms; }
+.fx-press[data-reveal][data-inview]:active { transform: scale(0.96); }
+.fx-lift[data-tilt]:hover { transform: perspective(1000px) translateY(-4px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)); }
+
+/* Ripple from click point. */
+[data-ripple] { position: relative; overflow: hidden; }
+.fx-ripple-dot { position: absolute; border-radius: 50%; pointer-events: none; background: rgb(255 255 255 / 0.25); transform: scale(0); animation: ripple 650ms ease-out forwards; }
+@keyframes ripple { to { transform: scale(1); opacity: 0; } }
+
+/* Animated focus ring. */
+@media (prefers-reduced-motion: no-preference) {
+  :root.motion :focus-visible { animation: focus-ring 600ms var(--ease-out-expo); }
+}
+@keyframes focus-ring { from { outline-offset: 8px; outline-color: transparent; } }
+
+/* ---------------------------------------------------------- state & layout */
+/* Dialog enter and exit (with @starting-style; instant where unsupported). */
+dialog { transition: opacity 260ms ease, transform 320ms var(--ease-spring), overlay 260ms allow-discrete, display 260ms allow-discrete; }
+dialog:not([open]) { opacity: 0; transform: translateY(14px) scale(0.98); }
+@starting-style { dialog[open] { opacity: 0; transform: translateY(14px) scale(0.98); } }
+dialog::backdrop { transition: background-color 260ms ease, backdrop-filter 260ms ease, overlay 260ms allow-discrete, display 260ms allow-discrete; }
+@starting-style { dialog[open]::backdrop { background-color: transparent; backdrop-filter: none; } }
+
+/* Popovers. */
+[popover] { transition: opacity 200ms ease, transform 260ms var(--ease-spring), overlay 200ms allow-discrete, display 200ms allow-discrete; }
+@starting-style { [popover]:popover-open { opacity: 0; transform: scale(0.96) translateY(6px); } }
+
+/* Disclosure / accordion body. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-expand { animation: expand-in 520ms var(--ease-out-expo) both; }
+  :root.motion .fx-expand > * { animation: section-entrance 520ms var(--ease-out-expo) both; animation-delay: calc(var(--i, 0) * 50ms + 80ms); }
+}
+@keyframes expand-in { from { clip-path: inset(0 0 100% 0); opacity: 0.4; } to { clip-path: inset(0); opacity: 1; } }
+
+/* Sliding tab / segmented-control indicator (positioned by useTabIndicator). */
+.fx-tab-indicator { position: absolute; left: 0; top: 0; height: var(--h, 100%); width: var(--w, 0); transform: translate(var(--x, 0), var(--y, 0)); transition: transform 450ms var(--ease-spring), width 450ms var(--ease-spring), height 300ms ease; pointer-events: none; }
+.fx-tab-underline { top: auto; bottom: 0; height: 2px; border-radius: 2px; transform: translateX(var(--x, 0)); }
+
+/* Skeleton shimmer resolving into content. */
+.fx-skeleton { position: relative; overflow: hidden; background: color-mix(in oklab, var(--color-hairline) 55%, transparent); border-radius: 0.5rem; }
+.fx-skeleton::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.07) 50%, transparent 70%); transform: translateX(-100%); }
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-skeleton::after { animation: shimmer 1.4s ease-in-out infinite; }
+  :root.motion .fx-resolve { animation: resolve 700ms var(--ease-out-expo) backwards; }
+}
+@keyframes shimmer { to { transform: translateX(100%); } }
+@keyframes resolve { from { opacity: 0; filter: blur(8px); transform: translateY(10px); } }
+
+/* Feedback. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-shake { animation: shake 420ms cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+  :root.motion .fx-pop { animation: pop 420ms var(--ease-elastic); }
+  :root.motion .fx-flash { animation: flash 900ms ease; }
+}
+@keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+@keyframes pop { 0% { transform: scale(0.6); } 100% { transform: scale(1); } }
+@keyframes flash { 0% { background-color: color-mix(in oklab, var(--color-brass) 30%, transparent); } }
+
+/* SVG path draw used by icons and charts. */
+.fx-draw { stroke-dasharray: var(--len, 1000); stroke-dashoffset: 0; transition: stroke-dashoffset 1400ms var(--ease-out-expo); transition-delay: var(--delay, 0ms); }
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion [data-io]:not([data-inview]) .fx-draw,
+  :root.motion .fx-draw-self:not([data-inview]) { stroke-dashoffset: var(--len, 1000); }
+}
+
+/* Scroll-direction-aware header. */
+.fx-header { transition: transform 420ms var(--ease-out-expo), background-color 300ms ease, padding 300ms ease; }
+:root.motion .fx-header[data-hidden='true'] { transform: translateY(-110%); }
+
+/* Toasts. */
+.fx-toast { animation: toast-in 420ms var(--ease-spring) both; }
+.fx-toast[data-leaving] { animation: toast-out 280ms ease-in forwards; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(16px) scale(0.96); } }
+@keyframes toast-out { to { opacity: 0; transform: translateX(40px) scale(0.9); } }
+
+/* Hamburger to close morph. */
+.fx-burger span { display: block; width: 18px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 350ms var(--ease-spring), opacity 200ms; }
+.fx-burger span + span { margin-top: 4px; }
+.fx-burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.fx-burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+.fx-burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Theme accent that shifts with the active chapter (scroll-linked colour). */
+:root { --chapter-accent: var(--color-brass); }
+body { transition: background-color 800ms ease; }
+
+@media print {
+  [data-reveal], .split-inner, .split-char, .odo-col { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
+}
+
+/* Checkmark / cross draw in toasts. */
+.fx-check { stroke-dasharray: 24; stroke-dashoffset: 0; }
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-check { animation: check-draw 500ms var(--ease-out-expo) 150ms both; }
+}
+@keyframes check-draw { from { stroke-dashoffset: 24; } }
+
+/* ================================================================ charts */
+.chart { position: relative; }
+.chart svg text { font-family: var(--font-body); }
+.c-grid, .c-axis { transition: opacity 900ms ease 100ms; }
+.c-bar-h, .c-bar-v, .c-grow-x, .c-grow-y { transform-box: fill-box; transition: transform 1100ms var(--ease-out-expo), opacity 300ms ease, filter 300ms ease; transition-delay: calc(var(--i, 0) * 90ms + 150ms); }
+.c-bar-h, .c-grow-x { transform-origin: left center; }
+.c-bar-v, .c-grow-y { transform-origin: center bottom; }
+.c-grow-center { transform-box: fill-box; transform-origin: center; transition: transform 900ms var(--ease-spring); transition-delay: calc(var(--i, 0) * 80ms + 200ms); }
+.c-fade { transition: opacity 700ms ease; transition-delay: calc(var(--i, 0) * 90ms + 500ms); }
+.c-drop { transform-box: fill-box; transform-origin: center; transition: transform 900ms var(--ease-bounce), opacity 400ms ease; transition-delay: calc(var(--i, 0) * 110ms + 300ms); }
+.c-pop { transform-box: fill-box; transform-origin: center; transition: transform 700ms var(--ease-spring), opacity 300ms ease; transition-delay: calc(var(--i, 0) * 60ms + 200ms); }
+.c-sweep { transition: stroke-dashoffset 1500ms var(--ease-out-expo); transition-delay: calc(var(--i, 0) * 180ms + 150ms); }
+.c-area { transition: clip-path 1600ms var(--ease-out-expo) 250ms; clip-path: inset(0 0 0 0); }
+.c-needle { transform-box: view-box; transition: transform 1800ms var(--ease-elastic) 300ms; }
+.c-path { transition: d 600ms var(--ease-out-expo); }
+.c-cell { transition: opacity 500ms ease, transform 600ms var(--ease-spring); transition-delay: calc(var(--i, 0) * 14ms + 150ms); transform-box: fill-box; transform-origin: center; }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .chart:not([data-inview]) .c-grid,
+  :root.motion .chart:not([data-inview]) .c-axis,
+  :root.motion .chart:not([data-inview]) .c-fade { opacity: 0; }
+  :root.motion .chart:not([data-inview]) .c-bar-h,
+  :root.motion .chart:not([data-inview]) .c-grow-x { transform: scaleX(0); }
+  :root.motion .chart:not([data-inview]) .c-bar-v,
+  :root.motion .chart:not([data-inview]) .c-grow-y { transform: scaleY(0); }
+  :root.motion .chart:not([data-inview]) .c-grow-center { transform: scale(0); }
+  :root.motion .chart:not([data-inview]) .c-drop { transform: translateY(-60px); opacity: 0; }
+  :root.motion .chart:not([data-inview]) .c-pop { transform: scale(0); opacity: 0; }
+  :root.motion .chart:not([data-inview]) .c-sweep { stroke-dashoffset: var(--len, 1000); }
+  :root.motion .chart:not([data-inview]) .c-area { clip-path: inset(0 100% 0 0); }
+  :root.motion .chart:not([data-inview]) .c-needle { transform: rotate(var(--from, -90deg)); }
+  :root.motion .chart:not([data-inview]) .c-cell { opacity: 0; transform: scale(0.4); }
+  :root.motion .c-pulse-ring { animation: catchment 2.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+  :root.motion .c-pulse-ring:nth-of-type(2) { animation-delay: 1.3s; }
+  :root.motion .c-dash-flow { animation: dash-flow 1.6s linear infinite; }
+}
+@keyframes catchment { from { transform: scale(0.3); opacity: 0.9; } to { transform: scale(2.6); opacity: 0; } }
+@keyframes dash-flow { to { stroke-dashoffset: -24; } }
+
+/* Hover focus: the hovered series stands out, the rest dim. */
+.chart [data-series] { transition: opacity 250ms ease, filter 250ms ease; }
+.chart:has([data-series]:hover) [data-series]:not(:hover) { opacity: 0.35; }
+.chart [data-series]:hover { filter: brightness(1.2) drop-shadow(0 0 8px color-mix(in oklab, var(--color-brass) 50%, transparent)); }
+
+/* Tooltip that follows the pointer. */
+.c-tip { position: absolute; z-index: 5; pointer-events: none; min-width: 9rem; padding: 0.5rem 0.65rem; border-radius: 0.5rem; border: 1px solid color-mix(in oklab, var(--color-brass) 45%, transparent); background: color-mix(in oklab, var(--color-ink) 92%, transparent); backdrop-filter: blur(6px); color: var(--color-paper); font-size: 12px; line-height: 1.35; box-shadow: 0 14px 30px -12px rgb(0 0 0 / 0.8); transform: translate(-50%, calc(-100% - 12px)); transition: left 120ms ease-out, top 120ms ease-out, opacity 150ms ease; }
+.c-tip[hidden] { display: block; opacity: 0; }
+.c-seg { transition: stroke-dasharray 1100ms var(--ease-out-expo), stroke-width 250ms ease; transition-delay: calc(var(--i, 0) * 260ms + 200ms), 0ms; }
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .chart:not([data-inview]) .c-seg { stroke-dasharray: 0 1000; }
+}
+.fx-orbit-path { offset-path: path('M30,120 a120,90 0 1,0 240,0 a120,90 0 1,0 -240,0'); offset-distance: 12%; offset-rotate: 0deg; }
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root.motion .fx-orbit-path { animation: orbit-path 9s linear infinite; }
+}
+@keyframes orbit-path { from { offset-distance: 0%; } to { offset-distance: 100%; } }

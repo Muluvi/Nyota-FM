@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { CheckSquare, Square, Filter, Search, Award, CheckCircle2, ChevronRight, FileDown, Sparkles, Layers } from 'lucide-react';
 import { strategies, type StrategyItem } from '../../data/strategies';
 import { monthRangeLabel, monthToQuarterLabel } from '../../data/timeline';
+import { useFlip } from '../motion/hooks';
+import { toast } from '../motion/Toaster';
 
 type StrategyBrief = {
   id: string;
@@ -52,6 +54,7 @@ export function StrategyTracker() {
   const toggleEndorsement = (id: string) => {
     const updated = { ...endorsed, [id]: !endorsed[id] };
     setEndorsed(updated);
+    toast(updated[id] ? 'Added to your shortlist' : 'Removed from your shortlist');
     try {
       localStorage.setItem('nyota_shortlist_strategies', JSON.stringify(updated));
     } catch (e) {}
@@ -67,6 +70,7 @@ export function StrategyTracker() {
       s.num.includes(search);
     return matchCat && matchQtr && matchSearch;
   });
+  const flipRef = useFlip(filtered.map((s) => s.id).join());
 
   const endorsedCount = Object.values(endorsed).filter(Boolean).length;
 
@@ -98,7 +102,7 @@ export function StrategyTracker() {
               Your Shortlist
             </div>
             <div className="font-mono text-xs text-brass font-bold">
-              {endorsedCount} of 21 shortlisted (this browser)
+              {endorsedCount} of {STRATEGIES.length} shortlisted (this browser)
             </div>
           </div>
         </div>
@@ -150,13 +154,14 @@ export function StrategyTracker() {
       </div>
 
       {/* Strategies Grid List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 max-h-[620px] overflow-y-auto pr-1">
+      <div ref={flipRef} className="grid grid-cols-1 md:grid-cols-2 gap-3.5 max-h-[620px] overflow-y-auto pr-1">
         {filtered.map((s) => {
           const isEndorsed = Boolean(endorsed[s.id]);
           return (
             <div
               key={s.id}
-              className={`rounded-xl border p-4.5 transition-all flex flex-col justify-between space-y-3 ${
+              data-flip-key={s.id}
+              className={`fx-lift rounded-xl border p-4.5 transition-all flex flex-col justify-between space-y-3 ${
                 isEndorsed
                   ? 'bg-ink border-brass/60 shadow-md ring-1 ring-brass/30'
                   : 'bg-ink/60 border-hairline hover:border-hairline/80'

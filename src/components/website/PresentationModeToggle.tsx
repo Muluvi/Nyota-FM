@@ -166,10 +166,12 @@ export function PresentationModeToggle() {
         onClick={() => setIsOpen(true)}
         className="flex items-center gap-1.5 rounded-lg border border-hairline bg-ink px-3 py-1.5 text-xs font-mono text-sage hover:border-brass hover:text-paper transition-all shadow-sm"
         title="Launch Boardroom Presentation Deck"
+        aria-label="Presentation deck"
+        data-ripple=""
       >
         <Presentation size={14} className="text-brass" />
-        <span className="hidden sm:inline">Presentation Mode</span>
-        <span className="sm:hidden">Deck</span>
+        <span className="hidden 2xl:inline">Presentation </span>
+        <span>Deck</span>
       </button>
 
       {/* Fullscreen Presentation Modal */}

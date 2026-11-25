@@ -1,9 +1,12 @@
+import { toast } from '../components/motion/Toaster'
+
 /**
  * Print one part of the page (a quote, the briefing, the resolution sheet) instead
  * of the whole site. The element is cloned into a temporary #print-root; print CSS
  * hides everything else, so the output is a short document, not 70 pages.
  */
 export function printSection(elementId: string): void {
+  toast('Opening print view')
   const source = document.getElementById(elementId)
   if (!source) {
     window.print()

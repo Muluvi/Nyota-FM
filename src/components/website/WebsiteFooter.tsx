@@ -5,6 +5,7 @@ import { sections } from '../../content/sections';
 import { INQUIRY_ENDPOINT } from '../../config';
 import { setLite } from '../../lib/lite';
 import { Modal } from '../Modal';
+import { toast } from '../motion/Toaster';
 
 const LEVERS = [
   'Outside Broadcast (OB) Market Activation',
@@ -53,8 +54,14 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
       // Only report success when the form service confirms receipt.
       setSendState('sending');
       fetch(INQUIRY_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ org, email, lever, message }) })
-        .then((r) => setSendState(r.ok ? 'sent' : 'failed'))
-        .catch(() => setSendState('failed'));
+        .then((r) => {
+          setSendState(r.ok ? 'sent' : 'failed');
+          toast(r.ok ? 'Inquiry received' : 'Not sent: use email or WhatsApp', r.ok ? 'ok' : 'error');
+        })
+        .catch(() => {
+          setSendState('failed');
+          toast('Not sent: use email or WhatsApp', 'error');
+        });
       return;
     }
     if (via === 'whatsapp' && station.salesWhatsApp) {
@@ -265,7 +272,17 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleInquirySubmit} className="space-y-3.5 font-body">
+              <form
+                onSubmit={handleInquirySubmit}
+                onInvalidCapture={(e) => {
+                  // Shake the first invalid field (restarts the animation each time).
+                  const el = e.target as HTMLElement;
+                  el.classList.remove('fx-shake');
+                  void el.offsetWidth;
+                  el.classList.add('fx-shake');
+                }}
+                className="space-y-3.5 font-body"
+              >
                 <div>
                   <label htmlFor="inq-org" className="text-xs font-mono text-sage block mb-1">Brand or Organisation Name</label>
                   <input

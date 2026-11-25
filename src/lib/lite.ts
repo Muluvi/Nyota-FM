@@ -5,8 +5,8 @@
 const KEY = 'nyota-lite'
 
 export function autoLite(): boolean {
-  const nav = navigator as Navigator & { connection?: { saveData?: boolean } }
-  return Boolean(nav.connection?.saveData) || (navigator.hardwareConcurrency ?? 8) <= 4
+  const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number }
+  return Boolean(nav.connection?.saveData) || (navigator.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 2
 }
 
 export function initLite(): boolean {

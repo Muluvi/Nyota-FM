@@ -21,7 +21,7 @@ export function FloatingNavRail() {
     <>
       {/* Desktop Sticky Rail (Right Side) */}
       <aside
-        className="fixed right-4 top-1/2 -translate-y-1/2 z-30 hidden xl:flex flex-col items-end gap-2"
+        className="fixed right-4 top-1/2 -translate-y-1/2 z-30 hidden 2xl:flex flex-col items-end gap-2"
         aria-label="Document Section Rail"
       >
         <div className="bg-ink-2/90 border border-hairline/80 rounded-xl p-2.5 backdrop-blur-md shadow-2xl flex flex-col gap-1 max-w-[160px]">
@@ -68,11 +68,12 @@ export function FloatingNavRail() {
         <button
           type="button"
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-brass/50 bg-ink-2/95 text-brass shadow-2xl backdrop-blur-md transition-all hover:bg-brass hover:text-ink active:scale-95 group animate-section-entrance"
+          data-ripple=""
+          className="fx-toast fx-glow-pulse fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-brass/50 bg-ink-2/95 text-brass shadow-2xl backdrop-blur-md transition-all hover:bg-brass hover:text-ink active:scale-95 group"
           aria-label="Back to top"
           title="Return to top"
         >
-          <ArrowUp size={18} className="group-hover:-translate-y-0.5 transition-transform" />
+          <ArrowUp size={18} className="fx-float group-hover:-translate-y-0.5 transition-transform" />
         </button>
       )}
     </>

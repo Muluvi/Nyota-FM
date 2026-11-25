@@ -112,7 +112,8 @@ button, a, input, select, textarea {
   
   }
 
-/* Typography Scale - Mobile Balanced */
+/* Typography Scale - Mobile Balanced (base layer, so Tailwind size utilities win) */
+@layer base {
 h1 {
   font-size: clamp(1.85rem, 6.2vw, 4.5rem);
   letter-spacing: -.03em;
@@ -131,6 +132,7 @@ h3 {
   font-size: clamp(1.15rem, 3.8vw, 1.85rem);
   letter-spacing: -.02em;
   line-height: 1.25;
+}
 }
 
 ::selection {

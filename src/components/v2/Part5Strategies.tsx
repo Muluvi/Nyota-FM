@@ -7,6 +7,7 @@ import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { strategies } from '../../data/strategies';
 import { StrategyTracker } from '../website/StrategyTracker';
+import { useFlip } from '../motion/hooks';
 
 export function Part5Strategies() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -30,6 +31,7 @@ export function Part5Strategies() {
       st.num.includes(searchQuery);
     return matchesCat && matchesQuery;
   });
+  const flipRef = useFlip(filtered.map((st) => st.id).join());
 
   return (
     <div className="space-y-6">
@@ -83,13 +85,14 @@ export function Part5Strategies() {
           </div>
 
           {/* Strategy Accordion Items */}
-          <div className="space-y-3 pt-2">
+          <div ref={flipRef} className="space-y-3 pt-2">
             {filtered.map((st) => {
               const isExpanded = expandedStrategy === st.id;
               return (
                 <div
                   key={st.id}
-                  className="bg-ink rounded border border-hairline overflow-hidden transition-all duration-200"
+                  data-flip-key={st.id}
+                  className="fx-glow bg-ink rounded border border-hairline overflow-hidden transition-all duration-200"
                 >
                   {/* Strategy Header */}
                   <button
@@ -126,7 +129,7 @@ export function Part5Strategies() {
 
                   {/* Expanded Body */}
                   {isExpanded && (
-                    <div className="px-4 pb-5 sm:px-5 pt-1 border-t border-hairline space-y-4 text-xs font-body">
+                    <div className="fx-expand px-4 pb-5 sm:px-5 pt-1 border-t border-hairline space-y-4 text-xs font-body">
                       {/* Strategy statement */}
                       <div className="p-3 bg-ink-2 rounded border border-hairline">
                         <strong className="text-brass font-mono uppercase tracking-wider text-xs block mb-1">

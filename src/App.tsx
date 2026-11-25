@@ -17,6 +17,7 @@ import { Deferred } from './components/Deferred';
 import { scrollToSection } from './lib/scroll';
 import { sections } from './content/sections';
 import { Modal } from './components/Modal';
+import { Toaster } from './components/motion/Toaster';
 
 // Chapters 01–07 and Appendix A load as separate chunks when scrolled near (Deferred).
 const CHAPTERS: { id: string; Body: React.ComponentType }[] = [
@@ -160,6 +161,8 @@ export default function App() {
         onOpenBriefing={() => setBriefingOpen(true)}
         onNavigate={handleNavigate}
       />
+
+      <Toaster />
 
       {/* Desktop Sticky Rail & Back-to-Top Indicator */}
       <FloatingNavRail />

@@ -3,6 +3,7 @@ import { Award, TrendingUp, Sparkles, Filter, CheckCircle2, ArrowRight } from 'l
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { levers } from '../../data/levers';
+import { useFlip } from '../motion/hooks';
 
 type Opportunity = {
   rank: number;
@@ -38,6 +39,7 @@ export function Part4Opportunities() {
     if (filterDifficulty === 'all') return true;
     return op.difficulty.toLowerCase() === filterDifficulty.toLowerCase();
   });
+  const flipRef = useFlip(filterDifficulty);
 
   return (
     <div className="space-y-6">
@@ -93,9 +95,9 @@ export function Part4Opportunities() {
                   <th className="py-2 pl-2">Score</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-hairline">
+              <tbody ref={flipRef as unknown as React.RefObject<HTMLTableSectionElement>} className="divide-y divide-hairline">
                 {filtered.map((op) => (
-                  <tr key={op.rank} className={`hover:bg-ink ${op.highlight ? 'bg-brass/5' : ''}`}>
+                  <tr key={op.rank} data-flip-key={op.rank} className={`hover:bg-ink ${op.highlight ? 'bg-brass/5' : ''}`}>
                     <td className="py-2.5 pr-2">
                       <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full font-bold text-xs ${
                         op.rank <= 3 ? 'bg-brass text-ink' : op.rank <= 5 ? 'bg-hairline text-brass' : 'text-sage-dim'
@@ -132,8 +134,8 @@ export function Part4Opportunities() {
               <span>The Board's Top Five Commercial Priorities</span>
             </h5>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-mono">
-              <div className="p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
+            <div data-stagger="" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-mono">
+              <div data-reveal="up" data-spotlight="" className="fx-lift p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-brass font-bold text-sm">#1 GAA & County Vendor</span>
                   <span className="text-xs px-1.5 py-0.5 rounded bg-brass text-ink font-bold">8.5</span>
@@ -143,7 +145,7 @@ export function Part4Opportunities() {
                 </p>
               </div>
 
-              <div className="p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
+              <div data-reveal="up" data-spotlight="" className="fx-lift p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-brass font-bold text-sm">#2 WhatsApp / USSD</span>
                   <span className="text-xs px-1.5 py-0.5 rounded bg-brass text-ink font-bold">8.2</span>
@@ -153,7 +155,7 @@ export function Part4Opportunities() {
                 </p>
               </div>
 
-              <div className="p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
+              <div data-reveal="up" data-spotlight="" className="fx-lift p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-brass font-bold text-sm">#3 Branded Shows</span>
                   <span className="text-xs px-1.5 py-0.5 rounded bg-brass text-ink font-bold">7.8</span>
@@ -163,7 +165,7 @@ export function Part4Opportunities() {
                 </p>
               </div>
 
-              <div className="p-3.5 bg-ink rounded border border-hairline space-y-1.5">
+              <div data-reveal="up" data-spotlight="" className="fx-lift p-3.5 bg-ink rounded border border-hairline space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-paper font-bold text-sm">#4 Outside Broadcast (OB)</span>
                   <span className="text-xs px-1.5 py-0.5 rounded bg-hairline text-brass font-bold">7.2</span>
@@ -173,7 +175,7 @@ export function Part4Opportunities() {
                 </p>
               </div>
 
-              <div className="p-3.5 bg-ink rounded border border-hairline space-y-1.5">
+              <div data-reveal="up" data-spotlight="" className="fx-lift p-3.5 bg-ink rounded border border-hairline space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-paper font-bold text-sm">#5 YouTube & Video</span>
                   <span className="text-xs px-1.5 py-0.5 rounded bg-hairline text-brass font-bold">6.9</span>

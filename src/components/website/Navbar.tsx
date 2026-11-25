@@ -1,9 +1,10 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { Menu, X, Search, Radio, Volume2, ArrowUp, ChevronRight, Layers, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { X, Search, Radio, Volume2, ArrowUp, ChevronRight, Layers, ExternalLink } from 'lucide-react';
 import { sections, chapterSections } from '../../content/sections';
 import { Modal } from '../Modal';
 import { useScrollState } from '../../lib/useActiveSection';
 import { scrollToSection as scrollTo } from '../../lib/scroll';
+import { useTabIndicator } from '../motion/hooks';
 
 // The deck (slides and dialog) is its own chunk; the trigger appears once it loads.
 const PresentationModeToggle = lazy(() => import('./PresentationModeToggle').then((m) => ({ default: m.PresentationModeToggle })));
@@ -15,7 +16,8 @@ interface NavItem {
 }
 
 /** Derived from src/content/sections.ts (chapters only; appendices are in the rail and footer). */
-const PRIMARY_NAV: NavItem[] = chapterSections.map((s) => ({ id: s.id, label: s.shortTitle, number: s.number }));
+// The logo already returns to the overview, so the desktop bar lists chapters only.
+const PRIMARY_NAV: NavItem[] = chapterSections.filter((s) => s.id !== 'overview').map((s) => ({ id: s.id, label: s.shortTitle, number: s.number }));
 const MENU_NAV: NavItem[] = sections.map((s) => ({ id: s.id, label: s.title, number: s.number }));
 
 export function Navbar({
@@ -27,9 +29,14 @@ export function Navbar({
   onOpenRadio?: () => void;
   onOpenBriefing?: () => void;
 }) {
-  const { progress: scrollProgress, active: activeSection, scrollY } = useScrollState();
+  const mobileMenuOpenRef = useRef(false);
+  const { progress: scrollProgress, active: activeSection, scrollY, dir } = useScrollState();
+  // Hide the bar while reading downwards; bring it back on any upward scroll.
+  const hidden = dir === 'down' && scrollY > 400 && !mobileMenuOpenRef.current;
   const isScrolled = scrollY > 20;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  mobileMenuOpenRef.current = mobileMenuOpen;
+  const navInd = useTabIndicator(activeSection);
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
@@ -50,7 +57,8 @@ export function Navbar({
 
       {/* Main Sticky Navbar */}
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 border-b ${
+        data-hidden={hidden}
+        className={`fx-header fixed top-0 left-0 right-0 z-40 border-b ${
           isScrolled
             ? 'bg-ink-2/95 backdrop-blur-md border-hairline py-2.5 shadow-xl'
             : 'bg-ink-2/80 backdrop-blur-sm border-hairline/60 py-3.5'
@@ -62,7 +70,7 @@ export function Navbar({
             <button
               type="button"
               onClick={() => scrollToSection('overview')}
-              className="flex items-center gap-2.5 text-left group"
+              className="flex shrink-0 items-center gap-2.5 text-left group"
               aria-label="Nyota FM Home"
             >
               <img
@@ -72,7 +80,7 @@ export function Navbar({
                 height={24}
                 className="h-6 sm:h-7 w-auto"
               />
-              <div className="hidden sm:flex flex-col">
+              <div className="hidden sm:flex md:hidden 2xl:flex flex-col whitespace-nowrap">
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-brass font-bold leading-none">
                   107.3 FM · WESTERN
                 </span>
@@ -85,9 +93,11 @@ export function Navbar({
 
           {/* Desktop chapter links (from sections.ts) */}
           <nav
-            className="hidden md:flex items-center gap-1 lg:gap-1.5 text-xs font-mono"
+            ref={navInd.listRef as unknown as React.RefObject<HTMLElement>}
+            className="relative hidden md:flex items-center gap-1 lg:gap-1.5 text-xs font-mono"
             aria-label="Main Navigation"
           >
+            <span ref={navInd.indRef} aria-hidden="true" className="fx-tab-indicator rounded bg-brass/10 ring-1 ring-brass/30" />
             {PRIMARY_NAV.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -95,19 +105,17 @@ export function Navbar({
                   key={item.id}
                   type="button"
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-2.5 py-1.5 rounded transition-all duration-150 relative ${
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`fx-underline px-2.5 py-1.5 rounded transition-colors duration-300 relative ${
                     isActive
-                      ? 'text-brass font-semibold bg-brass/10'
+                      ? 'text-brass font-semibold'
                       : 'text-sage hover:text-paper hover:bg-ink-2/60'
                   }`}
                 >
-                  <span className="text-xs text-sage-dim mr-1 opacity-70">
+                  <span className="hidden 2xl:inline text-xs text-sage-dim mr-1 opacity-70">
                     {item.number}
                   </span>
                   <span>{item.label}</span>
-                  {isActive && (
-                    <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-brass rounded-full" />
-                  )}
                 </button>
               );
             })}
@@ -160,7 +168,11 @@ export function Navbar({
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              <span className="fx-burger" aria-expanded={mobileMenuOpen} aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
             </button>
           </div>
         </div>
@@ -183,12 +195,13 @@ export function Navbar({
             </button>
           </div>
 
-          <nav className="flex-1 overflow-y-auto px-6 py-6 divide-y divide-hairline">
+          <nav data-stagger="" className="flex-1 overflow-y-auto px-6 py-6 divide-y divide-hairline">
             {MENU_NAV.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => scrollToSection(item.id)}
+                data-reveal="left"
                 className={`flex w-full items-center justify-between py-4 text-left font-body text-base transition-colors min-h-[48px] ${
                   activeSection === item.id ? 'text-brass font-semibold' : 'text-paper hover:text-brass'
                 }`}

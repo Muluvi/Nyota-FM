@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Building2, FileCheck, Copy, Check, Users, Sparkles, MapPin, ShieldCheck } from 'lucide-react';
 import { TierBadge } from '../v2/TierBadge';
+import { toast } from '../motion/Toaster';
 
 export function CivicNoticeBuilder() {
   const [selectedCounty, setSelectedCounty] = useState<'Bungoma' | 'Kakamega' | 'Busia' | 'Trans Nzoia' | 'Vihiga'>('Bungoma');
@@ -37,9 +38,13 @@ Coverage: ${currentCounty.subcounties} sub-counties, ${currentCounty.mcaCount} w
       .writeText(text)
       .then(() => {
         setCopied(true);
+        toast('Notice copied');
         setTimeout(() => setCopied(false), 2500);
       })
-      .catch(() => setCopied(false));
+      .catch(() => {
+        setCopied(false);
+        toast('Copy failed: select the text instead', 'error');
+      });
   };
 
   return (

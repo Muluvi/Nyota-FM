@@ -12,8 +12,9 @@ import { printSection } from '../../lib/print';
  */
 export function DecisionSummary({ onNavigate }: { onNavigate: (id: string) => void }) {
   const payback = paybackStatement();
+  const maxHigh = Math.max(...PHASES.map((p) => phaseTotal(p.id).high));
   return (
-    <aside id="decision-summary" aria-labelledby="decision-summary-heading" className="rounded-xl border border-brass/60 bg-ink-2 p-5 sm:p-6 shadow-xl">
+    <aside id="decision-summary" aria-labelledby="decision-summary-heading" data-reveal="up" data-spotlight="" className="fx-glow rounded-xl border border-brass/60 bg-ink-2 p-5 sm:p-6 shadow-xl">
       <div className="flex items-start justify-between gap-3 border-b border-hairline pb-3">
         <div>
           <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-brass">Decision summary</p>
@@ -24,7 +25,7 @@ export function DecisionSummary({ onNavigate }: { onNavigate: (id: string) => vo
         <button
           type="button"
           onClick={() => printSection('decision-summary')}
-          className="print:hidden rounded border border-hairline px-3 py-2 text-xs font-mono text-sage hover:border-brass hover:text-paper"
+          className="fx-press print:hidden rounded border border-hairline px-3 py-2 text-xs font-mono text-sage hover:border-brass hover:text-paper"
         >
           Print summary
         </button>
@@ -34,13 +35,23 @@ export function DecisionSummary({ onNavigate }: { onNavigate: (id: string) => vo
         <div>
           <dt className="text-xs font-mono uppercase tracking-wider text-sage-dim">Capital by phase (quoted lines)</dt>
           <dd className="mt-1">
-            <ul className="space-y-0.5 text-sm">
-              {PHASES.map((p) => (
-                <li key={p.id} className="flex justify-between gap-3">
-                  <span className="text-sage">{p.label}</span>
-                  <span className="font-mono text-paper tabular-nums whitespace-nowrap">{formatKshRangeM(phaseTotal(p.id))}</span>
-                </li>
-              ))}
+            <ul className="chart space-y-1.5 text-sm" data-io="">
+              {PHASES.map((p, i) => {
+                const t = phaseTotal(p.id);
+                return (
+                  <li key={p.id}>
+                    <div className="flex justify-between gap-3">
+                      <span className="text-sage">{p.label}</span>
+                      <span className="font-mono text-paper tabular-nums whitespace-nowrap">{formatKshRangeM(t)}</span>
+                    </div>
+                    {/* Low-to-high band on a shared scale (decorative; the figures are in the text). */}
+                    <div aria-hidden="true" className="relative mt-0.5 h-1.5 overflow-hidden rounded-full bg-hairline/60">
+                      <div className="c-grow-x absolute inset-y-0 left-0 rounded-full bg-brass/35" style={{ width: `${(t.high / maxHigh) * 100}%`, '--i': i } as React.CSSProperties} />
+                      <div className="c-grow-x absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-brass/70 to-brass" style={{ width: `${(t.low / maxHigh) * 100}%`, '--i': i } as React.CSSProperties} />
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
             <p className="mt-1 text-xs text-sage-dim">
               Only Phase 1 is asked for now. {unquotedLines().length} line(s) still need quotes.
@@ -55,9 +66,9 @@ export function DecisionSummary({ onNavigate }: { onNavigate: (id: string) => vo
         <div className="sm:col-span-2">
           <dt className="text-xs font-mono uppercase tracking-wider text-sage-dim">Top risks</dt>
           <dd className="mt-1">
-            <ol className="list-decimal space-y-1 pl-5 text-sm text-paper">
+            <ol data-stagger="" className="list-decimal space-y-1 pl-5 text-sm text-paper">
               {topRisks.map((r) => (
-                <li key={r.id}>
+                <li key={r.id} data-reveal="left">
                   {r.title}. <span className="text-sage">{r.mitigation}</span>
                 </li>
               ))}
@@ -67,9 +78,9 @@ export function DecisionSummary({ onNavigate }: { onNavigate: (id: string) => vo
         <div className="sm:col-span-2">
           <dt className="text-xs font-mono uppercase tracking-wider text-sage-dim">The asks</dt>
           <dd className="mt-1">
-            <ol className="list-decimal space-y-0.5 pl-5 text-sm text-paper">
+            <ol data-stagger="" className="list-decimal space-y-0.5 pl-5 text-sm text-paper">
               {asks.map((a) => (
-                <li key={a.id}>
+                <li key={a.id} data-reveal="left">
                   {a.title}
                   {a.amount && <span className="font-mono text-brass"> · {a.amount}</span>}
                 </li>
@@ -80,10 +91,10 @@ export function DecisionSummary({ onNavigate }: { onNavigate: (id: string) => vo
       </dl>
 
       <div className="mt-4 flex flex-wrap gap-2 print:hidden">
-        <button type="button" onClick={() => onNavigate('situation')} className="rounded bg-brass px-4 py-2.5 text-xs font-mono font-bold uppercase tracking-wider text-ink hover:brightness-110">
+        <button type="button" onClick={() => onNavigate('situation')} data-ripple="" className="fx-shine fx-press rounded bg-brass px-4 py-2.5 text-xs font-mono font-bold uppercase tracking-wider text-ink hover:brightness-110">
           Read the 5-minute case
         </button>
-        <button type="button" onClick={() => onNavigate('asks')} className="rounded border border-brass/60 px-4 py-2.5 text-xs font-mono font-bold uppercase tracking-wider text-brass hover:bg-brass/10">
+        <button type="button" onClick={() => onNavigate('asks')} data-io="" data-ripple="" className="fx-nudge fx-press rounded border border-brass/60 px-4 py-2.5 text-xs font-mono font-bold uppercase tracking-wider text-brass hover:bg-brass/10">
           Go to the asks
         </button>
       </div>

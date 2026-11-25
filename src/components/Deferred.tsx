@@ -35,11 +35,33 @@ export function Deferred({ children, minHeight = 320, label }: { children: React
     };
   }, [show]);
 
+  // Skeleton shimmer (static under reduced motion) that resolves into the chapter.
   const placeholder = (
-    <div className="grid place-items-center rounded-xl border border-dashed border-hairline text-xs font-mono text-sage-dim" style={{ minHeight }}>
-      Loading {label}…
+    <div className="space-y-4 rounded-xl border border-dashed border-hairline p-5" style={{ minHeight }} role="status">
+      <span className="sr-only">Loading {label}…</span>
+      <div aria-hidden="true" className="space-y-4">
+        <div className="fx-skeleton h-4 w-40" />
+        <div className="fx-skeleton h-8 w-3/4" />
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="fx-skeleton h-40" />
+          <div className="fx-skeleton h-40" />
+          <div className="fx-skeleton h-40" />
+        </div>
+        <div className="fx-skeleton h-56" />
+        <p className="text-center text-xs font-mono text-sage-dim">Loading {label}…</p>
+      </div>
     </div>
   );
 
-  return <div ref={ref}>{show ? <Suspense fallback={placeholder}>{children}</Suspense> : placeholder}</div>;
+  return (
+    <div ref={ref}>
+      {show ? (
+        <Suspense fallback={placeholder}>
+          <div className="fx-resolve">{children}</div>
+        </Suspense>
+      ) : (
+        placeholder
+      )}
+    </div>
+  );
 }

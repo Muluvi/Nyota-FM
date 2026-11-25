@@ -71,3 +71,16 @@ describe('media plan quote', () => {
     expect(q.total).toBe(q.subtotal + Math.round(q.subtotal * 0.16));
   });
 });
+
+describe('headline counts', () => {
+  it('match the lists they summarise', async () => {
+    const {counts} = await import('../../src/data/counts');
+    const {strategies} = await import('../../src/data/strategies');
+    const {readFileSync} = await import('node:fs');
+    expect(counts.sources).toBe(sources.length);
+    expect(counts.strategies).toBe(strategies.length);
+    const part7 = readFileSync('src/components/v2/Part7GapAudit.tsx', 'utf8');
+    const listB = part7.slice(part7.indexOf('const checklistB = ['), part7.indexOf('];', part7.indexOf('const checklistB = [')));
+    expect(counts.buildChecklistItems).toBe((listB.match(/\{ id: \d+,/g) ?? []).length);
+  });
+});

@@ -162,7 +162,7 @@ export function Part1Objectives() {
 
                 {/* Collapsible Content */}
                 {isExpanded && (
-                  <div className="px-4 pb-5 sm:px-5 pt-1 border-t border-hairline space-y-4">
+                  <div className="fx-expand px-4 pb-5 sm:px-5 pt-1 border-t border-hairline space-y-4">
                     {/* v1.0 vs v2.0 Comparison Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
                       <div className="p-3.5 rounded bg-ink/60 border border-hairline/80">

@@ -6,10 +6,12 @@ import {
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
 import { onTabListKeyDown } from '../../lib/tabs';
+import { useTabIndicator } from '../motion/hooks';
 import { CompetitorDialMap } from '../website/CompetitorDialMap';
 
 export function Part2MasterData() {
   const [activeTab, setActiveTab] = useState<'market' | 'competitors' | 'ad_econ' | 'digital' | 'studio' | 'regulatory' | 'audience' | 'levers'>('market');
+  const tabInd = useTabIndicator(activeTab);
 
   return (
     <div className="space-y-6">
@@ -32,7 +34,8 @@ export function Part2MasterData() {
       </Reveal>
 
       {/* Sub-Navigation Tabs */}
-      <div role="tablist" aria-label="Data room sections" onKeyDown={onTabListKeyDown} className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none border-b border-hairline text-xs font-mono">
+      <div ref={tabInd.listRef} role="tablist" aria-label="Data room sections" onKeyDown={onTabListKeyDown} className="relative flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none border-b border-hairline text-xs font-mono">
+        <span ref={tabInd.indRef} aria-hidden="true" className="fx-tab-indicator fx-tab-underline bg-brass" />
         {[
           { id: 'market', label: '2.1 Market Sizing', icon: <Users size={12} /> },
           { id: 'competitors', label: '2.2 Competitor Landscape', icon: <Radio size={12} /> },
@@ -62,7 +65,7 @@ export function Part2MasterData() {
 
       {/* TAB 2.1: MARKET SIZING */}
       {activeTab === 'market' && (
-        <div className="space-y-6">
+        <div className="fx-resolve space-y-6">
           {/* 2.1.1 Population */}
           <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
@@ -228,7 +231,7 @@ export function Part2MasterData() {
 
       {/* TAB 2.2: COMPETITOR LANDSCAPE */}
       {activeTab === 'competitors' && (
-        <div className="space-y-4">
+        <div className="fx-resolve space-y-4">
           <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
               <div>
@@ -402,7 +405,7 @@ export function Part2MasterData() {
 
       {/* TAB 2.3: RADIO ADVERTISING ECONOMICS */}
       {activeTab === 'ad_econ' && (
-        <div className="space-y-4">
+        <div className="fx-resolve space-y-4">
           <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
               <div>
@@ -543,7 +546,7 @@ export function Part2MasterData() {
 
       {/* TAB 2.4: DIGITAL PLATFORM ECONOMICS */}
       {activeTab === 'digital' && (
-        <div className="space-y-4">
+        <div className="fx-resolve space-y-4">
           <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
               <div>
@@ -677,7 +680,7 @@ export function Part2MasterData() {
 
       {/* TAB 2.5: STUDIO & HARDWARE */}
       {activeTab === 'studio' && (
-        <div className="space-y-4">
+        <div className="fx-resolve space-y-4">
           <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
               <div>
@@ -790,7 +793,7 @@ export function Part2MasterData() {
 
       {/* TAB 2.6: REGULATORY & COMPLIANCE */}
       {activeTab === 'regulatory' && (
-        <div className="space-y-4">
+        <div className="fx-resolve space-y-4">
           <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
               <div>
@@ -840,7 +843,7 @@ export function Part2MasterData() {
 
       {/* TAB 2.7: AUDIENCE MEASUREMENT & NLS */}
       {activeTab === 'audience' && (
-        <div className="space-y-4">
+        <div className="fx-resolve space-y-4">
           <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
               <div>
@@ -904,7 +907,7 @@ export function Part2MasterData() {
 
       {/* TAB 2.8: MASTER REVENUE LEVERS */}
       {activeTab === 'levers' && (
-        <div className="space-y-4">
+        <div className="fx-resolve space-y-4">
           <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
               <div>

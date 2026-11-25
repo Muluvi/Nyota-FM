@@ -6,6 +6,7 @@ import { spotDayparts, quote, quoteAddOns, RATE_CARD_VALID_UNTIL, VAT_RATE } fro
 import { displayValue, formatKsh } from '../../data/format';
 import { station } from '../../data/station';
 import { printSection } from '../../lib/print';
+import { toast } from '../motion/Toaster';
 
 /**
  * One media-plan and quote preview (replaces the old campaign calculator and quote
@@ -43,8 +44,10 @@ export function MediaPlanQuote() {
     try {
       await navigator.clipboard.writeText(text);
       setCopied('ok');
+      toast('Quote copied');
     } catch {
       setCopied('failed');
+      toast('Copy failed: select the text instead', 'error');
     }
     setTimeout(() => setCopied('idle'), 2500);
   };

@@ -4,6 +4,7 @@ import { asks } from '../../data/asks';
 import { monthZero } from '../../data/station';
 import { paybackStatement } from '../../model/finance';
 import { printSection } from '../../lib/print';
+import { toast } from '../motion/Toaster';
 
 export function ExecutiveBriefingMode({
   onClose,
@@ -27,8 +28,10 @@ export function ExecutiveBriefingMode({
     try {
       await navigator.clipboard.writeText(ballotText);
       setCopied('ok');
+      toast('Resolutions copied');
     } catch {
       setCopied('failed');
+      toast('Copy failed: select the text instead', 'error');
     }
     setTimeout(() => setCopied('idle'), 2500);
   };

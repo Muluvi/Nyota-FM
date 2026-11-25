@@ -5,10 +5,12 @@ import {
 } from 'lucide-react';
 import { Reveal } from '../ledger/Reveal';
 import { onTabListKeyDown } from '../../lib/tabs';
+import { useTabIndicator } from '../motion/hooks';
 import { InteractiveGapAuditWorkbench } from '../website/InteractiveGapAuditWorkbench';
 
 export function Part7GapAudit() {
   const [activeChecklist, setActiveChecklist] = useState<'A' | 'B' | 'C'>('A');
+  const listInd = useTabIndicator(activeChecklist);
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
 
@@ -128,14 +130,15 @@ export function Part7GapAudit() {
           </div>
 
           {/* Checklist Selector Tabs */}
-          <div role="tablist" aria-label="Checklists" onKeyDown={onTabListKeyDown} className="flex items-center gap-2 border-b border-hairline text-xs font-mono">
+          <div ref={listInd.listRef} role="tablist" aria-label="Checklists" onKeyDown={onTabListKeyDown} className="relative flex items-center gap-2 border-b border-hairline text-xs font-mono">
+            <span ref={listInd.indRef} aria-hidden="true" className="fx-tab-indicator fx-tab-underline bg-brass" />
             <button
               onClick={() => setActiveChecklist('A')}
                 role="tab"
                 aria-selected={activeChecklist === 'A'}
               className={`pb-2.5 px-3 border-b-2 font-semibold transition-all ${
                 activeChecklist === 'A'
-                  ? 'border-brass text-brass'
+                  ? 'border-transparent text-brass'
                   : 'border-transparent text-sage hover:text-paper'
               }`}
             >
@@ -147,7 +150,7 @@ export function Part7GapAudit() {
                 aria-selected={activeChecklist === 'B'}
               className={`pb-2.5 px-3 border-b-2 font-semibold transition-all ${
                 activeChecklist === 'B'
-                  ? 'border-brass text-brass'
+                  ? 'border-transparent text-brass'
                   : 'border-transparent text-sage hover:text-paper'
               }`}
             >
@@ -159,7 +162,7 @@ export function Part7GapAudit() {
                 aria-selected={activeChecklist === 'C'}
               className={`pb-2.5 px-3 border-b-2 font-semibold transition-all ${
                 activeChecklist === 'C'
-                  ? 'border-brass text-brass'
+                  ? 'border-transparent text-brass'
                   : 'border-transparent text-sage hover:text-paper'
               }`}
             >
@@ -181,7 +184,7 @@ export function Part7GapAudit() {
 
           {/* CHECKLIST A: 20 PROPOSAL COMPLETENESS GAPS */}
           {activeChecklist === 'A' && (
-            <div className="space-y-3">
+            <div className="fx-resolve space-y-3">
               <div className="text-xs text-sage font-mono flex items-center justify-between">
                 <span>Displaying 20 foundational proposal gaps addressed in v2</span>
                 <span className="text-brass font-semibold">{gapsFixed} fixed · {gapsDeclared} declared gap</span>
@@ -222,7 +225,7 @@ export function Part7GapAudit() {
 
           {/* CHECKLIST B: 40 OPERATIONAL BUILD ITEMS */}
           {activeChecklist === 'B' && (
-            <div className="space-y-3">
+            <div className="fx-resolve space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono">
                 <span className="text-sage">Complete 40-Item Operational Procurement & Resourcing Register</span>
                 <div className="flex items-center gap-1 overflow-x-auto">
@@ -291,7 +294,7 @@ export function Part7GapAudit() {
 
           {/* CHECKLIST C: 12 STRATEGY GAPS OMITTED */}
           {activeChecklist === 'C' && (
-            <div className="space-y-3">
+            <div className="fx-resolve space-y-3">
               <div className="text-xs text-sage font-mono flex items-center justify-between">
                 <span>12 Additional Strategic Revenue Levers Omitted in May 2026</span>
                 <span className="text-brass font-semibold">12 Reclaimed Levers</span>
