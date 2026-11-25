@@ -1,138 +1,132 @@
-import React, { useState } from 'react';
-import { Globe2, Clock, Send, DollarSign, MessageCircle, Heart, Check, Sparkles } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Globe2, Send } from 'lucide-react';
 import { TierBadge } from '../v2/TierBadge';
+import { Illustrative } from '../Illustrative';
+import { station } from '../../data/station';
+
+/**
+ * Diaspora shout-out preview. Times are computed live with Intl for each city;
+ * shout-outs open a pre-filled WhatsApp message to the station (nothing is stored here).
+ * Remittance context comes from facts.ts (key: remittances).
+ */
+const CITIES = [
+  { id: 'us', label: 'United States (Dallas)', zone: 'America/Chicago' },
+  { id: 'gulf', label: 'Gulf (Doha)', zone: 'Asia/Qatar' },
+  { id: 'de', label: 'Germany (Berlin)', zone: 'Europe/Berlin' },
+  { id: 'uk', label: 'United Kingdom (London)', zone: 'Europe/London' },
+  { id: 'nbo', label: 'Nairobi', zone: 'Africa/Nairobi' },
+] as const;
+
+const timeIn = (zone: string, now: Date) =>
+  new Intl.DateTimeFormat('en-GB', { timeZone: zone, hour: '2-digit', minute: '2-digit', weekday: 'short' }).format(now);
+
+/** Hours ahead (+) or behind (−) Bungoma (EAT) right now, accounting for daylight saving. */
+function offsetFromEat(zone: string, now: Date): number {
+  const minutes = (z: string) => {
+    const parts = new Intl.DateTimeFormat('en-US', { timeZone: z, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }).formatToParts(now);
+    const get = (t: string) => Number(parts.find((p) => p.type === t)!.value);
+    return Date.UTC(get('year'), get('month') - 1, get('day'), get('hour'), get('minute')) / 60000;
+  };
+  return Math.round((minutes(zone) - minutes('Africa/Nairobi')) / 60);
+}
 
 export function DiasporaHub() {
-  const [diasporaLocation, setDiasporaLocation] = useState<'Nairobi / Mombasa' | 'London (UK)' | 'Dallas / Atlanta (USA)' | 'Doha / Dubai (Gulf)'>('London (UK)');
-  const [shoutoutName, setShoutoutName] = useState('Dr. Chris Wanyonyi');
-  const [shoutoutMsg, setShoutoutMsg] = useState('Mulembe to my parents in Bungoma Kanduyi! Tuning in live online while heading to work.');
-  const [sent, setSent] = useState<boolean>(false);
+  const [cityId, setCityId] = useState<(typeof CITIES)[number]['id']>('us');
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [now, setNow] = useState(() => new Date());
 
-  const timezones = {
-    'Nairobi / Mombasa': { timeDiff: 'Local EAT', streamLatency: '1.2s' },
-    'London (UK)': { timeDiff: 'EAT -2 hours', streamLatency: '2.4s' },
-    'Dallas / Atlanta (USA)': { timeDiff: 'EAT -8 hours', streamLatency: '3.1s' },
-    'Doha / Dubai (Gulf)': { timeDiff: 'EAT +1 hour', streamLatency: '1.8s' },
-  };
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(new Date()), 30_000);
+    return () => window.clearInterval(id);
+  }, []);
 
-  const handleSendShoutout = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
-  };
+  const city = CITIES.find((c) => c.id === cityId)!;
+  const diff = offsetFromEat(city.zone, now);
+  const waText = `Diaspora shout-out for Nyota FM\nFrom: ${name} (${city.label})\nMessage: ${message}`;
+  const canSend = Boolean(station.salesWhatsApp && name.trim() && message.trim());
 
   return (
     <div className="rounded-xl border border-hairline bg-ink-2 p-5 sm:p-7 space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-brass">
-            <Globe2 size={14} />
-            <span className="uppercase tracking-widest font-semibold">Global Community · Strategy 5.17</span>
-            <span className="text-sage-dim">·</span>
-            <TierBadge tier={1} citation="Central Bank of Kenya (CBK) Diaspora Remittance Annual Reports" />
-          </div>
-          <h3 className="font-display text-xl sm:text-2xl font-bold text-paper mt-1">
-            Global Western Diaspora Hub & Remittance Media Gateway
-          </h3>
-          <p className="text-xs sm:text-sm text-sage mt-1 max-w-2xl">
-            Connect the high-purchasing-power Western Kenya diaspora residing in Nairobi, the UK, the US, and the Gulf. Streamlined Sunday evening diaspora shout-outs and real-estate remittance advertising.
-          </p>
+      <div className="border-b border-hairline pb-4 space-y-2">
+        <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-brass">
+          <Globe2 size={14} />
+          <span className="uppercase tracking-widest font-semibold">Diaspora · Strategy 5.17</span>
+          <TierBadge factId="remittances" />
         </div>
-
-        <div className="flex items-center gap-2">
-          <span className="px-3 py-1.5 rounded text-xs font-mono text-brass bg-brass/10 border border-brass/30 font-semibold">
-            Kenya remittances: US$5.04B (2025, CBK) · no regional split
-          </span>
-        </div>
+        <h3 className="font-display text-xl sm:text-2xl font-bold text-paper">Diaspora shout-outs (preview)</h3>
+        <p className="text-xs sm:text-sm text-sage max-w-2xl">
+          Kenya received US$5.04 billion in remittances in 2025. The US sends the largest share; the UK sends little. No regional
+          split exists, so the Western Kenya diaspora market is not sized here. Lead with the US, the Gulf and Germany.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Timezone & Diaspora Cities */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="rounded-xl border border-hairline bg-ink p-4 space-y-3">
-            <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block font-bold">
-              SELECT DIASPORA STREAMING CLUSTER
-            </span>
-            <div className="space-y-1.5">
-              {(['London (UK)', 'Dallas / Atlanta (USA)', 'Doha / Dubai (Gulf)', 'Nairobi / Mombasa'] as const).map((loc) => (
-                <button
-                  key={loc}
-                  type="button"
-                  onClick={() => setDiasporaLocation(loc)}
-                  className={`w-full text-left p-2.5 rounded border text-xs font-mono transition-all flex items-center justify-between ${
-                    diasporaLocation === loc
-                      ? 'border-brass bg-brass/10 text-paper font-semibold'
-                      : 'border-hairline bg-ink-2 text-sage hover:text-paper'
-                  }`}
-                >
-                  <span>{loc}</span>
-                  <span className="text-[10px] text-brass">{timezones[loc].timeDiff}</span>
-                </button>
-              ))}
-            </div>
+        <div className="lg:col-span-5 space-y-2" role="radiogroup" aria-label="Your city">
+          {CITIES.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              role="radio"
+              aria-checked={c.id === cityId}
+              onClick={() => setCityId(c.id)}
+              className={`w-full text-left p-2.5 rounded border text-xs font-mono flex items-center justify-between ${
+                c.id === cityId ? 'border-brass bg-brass/10 text-paper font-semibold' : 'border-hairline bg-ink text-sage hover:text-paper'
+              }`}
+            >
+              <span>{c.label}</span>
+              <span className="text-brass">{timeIn(c.zone, now)}</span>
+            </button>
+          ))}
+          <p className="text-xs text-sage pt-1">
+            Bungoma now: <strong className="text-paper">{timeIn('Africa/Nairobi', now)}</strong> ·{' '}
+            {diff === 0 ? 'same time as Bungoma' : `${Math.abs(diff)} h ${diff > 0 ? 'ahead of' : 'behind'} Bungoma`}
+          </p>
+        </div>
 
-            <div className="rounded bg-ink-2 border border-hairline p-3 text-xs font-mono space-y-1.5 text-sage">
-              <div className="flex justify-between">
-                <span>CDN Streaming Protocol:</span>
-                <strong className="text-paper">HLS / Icecast AAC+</strong>
-              </div>
-              <div className="flex justify-between">
-                <span>Global Edge Latency:</span>
-                <strong className="text-emerald-400">{timezones[diasporaLocation].streamLatency}</strong>
-              </div>
-              <div className="flex justify-between">
-                <span>Remittance Target:</span>
-                <strong className="text-brass">Land & Home Construction</strong>
-              </div>
-            </div>
+        <form
+          className="lg:col-span-7 rounded-xl border border-hairline bg-ink p-5 space-y-3"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (canSend) window.open(`https://wa.me/${station.salesWhatsApp}?text=${encodeURIComponent(waText)}`, '_blank', 'noopener');
+          }}
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-mono text-brass uppercase tracking-wider font-bold">Send a shout-out</span>
+            <Illustrative note="Preview of a planned service; the diaspora show time is to be confirmed" />
           </div>
-        </div>
-
-        {/* Live Diaspora On-Air Shoutout Form */}
-        <div className="lg:col-span-7 rounded-xl border border-hairline bg-ink p-5 space-y-4">
-          <span className="text-[10px] font-mono text-brass uppercase tracking-wider font-bold block">
-            SUNDAY DIASPORA LIVE ON-AIR SHOUTOUT DISPATCH
-          </span>
-
-          <form onSubmit={handleSendShoutout} className="space-y-3">
-            <div>
-              <label className="text-xs font-mono text-sage-dim uppercase tracking-wider block mb-1">
-                Your Name & Current City
-              </label>
-              <input
-                type="text"
-                value={shoutoutName}
-                onChange={(e) => setShoutoutName(e.target.value)}
-                className="w-full rounded bg-ink-2 border border-hairline px-3 py-2 text-xs font-mono text-paper focus:outline-none focus:border-brass"
-              />
-            </div>
-
-            <div>
-              <label className="text-xs font-mono text-sage-dim uppercase tracking-wider block mb-1">
-                Dedication Message to Family in Western Kenya
-              </label>
-              <textarea
-                rows={3}
-                value={shoutoutMsg}
-                onChange={(e) => setShoutoutMsg(e.target.value)}
-                className="w-full rounded bg-ink-2 border border-hairline px-3 py-2 text-xs font-sans text-paper focus:outline-none focus:border-brass resize-none"
-              />
-            </div>
-
-            <div className="flex items-center justify-between pt-1">
-              <span className="text-[11px] font-mono text-sage-dim">
-                Read live on *Mwangaza wa Usiku* (19:00–22:00)
-              </span>
-              <button
-                type="submit"
-                className="px-4 py-2 rounded bg-brass text-ink font-mono text-xs font-bold hover:brightness-110 transition-all flex items-center gap-1.5 shadow"
-              >
-                {sent ? <Check size={14} /> : <Send size={14} />}
-                <span>{sent ? 'Dispatched to Studio' : 'Send to Studio Mic'}</span>
-              </button>
-            </div>
-          </form>
-        </div>
+          <div>
+            <label htmlFor="dh-name" className="text-xs font-mono text-sage-dim block mb-1">Your name</label>
+            <input
+              id="dh-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="First name"
+              className="w-full rounded bg-ink-2 border border-hairline px-3 py-2 text-sm text-paper focus:outline-none focus:border-brass"
+            />
+          </div>
+          <div>
+            <label htmlFor="dh-msg" className="text-xs font-mono text-sage-dim block mb-1">Message to family in Western Kenya</label>
+            <textarea
+              id="dh-msg"
+              rows={3}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full rounded bg-ink-2 border border-hairline px-3 py-2 text-sm text-paper focus:outline-none focus:border-brass resize-none"
+            />
+          </div>
+          <p className="text-[11px] text-sage-dim">
+            Opens WhatsApp with your message to the station. Nothing is stored on this site. Read-outs happen in the planned
+            Sunday diaspora block (time to be confirmed).
+          </p>
+          <button
+            type="submit"
+            disabled={!canSend}
+            className="px-4 py-2 rounded bg-brass text-ink font-mono text-xs font-bold hover:brightness-110 disabled:opacity-40 flex items-center gap-1.5"
+          >
+            <Send size={14} /> Send via WhatsApp
+          </button>
+        </form>
       </div>
     </div>
   );

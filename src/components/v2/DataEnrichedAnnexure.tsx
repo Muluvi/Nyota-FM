@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { factValue } from '../../data/facts';
 import { ChevronDown, Database, ExternalLink } from 'lucide-react';
 
 const sections = [
   { title: 'Executive summary', eyebrow: '01 / sourced reality', items: [
-    ['Radio reach, Western Kenya', '83%', 'CA Audience Measurement, Apr–Jun 2026; Nyota’s own reach is a Tier 0 gap'],
+    ['Radio reach, Western Kenya', factValue('radio.reach.western'), 'CA Audience Measurement, Apr–Jun 2026; Nyota’s own reach is a Tier 0 gap'],
     ['Radio advertising market', 'KSh 25.9B', 'Down 5% in 2025'],
     ['Smartphone connections', '52.26M', 'June 2026 (CA); connections, not people'],
     ['YouTube RPM Kenya', '$0.6719', 'Per 1,000 views'],
@@ -18,7 +19,7 @@ const sections = [
     ['Print advertising', 'KSh 1.4B', 'Down 25%'],
     ['2026 forecast', 'KSh 52.7B', 'Further 20% decline projected by Reelanalytics'],
     ['Safaricom share', '8%', 'Of total mainstream ad expenditure; leading individual advertiser'], // data-ok: market fact, not a sponsor
-    ['Western radio reach', '83%', 'Q4 2025/26 (Apr–Jun 2026); 81% in Q2'],
+    ['Western radio reach', factValue('radio.reach.western'), 'Q4 2025/26 (Apr–Jun 2026); 81% in Q2'],
     ['Lower Eastern', '83%', 'Q2 2025/26'],
     ['Lake Region', '82%', 'Q2 2025/26'],
     ['South Nyanza', '80%', 'Q2 2025/26'],

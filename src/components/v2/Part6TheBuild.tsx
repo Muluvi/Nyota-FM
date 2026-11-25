@@ -5,12 +5,67 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
+import { capex, phaseGates, phaseTotal, capexTotal, studioPhasesTotal, unquotedLines, PHASES, type Phase } from '../../data/capex';
+import { formatKshRange, displayValue } from '../../data/format';
 import { InteractiveStudioPlan } from '../website/InteractiveStudioPlan';
 import { VisualRadioStudioSimulator } from '../website/VisualRadioStudioSimulator';
 import { PowerResilienceMatrix } from '../website/PowerResilienceMatrix';
 import { OBVanExplorer } from '../website/OBVanExplorer';
 import { EquipmentLifecycleLog } from '../website/EquipmentLifecycleLog';
 import { BrandIdentityViewer } from '../website/BrandIdentityViewer';
+
+const PHASE_KEY = { p1: 'P1', p2: 'P2', p3: 'P3' } as const;
+
+/** One capex table, rendered from the single capex register. */
+function CapexPhaseTable({ phase }: { phase: Phase }) {
+  const meta = PHASES.find((p) => p.id === phase)!;
+  const lines = capex.filter((l) => l.phase === phase);
+  const total = phaseTotal(phase);
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between text-xs font-mono text-sage">
+        <span>
+          {meta.label} ({meta.months})
+        </span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-xs font-mono">
+          <caption className="sr-only">
+            {meta.label}: equipment, vendor, cost and evidence tier
+          </caption>
+          <thead>
+            <tr className="border-b border-hairline text-sage-dim">
+              <th scope="col" className="py-2 pr-3">Item</th>
+              <th scope="col" className="py-2 px-3">Vendor / basis</th>
+              <th scope="col" className="py-2 px-3">Cost</th>
+              <th scope="col" className="py-2 pl-3">Tier</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-hairline text-paper/90">
+            {lines.map((l) => (
+              <tr key={l.id}>
+                <td className="py-2.5 pr-3 font-body">
+                  {l.item}
+                  {!l.inModel && <span className="ml-1 text-[11px] text-brick-text">(was missing from totals)</span>}
+                </td>
+                <td className="py-2.5 px-3 text-sage">{l.vendor}</td>
+                <td className="py-2.5 px-3 whitespace-nowrap">{formatKshRange(l.cost)}</td>
+                <td className="py-2.5 pl-3">Tier {l.tier}</td>
+              </tr>
+            ))}
+            <tr className="font-bold border-t border-brass/40">
+              <td className="py-2.5 pr-3 text-paper" colSpan={2}>
+                Total (quoted lines)
+              </td>
+              <td className="py-2.5 px-3 text-brass whitespace-nowrap">{formatKshRange(total)}</td>
+              <td />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
 
 export function Part6TheBuild() {
   const [activePhase, setActivePhase] = useState<'p1' | 'p2' | 'p3'>('p1');
@@ -178,7 +233,7 @@ export function Part6TheBuild() {
                 SECTION 6.2
               </span>
               <h4 className="font-display text-paper text-base font-semibold">Studio Build — Consolidated Cost Schedule</h4>
-              <p className="text-xs text-sage mt-0.5">Empirically researched local quotes vs v1.0 speculative budgets</p>
+              <p className="text-xs text-sage mt-0.5">One register for every equipment line; totals are computed</p>
             </div>
             <div className="flex items-center gap-1">
               {(['p1', 'p2', 'p3'] as const).map((ph) => (
@@ -195,203 +250,47 @@ export function Part6TheBuild() {
             </div>
           </div>
 
-          {/* Phase 1 Table */}
-          {activePhase === 'p1' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-mono text-sage">
-                <span>Phase 1 (Months 1–4): Visual Radio Foundation</span>
-                <TierBadge tier={1} citation="BS International, Cellular Kenya, Rondamo" url="bsint.net" />
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs font-mono">
-                  <thead>
-                    <tr className="border-b border-hairline text-sage-dim">
-                      <th className="py-2 pr-3">Equipment Item</th>
-                      <th className="py-2 px-3">Kenyan Vendor</th>
-                      <th className="py-2 px-3">Price (KSh)</th>
-                      <th className="py-2 pl-3">Source Citation</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-hairline text-paper/90">
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">2× PTZ Camera KTUH86 (NDI/HDMI)</td>
-                      <td className="py-2 px-3 text-sage">Broadcast Solutions International</td>
-                      <td className="py-2 px-3 text-emerald-400 font-bold">228,000</td>
-                      <td className="py-2 pl-3 text-sage">bsint.net</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">ATEM Television Studio HD</td>
-                      <td className="py-2 px-3 text-sage">Cellular Kenya</td>
-                      <td className="py-2 px-3 text-emerald-400 font-bold">154,999</td>
-                      <td className="py-2 pl-3 text-sage">cameraplacekenya.com</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">VISICO LED-50A 3-Lights Kit</td>
-                      <td className="py-2 px-3 text-sage">Rondamo</td>
-                      <td className="py-2 px-3 text-emerald-400 font-bold">34,300</td>
-                      <td className="py-2 pl-3 text-sage">rondamo.co.ke</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Acoustic Treatment (20 m² panels)</td>
-                      <td className="py-2 px-3 text-sage">Soundproofing Kenya</td>
-                      <td className="py-2 px-3 text-amber-300">110,000 – 250,000</td>
-                      <td className="py-2 pl-3 text-sage">soundproofingcompany.co.ke</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Hardware Streaming Encoder</td>
-                      <td className="py-2 px-3 text-sage">Industry estimate</td>
-                      <td className="py-2 px-3 text-amber-300">50,000 – 120,000</td>
-                      <td className="py-2 pl-3 text-sage-dim">Tier 2 estimate</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Cables, wall mounts & installation</td>
-                      <td className="py-2 px-3 text-sage">Local technician / engineering</td>
-                      <td className="py-2 px-3 text-amber-300">50,000</td>
-                      <td className="py-2 pl-3 text-sage-dim">Tier 2 estimate</td>
-                    </tr>
-                    <tr className="bg-moss/20 font-bold border-t border-moss">
-                      <td className="py-3 pr-3 text-paper">Total Phase 1 Commitment</td>
-                      <td className="py-3 px-3 text-emerald-300">Bankable Researched Quote</td>
-                      <td className="py-3 px-3 text-emerald-400 text-sm">KSh 627,299 – 837,299</td>
-                      <td className="py-3 pl-3 text-emerald-300">Saves KSh 1.5M vs v1.0</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
+          <CapexPhaseTable phase={PHASE_KEY[activePhase]} />
 
-          {/* Phase 2 Table */}
-          {activePhase === 'p2' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-mono text-sage">
-                <span>Phase 2 (Months 5–10): Multi-Cam Live Production</span>
-                <TierBadge tier={1} citation="BS International & Rondamo" url="rondamo.co.ke" />
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs font-mono">
-                  <thead>
-                    <tr className="border-b border-hairline text-sage-dim">
-                      <th className="py-2 pr-3">Equipment Item</th>
-                      <th className="py-2 px-3">Vendor / Derivation</th>
-                      <th className="py-2 px-3">Price (KSh)</th>
-                      <th className="py-2 pl-3">Source Citation</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-hairline text-paper/90">
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">4× Additional PTZ Cameras</td>
-                      <td className="py-2 px-3 text-sage">Broadcast Solutions International</td>
-                      <td className="py-2 px-3 text-emerald-400 font-bold">456,000 – 652,000</td>
-                      <td className="py-2 pl-3 text-sage">bsint.net</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">ATEM Television Studio HD8</td>
-                      <td className="py-2 px-3 text-sage">Rondamo Technologies</td>
-                      <td className="py-2 px-3 text-emerald-400 font-bold">455,800</td>
-                      <td className="py-2 pl-3 text-sage">rondamo.co.ke</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">vMix / OBS Production Workstation PC</td>
-                      <td className="py-2 px-3 text-sage">Custom workstation build</td>
-                      <td className="py-2 px-3 text-amber-300">150,000 – 300,000</td>
-                      <td className="py-2 pl-3 text-sage-dim">Tier 2 estimate</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Studio Talk-Back Intercom System</td>
-                      <td className="py-2 px-3 text-sage">Industry estimate</td>
-                      <td className="py-2 px-3 text-amber-300">80,000 – 150,000</td>
-                      <td className="py-2 pl-3 text-sage-dim">Tier 2 estimate</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Dedicated Control Room Build-Out</td>
-                      <td className="py-2 px-3 text-sage">Partitioning & acoustic glass</td>
-                      <td className="py-2 px-3 text-rose-300 font-bold">500,000 – 1,000,000</td>
-                      <td className="py-2 pl-3 text-rose-300 font-semibold">Tier 0 Data Gap</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Overhead Lighting Truss & Grid</td>
-                      <td className="py-2 px-3 text-sage">Rondamo / local riggers</td>
-                      <td className="py-2 px-3 text-amber-300">200,000 – 400,000</td>
-                      <td className="py-2 pl-3 text-sage-dim">Tier 2 estimate</td>
-                    </tr>
-                    <tr className="bg-brass/20 font-bold border-t border-brass">
-                      <td className="py-3 pr-3 text-paper">Total Phase 2 Envelope</td>
-                      <td className="py-3 px-3 text-brass">Months 5–10 Investment</td>
-                      <td className="py-3 px-3 text-brass text-sm">KSh 1,841,800 – 2,957,800</td>
-                      <td className="py-3 pl-3 text-amber-300">Multi-Cam Rig</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
+          {/* Lines that were missing from the original envelope */}
+          <div className="space-y-2">
+            <h5 className="font-display text-sm text-paper font-semibold">Also needed, previously outside the phase totals</h5>
+            <p className="text-xs text-sage">
+              Power resilience and the outside-broadcast rig appeared in the tools but not in any phase, and two Phase 2 lines were
+              listed elsewhere. They are added here so the board sees the full envelope.
+            </p>
+            <CapexPhaseTable phase="Power" />
+            <CapexPhaseTable phase="OB" />
+          </div>
 
-          {/* Phase 3 Table */}
-          {activePhase === 'p3' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-mono text-sage">
-                <span>Phase 3 (Months 11–18): Full Multi-Platform Hub</span>
-                <TierBadge tier={2} citation="Enterprise Facility Model" />
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs font-mono">
-                  <thead>
-                    <tr className="border-b border-hairline text-sage-dim">
-                      <th className="py-2 pr-3">Expansion Category</th>
-                      <th className="py-2 px-3">Component Description</th>
-                      <th className="py-2 px-3">Budget Envelope (KSh)</th>
-                      <th className="py-2 pl-3">Audit Standard</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-hairline text-paper/90">
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Secondary Studio</td>
-                      <td className="py-2 px-3 text-sage">Podcast, voicework & pre-records facility</td>
-                      <td className="py-2 px-3 text-rose-300 font-bold">1,500,000 – 3,000,000</td>
-                      <td className="py-2 pl-3 text-rose-300">Tier 0 Data Gap (quotes needed)</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">DAM System</td>
-                      <td className="py-2 px-3 text-sage">Digital Asset Management server & indexing</td>
-                      <td className="py-2 px-3 text-rose-300 font-bold">500,000 – 1,500,000</td>
-                      <td className="py-2 pl-3 text-rose-300">Tier 0 Data Gap</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Archive Infrastructure</td>
-                      <td className="py-2 px-3 text-sage">NAS storage array + offsite cloud backup</td>
-                      <td className="py-2 px-3 text-amber-300">300,000 – 800,000</td>
-                      <td className="py-2 pl-3 text-sage-dim">Tier 2 estimate</td>
-                    </tr>
-                    <tr className="hover:bg-ink">
-                      <td className="py-2 pr-3 font-semibold text-paper">Automation & AI Tooling</td>
-                      <td className="py-2 px-3 text-sage">Auto-clipping, transcription & captioning suite</td>
-                      <td className="py-2 px-3 text-amber-300">200,000 – 500,000</td>
-                      <td className="py-2 pl-3 text-sage-dim">Tier 2 estimate</td>
-                    </tr>
-                    <tr className="bg-brass/20 font-bold border-t border-brass">
-                      <td className="py-3 pr-3 text-paper">Total Phase 3 Envelope</td>
-                      <td className="py-3 px-3 text-brass">Months 11–18 Enterprise Scale</td>
-                      <td className="py-3 px-3 text-brass text-sm">KSh 2,500,000 – 5,800,000</td>
-                      <td className="py-3 pl-3 text-amber-300">Maturity Scale</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-
-          {/* Master Studio Comparison Callout */}
-          <div className="p-4 bg-ink rounded border border-brass/50 flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono gap-3">
+          {/* Totals, computed from src/data/capex.ts */}
+          <div className="p-4 bg-ink rounded border border-brass/50 grid gap-3 sm:grid-cols-2 text-xs font-mono">
             <div>
-              <span className="text-brass font-bold text-sm block">Total Studio Capex (All 3 Phases):</span>
-              <span className="text-paper text-base font-bold">KSh 4,969,099 – 9,595,099</span>
-              <span className="text-sage block text-[11px] mt-0.5">Phased across 18 months, gate-controlled by revenue thresholds</span>
+              <span className="text-sage block">Studio phases 1–3 (original schedule)</span>
+              <span className="text-paper text-base font-bold">{formatKshRange(studioPhasesTotal())}</span>
             </div>
-            <div className="sm:text-right">
-              <span className="text-emerald-400 font-bold block text-sm">&gt; 50% Reduction</span>
-              <span className="text-sage-dim text-[11px]">vs v1.0's unresearched KSh 12.7M–21.3M envelope</span>
+            <div>
+              <span className="text-brass font-bold block">Full envelope incl. power, OB rig and missing lines</span>
+              <span className="text-paper text-base font-bold">{formatKshRange(capexTotal())}</span>
+              <span className="text-sage block text-[11px] mt-0.5">
+                Plus {unquotedLines().length} unquoted line(s) (Tier 0): {unquotedLines().map((l) => l.item).join(', ')}
+              </span>
             </div>
+            <div className="sm:col-span-2 font-body">
+              <span className="text-paper font-semibold text-xs block mb-1">Phase gates</span>
+              <ul className="space-y-1 text-[11px] text-sage">
+                {phaseGates.map((g) => (
+                  <li key={g.phase}>
+                    <strong className="text-paper">{PHASES.find((p) => p.id === g.phase)!.label}:</strong> {g.condition}.{' '}
+                    <span className="text-brick-text">Threshold: {displayValue(g.threshold)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p className="sm:col-span-2 text-sage font-body text-[11px]">
+              Phases 2 and 3 are released only when their gates are met (gates below). Prices are vendor listings from September
+              2026 and need re-quoting with dates; imported equipment is exposed to the USD exchange rate.
+            </p>
           </div>
         </div>
       </Reveal>

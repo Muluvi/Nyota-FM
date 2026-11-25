@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Database, Calculator, HelpCircle, ArrowRight, Layers, Radio, Sparkles, CheckCircle2, TrendingUp, Sliders, ExternalLink } from 'lucide-react';
+import { factValue } from '../../data/facts';
 import { Reveal } from '../ledger/Reveal';
 
 interface DocumentHeroProps {
@@ -222,7 +223,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
                   Traceable to a named, publicly citable institution or documented vendor quote. Includes the Kenya National Bureau of Statistics (KNBS) 2019 Census, Communications Authority of Kenya (CA) audience and sector statistics, Media Council of Kenya, ReelAnalytics broadcast monitoring, and Africa&apos;s Talking official rate cards.
                 </p>
                 <div className="p-2.5 rounded bg-ink-2 border border-hairline font-mono text-xs text-sage flex items-center justify-between">
-                  <span>Example: radio reach in Western Kenya 83% (CA, Apr–Jun 2026); 24.4M radio listeners nationally</span>
+                  <span data-fact="radio.reach.western">Example: radio reach in Western Kenya {factValue('radio.reach.western')} (CA, Apr–Jun 2026); {factValue('radio.listeners.national')} radio listeners nationally</span>
                   <span className="text-moss font-semibold">Published source</span>
                 </div>
               </div>

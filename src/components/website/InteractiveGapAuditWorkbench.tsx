@@ -12,18 +12,18 @@ interface AuditItem {
 }
 
 const AUDIT_ITEMS: AuditItem[] = [
-  { id: 1, item: '10-Year CA Broadcast License Audit & Fee Confirmation', category: 'Regulatory', quarter: 'Q1 2027 (Months 1–3)', cost: 'KSh 120,000 annual', mitigation: 'Audit complete license terms; verify no pending penalty citations with CA Kenya.' },
+  { id: 1, item: '10-Year CA Broadcast License Audit & Fee Confirmation', category: 'Regulatory', quarter: 'Q1 2027 (Months 1–3)', cost: 'KSh 100,000/yr or 0.4% of turnover (to confirm with CA)', mitigation: 'Audit complete license terms; verify no pending penalty citations with CA Kenya.' },
   { id: 2, item: 'Office of Data Protection Commissioner (ODPC) Registration', category: 'Regulatory', quarter: 'Q1 2027 (Months 1–3)', cost: 'KSh 4,000 (Tier 1)', mitigation: 'Register Nyota FM as data processor for USSD and WhatsApp databases.' },
   { id: 3, item: 'Music licences with CMOs licensed for the year', category: 'Regulatory', quarter: 'Q2 2027 (Months 4–6)', cost: 'DATA GAP (Est. KSh 150K)', mitigation: 'Formalize blanket licensing to prevent on-air equipment impoundment.' },
   { id: 4, item: 'Studio Phase 1 Acoustic Soundproofing Panelling', category: 'Engineering', quarter: 'Q1 2027 (Months 1–3)', cost: 'KSh 110K–250K', mitigation: 'Install 20m² acoustic absorption panels to eliminate Bungoma street reverberation.' },
   { id: 5, item: '2× Robotic PTZ Cameras (NDI/HDMI) Procurement', category: 'Engineering', quarter: 'Q1 2027 (Months 1–3)', cost: 'KSh 228,000', mitigation: 'Automated video switching for YouTube and Facebook visual live stream.' },
   { id: 6, item: 'Blackmagic ATEM Video Switcher & Hardware Encoder', category: 'Engineering', quarter: 'Q1 2027 (Months 1–3)', cost: 'KSh 204,999', mitigation: 'Dedicated streaming hardware preventing audio production computer overload.' },
-  { id: 7, item: 'Studio Power Generator & UPS Backup Rig', category: 'Engineering', quarter: 'Q2 2027 (Months 4–6)', cost: 'KSh 320,000', mitigation: 'Zero on-air downtime during Western Kenya national grid blackouts.' },
+  { id: 7, item: 'Studio Power Generator & UPS Backup Rig', category: 'Engineering', quarter: 'Q2 2027 (Months 4–6)', cost: 'KSh 1.13M (generator + hybrid solar, capex register)', mitigation: 'Zero on-air downtime during Western Kenya national grid blackouts.' },
   { id: 8, item: 'Africa\'s Talking WhatsApp Business API Gateway Onboarding', category: 'Operations', quarter: 'Q1 2027 (Months 1–3)', cost: 'KSh 11,000 setup', mitigation: 'Verified green tick WhatsApp presence for automated listener inbound messages.' },
   { id: 9, item: 'Dedicated USSD Shortcode (*...#) Allocation & Telco Link', category: 'Operations', quarter: 'Q2 2027 (Months 4–6)', cost: 'KSh 70,000/mo (Safaricom)', mitigation: 'Bridges the 27.42M Kenyan feature phones for zero-data listener participation.' }, // data-ok: market fact, not a sponsor
   { id: 10, item: 'Government Advertising Agency (GAA) National Register Entry', category: 'Commercial', quarter: 'Q2 2027 (Months 4–6)', cost: 'KSh 100,000 fee', mitigation: 'Unlocks formal access to public sector and ministry civic campaign budgets.' },
   { id: 11, item: 'Bungoma & Kakamega County Government Communications Retainers', category: 'Commercial', quarter: 'Q3 2027 (Months 7–9)', cost: 'Relationship-led', mitigation: 'Annual communication frameworks for governor press updates and public participation.' },
-  { id: 12, item: 'Hapa Tulipo Outside Broadcast (OB) Field Vehicle & Rig', category: 'Commercial', quarter: 'Q3 2027 (Months 7–9)', cost: 'KSh 320,000', mitigation: 'Deployable market broadcast unit generating KSh 150K–350K per market day.' },
+  { id: 12, item: 'Hapa Tulipo Outside Broadcast (OB) Field Vehicle & Rig', category: 'Commercial', quarter: 'Q3 2027 (Months 7–9)', cost: 'KSh 570K rig + vehicle (Tier 0)', mitigation: 'Deployable market broadcast unit; per-activation economics are Tier 0 until a pilot is costed.' },
   { id: 13, item: 'Four Pre-Recorded Show Packages Production & Pilot Master', category: 'Programming', quarter: 'Q2 2027 (Months 4–6)', cost: 'KSh 80,000 pool', mitigation: 'Complete Asubuhi ya Imani, Hapa Tulipo Mix, Sauti ya Nchi, and Wanawake wa Twang\'aa.' },
   { id: 14, item: 'SME Bundle Rate Card & Self-Serve Advertiser Web Portal', category: 'Commercial', quarter: 'Q3 2027 (Months 7–9)', cost: 'Internal build', mitigation: 'Transparent rate cards for rural agro-vets, clinics, and hardware businesses.' },
   { id: 15, item: 'Twang\'aa Club Listener Loyalty Engine & M-Pesa Integration', category: 'Operations', quarter: 'Q4 2027 (Months 10–12)', cost: 'KSh 120,000', mitigation: 'Direct listener rewards system driving continuous cross-platform engagement.' },
@@ -125,7 +125,7 @@ export function InteractiveGapAuditWorkbench() {
         </div>
 
         <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto font-mono text-xs">
-          {['All', 'Regulatory', 'Engineering', 'Commercial', 'Operations'].map((cat) => (
+          {['All', 'Regulatory', 'Engineering', 'Commercial', 'Programming', 'Operations'].map((cat) => (
             <button
               key={cat}
               type="button"

@@ -1,21 +1,19 @@
 /**
- * Station configuration. Values that must come from the station (stream URL,
- * sales contacts) are read from build-time environment variables so the site
- * never ships a guessed URL or phone number. See `.env.example`.
+ * Station identity and contact channels (see src/config.ts for the values).
  */
-const env = import.meta.env
+import { STREAM_URL_LOW, STREAM_URL_HIGH, SALES_EMAIL, SALES_WHATSAPP, SALES_PHONE } from '../config'
 
 export const station = {
   name: 'Nyota FM 107.3',
   legalName: 'Nyota Frequency Modulation Limited',
   frequency: '107.3 FM',
   hq: 'Bungoma',
-  /** Direct audio stream (e.g. a Zeno.FM mount). Empty = player shows "not configured". */
-  streamUrl: (env.VITE_STREAM_URL ?? '').trim(),
-  /** Sales desk email for inquiries. */
-  salesEmail: (env.VITE_SALES_EMAIL ?? '').trim(),
-  /** Sales WhatsApp number in international format, digits only (e.g. 2547XXXXXXXX). */
-  salesWhatsApp: (env.VITE_SALES_WHATSAPP ?? '').replace(/\D/g, ''),
+  /** Live stream: low-bitrate by default (data saver); empty = "Stream link pending". */
+  streamUrl: STREAM_URL_LOW,
+  streamUrlHigh: STREAM_URL_HIGH,
+  salesEmail: SALES_EMAIL,
+  salesPhone: SALES_PHONE,
+  salesWhatsApp: SALES_WHATSAPP,
 } as const
 
 /**

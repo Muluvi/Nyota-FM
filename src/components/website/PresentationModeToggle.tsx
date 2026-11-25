@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Presentation, ChevronLeft, ChevronRight, X, Maximize2, Minimize2, FileText, CheckCircle2, Sparkles, Printer } from 'lucide-react';
+import { factValue } from '../../data/facts';
 import { asks } from '../../data/asks';
 
 interface Slide {
@@ -36,11 +37,11 @@ const SLIDES: Slide[] = [
     headline: 'Fewer people listen daily, but most of Western Kenya still listens',
     leadParagraph: 'Figures are tiered by evidence. Tier 1 items cite CA Kenya, KNBS, MCK and ReelAnalytics; gaps are marked Tier 0.',
     bullets: [
-      'Radio reach in Western Kenya is 83% (CA, Apr–Jun 2026); national daily listenership fell 75% → 57% → 41% (MCK, 2023–2025).',
+      `Radio reach in Western Kenya is ${factValue('radio.reach.western')} (CA, Apr–Jun 2026); national daily listenership fell ${factValue('radio.dailyListenership')} (MCK, 2023–2025).`,
       'Only 16% of radio listening in Western is vernacular; Swahili dominates (CA). That supports a Swahili-first, Bukusu-flavoured format.',
       'Betting ad spend on radio fell 89% in one quarter (Jul–Sep 2025), but betting was the #3 sector market-wide in H1 2026. Nyota chooses not to depend on it.',
     ],
-    keyMetric: { value: '83%', label: 'Radio reach, Western (CA, Apr–Jun 2026)' },
+    keyMetric: { value: factValue('radio.reach.western'), label: 'Radio reach, Western (CA, Apr–Jun 2026)' },
     speakerNotes:
       'Leaving betting money is a values and regulatory choice, not a market fact. Lead with banking, agriculture (KES 494 M on radio in Apr–Jun 2026) and public-sector notices.',
   },

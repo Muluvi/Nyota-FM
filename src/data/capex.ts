@@ -82,3 +82,13 @@ export const capexTotal = (): KshRange => PHASES.reduce((t, p) => add(t, phaseTo
 /** The three studio phases as originally scheduled (P1–P3, in-model lines only). */
 export const studioPhasesTotal = (): KshRange =>
   (['P1', 'P2', 'P3'] as const).reduce((t, p) => add(t, phaseTotal(p, { inModelOnly: true })), ZERO)
+
+/**
+ * Phase gates: later phases are released only when these conditions hold.
+ * Thresholds are owner decisions (Tier 0) and are never filled in by guesswork.
+ */
+export const phaseGates = [
+  { phase: 'P2' as Phase, condition: 'Trailing 3-month non-spot revenue ≥ threshold, and Phase 1 used for ≥ 2 live video streams per week', threshold: 'TODO_OWNER' },
+  { phase: 'P3' as Phase, condition: 'Trailing 3-month non-spot revenue ≥ threshold, and Phase 2 multi-camera shows sold to at least one title sponsor', threshold: 'TODO_OWNER' },
+  { phase: 'OB' as Phase, condition: 'One pilot activation costed end-to-end and three vehicle/conversion quotes received', threshold: 'Pilot completed' },
+] as const

@@ -14,115 +14,26 @@ import {
 } from 'lucide-react';
 import { Reveal } from '../ledger/Reveal';
 
-interface Touchpoint {
-  name: string;
-  price: number;
-}
+import { touchpointGroups, groupTotal, touchpointCount, type TouchpointGroup as DataGroup } from '../../data/rateCard';
 
-interface TouchpointGroup {
-  id: string;
-  platform: string;
-  subtitle: string;
+type TouchpointGroup = DataGroup & {
   icon: React.ComponentType<{ size?: number; className?: string }>;
   accent: string;
-  touchpoints: Touchpoint[];
-}
+};
 
-const TOUCHPOINT_GROUPS: TouchpointGroup[] = [
-  {
-    id: 'youtube',
-    platform: 'YouTube',
-    subtitle: 'Long-form video, livestreams & searchable archive',
-    icon: Play,
-    accent: 'text-red-300',
-    touchpoints: [
-      { name: 'Video intro logo animation (5–10 sec)', price: 12000 },
-      { name: 'Persistent lower-third logo', price: 12000 },
-      { name: 'Top banner overlay', price: 8000 },
-      { name: 'Mid-roll brand segment (30–60 sec)', price: 15000 },
-      { name: 'Product placement — DJ booth', price: 6000 },
-      { name: 'Product placement — bar/lounge', price: 6000 },
-      { name: 'Branded venue elements', price: 5500 },
-      { name: 'Equipment branding coverage', price: 4000 },
-      { name: 'Apparel / merchandise placement', price: 4500 },
-      { name: 'Crowd interaction shots', price: 5000 },
-      { name: 'End credits sponsorship', price: 6000 },
-      { name: 'Video title brand mention', price: 3000 },
-      { name: 'Thumbnail branding', price: 4000 },
-      { name: 'Pinned comment', price: 2000 },
-      { name: 'Description top placement', price: 4000 },
-    ],
-  },
-  {
-    id: 'instagram',
-    platform: 'Instagram',
-    subtitle: 'Visual discovery, Reels, Stories & product features',
-    icon: Instagram,
-    accent: 'text-pink-300',
-    touchpoints: [
-      { name: 'Feed post — brand tag', price: 3000 },
-      { name: 'Feed post — product feature', price: 4500 },
-      { name: 'Story — brand mention', price: 2000 },
-      { name: 'Story — product feature', price: 3000 },
-      { name: 'Story — swipe-up link', price: 2500 },
-      { name: 'Reel — logo watermark', price: 4000 },
-      { name: 'Reel — product placement', price: 5000 },
-      { name: 'Reel — brand sound / audio', price: 3500 },
-      { name: 'Live — brand shoutout', price: 2500 },
-      { name: 'Carousel — dedicated slide', price: 3500 },
-    ],
-  },
-  {
-    id: 'tiktok',
-    platform: 'TikTok',
-    subtitle: 'Short-form cultural discovery & participatory formats',
-    icon: Video,
-    accent: 'text-cyan-200',
-    touchpoints: [
-      { name: 'Video — brand tag', price: 2500 },
-      { name: 'Video — logo watermark', price: 2500 },
-      { name: 'Video — product feature', price: 4000 },
-      { name: 'Duet / stitch feature', price: 3000 },
-      { name: 'Live — brand mention', price: 2000 },
-      { name: 'Hashtag challenge', price: 6000 },
-      { name: 'Pinned comment', price: 1500 },
-      { name: 'Temporary bio link', price: 2500 },
-    ],
-  },
-  {
-    id: 'multi',
-    platform: 'Multi-platform & exclusive',
-    subtitle: 'X, Facebook, conversion links and premium content',
-    icon: BriefcaseBusiness,
-    accent: 'text-brass',
-    touchpoints: [
-      { name: 'X — tweet brand tag', price: 1500 },
-      { name: 'X — tweet product photo', price: 2500 },
-      { name: 'X — thread brand feature', price: 3000 },
-      { name: 'X — quote tweet', price: 1500 },
-      { name: 'X — retweet brand mention', price: 1500 },
-      { name: 'X — pinned tweet (1 week)', price: 3500 },
-      { name: 'Facebook — post brand tag', price: 1500 },
-      { name: 'Facebook — post product feature', price: 2500 },
-      { name: 'Facebook — story brand mention', price: 1500 },
-      { name: 'Facebook — video logo watermark', price: 2000 },
-      { name: 'Facebook — event sponsor listing', price: 3000 },
-      { name: 'Facebook — live brand shoutout', price: 2000 },
-      { name: 'Promo code integration', price: 2500 },
-      { name: 'Affiliate link', price: 3000 },
-      { name: 'Hashtag campaign', price: 4000 },
-      { name: 'Exclusive — dedicated social video', price: 25000 },
-      { name: 'Exclusive — behind-the-scenes content', price: 15000 },
-    ],
-  },
-];
+const UI: Record<string, Pick<TouchpointGroup, 'icon' | 'accent'>> = {
+  youtube: { icon: Play, accent: 'text-brick-text' },
+  instagram: { icon: Instagram, accent: 'text-brass' },
+  tiktok: { icon: Video, accent: 'text-sage' },
+  multi: { icon: BriefcaseBusiness, accent: 'text-brass' },
+};
+
+/** The single rate card from src/data/rateCard.ts, with display icons. */
+const TOUCHPOINT_GROUPS: TouchpointGroup[] = touchpointGroups.map((g) => ({ ...g, ...UI[g.id] }));
 
 const money = (value: number) => `KSh ${value.toLocaleString('en-KE')}`;
 
-// Totals are always computed from the line items, never typed in. (The source .docx
-// states YouTube = 95,000, but its own items sum to 97,000; the true total is 230,000.)
-const groupTotal = (group: TouchpointGroup) => group.touchpoints.reduce((sum, t) => sum + t.price, 0);
-const TOUCHPOINT_COUNT = TOUCHPOINT_GROUPS.reduce((n, g) => n + g.touchpoints.length, 0);
+const TOUCHPOINT_COUNT = touchpointCount;
 
 export function TouchpointEcosystem() {
   const [selectedId, setSelectedId] = useState('youtube');
@@ -162,12 +73,12 @@ export function TouchpointEcosystem() {
           <div className="rounded border border-hairline bg-ink-2 p-4">
             <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">Highest-value channel</div>
             <div className="mt-2 font-display text-lg text-paper">YouTube</div>
-            <div className="mt-1 font-mono text-xs text-brass">{money(groupTotal(TOUCHPOINT_GROUPS[0]))}</div>
+            <div className="mt-1 font-mono text-xs text-brass">{money(Math.max(...TOUCHPOINT_GROUPS.map(groupTotal)))}</div>
           </div>
           <div className="rounded border border-hairline bg-ink-2 p-4">
             <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">Premium formats</div>
             <div className="mt-2 font-display text-lg text-paper">Exclusive</div>
-            <div className="mt-1 font-mono text-xs text-brass">{money(40000)}</div>
+            <div className="mt-1 font-mono text-xs text-brass">{money(TOUCHPOINT_GROUPS.flatMap((g) => g.touchpoints).filter((t) => t.name.startsWith('Exclusive')).reduce((n, t) => n + t.price, 0))}</div>
           </div>
         </div>
       </Reveal>

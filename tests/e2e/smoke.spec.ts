@@ -33,3 +33,21 @@ test('no fabricated claims are rendered', async ({page}) => {
     expect(text, bad).not.toContain(bad);
   }
 });
+
+test('the Western reach fact renders the same in Hero, Search and Deck', async ({page, isMobile}) => {
+  const {factValue} = await import('../../src/data/facts');
+  const reach = factValue('radio.reach.western');
+  await page.goto('/');
+  await expect(page.locator('[data-fact="radio.reach.western"]')).toContainText(reach);
+
+  await page.keyboard.press('Control+k');
+  await page.getByRole('textbox').first().fill('Radio Reach');
+  await expect(page.getByRole('heading', {name: `${reach} Radio Reach in Western Kenya`})).toBeVisible();
+  await page.keyboard.press('Escape');
+
+  test.skip(isMobile, 'Deck trigger lives in the desktop navbar');
+  await page.reload();
+  await page.getByRole('button', {name: /Presentation Mode/}).click();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.getByRole('dialog')).toContainText(reach);
+});

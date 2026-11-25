@@ -880,26 +880,26 @@ export function Part2MasterData() {
 
               <div className="p-3 bg-ink-2 rounded border border-hairline text-center">
                 <div className="font-mono text-sm sm:text-base text-paper font-bold tracking-wide">
-                  {'Net Listener Score (NLS) = (WAL × AWLH) + (RCI × 0.3) + (CPEI × 0.2)'}
+                  {'NLS = 100 × (0.4 · min(AWLH ÷ benchmark, 1) + 0.3 · RepeatRate + 0.3 · CPEI)'}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono pt-1">
                 <div className="p-2.5 bg-ink-2 rounded border border-hairline">
-                  <span className="text-brass font-semibold block">WAL: Weekly Active Listeners</span>
-                  <span className="text-sage text-[11px]">Unique listeners in past 7 days measured via GeoPoll / KARF panel oversample.</span>
+                  <span className="text-brass font-semibold block">Scale: 0–100</span>
+                  <span className="text-sage text-[11px]">Each term is a ratio between 0 and 1, so no single term swamps the others. Weights (0.4 / 0.3 / 0.3) are Tier 2 and the board can change them.</span>
                 </div>
                 <div className="p-2.5 bg-ink-2 rounded border border-hairline">
                   <span className="text-brass font-semibold block">AWLH: Average Weekly Listening Hours</span>
-                  <span className="text-sage text-[11px]">Time spent listening per diary and daypart recall surveys.</span>
+                  <span className="text-sage text-[11px]">From diary and daypart recall surveys, divided by an agreed benchmark and capped at 1.</span>
                 </div>
                 <div className="p-2.5 bg-ink-2 rounded border border-hairline">
-                  <span className="text-brass font-semibold block">RCI: Repeat Caller Index</span>
-                  <span className="text-sage text-[11px]">Formula: <code className="text-paper">(Unique Callers / Week ÷ Total Callers) × 100</code> recorded via studio call logs.</span>
+                  <span className="text-brass font-semibold block">RepeatRate</span>
+                  <span className="text-sage text-[11px]">Formula: <code className="text-paper">callers with ≥2 calls in 4 weeks ÷ unique callers</code>, from studio call logs. (The old index measured new callers, not repeat ones.)</span>
                 </div>
                 <div className="p-2.5 bg-ink-2 rounded border border-hairline">
                   <span className="text-brass font-semibold block">CPEI: Cross-Platform Engagement Index</span>
-                  <span className="text-sage text-[11px]">Formula: <code className="text-paper">(WhatsApp Opt-In Retention % + USSD Freq + App WAU) ÷ 3</code>.</span>
+                  <span className="text-sage text-[11px]">Formula: <code className="text-paper">mean of WhatsApp opt-in retention, USSD repeat-session rate and app weekly-active rate</code>, each 0–1.</span>
                 </div>
               </div>
 

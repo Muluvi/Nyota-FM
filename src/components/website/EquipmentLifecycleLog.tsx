@@ -30,7 +30,7 @@ const ASSET_REGISTRY: AssetRecord[] = [
     id: 'EQ-02',
     name: 'Blackmagic ATEM Television Studio HD Switcher',
     category: 'Visual Video',
-    costKsh: 204999,
+    costKsh: 154999, // matches capex.ts p1-atem
     warrantyYears: 2,
     maintenanceSchedule: 'Semi-annual thermal cleaning & macro backup',
     localServiceAgent: 'Sound Wave Audio Nairobi',
@@ -39,9 +39,9 @@ const ASSET_REGISTRY: AssetRecord[] = [
   },
   {
     id: 'EQ-03',
-    name: '3× Shure SM7B Cardioid Dynamic Vocal Mics',
+    name: '2× Shure SM7B mics + Cloudlifters (podcast room)',
     category: 'Studio Audio',
-    costKsh: 135000,
+    costKsh: 120000, // part of capex.ts p2-podcast
     warrantyYears: 3,
     maintenanceSchedule: 'Monthly windscreen sanitation & shockmount check',
     localServiceAgent: 'Yamaha Music Point Eldoret',
