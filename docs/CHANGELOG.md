@@ -1,5 +1,22 @@
 # Changelog
 
+## Purpose alignment: baseline — 25 November 2026
+
+Measured with `pnpm check` (Vite 6.4) before the purpose-alignment work packages:
+
+| Metric | Value |
+|---|---|
+| JS | 801.21 KB raw / 205.08 KB gzip, one chunk |
+| CSS | 78.50 KB / 13.68 KB gzip |
+| Modules | 1,733 |
+| Orphan check | 63 / 63 reachable |
+
+After WP1 (trust fixes): JS 789.85 KB / 204.58 KB gzip, CSS 77.96 KB / 13.79 KB gzip.
+
+WP0 adds Vitest (`pnpm test`), Playwright (`pnpm e2e`, desktop + Pixel 7) and `@axe-core/playwright`.
+The smoke test checks that the page loads without script errors, every `sections.ts` id exists exactly
+once with no duplicate ids anywhere, and that none of the removed fabricated claims render.
+
 ## Baseline — 7 October 2026
 
 - TypeScript: `tsc --noEmit` passed before strict mode was enabled.
