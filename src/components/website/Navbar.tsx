@@ -94,12 +94,14 @@ export function Navbar({
               aria-label="Nyota FM Home"
             >
               <img
-                src="https://res.cloudinary.com/da5j0zjok/image/upload/v1780508039/Untitled_design_20260603_203332_0000_e2md3o.png"
+                src="/brand/nyota-logo.svg"
                 alt="Nyota FM"
-                className="h-6 sm:h-7 w-auto object-contain brightness-0 invert opacity-95 group-hover:opacity-100 transition-opacity"
+                width={120}
+                height={24}
+                className="h-6 sm:h-7 w-auto"
               />
               <div className="hidden sm:flex flex-col">
-                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-brass font-bold leading-none">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-brass font-bold leading-none">
                   107.3 FM · WESTERN
                 </span>
                 <span className="font-body text-[11px] text-sage-dim leading-tight">
@@ -127,7 +129,7 @@ export function Navbar({
                       : 'text-sage hover:text-paper hover:bg-ink-2/60'
                   }`}
                 >
-                  <span className="text-[10px] text-sage-dim mr-1 opacity-70">
+                  <span className="text-xs text-sage-dim mr-1 opacity-70">
                     {item.number}
                   </span>
                   <span>{item.label}</span>
@@ -171,7 +173,7 @@ export function Navbar({
             >
               <Search size={14} className="text-brass" />
               <span className="hidden sm:inline">Search</span>
-              <kbd className="hidden lg:inline-block rounded bg-hairline px-1.5 py-0.5 text-[9px] font-mono text-sage-dim">
+              <kbd className="hidden lg:inline-block rounded bg-hairline px-1.5 py-0.5 text-xs font-mono text-sage-dim">
                 ⌘K
               </kbd>
             </button>

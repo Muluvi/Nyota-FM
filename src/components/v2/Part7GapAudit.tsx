@@ -109,7 +109,7 @@ export function Part7GapAudit() {
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
                 PART 7 · THE GAP AUDIT (CENTREPIECE)
               </span>
               <h4 className="font-display text-paper text-base font-semibold">
@@ -201,10 +201,10 @@ export function Part7GapAudit() {
                       .map((g) => (
                         <tr key={g.id} className="hover:bg-ink">
                           <td className="py-2.5 pr-2 font-bold text-brass">Gap {g.id}</td>
-                          <td className="py-2.5 px-2 text-rose-300 font-semibold">{g.v1}</td>
+                          <td className="py-2.5 px-2 text-brick-text font-semibold">{g.v1}</td>
                           <td className="py-2.5 px-2 text-sage font-body">{g.why}</td>
                           <td className="py-2.5 px-2 text-paper font-medium">{g.fix}</td>
-                          <td className="py-2.5 pl-2 text-emerald-400 font-semibold whitespace-nowrap">{g.ref}</td>
+                          <td className="py-2.5 pl-2 text-moss font-semibold whitespace-nowrap">{g.ref}</td>
                         </tr>
                       ))}
                   </tbody>
@@ -223,7 +223,7 @@ export function Part7GapAudit() {
                     <button
                       key={cat}
                       onClick={() => setCategoryFilter(cat)}
-                      className={`px-2 py-0.5 rounded text-[10px] uppercase ${
+                      className={`px-2 py-0.5 rounded text-xs uppercase ${
                         categoryFilter === cat ? 'bg-brass text-ink font-bold' : 'bg-ink text-sage hover:text-paper'
                       }`}
                     >
@@ -259,17 +259,17 @@ export function Part7GapAudit() {
                           <td className="py-2.5 pr-2 font-bold text-sage-dim">{b.id}</td>
                           <td className="py-2.5 px-2 font-bold text-paper">{b.item}</td>
                           <td className="py-2.5 px-2">
-                            <span className="px-1.5 py-0.5 rounded text-[10px] bg-ink border border-hairline text-sage">
+                            <span className="px-1.5 py-0.5 rounded text-xs bg-ink border border-hairline text-sage">
                               {b.cat}
                             </span>
                           </td>
                           <td className="py-2.5 px-2 text-brass font-medium">{b.when}</td>
-                          <td className="py-2.5 px-2 text-emerald-400 font-semibold">{b.cost}</td>
+                          <td className="py-2.5 px-2 text-moss font-semibold">{b.cost}</td>
                           <td className="py-2.5 px-2 text-paper">{b.owner}</td>
                           <td className="py-2.5 pl-2">
-                            <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                              b.v1 === 'Absent' ? 'bg-brick/30 text-rose-300' :
-                              b.v1 === 'Implied' ? 'bg-amber-950/40 text-amber-300' : 'bg-moss/20 text-emerald-300'
+                            <span className={`px-1.5 py-0.5 rounded text-xs font-bold ${
+                              b.v1 === 'Absent' ? 'bg-brick/10 text-brick-text' :
+                              b.v1 === 'Implied' ? 'bg-ink-2/40 text-brass' : 'bg-moss/10 text-moss'
                             }`}>
                               {b.v1}
                             </span>
@@ -314,12 +314,12 @@ export function Part7GapAudit() {
                           <td className="py-2.5 pr-2 font-bold text-brass">{c.id}</td>
                           <td className="py-2.5 px-2 font-bold text-paper">{c.lever}</td>
                           <td className="py-2.5 px-2 text-sage font-body">{c.why}</td>
-                          <td className="py-2.5 px-2 text-emerald-400 font-bold whitespace-nowrap">{c.value}</td>
+                          <td className="py-2.5 px-2 text-moss font-bold whitespace-nowrap">{c.value}</td>
                           <td className="py-2.5 px-2 text-paper whitespace-nowrap">{c.cost}</td>
                           <td className="py-2.5 px-2">
-                            <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
-                              c.diff === 'Low' ? 'bg-moss/20 text-emerald-300' :
-                              c.diff === 'Medium' ? 'bg-brass/20 text-amber-300' : 'bg-brick/20 text-rose-300'
+                            <span className={`px-1.5 py-0.5 rounded text-xs font-semibold ${
+                              c.diff === 'Low' ? 'bg-moss/10 text-moss' :
+                              c.diff === 'Medium' ? 'bg-brass/20 text-brass' : 'bg-brick/10 text-brick-text'
                             }`}>
                               {c.diff}
                             </span>

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -14,9 +13,10 @@
   /* Brick at text size on ink: 6.18:1 contrast (plain brick is 3.99:1). */
   --color-brick-text: #C47F66;
 
-  --font-display: "Instrument Serif", serif;
-  --font-body: "DM Sans", sans-serif;
-  --font-mono: "DM Mono", monospace;
+  /* Self-hosted (src/main.tsx). DM Mono dropped: figures use the system mono stack with tabular numerals. */
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "DM Sans Variable", "DM Sans", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   /* Motion tokens. Collapsed to 0 under reduced motion and in Lite mode. */
   --dur-quick: 160ms;
@@ -28,7 +28,7 @@
 
 /* Base Configuration */
 html {
-  font-size: 15px;
+  font-size: 16px;
   scroll-behavior: smooth;
   background: #090B0A;
   overflow-x: hidden;
@@ -89,7 +89,7 @@ button, a, input, select, textarea {
   }
 
   .text-eyebrow {
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: 1.2px;
   }
 
@@ -145,7 +145,7 @@ h3 {
 }
 
 .text-eyebrow {
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
@@ -215,14 +215,6 @@ h3 {
 }
 
 /* Visual Components Styling */
-:root {
-  --color-broadcast-night: #1B211E;
-  --color-signal-amber: #B8925A;
-  --color-maize-cream: #F3F1EA;
-  --color-static-grey: #8FA096;
-  --color-mulembe-green: #5C7A66;
-  --color-accent: #B8925A;
-}
 
 .glass-panel {
   background-color: var(--color-ink-2);
@@ -375,3 +367,4 @@ h3 {
 [popover]:not(:popover-open) {
   display: none !important;
 }
+.font-mono { font-variant-numeric: tabular-nums; }

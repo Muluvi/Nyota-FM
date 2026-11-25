@@ -101,8 +101,8 @@ export function PresenterRoster() {
               >
                 <div>
                   <h4 className="text-xs font-bold text-paper">{p.name}</h4>
-                  <span className="text-[10px] text-brass font-mono">{p.show}</span>
-                  <span className="text-[10px] text-sage-dim block font-mono">{p.slot}</span>
+                  <span className="text-xs text-brass font-mono">{p.show}</span>
+                  <span className="text-xs text-sage-dim block font-mono">{p.slot}</span>
                 </div>
                 <span className="text-xs font-mono text-sage-dim font-bold">
                   Followers: {p.followerCount}
@@ -138,7 +138,7 @@ export function PresenterRoster() {
           </p>
 
           <div className="pt-2 border-t border-hairline space-y-1.5">
-            <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block font-bold">
+            <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block font-bold">
               SPONSOR CATEGORIES THIS FORMAT SUITS
             </span>
             <div className="flex flex-wrap gap-1.5">

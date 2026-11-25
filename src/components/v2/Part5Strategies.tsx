@@ -38,7 +38,7 @@ export function Part5Strategies() {
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
                 PART 5 · THE 21 ACTION STRATEGIES
               </span>
               <h4 className="font-display text-paper text-base font-semibold">
@@ -48,7 +48,7 @@ export function Part5Strategies() {
                 Every strategy includes rationale, verified data receipts, budget, leads, specific revenue mechanisms, and measurable milestone KPIs.
               </p>
             </div>
-            <span className="text-xs font-mono px-2.5 py-1 rounded bg-moss/20 text-emerald-300 border border-moss/60 font-semibold self-start sm:self-auto">
+            <span className="text-xs font-mono px-2.5 py-1 rounded bg-moss/10 text-moss border border-moss/60 font-semibold self-start sm:self-auto">
               21 / 21 Fully Detailed
             </span>
           </div>
@@ -129,7 +129,7 @@ export function Part5Strategies() {
                     <div className="px-4 pb-5 sm:px-5 pt-1 border-t border-hairline space-y-4 text-xs font-body">
                       {/* Strategy statement */}
                       <div className="p-3 bg-ink-2 rounded border border-hairline">
-                        <strong className="text-brass font-mono uppercase tracking-wider text-[10px] block mb-1">
+                        <strong className="text-brass font-mono uppercase tracking-wider text-xs block mb-1">
                           Strategic Action Statement
                         </strong>
                         <p className="text-paper/95 leading-relaxed sm:text-[13px]">
@@ -140,7 +140,7 @@ export function Part5Strategies() {
                       {/* Why it works & Data Receipts */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="p-3 bg-ink-2 rounded border border-hairline space-y-1">
-                          <strong className="text-paper font-mono uppercase tracking-wider text-[10px] block">
+                          <strong className="text-paper font-mono uppercase tracking-wider text-xs block">
                             Why This Strategy Works
                           </strong>
                           <p className="text-sage leading-relaxed">
@@ -149,13 +149,13 @@ export function Part5Strategies() {
                         </div>
 
                         <div className="p-3 bg-moss/10 rounded border border-moss/40 space-y-1.5 font-mono">
-                          <strong className="text-emerald-400 uppercase tracking-wider text-[10px] flex items-center gap-1">
+                          <strong className="text-moss uppercase tracking-wider text-xs flex items-center gap-1">
                             <CheckCircle2 size={11} /> Data Receipts
                           </strong>
                           <ul className="space-y-1 text-[11px] text-sage">
                             {st.dataReceipts.map((rcpt, i) => (
                               <li key={i} className="flex items-start gap-1.5">
-                                <span className="text-emerald-400">•</span>
+                                <span className="text-moss">•</span>
                                 <span>{rcpt}</span>
                               </li>
                             ))}
@@ -166,21 +166,21 @@ export function Part5Strategies() {
                       {/* Execution Details & Revenue Mechanism */}
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 font-mono text-xs">
                         <div className="p-2.5 bg-ink-2 rounded border border-hairline">
-                          <span className="text-sage-dim text-[10px] block uppercase">Operational Lead</span>
+                          <span className="text-sage-dim text-xs block uppercase">Operational Lead</span>
                           <span className="text-paper font-semibold block mt-0.5">{st.execution.lead}</span>
                         </div>
                         <div className="p-2.5 bg-ink-2 rounded border border-hairline">
-                          <span className="text-sage-dim text-[10px] block uppercase">Allocated Budget</span>
+                          <span className="text-sage-dim text-xs block uppercase">Allocated Budget</span>
                           <span className="text-brass font-bold block mt-0.5">{st.execution.budget}</span>
                         </div>
                         <div className="p-2.5 bg-ink-2 rounded border border-hairline">
-                          <span className="text-sage-dim text-[10px] block uppercase">Deployment Window</span>
+                          <span className="text-sage-dim text-xs block uppercase">Deployment Window</span>
                           <span className="text-paper font-semibold block mt-0.5">{st.execution.timeline}</span>
                         </div>
                       </div>
 
                       <div className="p-3 bg-ink-2 rounded border border-brass/40 space-y-1 font-mono">
-                        <span className="text-brass text-[10px] font-bold uppercase tracking-wider block">
+                        <span className="text-brass text-xs font-bold uppercase tracking-wider block">
                           Specific Revenue Generation Mechanism
                         </span>
                         <p className="text-paper/90 font-body text-xs leading-relaxed">
@@ -212,7 +212,7 @@ export function Part5Strategies() {
                                     <td className="py-2 px-2">{kpi.m3}</td>
                                     <td className="py-2 px-2 text-sage">{kpi.m6}</td>
                                     <td className="py-2 px-2 text-paper font-semibold">{kpi.m12}</td>
-                                    <td className="py-2 pl-2 text-emerald-400 font-bold">{kpi.m24}</td>
+                                    <td className="py-2 pl-2 text-moss font-bold">{kpi.m24}</td>
                                   </tr>
                                 ))}
                               </tbody>

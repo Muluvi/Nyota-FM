@@ -75,7 +75,7 @@ export function StrategyTracker() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Execution Workbench
             </span>
             <span className="font-mono text-xs text-sage-dim">· 21 Concrete Action Playbooks</span>
@@ -94,7 +94,7 @@ export function StrategyTracker() {
             {endorsedCount}
           </div>
           <div>
-            <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+            <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">
               Your Shortlist
             </div>
             <div className="font-mono text-xs text-brass font-bold">
@@ -168,11 +168,11 @@ export function StrategyTracker() {
                     <span className="font-mono text-xs font-bold text-brass px-1.5 py-0.5 rounded bg-brass/10 border border-brass/30">
                       {s.num}
                     </span>
-                    <span className="font-mono text-[10px] uppercase text-sage-dim">
+                    <span className="font-mono text-xs uppercase text-sage-dim">
                       {s.window}
                     </span>
                   </div>
-                  <span className="rounded bg-hairline px-2 py-0.5 text-[9px] font-mono text-sage">
+                  <span className="rounded bg-hairline px-2 py-0.5 text-xs font-mono text-sage">
                     {s.category}
                   </span>
                 </div>
@@ -193,7 +193,7 @@ export function StrategyTracker() {
                 </div>
                 <div className="flex items-center justify-between text-xs font-mono">
                   <span className="text-sage-dim text-[11px]">Target Budget:</span>
-                  <span className="text-emerald-400 font-semibold">{s.cost}</span>
+                  <span className="text-moss font-semibold">{s.cost}</span>
                 </div>
 
                 {/* Interactive Endorsement Toggle Button */}

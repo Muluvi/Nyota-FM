@@ -96,7 +96,7 @@ export function CountyCoverageExplorer() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Interactive Signal Map
             </span>
             <span className="font-mono text-xs text-sage-dim">· 5-County Western Coverage Matrix</span>
@@ -124,7 +124,7 @@ export function CountyCoverageExplorer() {
                 : 'bg-ink text-sage hover:text-paper border-hairline hover:border-brass/50'
             }`}
           >
-            <div className="text-[10px] opacity-80 uppercase tracking-wider">{c.coverageStatus.split(' ')[0]}</div>
+            <div className="text-xs opacity-80 uppercase tracking-wider">{c.coverageStatus.split(' ')[0]}</div>
             <div className="text-sm font-semibold truncate mt-0.5">{c.name.replace(' County', '')}</div>
             <div className="text-[11px] opacity-90 mt-1">{c.projected2026} pop</div>
           </button>
@@ -138,14 +138,14 @@ export function CountyCoverageExplorer() {
             <div className="flex items-center gap-2 mb-1">
               <MapPin size={16} className="text-brass" />
               <h4 className="font-display text-2xl text-paper font-bold">{selectedCounty.name}</h4>
-              <span className="rounded-full bg-moss/20 text-moss px-2.5 py-0.5 font-mono text-[10px] font-semibold border border-moss/40">
+              <span className="rounded-full bg-moss/10 text-moss px-2.5 py-0.5 font-mono text-xs font-semibold border border-moss/40">
                 {selectedCounty.coverageStatus}
               </span>
             </div>
             <div className="text-xs font-mono text-sage flex flex-wrap items-center gap-3">
               <span>2019 Census: <strong className="text-paper">{selectedCounty.census2019}</strong></span>
               <span>•</span>
-              <span>2026 Projection: <strong className="text-emerald-400">{selectedCounty.projected2026}</strong></span>
+              <span>2026 Projection: <strong className="text-moss">{selectedCounty.projected2026}</strong></span>
               <span>•</span>
               <span>Signal: <strong className="text-brass">{selectedCounty.signalStrength}</strong></span>
             </div>
@@ -172,7 +172,7 @@ export function CountyCoverageExplorer() {
               ))}
             </div>
             <div className="pt-2 text-xs font-body text-sage leading-relaxed">
-              <span className="text-sage-dim font-mono text-[10px] block uppercase">Urban & Trade Centers:</span>
+              <span className="text-sage-dim font-mono text-xs block uppercase">Urban & Trade Centers:</span>
               {selectedCounty.keyTowns.join(' · ')}
             </div>
           </div>

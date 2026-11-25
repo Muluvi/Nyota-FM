@@ -179,11 +179,11 @@ export function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
               >
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-brass font-semibold">
+                    <span className="text-xs font-mono uppercase tracking-wider text-brass font-semibold">
                       {item.category}
                     </span>
                     {item.badge && (
-                      <span className="rounded bg-hairline px-1.5 py-0.2 text-[9px] font-mono text-sage-dim">
+                      <span className="rounded bg-hairline px-1.5 py-0.2 text-xs font-mono text-sage-dim">
                         {item.badge}
                       </span>
                     )}

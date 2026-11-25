@@ -109,7 +109,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         {/* Live Animated Metrics Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-8 sm:mb-12">
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+            <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Evidence Standard
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-paper font-bold flex items-center gap-1.5 group-hover:text-brass transition-colors">
@@ -122,7 +122,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
           </div>
 
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+            <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Phase 1 Studio Capex
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-brass font-bold flex items-center gap-1 group-hover:brightness-110 transition-colors">
@@ -134,7 +134,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
           </div>
 
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+            <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Operational Build
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-paper font-bold flex items-center gap-1.5 group-hover:text-brass transition-colors">
@@ -147,7 +147,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
           </div>
 
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+            <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Action Execution Plans
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-moss font-bold flex items-center gap-1.5 group-hover:brightness-110 transition-colors">
@@ -165,7 +165,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4 mb-5">
             <div>
               <div className="flex items-center gap-2">
-                <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+                <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
                   Audit Protocol
                 </span>
                 <span className="font-mono text-xs text-sage-dim">· Three-Tier Evidence Standard</span>
@@ -182,7 +182,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
                 onClick={() => setActiveTierTab(1)}
                 className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
                   activeTierTab === 1
-                    ? 'bg-moss/30 text-emerald-300 font-semibold border border-moss/60'
+                    ? 'bg-moss/10 text-moss font-semibold border border-moss/60'
                     : 'text-sage hover:text-paper'
                 }`}
               >
@@ -195,7 +195,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
                 onClick={() => setActiveTierTab(2)}
                 className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
                   activeTierTab === 2
-                    ? 'bg-brass/30 text-amber-300 font-semibold border border-brass/60'
+                    ? 'bg-brass/30 text-brass font-semibold border border-brass/60'
                     : 'text-sage hover:text-paper'
                 }`}
               >
@@ -208,7 +208,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
                 onClick={() => setActiveTierTab(0)}
                 className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
                   activeTierTab === 0
-                    ? 'bg-brick/30 text-rose-300 font-semibold border border-brick/60'
+                    ? 'bg-brick/10 text-brick-text font-semibold border border-brick/60'
                     : 'text-sage hover:text-paper'
                 }`}
               >
@@ -223,8 +223,8 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             {activeTierTab === 1 && (
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 font-semibold">
-                    <span className="size-2 rounded-full bg-emerald-400" />
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-moss font-semibold">
+                    <span className="size-2 rounded-full bg-moss" />
                     TIER 1 · PRIMARY VERIFIED HARD DATA
                   </span>
                   <span className="text-[11px] font-mono text-sage-dim">Source registry in the appendix</span>
@@ -242,8 +242,8 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             {activeTierTab === 2 && (
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-amber-300 font-semibold">
-                    <span className="size-2 rounded-full bg-amber-400" />
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-brass font-semibold">
+                    <span className="size-2 rounded-full bg-brass" />
                     TIER 2 · MODELLED ECONOMETRIC ESTIMATE
                   </span>
                   <span className="text-[11px] font-mono text-sage-dim">Reproducible Formulae</span>
@@ -253,7 +253,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
                 </p>
                 <div className="p-2.5 rounded bg-ink-2 border border-hairline font-mono text-xs text-sage flex items-center justify-between">
                   <span>Example: revenue index 100 → 200 by Month 24 (base case)</span>
-                  <span className="text-amber-400 font-semibold">Math Stated</span>
+                  <span className="text-brass font-semibold">Math Stated</span>
                 </div>
               </div>
             )}
@@ -261,8 +261,8 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
             {activeTierTab === 0 && (
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-rose-300 font-semibold">
-                    <span className="size-2 rounded-full bg-rose-400" />
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono text-brick-text font-semibold">
+                    <span className="size-2 rounded-full bg-brick" />
                     TIER 0 · EXPLICIT DATA GAP
                   </span>
                   <span className="text-[11px] font-mono text-sage-dim">Primary Field Research Needed</span>
@@ -272,7 +272,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
                 </p>
                 <div className="p-2.5 rounded bg-ink-2 border border-hairline font-mono text-xs text-sage flex items-center justify-between">
                   <span>Example: Dial-level station recall in rural Bungoma wards (KSh 180K survey)</span>
-                  <span className="text-rose-400 font-semibold">Honest Gap Declared</span>
+                  <span className="text-brick-text font-semibold">Honest Gap Declared</span>
                 </div>
               </div>
             )}

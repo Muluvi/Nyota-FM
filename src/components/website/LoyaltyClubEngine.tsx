@@ -56,7 +56,7 @@ export function LoyaltyClubEngine() {
             <Award size={20} />
           </div>
           <div>
-            <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+            <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
               Active Loyalty Balance
             </span>
             <span className="font-display text-2xl font-bold text-brass tabular-nums">
@@ -67,7 +67,7 @@ export function LoyaltyClubEngine() {
       </div>
 
       {redeemedItem && (
-        <div className="p-3 rounded-lg bg-emerald-500/20 border border-emerald-500 text-emerald-300 text-xs font-mono flex items-center gap-2 animate-section-entrance">
+        <div className="p-3 rounded-lg bg-moss/10 border border-moss text-moss text-xs font-mono flex items-center gap-2 animate-section-entrance">
           <Check size={16} />
           <span>Success! Redeemed <strong>{redeemedItem}</strong>. (Demo only: no reward is sent.)</span>
         </div>
@@ -100,7 +100,7 @@ export function LoyaltyClubEngine() {
 
         {/* Rewards Catalog */}
         <div className="lg:col-span-6 space-y-3">
-          <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold block">
+          <span className="text-xs font-mono text-moss uppercase tracking-wider font-semibold block">
             REDEEM FIRST-PARTY REWARDS
           </span>
           <div className="space-y-2">
@@ -113,7 +113,7 @@ export function LoyaltyClubEngine() {
                 >
                   <div>
                     <span className="text-paper font-semibold block">{rew.title}</span>
-                    <span className="text-[10px] text-sage-dim">Sponsored by {rew.sponsor}</span>
+                    <span className="text-xs text-sage-dim">Sponsored by {rew.sponsor}</span>
                   </div>
 
                   <button
@@ -123,7 +123,7 @@ export function LoyaltyClubEngine() {
                     className={`px-3 py-1.5 rounded font-bold transition-all ${
                       canAfford
                         ? 'bg-brass text-ink hover:brightness-110 shadow'
-                        : 'bg-stone-800 text-stone-500 cursor-not-allowed'
+                        : 'bg-hairline text-sage cursor-not-allowed'
                     }`}
                   >
                     {rew.costPts} pts

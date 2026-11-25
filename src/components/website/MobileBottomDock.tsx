@@ -39,7 +39,7 @@ export function MobileBottomDock({
             onClick={(e) => e.stopPropagation()}
           >
             {/* Grab handle */}
-            <div className="h-1 w-10 bg-stone-700 rounded-full mx-auto" />
+            <div className="h-1 w-10 bg-hairline rounded-full mx-auto" />
 
             <div className="flex items-center justify-between border-b border-hairline pb-2.5">
               <span className="text-xs font-mono text-brass uppercase tracking-wider font-bold">
@@ -64,7 +64,7 @@ export function MobileBottomDock({
                   className="w-full min-h-[44px] px-3 py-2 rounded-lg border border-hairline/60 bg-ink text-left flex items-center justify-between text-xs font-mono hover:border-brass/50 active:scale-[0.98] transition-all"
                 >
                   <div className="flex items-center gap-2.5">
-                    <span className="text-[10px] text-brass font-bold">{sec.num}</span>
+                    <span className="text-xs text-brass font-bold">{sec.num}</span>
                     <span className="text-paper font-medium">{sec.title}</span>
                   </div>
                   <ChevronRight size={14} className="text-sage-dim" />
@@ -89,7 +89,7 @@ export function MobileBottomDock({
             aria-label="Sections menu"
           >
             <Layers size={18} className="text-brass" />
-            <span className="text-[10px] font-mono mt-0.5 font-medium">Parts</span>
+            <span className="text-xs font-mono mt-0.5 font-medium">Parts</span>
           </button>
 
           {/* 2. Board Briefing Mode Trigger */}
@@ -100,7 +100,7 @@ export function MobileBottomDock({
             aria-label="Board Mode"
           >
             <Sparkles size={18} className="text-brass" />
-            <span className="text-[10px] font-mono mt-0.5 font-medium">Board</span>
+            <span className="text-xs font-mono mt-0.5 font-medium">Board</span>
           </button>
 
           {/* 3. Search Modal Trigger */}
@@ -111,7 +111,7 @@ export function MobileBottomDock({
             aria-label="Search"
           >
             <Search size={18} className="text-brass" />
-            <span className="text-[10px] font-mono mt-0.5 font-medium">Search</span>
+            <span className="text-xs font-mono mt-0.5 font-medium">Search</span>
           </button>
 
           {/* 4. Scroll To Top Trigger */}
@@ -122,7 +122,7 @@ export function MobileBottomDock({
             aria-label="Scroll to top"
           >
             <ArrowUp size={18} className="text-brass" />
-            <span className="text-[10px] font-mono mt-0.5 font-medium">Top</span>
+            <span className="text-xs font-mono mt-0.5 font-medium">Top</span>
           </button>
         </div>
       </nav>

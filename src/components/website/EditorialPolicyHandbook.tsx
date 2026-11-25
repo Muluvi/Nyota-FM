@@ -139,7 +139,7 @@ export function EditorialPolicyHandbook() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-hairline/60 font-mono text-[11px]">
                     <div>
-                      <span className="text-rose-400 font-bold block">Sanction for Breach:</span>
+                      <span className="text-brick-text font-bold block">Sanction for Breach:</span>
                       <span className="text-paper">{rule.sanction}</span>
                     </div>
                     <div>

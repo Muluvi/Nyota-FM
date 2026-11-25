@@ -130,7 +130,7 @@ export function TwangaaLexicon() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-[10px] font-mono text-brass font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-xs font-mono text-brass font-bold uppercase tracking-wider">
               <Sparkles size={12} />
               Cultural Moat & Linguistic Authenticity
             </span>
@@ -149,7 +149,7 @@ export function TwangaaLexicon() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Term List */}
         <div className="lg:col-span-5 space-y-2">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-brass font-semibold block px-1">
+          <span className="text-xs font-mono uppercase tracking-widest text-brass font-semibold block px-1">
             KEY BROADCAST VOCABULARY
           </span>
           <div className="space-y-1.5">
@@ -173,7 +173,7 @@ export function TwangaaLexicon() {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="font-display text-sm text-paper">{w.term}</span>
-                      <span className="text-[9px] font-mono rounded bg-ink-2 px-1.5 py-0.5 text-brass border border-hairline">
+                      <span className="text-xs font-mono rounded bg-ink-2 px-1.5 py-0.5 text-brass border border-hairline">
                         {w.dialect}
                       </span>
                     </div>
@@ -222,7 +222,7 @@ export function TwangaaLexicon() {
 
           {/* Translation */}
           <div className="space-y-1">
-            <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block font-bold">
+            <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block font-bold">
               LITERAL & CULTURAL MEANING
             </span>
             <p className="text-sm text-paper font-serif italic leading-relaxed">
@@ -232,7 +232,7 @@ export function TwangaaLexicon() {
 
           {/* On-Air Programming Context */}
           <div className="rounded-lg border border-hairline bg-ink-2 p-3.5 space-y-1">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-wider block font-bold flex items-center gap-1.5">
+            <span className="text-xs font-mono text-brass uppercase tracking-wider block font-bold flex items-center gap-1.5">
               <Music size={12} />
               ON-AIR BROADCAST APPLICATION
             </span>
@@ -243,7 +243,7 @@ export function TwangaaLexicon() {
 
           {/* Commercial & Advertiser Value */}
           <div className="rounded-lg border border-hairline bg-ink-2 p-3.5 space-y-1">
-            <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider block font-bold flex items-center gap-1.5">
+            <span className="text-xs font-mono text-moss uppercase tracking-wider block font-bold flex items-center gap-1.5">
               <Globe2 size={12} />
               COMMERCIAL ADVERTISER VALUE
             </span>

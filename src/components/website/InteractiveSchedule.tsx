@@ -70,7 +70,7 @@ export function InteractiveSchedule() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Programming Grid
             </span>
             <span className="font-mono text-xs text-sage-dim">· 7-Day Broadcast Architecture</span>
@@ -163,7 +163,7 @@ export function InteractiveSchedule() {
               <div>
                 <div className="flex items-center gap-2">
                   <span className="font-mono text-xs text-brass font-bold">{currentShow.time}</span>
-                  <span className="rounded bg-hairline px-2 py-0.5 font-mono text-[10px] text-sage">
+                  <span className="rounded bg-hairline px-2 py-0.5 font-mono text-xs text-sage">
                     {currentShow.category}
                   </span>
                 </div>
@@ -191,7 +191,7 @@ export function InteractiveSchedule() {
             {/* Demographics & Commercial Data */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <div className="p-3.5 rounded-lg bg-ink-2 border border-hairline space-y-1">
-                <span className="text-[10px] font-mono uppercase text-sage-dim tracking-wider block">
+                <span className="text-xs font-mono uppercase text-sage-dim tracking-wider block">
                   Core Audience Demographic
                 </span>
                 <span className="text-xs font-mono text-paper font-semibold block">
@@ -200,10 +200,10 @@ export function InteractiveSchedule() {
               </div>
 
               <div className="p-3.5 rounded-lg bg-ink-2 border border-brass/40 space-y-1">
-                <span className="text-[10px] font-mono uppercase text-brass tracking-wider block">
+                <span className="text-xs font-mono uppercase text-brass tracking-wider block">
                   Title Sponsorship Benchmark
                 </span>
-                <span className="text-xs font-mono text-emerald-400 font-bold block">
+                <span className="text-xs font-mono text-moss font-bold block">
                   {currentShow.commercialRate}
                 </span>
               </div>

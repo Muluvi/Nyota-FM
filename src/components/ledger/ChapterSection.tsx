@@ -19,7 +19,7 @@ export function ChapterSection({ id, number, title, children }: ChapterSectionPr
               {number}
             </div>
             <div>
-              <span className="font-mono text-[10px] uppercase tracking-widest text-brass font-bold block">
+              <span className="font-mono text-xs uppercase tracking-widest text-brass font-bold block">
                 PART {number} · STRATEGIC MODULE
               </span>
               <h2 className="font-display text-2xl sm:text-4xl text-paper font-semibold m-0 leading-tight">

@@ -55,7 +55,7 @@ export function FloatingNavRail() {
         aria-label="Document Section Rail"
       >
         <div className="bg-ink-2/90 border border-hairline/80 rounded-xl p-2.5 backdrop-blur-md shadow-2xl flex flex-col gap-1 max-w-[160px]">
-          <div className="px-2 py-1 text-[9px] font-mono uppercase tracking-widest text-brass font-bold border-b border-hairline/50 flex items-center gap-1.5">
+          <div className="px-2 py-1 text-xs font-mono uppercase tracking-widest text-brass font-bold border-b border-hairline/50 flex items-center gap-1.5">
             <Compass size={11} />
             <span>Platform Rail</span>
           </div>
@@ -86,7 +86,7 @@ export function FloatingNavRail() {
             })}
           </nav>
 
-          <div className="pt-1.5 mt-0.5 border-t border-hairline/50 px-2 flex items-center justify-between text-[10px] font-mono text-sage-dim">
+          <div className="pt-1.5 mt-0.5 border-t border-hairline/50 px-2 flex items-center justify-between text-xs font-mono text-sage-dim">
             <span>Read</span>
             <span className="text-brass font-bold">{scrollPercent}%</span>
           </div>

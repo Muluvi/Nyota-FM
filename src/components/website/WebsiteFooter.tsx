@@ -73,9 +73,11 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
             <div className="lg:col-span-2 space-y-4">
               <div className="flex items-center gap-3">
                 <img
-                  src="https://res.cloudinary.com/da5j0zjok/image/upload/v1780508039/Untitled_design_20260603_203332_0000_e2md3o.png"
+                  src="/brand/nyota-logo.svg"
                   alt="Nyota FM 107.3"
-                  className="h-8 w-auto brightness-0 invert"
+                  width={120}
+                  height={24}
+                  className="h-8 w-auto"
                 />
                 <div>
                   <span className="font-mono text-xs uppercase tracking-widest text-brass font-bold block">
@@ -242,7 +244,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
           >
             <div className="flex items-center justify-between border-b border-hairline pb-3">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-brass font-bold">
+                <span className="text-xs font-mono uppercase tracking-wider text-brass font-bold">
                   COMMERCIAL INQUIRY
                 </span>
                 <h3 className="font-display text-2xl text-paper font-semibold">

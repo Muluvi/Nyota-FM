@@ -15,7 +15,7 @@ export function Part2MasterData() {
       <Reveal>
         <div className="p-4 bg-ink-2 rounded border border-hairline flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div>
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
               PART 2 · MASTER DATA ANNEXURE
             </span>
             <p className="text-xs text-sage mt-0.5">
@@ -23,9 +23,9 @@ export function Part2MasterData() {
             </p>
           </div>
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-moss/20 text-emerald-300 border border-moss/50 font-semibold">Tier 1 Hard</span>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-brass/20 text-amber-300 border border-brass/50 font-semibold">Tier 2 Modelled</span>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-brick/20 text-rose-300 border border-brick/50 font-semibold">Tier 0 Gap</span>
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-moss/10 text-moss border border-moss/50 font-semibold">Tier 1 Hard</span>
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-brass/20 text-brass border border-brass/50 font-semibold">Tier 2 Modelled</span>
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-brick/10 text-brick-text border border-brick/50 font-semibold">Tier 0 Gap</span>
           </div>
         </div>
       </Reveal>
@@ -86,40 +86,40 @@ export function Part2MasterData() {
                     <td className="py-2.5 pr-3 font-semibold text-brass">Bungoma</td>
                     <td className="py-2.5 px-3">1,670,570</td>
                     <td className="py-2.5 px-3">≈1.89M</td>
-                    <td className="py-2.5 px-3 text-emerald-400">≈1.93M</td>
+                    <td className="py-2.5 px-3 text-moss">≈1.93M</td>
                     <td className="py-2.5 pl-3 text-sage">Bukusu, Tachoni, Sabaot</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-brass">Kakamega</td>
                     <td className="py-2.5 px-3">1,867,579</td>
-                    <td className="py-2.5 px-3 text-amber-300">2,070,000 (est.)</td>
-                    <td className="py-2.5 px-3 text-amber-300">2,110,000 (est.)</td>
+                    <td className="py-2.5 px-3 text-brass">2,070,000 (est.)</td>
+                    <td className="py-2.5 px-3 text-brass">2,110,000 (est.)</td>
                     <td className="py-2.5 pl-3 text-sage">Maragoli, Isukha, Idakho, Tiriki</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-brass">Trans Nzoia</td>
                     <td className="py-2.5 px-3">990,341</td>
-                    <td className="py-2.5 px-3 text-amber-300">1,060,000 (est.)</td>
-                    <td className="py-2.5 px-3 text-amber-300">1,080,000 (est.)</td>
+                    <td className="py-2.5 px-3 text-brass">1,060,000 (est.)</td>
+                    <td className="py-2.5 px-3 text-brass">1,080,000 (est.)</td>
                     <td className="py-2.5 pl-3 text-sage">Bukusu, Sabaot, mixed</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-brass">Busia</td>
                     <td className="py-2.5 px-3">893,681</td>
-                    <td className="py-2.5 px-3 text-amber-300">970,000 (est.)</td>
-                    <td className="py-2.5 px-3 text-amber-300">990,000 (est.)</td>
+                    <td className="py-2.5 px-3 text-brass">970,000 (est.)</td>
+                    <td className="py-2.5 px-3 text-brass">990,000 (est.)</td>
                     <td className="py-2.5 pl-3 text-sage">Samia, Khayo, Marachi, Teso</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-brass">Vihiga</td>
                     <td className="py-2.5 px-3">590,013</td>
-                    <td className="py-2.5 px-3 text-amber-300">640,000 (est.)</td>
-                    <td className="py-2.5 px-3 text-amber-300">650,000 (est.)</td>
+                    <td className="py-2.5 px-3 text-brass">640,000 (est.)</td>
+                    <td className="py-2.5 px-3 text-brass">650,000 (est.)</td>
                     <td className="py-2.5 pl-3 text-sage">Maragoli, Tiriki, Banyore</td>
                   </tr>
                   <tr className="bg-ink font-bold border-t border-brass/40">
                     <td className="py-3 pr-3 text-paper">Total Addressable Market</td>
-                    <td className="py-3 px-3 text-emerald-400">6,012,184</td>
+                    <td className="py-3 px-3 text-moss">6,012,184</td>
                     <td className="py-3 px-3 text-brass">≈ 6.6M</td>
                     <td className="py-3 px-3 text-brass">≈ 6.8M</td>
                     <td className="py-3 pl-3 text-sage-dim">Pan-Luhya Core Basin</td>
@@ -129,7 +129,7 @@ export function Part2MasterData() {
             </div>
 
             <div className="p-3 bg-ink rounded border border-hairline text-xs space-y-1.5 font-body">
-              <div className="text-amber-400 font-mono text-[11px] font-semibold uppercase tracking-wider">
+              <div className="text-brass font-mono text-[11px] font-semibold uppercase tracking-wider">
                 Note on v1.0 Discrepancy (Audited Correction)
               </div>
               <p className="text-sage text-xs leading-relaxed">
@@ -156,7 +156,7 @@ export function Part2MasterData() {
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-hairline">
                   <span className="text-sage">National daily listenership (MCK, 2023 → 2025)</span>
-                  <span className="text-rose-400 font-bold">75% → 41%</span>
+                  <span className="text-brick-text font-bold">75% → 41%</span>
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-hairline">
                   <span className="text-sage">Radio listeners nationally (CA, Apr–Jun 2026)</span>
@@ -186,7 +186,7 @@ export function Part2MasterData() {
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-hairline">
                   <span className="text-sage">Feature Phone Connections (June 2026)</span>
-                  <span className="text-amber-300 font-bold">27.42 Million</span>
+                  <span className="text-brass font-bold">27.42 Million</span>
                 </div>
                 <div className="flex justify-between py-1.5">
                   <span className="text-sage">Strategic Implication</span>
@@ -216,7 +216,7 @@ export function Part2MasterData() {
               <div className="p-3 bg-ink rounded border border-hairline">
                 <div className="text-sage font-bold text-base">All Luhya: 6,823,842</div>
                 <div className="text-sage text-[11px] mt-1">Isukha, Idakho, Samia, Khayo, Tiriki</div>
-                <div className="text-sage-dim text-[10px] mt-1">Unified via Swahili + Pan-Luhya civic bridge</div>
+                <div className="text-sage-dim text-xs mt-1">Unified via Swahili + Pan-Luhya civic bridge</div>
               </div>
             </div>
           </div>
@@ -250,12 +250,12 @@ export function Part2MasterData() {
                 </thead>
                 <tbody className="divide-y divide-hairline text-paper/90">
                   <tr className="hover:bg-ink">
-                    <td className="py-2 pr-2 font-bold text-emerald-400">Mulembe FM</td>
+                    <td className="py-2 pr-2 font-bold text-moss">Mulembe FM</td>
                     <td className="py-2 px-2">99.0 / 99.2 / 95.8 / 97.9 FM</td>
                     <td className="py-2 px-2">National</td>
                     <td className="py-2 px-2 text-brass">Royal Media Services</td>
                     <td className="py-2 px-2">Luhya</td>
-                    <td className="py-2 px-2 text-emerald-400">High (RMS network)</td>
+                    <td className="py-2 px-2 text-moss">High (RMS network)</td>
                     <td className="py-2 pl-2 text-sage">Legacy leader; network ad sales; strong FMCG advertiser base</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -264,16 +264,16 @@ export function Part2MasterData() {
                     <td className="py-2 px-2">Western, N. Rift, E. Uganda</td>
                     <td className="py-2 px-2">West Media Ltd (Indep.)</td>
                     <td className="py-2 px-2">Luhya/Swahili</td>
-                    <td className="py-2 px-2 text-amber-300">Moderate</td>
+                    <td className="py-2 px-2 text-brass">Moderate</td>
                     <td className="py-2 pl-2 text-sage">Independent; regional focus; traditional spot advertising dominant</td>
                   </tr>
                   <tr className="hover:bg-ink">
-                    <td className="py-2 pr-2 font-bold text-emerald-400">Sulwe FM</td>
+                    <td className="py-2 pr-2 font-bold text-moss">Sulwe FM</td>
                     <td className="py-2 px-2">89.6 FM</td>
                     <td className="py-2 px-2">Western, Nairobi, N. Rift</td>
                     <td className="py-2 px-2 text-brass">Royal Media Services</td>
                     <td className="py-2 px-2">Bukusu</td>
-                    <td className="py-2 px-2 text-amber-300">Moderate</td>
+                    <td className="py-2 px-2 text-brass">Moderate</td>
                     <td className="py-2 pl-2 text-sage">RMS-backed Bukusu vernacular leader; minimal multi-platform inventory</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -282,7 +282,7 @@ export function Part2MasterData() {
                     <td className="py-2 px-2">Western Kenya</td>
                     <td className="py-2 px-2">KBC (State Broadcaster)</td>
                     <td className="py-2 px-2">Luhya</td>
-                    <td className="py-2 px-2 text-rose-300">Low</td>
+                    <td className="py-2 px-2 text-brick-text">Low</td>
                     <td className="py-2 pl-2 text-sage">State broadcaster; loyal older demographic; limited digital engagement</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -291,7 +291,7 @@ export function Part2MasterData() {
                     <td className="py-2 px-2">North Rift, Western</td>
                     <td className="py-2 px-2">Independent (Christian)</td>
                     <td className="py-2 px-2">Gospel/English</td>
-                    <td className="py-2 px-2 text-rose-300">Low</td>
+                    <td className="py-2 px-2 text-brick-text">Low</td>
                     <td className="py-2 pl-2 text-sage">Faith-based format; listener donations + limited church sponsorships</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -300,7 +300,7 @@ export function Part2MasterData() {
                     <td className="py-2 px-2">Bungoma County</td>
                     <td className="py-2 px-2">Community / Commercial</td>
                     <td className="py-2 px-2">Luhya</td>
-                    <td className="py-2 px-2 text-rose-300">Very Low</td>
+                    <td className="py-2 px-2 text-brick-text">Very Low</td>
                     <td className="py-2 pl-2 text-sage">Hyper-local; narrow coverage; spot rates under KSh 3,000</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -309,7 +309,7 @@ export function Part2MasterData() {
                     <td className="py-2 px-2">Kakamega, Vihiga, Bungoma</td>
                     <td className="py-2 px-2">Amaica Media</td>
                     <td className="py-2 px-2">Multi-lingual</td>
-                    <td className="py-2 px-2 text-amber-300">Moderate</td>
+                    <td className="py-2 px-2 text-brass">Moderate</td>
                     <td className="py-2 pl-2 text-sage">Youth-focused urban programming; licensed 2025; digital-first experiments</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -318,7 +318,7 @@ export function Part2MasterData() {
                     <td className="py-2 px-2">Western, E. Uganda</td>
                     <td className="py-2 px-2">Sunlight Media Services</td>
                     <td className="py-2 px-2">Luhya</td>
-                    <td className="py-2 px-2 text-rose-300">Low</td>
+                    <td className="py-2 px-2 text-brick-text">Low</td>
                     <td className="py-2 pl-2 text-sage">Launched 2021; growing grassroots presence; regional spot advertiser focus</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -327,7 +327,7 @@ export function Part2MasterData() {
                     <td className="py-2 px-2">Bungoma County</td>
                     <td className="py-2 px-2">Landmerc Limited</td>
                     <td className="py-2 px-2">Luhya</td>
-                    <td className="py-2 px-2 text-rose-300">Very Low</td>
+                    <td className="py-2 px-2 text-brick-text">Very Low</td>
                     <td className="py-2 pl-2 text-sage">Hyper-local community station; low commercial footprint</td>
                   </tr>
                   <tr className="bg-brass/10 hover:bg-brass/20 border-t border-brass/50">
@@ -346,7 +346,7 @@ export function Part2MasterData() {
             {/* Competitor Data Gap Card */}
             <div className="p-3.5 bg-brick/20 border border-brick/60 rounded flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
               <div className="space-y-0.5 font-mono">
-                <span className="text-rose-400 font-bold uppercase tracking-wider block">
+                <span className="text-brick-text font-bold uppercase tracking-wider block">
                   Identified Data Gap — Competitor Financials
                 </span>
                 <span className="text-paper/90">
@@ -358,7 +358,7 @@ export function Part2MasterData() {
               </div>
               <div className="shrink-0 text-right">
                 <span className="text-brass font-mono font-bold block">KSh 200,000–500,000</span>
-                <span className="text-[10px] font-mono text-sage-dim">Timeline: 4–6 weeks</span>
+                <span className="text-xs font-mono text-sage-dim">Timeline: 4–6 weeks</span>
               </div>
             </div>
 
@@ -423,7 +423,7 @@ export function Part2MasterData() {
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-brass">Radio Citizen</td>
                     <td className="py-2.5 px-3">Prime Time (Breakfast / Drive)</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">35,000 – 55,000</td>
+                    <td className="py-2.5 px-3 text-moss font-bold">35,000 – 55,000</td>
                     <td className="py-2.5 pl-3 text-sage">National market leader morning slot</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -460,7 +460,7 @@ export function Part2MasterData() {
                     <td className="py-2.5 pr-3 text-brass">Nyota FM v2.0 Model</td>
                     <td className="py-2.5 px-3 text-paper">Prime / Off-Peak Modelled</td>
                     <td className="py-2.5 px-3 text-brass font-bold">8,000–15,000 / 3,000–6,000</td>
-                    <td className="py-2.5 pl-3 text-amber-300">Tier 2 Bankable Rate Card Model</td>
+                    <td className="py-2.5 pl-3 text-brass">Tier 2 Bankable Rate Card Model</td>
                   </tr>
                 </tbody>
               </table>
@@ -473,7 +473,7 @@ export function Part2MasterData() {
                 <span className="text-brass block mt-1">VAT: 16% levied on all commercial billings</span>
               </div>
               <div className="p-3 bg-ink rounded border border-hairline">
-                <span className="text-amber-400 block font-semibold uppercase text-[10px]">Tier 2 Derivation Method</span>
+                <span className="text-brass block font-semibold uppercase text-xs">Tier 2 Derivation Method</span>
                 <p className="text-sage font-body text-xs mt-1">
                   Positioning Nyota between "small station" off-peak (KSh 5,000) and Radio Jambo prime (KSh 12,000–18,000), discounted for lower initial baseline reach and rising with GeoPoll panel proof.
                 </p>
@@ -524,14 +524,14 @@ export function Part2MasterData() {
                 <p className="text-sage text-[11px] font-body leading-snug">
                   Government Advertising Agency National Register prequalification. Regional radio stations eligible for national ministry campaigns.
                 </p>
-                <span className="text-[10px] text-amber-300 block mt-1">Tier 0 Gap: Rate transparency</span>
+                <span className="text-xs text-brass block mt-1">Tier 0 Gap: Rate transparency</span>
               </div>
               <div className="p-3 bg-ink rounded border border-hairline">
                 <span className="text-brass font-bold block mb-1">County Tenders</span>
                 <p className="text-sage text-[11px] font-body leading-snug">
                   Bungoma Assembly tender <code className="text-paper">BGM/CNTY/OT/FWC/05/07/2026-2028</code>. Kakamega County IFMIS media frameworks.
                 </p>
-                <span className="text-[10px] text-amber-300 block mt-1">Tier 0 Gap: Value disclosure</span>
+                <span className="text-xs text-brass block mt-1">Tier 0 Gap: Value disclosure</span>
               </div>
             </div>
           </div>
@@ -560,7 +560,7 @@ export function Part2MasterData() {
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
                   <span className="text-sage">Kenya Music Channel RPM</span>
-                  <span className="text-emerald-400 font-bold">$0.6719 / 1,000 views</span>
+                  <span className="text-moss font-bold">$0.6719 / 1,000 views</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
                   <span className="text-sage">Playback CPM</span>
@@ -568,7 +568,7 @@ export function Part2MasterData() {
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
                   <span className="text-sage">General Kenyan Creator RPM Range</span>
-                  <span className="text-amber-300">$0.50–$4.00 (KSh 65–520)</span>
+                  <span className="text-brass">$0.50–$4.00 (KSh 65–520)</span>
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-sage">Partner Threshold</span>
@@ -582,11 +582,11 @@ export function Part2MasterData() {
               {/* TikTok Reality Check */}
               <div className="p-4 bg-brick/15 rounded border border-brick/60 space-y-2.5 text-xs font-mono">
                 <div className="flex items-center justify-between border-b border-brick/40 pb-1.5">
-                  <span className="text-rose-400 font-bold">2.4.2 TikTok Kenya Reality Check</span>
+                  <span className="text-brick-text font-bold">2.4.2 TikTok Kenya Reality Check</span>
                   <TierBadge tier={1} citation="LinkedIn / Jason Corder & Monitor Uganda 2025" url="monitor.co.ug" />
                 </div>
                 <div className="p-2 bg-ink rounded border border-brick/40 text-[11px] font-body text-paper/90">
-                  <strong className="text-rose-400 font-mono block mb-1">CRITICAL FACTUAL CORRECTION TO v1.0:</strong>
+                  <strong className="text-brick-text font-mono block mb-1">CRITICAL FACTUAL CORRECTION TO v1.0:</strong>
                   TikTok Creator Rewards Program is <strong>NOT available in Kenya</strong>. TikTok pays ZERO direct view-based payouts to Kenyan accounts.
                 </div>
                 <div className="space-y-1 text-sage text-[11px]">
@@ -607,11 +607,11 @@ export function Part2MasterData() {
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
                   <span className="text-sage">Utility message (Rest of Africa)</span>
-                  <span className="text-emerald-400 font-bold">$0.0040 (~KSh 0.52)</span>
+                  <span className="text-moss font-bold">$0.0040 (~KSh 0.52)</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
                   <span className="text-sage">Marketing message (Rest of Africa)</span>
-                  <span className="text-amber-300 font-bold">$0.0225 (~KSh 2.90)</span>
+                  <span className="text-brass font-bold">$0.0225 (~KSh 2.90)</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
                   <span className="text-sage">BSP Setup Fee (Africa's Talking)</span>
@@ -635,7 +635,7 @@ export function Part2MasterData() {
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
                   <span className="text-sage">CA 5-Digit Allocation (Alternative)</span>
-                  <span className="text-emerald-400">KSh 65,000–100,000</span>
+                  <span className="text-moss">KSh 65,000–100,000</span>
                 </div>
                 <div className="flex justify-between py-1 border-b border-hairline">
                   <span className="text-sage">Africa's Talking USSD (Safaricom dedicated)</span>{/* data-ok: market fact, not a sponsor */}
@@ -665,7 +665,7 @@ export function Part2MasterData() {
                 <p className="text-sage text-[11px] font-body leading-snug">
                   Meta Kenya CPM benchmark: <strong>KSh 50–150</strong>. Google Ads: <strong>KSh 30–100</strong>.
                 </p>
-                <span className="text-[10px] text-amber-300 block mt-1">Tier 0 Gap: Run KSh 10,000 test pilot to lock in sub-county CPMs</span>
+                <span className="text-xs text-brass block mt-1">Tier 0 Gap: Run KSh 10,000 test pilot to lock in sub-county CPMs</span>
               </div>
             </div>
           </div>
@@ -700,7 +700,7 @@ export function Part2MasterData() {
                     <td className="py-2 pr-3 text-brass font-bold">PTZ Camera</td>
                     <td className="py-2 px-3">PTZ Camera KTUH86 (NDI/HDMI, VISCA)</td>
                     <td className="py-2 px-3">Broadcast Solutions Intl</td>
-                    <td className="py-2 px-3 text-emerald-400 font-bold">114,000</td>
+                    <td className="py-2 px-3 text-moss font-bold">114,000</td>
                     <td className="py-2 pl-3 text-sage">bsint.net</td>
                   </tr>
                   <tr className="hover:bg-ink">
@@ -725,28 +725,28 @@ export function Part2MasterData() {
                     <td className="py-2 pl-3 text-sage">eamobitech.com</td>
                   </tr>
                   <tr className="hover:bg-ink">
-                    <td className="py-2 pr-3 text-emerald-400 font-bold">Switcher</td>
+                    <td className="py-2 pr-3 text-moss font-bold">Switcher</td>
                     <td className="py-2 px-3">Blackmagic ATEM Television Studio HD</td>
                     <td className="py-2 px-3">Cellular Kenya / Nextech</td>
-                    <td className="py-2 px-3 text-emerald-400 font-bold">154,999 – 174,999</td>
+                    <td className="py-2 px-3 text-moss font-bold">154,999 – 174,999</td>
                     <td className="py-2 pl-3 text-sage">cameraplacekenya.com</td>
                   </tr>
                   <tr className="hover:bg-ink">
-                    <td className="py-2 pr-3 text-emerald-400 font-bold">Switcher</td>
+                    <td className="py-2 pr-3 text-moss font-bold">Switcher</td>
                     <td className="py-2 px-3">Blackmagic ATEM Television Studio HD8</td>
                     <td className="py-2 px-3">Rondamo Technologies</td>
                     <td className="py-2 px-3">455,800</td>
                     <td className="py-2 pl-3 text-sage">rondamo.co.ke</td>
                   </tr>
                   <tr className="hover:bg-ink">
-                    <td className="py-2 pr-3 text-amber-300 font-bold">Lighting</td>
+                    <td className="py-2 pr-3 text-brass font-bold">Lighting</td>
                     <td className="py-2 px-3">VISICO LED-50A 3-Lights Kit</td>
                     <td className="py-2 px-3">Rondamo</td>
-                    <td className="py-2 px-3 text-emerald-400 font-bold">34,300</td>
+                    <td className="py-2 px-3 text-moss font-bold">34,300</td>
                     <td className="py-2 pl-3 text-sage">rondamo.co.ke</td>
                   </tr>
                   <tr className="hover:bg-ink">
-                    <td className="py-2 pr-3 text-amber-300 font-bold">Lighting</td>
+                    <td className="py-2 pr-3 text-brass font-bold">Lighting</td>
                     <td className="py-2 px-3">GVM 1500D RGB LED 3-Light Kit</td>
                     <td className="py-2 px-3">Jacaranta Digitech</td>
                     <td className="py-2 px-3">84,500 + VAT</td>
@@ -777,8 +777,8 @@ export function Part2MasterData() {
                 <span className="text-sage block mt-0.5">Includes 2× KTUH86 PTZ cameras, ATEM switcher, 3-light kit, acoustic panels & encoder</span>
               </div>
               <div className="text-right">
-                <span className="text-emerald-400 font-bold text-sm block">Saves &gt; KSh 1.5M</span>
-                <span className="text-sage-dim text-[10px]">vs v1.0's inflated KSh 2.2M–3.8M envelope</span>
+                <span className="text-moss font-bold text-sm block">Saves &gt; KSh 1.5M</span>
+                <span className="text-sage-dim text-xs">vs v1.0's inflated KSh 2.2M–3.8M envelope</span>
               </div>
             </div>
           </div>
@@ -804,8 +804,8 @@ export function Part2MasterData() {
                   2.6.1 CA Commercial Radio Licence
                 </div>
                 <div className="text-sage">Application Fee: <strong className="text-paper">KSh 5,000</strong></div>
-                <div className="text-sage">Annual Fee: <strong className="text-emerald-400">KSh 100,000</strong></div>
-                <div className="text-[10px] text-sage-dim">Or 0.4% of annual turnover, whichever is higher (CA Kenya)</div>
+                <div className="text-sage">Annual Fee: <strong className="text-moss">KSh 100,000</strong></div>
+                <div className="text-xs text-sage-dim">Or 0.4% of annual turnover, whichever is higher (CA Kenya)</div>
               </div>
 
               {/* Music Sync Rights */}
@@ -817,7 +817,7 @@ export function Part2MasterData() {
                 <div className="text-sage">• KAMP & PAVRISK: licensed from 5 Nov 2025; KAMP suspended 90 days from 1 Jul 2026</div>
                 <div className="text-sage">• Consolidated Music Tariffs 2026–2028: national radio 4% of net revenue (min KSh 500,000); lower regional minimums</div>
                 <div className="text-sage">• KECOBO invited 2027 CMO licence applications on 4 Sep 2026</div>
-                <div className="text-[10px] text-rose-300">Tier 0 Gap: Video streaming sync rates require direct negotiation (4 wks)</div>
+                <div className="text-xs text-brick-text">Tier 0 Gap: Video streaming sync rates require direct negotiation (4 wks)</div>
               </div>
 
               {/* Data Protection Act 2019 */}
@@ -828,7 +828,7 @@ export function Part2MasterData() {
                 <div className="text-sage">Micro & Small Data Controller: <strong className="text-paper">KSh 4,000</strong></div>
                 <div className="text-sage">Medium Entity: <strong className="text-paper">KSh 16,000</strong></div>
                 <div className="text-sage">Large Entity: <strong className="text-paper">KSh 40,000</strong></div>
-                <div className="text-[10px] text-emerald-400 font-semibold">Mandatory for WhatsApp/USSD listener opt-in database</div>
+                <div className="text-xs text-moss font-semibold">Mandatory for WhatsApp/USSD listener opt-in database</div>
               </div>
             </div>
           </div>
@@ -853,7 +853,7 @@ export function Part2MasterData() {
                 <span className="text-brass font-mono text-xs font-bold uppercase tracking-wider">
                   2.7.2 Net Listener Score (NLS) — Mathematical Methodology
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-brass/20 text-amber-300 border border-brass/40">
+                <span className="text-xs font-mono px-2 py-0.5 rounded bg-brass/20 text-brass border border-brass/40">
                   Constructed Equation
                 </span>
               </div>
@@ -884,7 +884,7 @@ export function Part2MasterData() {
               </div>
 
               <div className="p-3 bg-brick/20 border border-brick/60 rounded text-xs font-mono space-y-1">
-                <div className="text-rose-400 font-bold uppercase tracking-wider">
+                <div className="text-brick-text font-bold uppercase tracking-wider">
                   Audience Baseline Research Gap
                 </div>
                 <p className="text-paper/90 font-body text-xs">
@@ -925,101 +925,101 @@ export function Part2MasterData() {
                 <tbody className="divide-y divide-hairline text-paper/90">
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-brass">Podcast Ad Network</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">KSh 500,000 – 2,000,000</td>
+                    <td className="py-2.5 px-3 text-moss font-bold">KSh 500,000 – 2,000,000</td>
                     <td className="py-2.5 px-3 text-sage">Low</td>
                     <td className="py-2.5 px-3">6–12 months</td>
-                    <td className="py-2.5 pl-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 pl-3 text-brass">Medium</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-brass">YouTube Monetisation</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">KSh 600,000 – 2,400,000</td>
+                    <td className="py-2.5 px-3 text-moss font-bold">KSh 600,000 – 2,400,000</td>
                     <td className="py-2.5 px-3 text-sage">Low (existing channel)</td>
                     <td className="py-2.5 px-3">3–6 months</td>
-                    <td className="py-2.5 pl-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 pl-3 text-brass">Medium</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-paper">Google Ad Grants (not eligible)</td>
                     <td className="py-2.5 px-3 text-paper font-semibold">Charities only; Nyota is a limited company</td>
                     <td className="py-2.5 px-3 text-sage">Low</td>
                     <td className="py-2.5 px-3">2–4 months</td>
-                    <td className="py-2.5 pl-3 text-emerald-400">Low</td>
+                    <td className="py-2.5 pl-3 text-moss">Low</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-paper">Meta Journalism Project</td>
                     <td className="py-2.5 px-3 text-paper">Variable grant capital</td>
                     <td className="py-2.5 px-3 text-sage">Low</td>
                     <td className="py-2.5 px-3">4–6 months</td>
-                    <td className="py-2.5 pl-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 pl-3 text-brass">Medium</td>
                   </tr>
                   <tr className="hover:bg-ink bg-brass/10">
                     <td className="py-2.5 pr-3 font-bold text-brass">County Government Vendor</td>
                     <td className="py-2.5 px-3 text-brass font-bold">KSh 1,000,000 – 5,000,000</td>
-                    <td className="py-2.5 px-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 px-3 text-brass">Medium</td>
                     <td className="py-2.5 px-3">6–12 months</td>
-                    <td className="py-2.5 pl-3 text-rose-300 font-semibold">High</td>
+                    <td className="py-2.5 pl-3 text-brick-text font-semibold">High</td>
                   </tr>
                   <tr className="hover:bg-ink bg-brass/10">
                     <td className="py-2.5 pr-3 font-bold text-brass">GAA Registration Campaigns</td>
                     <td className="py-2.5 px-3 text-brass font-bold">KSh 500,000 – 3,000,000</td>
                     <td className="py-2.5 px-3 text-sage">Low</td>
                     <td className="py-2.5 px-3">3–6 months</td>
-                    <td className="py-2.5 pl-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 pl-3 text-brass">Medium</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-paper">Diaspora Advertising & Greetings</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">KSh 500,000 – 2,000,000</td>
-                    <td className="py-2.5 px-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 px-3 text-moss font-bold">KSh 500,000 – 2,000,000</td>
+                    <td className="py-2.5 px-3 text-brass">Medium</td>
                     <td className="py-2.5 px-3">6–12 months</td>
-                    <td className="py-2.5 pl-3 text-rose-300">High</td>
+                    <td className="py-2.5 pl-3 text-brick-text">High</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-paper">SMS / CRM Automation</td>
                     <td className="py-2.5 px-3 text-paper font-semibold">KSh 300,000 – 1,000,000</td>
                     <td className="py-2.5 px-3 text-sage">Low</td>
                     <td className="py-2.5 px-3">3–6 months</td>
-                    <td className="py-2.5 pl-3 text-emerald-400">Low</td>
+                    <td className="py-2.5 pl-3 text-moss">Low</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-paper">Syndication & Licensing</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">KSh 500,000 – 2,000,000</td>
-                    <td className="py-2.5 px-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 px-3 text-moss font-bold">KSh 500,000 – 2,000,000</td>
+                    <td className="py-2.5 px-3 text-brass">Medium</td>
                     <td className="py-2.5 px-3">12–18 months</td>
-                    <td className="py-2.5 pl-3 text-rose-300">High</td>
+                    <td className="py-2.5 pl-3 text-brick-text">High</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-paper">Merchandise Catalogue</td>
                     <td className="py-2.5 px-3 text-paper">KSh 200,000 – 500,000 (net)</td>
                     <td className="py-2.5 px-3 text-sage">Low–Medium (print on demand)</td>
                     <td className="py-2.5 px-3">3–6 months</td>
-                    <td className="py-2.5 pl-3 text-emerald-400">Low</td>
+                    <td className="py-2.5 pl-3 text-moss">Low</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-paper">Live Events Ticketing</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">KSh 500,000 – 3,000,000</td>
-                    <td className="py-2.5 px-3 text-rose-300">High</td>
+                    <td className="py-2.5 px-3 text-moss font-bold">KSh 500,000 – 3,000,000</td>
+                    <td className="py-2.5 px-3 text-brick-text">High</td>
                     <td className="py-2.5 px-3">6–12 months</td>
-                    <td className="py-2.5 pl-3 text-rose-300">High</td>
+                    <td className="py-2.5 pl-3 text-brick-text">High</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-paper">Agricultural Value-Chain Ads</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">KSh 500,000 – 2,000,000</td>
-                    <td className="py-2.5 px-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 px-3 text-moss font-bold">KSh 500,000 – 2,000,000</td>
+                    <td className="py-2.5 px-3 text-brass">Medium</td>
                     <td className="py-2.5 px-3">6–12 months</td>
-                    <td className="py-2.5 pl-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 pl-3 text-brass">Medium</td>
                   </tr>
                   <tr className="hover:bg-ink">
                     <td className="py-2.5 pr-3 font-semibold text-sage-dim">Betting Advertising (Constrained)</td>
                     <td className="py-2.5 px-3 text-sage">KSh 200,000 – 1,000,000</td>
                     <td className="py-2.5 px-3 text-sage">Low</td>
                     <td className="py-2.5 px-3">3–6 months</td>
-                    <td className="py-2.5 pl-3 text-amber-300">Medium</td>
+                    <td className="py-2.5 pl-3 text-brass">Medium</td>
                   </tr>
-                  <tr className="hover:bg-ink bg-emerald-950/20">
-                    <td className="py-2.5 pr-3 font-bold text-emerald-400">Political Advertising (2027 General Election)</td>
-                    <td className="py-2.5 px-3 text-emerald-400 font-bold">KSh 2,000,000 – 10,000,000</td>
+                  <tr className="hover:bg-ink bg-moss/20">
+                    <td className="py-2.5 pr-3 font-bold text-moss">Political Advertising (2027 General Election)</td>
+                    <td className="py-2.5 px-3 text-moss font-bold">KSh 2,000,000 – 10,000,000</td>
                     <td className="py-2.5 px-3 text-sage">Low</td>
                     <td className="py-2.5 px-3">Q3 2027 (Episodic)</td>
-                    <td className="py-2.5 pl-3 text-emerald-400">Low (Demand-driven)</td>
+                    <td className="py-2.5 pl-3 text-moss">Low (Demand-driven)</td>
                   </tr>
                 </tbody>
               </table>

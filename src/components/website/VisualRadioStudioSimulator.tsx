@@ -77,7 +77,7 @@ export function VisualRadioStudioSimulator() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-[10px] font-mono text-brass font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-xs font-mono text-brass font-bold uppercase tracking-wider">
               <Sparkles size={12} />
               Interactive Hardware Simulator · Studio Build
             </span>
@@ -92,8 +92,8 @@ export function VisualRadioStudioSimulator() {
         </div>
 
         {/* Live On-Air Indicator */}
-        <div className="flex items-center gap-2 rounded-lg border border-red-500/40 bg-red-950/30 px-3 py-1.5 text-xs font-mono text-red-400">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
+        <div className="flex items-center gap-2 rounded-lg border border-brick/40 bg-brick/10 px-3 py-1.5 text-xs font-mono text-brick-text">
+          <span className="h-2.5 w-2.5 rounded-full bg-brick" />
           <span className="font-bold tracking-wider">PROGRAM · planned 1080p</span>
         </div>
       </div>
@@ -102,7 +102,7 @@ export function VisualRadioStudioSimulator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Video Monitor (Program Feed) */}
         <div className="lg:col-span-8 space-y-3">
-          <div className="relative aspect-video w-full overflow-hidden rounded-xl border-2 border-red-500/60 bg-ink shadow-2xl">
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl border-2 border-brick/60 bg-ink shadow-2xl">
             {/* Background Camera Image */}
             <div className="grid h-full w-full place-items-center bg-gradient-to-br from-ink-2 via-ink to-brass/20 text-center">
               <div>
@@ -115,10 +115,10 @@ export function VisualRadioStudioSimulator() {
             {/* Top Overlay: Tally & Station Watermark */}
             <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="rounded bg-red-600 px-2 py-0.5 font-mono text-[10px] font-bold text-white shadow">
+                <span className="rounded bg-brick px-2 py-0.5 font-mono text-xs font-bold text-white shadow">
                   PGM: {activeProgramCam.toUpperCase()}
                 </span>
-                <span className="rounded bg-ink/80 backdrop-blur-sm px-2 py-0.5 font-mono text-[10px] text-paper border border-hairline">
+                <span className="rounded bg-ink/80 backdrop-blur-sm px-2 py-0.5 font-mono text-xs text-paper border border-hairline">
                   107.3 FM LIVE STREAM
                 </span>
               </div>
@@ -126,7 +126,7 @@ export function VisualRadioStudioSimulator() {
               {/* Station Logo & Sponsor Bug */}
               <div className="flex items-center gap-2">
                 {sponsorBugActive && (
-                  <span className="rounded bg-ink/85 border border-brass/50 px-2 py-0.5 text-[9px] font-mono font-bold text-brass uppercase shadow">
+                  <span className="rounded bg-ink/85 border border-brass/50 px-2 py-0.5 text-xs font-mono font-bold text-brass uppercase shadow">
                     SPONSOR SLOT
                   </span>
                 )}
@@ -140,10 +140,10 @@ export function VisualRadioStudioSimulator() {
             <div className="absolute right-3 bottom-16 flex items-end gap-1 rounded bg-ink/80 backdrop-blur-sm p-1.5 border border-hairline">
               <Volume2 size={12} className="text-brass mr-1" />
               {vuLevels.map((lvl, idx) => (
-                <div key={idx} className="h-10 w-1.5 rounded-full bg-stone-800 flex flex-col justify-end overflow-hidden">
+                <div key={idx} className="h-10 w-1.5 rounded-full bg-hairline flex flex-col justify-end overflow-hidden">
                   <div
                     className={`w-full transition-all duration-150 ${
-                      lvl > 75 ? 'bg-red-500' : lvl > 50 ? 'bg-amber-400' : 'bg-emerald-500'
+                      lvl > 75 ? 'bg-brick' : lvl > 50 ? 'bg-brass' : 'bg-moss'
                     }`}
                     style={{ height: `${lvl}%` }}
                   />
@@ -155,10 +155,10 @@ export function VisualRadioStudioSimulator() {
             {lowerThirdActive && (
               <div className="absolute bottom-6 left-3 right-16 rounded-md bg-ink-2/95 border-l-4 border-brass p-2.5 backdrop-blur-md shadow-xl text-paper">
                 <div className="flex items-center gap-2">
-                  <span className="rounded bg-brass/20 text-brass text-[9px] font-mono font-bold px-1.5 py-0.5 uppercase">
+                  <span className="rounded bg-brass/20 text-brass text-xs font-mono font-bold px-1.5 py-0.5 uppercase">
                     KUMEKUCHA BREAKFAST
                   </span>
-                  <span className="text-[10px] text-sage-dim font-mono">06:00 – 10:00 AM</span>
+                  <span className="text-xs text-sage-dim font-mono">06:00 – 10:00 AM</span>
                 </div>
                 <h4 className="text-xs sm:text-sm font-bold text-paper mt-0.5">
                   Achieng & Otieno · Discussing Western Kenya Maize & Fertilizer Subsidies
@@ -168,7 +168,7 @@ export function VisualRadioStudioSimulator() {
 
             {/* Bottom News/WhatsApp Ticker */}
             {tickerActive && (
-              <div className="absolute bottom-0 left-0 right-0 bg-ink-2/95 border-t border-hairline px-3 py-1 flex items-center gap-2 text-[10px] font-mono overflow-hidden">
+              <div className="absolute bottom-0 left-0 right-0 bg-ink-2/95 border-t border-hairline px-3 py-1 flex items-center gap-2 text-xs font-mono overflow-hidden">
                 <span className="bg-[#25D366] text-ink font-bold px-1.5 py-0.2 rounded shrink-0">
                   WHATSAPP 0720...
                 </span>
@@ -194,12 +194,12 @@ export function VisualRadioStudioSimulator() {
                 <Tv size={14} className="text-brass" />
                 ATEM Switcher Console
               </span>
-              <span className="text-[10px] font-mono text-sage-dim">ATEM Television Studio HD</span>
+              <span className="text-xs font-mono text-sage-dim">ATEM Television Studio HD</span>
             </div>
 
             {/* Program Row (Red Tally) */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-mono text-red-400 font-bold uppercase tracking-wider block">
+              <span className="text-xs font-mono text-brick-text font-bold uppercase tracking-wider block">
                 PROGRAM (ON AIR):
               </span>
               <div className="grid grid-cols-3 gap-1.5">
@@ -210,12 +210,12 @@ export function VisualRadioStudioSimulator() {
                     onClick={() => setActiveProgramCam(cam)}
                     className={`h-11 rounded font-mono text-xs font-bold transition-all flex flex-col items-center justify-center ${
                       activeProgramCam === cam
-                        ? 'bg-red-600 text-white shadow-[0_0_12px_rgba(220,38,38,0.8)] border border-red-400'
+                        ? 'bg-brick text-white shadow-[0_0_12px_rgba(220,38,38,0.8)] border border-brick'
                         : 'bg-ink-2 text-sage hover:text-paper border border-hairline'
                     }`}
                   >
                     <span>{cam.toUpperCase()}</span>
-                    <span className="text-[8px] font-normal opacity-80">
+                    <span className="text-xs font-normal opacity-80">
                       {cam === 'cam1' ? 'HOST' : cam === 'cam2' ? 'GUEST' : 'WIDE'}
                     </span>
                   </button>
@@ -225,7 +225,7 @@ export function VisualRadioStudioSimulator() {
 
             {/* Preview Row (Green Tally) */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
+              <span className="text-xs font-mono text-moss font-bold uppercase tracking-wider block">
                 PREVIEW (NEXT):
               </span>
               <div className="grid grid-cols-3 gap-1.5">
@@ -236,12 +236,12 @@ export function VisualRadioStudioSimulator() {
                     onClick={() => setPreviewCam(cam)}
                     className={`h-11 rounded font-mono text-xs font-bold transition-all flex flex-col items-center justify-center ${
                       previewCam === cam
-                        ? 'bg-emerald-600 text-white shadow-[0_0_12px_rgba(16,185,129,0.7)] border border-emerald-400'
+                        ? 'bg-moss text-white shadow-[0_0_12px_rgba(16,185,129,0.7)] border border-moss'
                         : 'bg-ink-2 text-sage hover:text-paper border border-hairline'
                     }`}
                   >
                     <span>{cam.toUpperCase()}</span>
-                    <span className="text-[8px] font-normal opacity-80">
+                    <span className="text-xs font-normal opacity-80">
                       {cam === 'cam1' ? 'HOST' : cam === 'cam2' ? 'GUEST' : 'WIDE'}
                     </span>
                   </button>
@@ -262,7 +262,7 @@ export function VisualRadioStudioSimulator() {
 
             {/* Graphics Overlays Toggles */}
             <div className="pt-2 border-t border-hairline space-y-2">
-              <span className="text-[10px] font-mono text-brass font-bold uppercase tracking-wider block">
+              <span className="text-xs font-mono text-brass font-bold uppercase tracking-wider block">
                 BROADCAST OVERLAYS (DSK):
               </span>
               <div className="space-y-1.5">
@@ -276,7 +276,7 @@ export function VisualRadioStudioSimulator() {
                   }`}
                 >
                   <span>Lower-Third Presenter Card</span>
-                  <span className={`text-[10px] ${lowerThirdActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
+                  <span className={`text-xs ${lowerThirdActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
                     {lowerThirdActive ? 'LIVE' : 'MUTED'}
                   </span>
                 </button>
@@ -291,7 +291,7 @@ export function VisualRadioStudioSimulator() {
                   }`}
                 >
                   <span>WhatsApp Community Ticker</span>
-                  <span className={`text-[10px] ${tickerActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
+                  <span className={`text-xs ${tickerActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
                     {tickerActive ? 'LIVE' : 'MUTED'}
                   </span>
                 </button>
@@ -306,7 +306,7 @@ export function VisualRadioStudioSimulator() {
                   }`}
                 >
                   <span>Corner Sponsor Bug (generic)</span>
-                  <span className={`text-[10px] ${sponsorBugActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
+                  <span className={`text-xs ${sponsorBugActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
                     {sponsorBugActive ? 'LIVE' : 'MUTED'}
                   </span>
                 </button>

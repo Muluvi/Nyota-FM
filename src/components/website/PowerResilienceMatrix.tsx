@@ -40,11 +40,11 @@ export function PowerResilienceMatrix() {
             onClick={() => setGridStatus(gridStatus === 'online' ? 'blackout' : 'online')}
             className={`px-3.5 py-1.5 rounded text-xs font-mono font-bold border transition-all flex items-center gap-1.5 ${
               gridStatus === 'online'
-                ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400'
-                : 'bg-red-500/20 border-red-500 text-red-400'
+                ? 'bg-moss/10 border-moss/50 text-moss'
+                : 'bg-brick/10 border-brick text-brick-text'
             }`}
           >
-            <span className={`h-2 w-2 rounded-full ${gridStatus === 'online' ? 'bg-emerald-400' : 'bg-red-500'}`} />
+            <span className={`h-2 w-2 rounded-full ${gridStatus === 'online' ? 'bg-moss' : 'bg-brick'}`} />
             <span>GRID: {gridStatus === 'online' ? 'KPLC MAINS ONLINE' : 'BLACKOUT SIMULATED'}</span>
           </button>
         </div>
@@ -55,16 +55,16 @@ export function PowerResilienceMatrix() {
         {/* Tier 1: KPLC Grid */}
         <div className={`rounded-xl border p-4 transition-all ${
           gridStatus === 'online'
-            ? 'border-emerald-500/40 bg-ink'
+            ? 'border-moss/40 bg-ink'
             : 'border-hairline bg-ink opacity-60'
         }`}>
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-mono uppercase tracking-wider text-sage-dim flex items-center gap-1.5">
-              <Zap size={14} className={gridStatus === 'online' ? 'text-emerald-400' : 'text-sage-dim'} />
+              <Zap size={14} className={gridStatus === 'online' ? 'text-moss' : 'text-sage-dim'} />
               Primary: Kenya Power (Mains)
             </span>
-            <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${
-              gridStatus === 'online' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-stone-800 text-stone-400'
+            <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${
+              gridStatus === 'online' ? 'bg-moss/10 text-moss' : 'bg-hairline text-sage'
             }`}>
               {gridStatus === 'online' ? 'ACTIVE' : 'CUT'}
             </span>
@@ -86,7 +86,7 @@ export function PowerResilienceMatrix() {
               <Sun size={14} />
               Hybrid Solar (10kVA Inverter)
             </span>
-            <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-brass/20 text-brass">
+            <span className="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-brass/20 text-brass">
               15.4 kWh LFP
             </span>
           </div>
@@ -94,11 +94,11 @@ export function PowerResilienceMatrix() {
             <span className="font-display text-2xl font-bold text-paper tabular-nums">
               {solarGenerationKw} kW
             </span>
-            <span className="text-xs font-mono text-emerald-400">
+            <span className="text-xs font-mono text-moss">
               Solar + Battery
             </span>
           </div>
-          <div className="h-1.5 rounded-full bg-stone-800 overflow-hidden">
+          <div className="h-1.5 rounded-full bg-hairline overflow-hidden">
             <div className="h-full bg-brass transition-all" style={{ width: '85%' }} />
           </div>
           <p className="text-xs text-sage leading-relaxed">
@@ -109,16 +109,16 @@ export function PowerResilienceMatrix() {
         {/* Tier 3: 15kVA Diesel Generator */}
         <div className={`rounded-xl border p-4 transition-all ${
           generatorRunning
-            ? 'border-red-500/50 bg-ink shadow-lg shadow-red-950/20'
+            ? 'border-brick/50 bg-ink shadow-lg shadow-brick/20'
             : 'border-hairline bg-ink'
         }`}>
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-mono uppercase tracking-wider text-sage-dim flex items-center gap-1.5">
-              <Gauge size={14} className={generatorRunning ? 'text-red-400' : 'text-sage-dim'} />
+              <Gauge size={14} className={generatorRunning ? 'text-brick-text' : 'text-sage-dim'} />
               Emergency: Perkins 15kVA Gen
             </span>
-            <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${
-              generatorRunning ? 'bg-red-500/20 text-red-400' : 'bg-stone-800 text-stone-400'
+            <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${
+              generatorRunning ? 'bg-brick/10 text-brick-text' : 'bg-hairline text-sage'
             }`}>
               {generatorRunning ? 'RUNNING' : 'STANDBY'}
             </span>
@@ -146,7 +146,7 @@ export function PowerResilienceMatrix() {
         </div>
         <div>
           <span className="text-sage-dim block">Solar OPEX Savings</span>
-          <span className="text-sm font-bold text-emerald-400 tabular-nums">KSh 38,000 / mo</span>
+          <span className="text-sm font-bold text-moss tabular-nums">KSh 38,000 / mo</span>
         </div>
         <div>
           <span className="text-sage-dim block">Switchover Latency</span>

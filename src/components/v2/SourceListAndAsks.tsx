@@ -137,7 +137,7 @@ export function SourceListAndAsks({ show = 'asks' }: { show?: 'asks' | 'sources'
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="border-b border-hairline pb-3">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
               SELF-CHECK
             </span>
             <h4 className="font-display text-paper text-base font-semibold">
@@ -177,7 +177,7 @@ export function SourceListAndAsks({ show = 'asks' }: { show?: 'asks' | 'sources'
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
                 MASTER SOURCE LIST
               </span>
               <h4 className="font-display text-paper text-base font-semibold">

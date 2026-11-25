@@ -157,7 +157,7 @@ export function Part6TheBuild() {
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="border-b border-hairline pb-3">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
               SECTION 6.1
             </span>
             <h4 className="font-display text-paper text-base font-semibold">Master 24-Month Roadmap (Months 1–24: Q1 2027 – Q4 2028)</h4>
@@ -170,7 +170,7 @@ export function Part6TheBuild() {
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="text-brass font-bold text-xs">{rq.q}</span>
-                    <span className="text-[10px] text-sage-dim">M{idx * 3 + 1}–M{idx * 3 + 3}</span>
+                    <span className="text-xs text-sage-dim">M{idx * 3 + 1}–M{idx * 3 + 3}</span>
                   </div>
                   <div className="font-semibold text-paper text-[13px] mb-2">{rq.title}</div>
                   <ul className="space-y-1 text-sage text-[11px] font-body">
@@ -193,7 +193,7 @@ export function Part6TheBuild() {
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
                 SECTION 6.2
               </span>
               <h4 className="font-display text-paper text-base font-semibold">Studio Build — Consolidated Cost Schedule</h4>
@@ -338,7 +338,7 @@ export function Part6TheBuild() {
                 <strong className="text-paper block">ODPC Data Controller</strong>
                 <span className="text-sage">Data Protection Act 2019</span>
               </div>
-              <span className="text-emerald-400 font-bold">KSh 4,000–16,000 (Q1)</span>
+              <span className="text-moss font-bold">KSh 4,000–16,000 (Q1)</span>
             </div>
           </div>
 

@@ -41,10 +41,10 @@ export function PoliticalRateCardEngine() {
         <div className="flex items-center gap-2">
           <span className={`px-3 py-1.5 rounded text-xs font-mono font-bold border flex items-center gap-1.5 ${
             isCompliant
-              ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-400'
-              : 'bg-red-500/15 border-red-500/50 text-red-400'
+              ? 'bg-moss/15 border-moss/50 text-moss'
+              : 'bg-brick/15 border-brick/50 text-brick-text'
           }`}>
-            <span className={`h-2 w-2 rounded-full ${isCompliant ? 'bg-emerald-400' : 'bg-red-400'}`} />
+            <span className={`h-2 w-2 rounded-full ${isCompliant ? 'bg-moss' : 'bg-brick'}`} />
             <span>{isCompliant ? 'Meets station policy' : 'Pending deposit / undertaking'}</span>
           </span>
         </div>
@@ -127,7 +127,7 @@ export function PoliticalRateCardEngine() {
         {/* Breakdown Card */}
         <div className="lg:col-span-6 space-y-4">
           <div className="rounded-xl border border-hairline bg-ink p-5 space-y-4 text-xs font-mono">
-            <span className="text-[10px] text-brass uppercase tracking-wider font-bold block">
+            <span className="text-xs text-brass uppercase tracking-wider font-bold block">
               STATUTORY ELECTION RATE CARD SUMMARY
             </span>
 

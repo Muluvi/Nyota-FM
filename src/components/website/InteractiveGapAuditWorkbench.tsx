@@ -68,7 +68,7 @@ export function InteractiveGapAuditWorkbench() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Governance & Compliance
             </span>
             <span className="font-mono text-xs text-sage-dim">· Gap Audit Operational Workbench</span>
@@ -83,11 +83,11 @@ export function InteractiveGapAuditWorkbench() {
 
         {/* Live Progress Card */}
         <div className="rounded-xl bg-ink p-3.5 border border-hairline flex items-center gap-4">
-          <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-moss/20 text-emerald-400 font-mono font-bold text-base">
+          <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-moss/10 text-moss font-mono font-bold text-base">
             {progressPct}%
           </div>
           <div>
-            <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+            <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">
               Readiness Score
             </div>
             <div className="font-mono text-xs text-paper font-bold">
@@ -101,11 +101,11 @@ export function InteractiveGapAuditWorkbench() {
       <div className="space-y-1">
         <div className="flex justify-between text-xs font-mono text-sage-dim">
           <span>Transformation Milestone Progress</span>
-          <span className="text-emerald-400 font-bold">{verifiedCount} / {totalCount} Requirements Closed</span>
+          <span className="text-moss font-bold">{verifiedCount} / {totalCount} Requirements Closed</span>
         </div>
         <div className="h-2 w-full rounded-full bg-ink overflow-hidden border border-hairline">
           <div
-            className="h-full bg-emerald-400 transition-all duration-500 rounded-full"
+            className="h-full bg-moss transition-all duration-500 rounded-full"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -160,7 +160,7 @@ export function InteractiveGapAuditWorkbench() {
                 aria-label={isDone ? 'Mark as incomplete' : 'Mark as completed'}
               >
                 {isDone ? (
-                  <CheckSquare size={18} className="text-emerald-400" />
+                  <CheckSquare size={18} className="text-moss" />
                 ) : (
                   <Square size={18} className="text-sage-dim" />
                 )}
@@ -171,7 +171,7 @@ export function InteractiveGapAuditWorkbench() {
                   <span className={`font-display text-base font-semibold ${isDone ? 'line-through text-sage' : 'text-paper'}`}>
                     {item.item}
                   </span>
-                  <div className="flex items-center gap-2 font-mono text-[10px]">
+                  <div className="flex items-center gap-2 font-mono text-xs">
                     <span className="rounded bg-hairline px-2 py-0.5 text-sage">
                       {item.category}
                     </span>
@@ -187,7 +187,7 @@ export function InteractiveGapAuditWorkbench() {
 
                 <div className="mt-2 flex items-center justify-between text-[11px] font-mono text-sage-dim">
                   <span>Cost Commitment: <strong className="text-paper">{item.cost}</strong></span>
-                  <span className={isDone ? 'text-emerald-400 font-bold' : 'text-sage-dim'}>
+                  <span className={isDone ? 'text-moss font-bold' : 'text-sage-dim'}>
                     {isDone ? 'Marked done (this browser)' : 'Not started'}
                   </span>
                 </div>

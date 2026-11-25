@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" width="240" height="48" role="img" aria-labelledby="t">
+  <title id="t">Nyota FM 107.3</title>
+  <!-- Placeholder wordmark (decision D6). Replace with the official logo at this same path. -->
+  <path d="M20 6l3.6 9.4L33 16l-7.4 6.1L28 32l-8-5.4L12 32l2.4-9.9L7 16l9.4-.6z" fill="#D6A75C"/>
+  <text x="44" y="31" font-family="'Instrument Serif', Georgia, serif" font-size="28" fill="#F7F8F4" letter-spacing="1">NYOTA</text>
+  <text x="152" y="31" font-family="ui-monospace, Menlo, monospace" font-size="18" fill="#D6A75C">107.3</text>
+</svg>

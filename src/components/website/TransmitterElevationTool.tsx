@@ -75,7 +75,7 @@ export function TransmitterElevationTool() {
                     }`}
                   >
                     <span>{locations[key].name}</span>
-                    <span className="text-[10px] text-brass">{locations[key].elevation}m ASL</span>
+                    <span className="text-xs text-brass">{locations[key].elevation}m ASL</span>
                   </button>
                 ))}
               </div>
@@ -99,7 +99,7 @@ export function TransmitterElevationTool() {
                 onChange={(e) => setTowerHeight(Number(e.target.value))}
                 className="w-full accent-brass cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] font-mono text-sage-dim mt-0.5">
+              <div className="flex justify-between text-xs font-mono text-sage-dim mt-0.5">
                 <span>30m (Guyed mast)</span>
                 <span>65m (Standard)</span>
                 <span>120m (Lattice tower)</span>
@@ -136,17 +136,17 @@ export function TransmitterElevationTool() {
         <div className="lg:col-span-7 space-y-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <div className="rounded-lg border border-hairline bg-ink p-3 space-y-1">
-              <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+              <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
                 Total Mast Altitude
               </span>
               <span className="font-display text-lg font-bold text-paper tabular-nums">
                 {totalAltitude.toLocaleString()} m
               </span>
-              <span className="text-[10px] text-sage-dim font-mono block">Above sea level</span>
+              <span className="text-xs text-sage-dim font-mono block">Above sea level</span>
             </div>
 
             <div className="rounded-lg border border-hairline bg-ink p-3 space-y-1">
-              <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+              <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
                 Signal Radius
               </span>
               <span className="font-display text-lg font-bold text-brass tabular-nums">
@@ -158,7 +158,7 @@ export function TransmitterElevationTool() {
 
           {/* Visual Elevation Profile & Coverage Contours */}
           <div className="rounded-xl border border-hairline bg-ink p-4 space-y-3">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-wider font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-wider font-semibold block">
               TERRAIN CONTOUR & LINE-OF-SIGHT PROPAGATION
             </span>
             <div className="h-32 rounded bg-ink-2 border border-hairline relative overflow-hidden flex items-end px-4 pb-2">
@@ -186,13 +186,13 @@ export function TransmitterElevationTool() {
                   <span className="absolute -top-2 -left-1.5 h-3 w-3 rounded-full border border-brass bg-ink" />
                   <span className="absolute -top-1 -left-1 h-2 w-2 rounded-full bg-brass" />
                 </div>
-                <span className="text-[9px] font-mono text-paper font-bold mt-1 bg-ink px-1 rounded border border-hairline whitespace-nowrap">
+                <span className="text-xs font-mono text-paper font-bold mt-1 bg-ink px-1 rounded border border-hairline whitespace-nowrap">
                   107.3 FM ({towerHeight}m)
                 </span>
               </div>
 
               {/* County Ground Markers */}
-              <div className="absolute bottom-1 left-4 right-4 flex justify-between text-[9px] font-mono text-sage-dim">
+              <div className="absolute bottom-1 left-4 right-4 flex justify-between text-xs font-mono text-sage-dim">
                 <span>Mt. Elgon</span>
                 <span>Webuye (Chetambe)</span>
                 <span>Bungoma CBD</span>
@@ -203,7 +203,7 @@ export function TransmitterElevationTool() {
 
             <div className="grid grid-cols-2 gap-2 text-xs font-mono text-sage">
               <div className="flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="h-1.5 w-1.5 rounded-full bg-moss" />
                 <span>Effective Radiated Power: <strong>{effectivePowerKw} kW ERP</strong></span>
               </div>
               <div className="flex items-center gap-1.5">

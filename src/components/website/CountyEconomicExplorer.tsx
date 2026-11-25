@@ -97,7 +97,7 @@ export function CountyEconomicExplorer() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-[10px] font-mono text-brass font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-xs font-mono text-brass font-bold uppercase tracking-wider">
               <Sparkles size={12} />
               Verified Regional Addressable Market · Part 2
             </span>
@@ -133,35 +133,35 @@ export function CountyEconomicExplorer() {
       {/* Main Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="rounded-lg border border-hairline bg-ink p-3.5 space-y-1">
-          <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+          <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
             TOTAL POPULATION
           </span>
           <span className="font-display text-xl font-bold text-paper">{data.pop}</span>
-          <span className="text-[10px] text-moss font-mono block">KNBS Verified</span>
+          <span className="text-xs text-moss font-mono block">KNBS Verified</span>
         </div>
 
         <div className="rounded-lg border border-hairline bg-ink p-3.5 space-y-1">
-          <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+          <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
             ADULT LISTENERS (18+)
           </span>
           <span className="font-display text-xl font-bold text-brass">{data.adultPop}</span>
-          <span className="text-[10px] text-sage-dim font-mono block">Purchasing demographic</span>
+          <span className="text-xs text-sage-dim font-mono block">Purchasing demographic</span>
         </div>
 
         <div className="rounded-lg border border-hairline bg-ink p-3.5 space-y-1">
-          <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+          <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
             SACCO LIQUIDITY
           </span>
           <span className="font-display text-xl font-bold text-paper">{data.saccoMembers}</span>
-          <span className="text-[10px] text-brass font-mono block">Table-banking capital</span>
+          <span className="text-xs text-brass font-mono block">Table-banking capital</span>
         </div>
 
         <div className="rounded-lg border border-hairline bg-ink p-3.5 space-y-1">
-          <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+          <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
             PUBLIC COMMS BUDGET
           </span>
-          <span className="font-display text-xl font-bold text-emerald-400">{data.countyGovCommsBudget}</span>
-          <span className="text-[10px] text-sage-dim font-mono block">County CIDP Allocation</span>
+          <span className="font-display text-xl font-bold text-moss">{data.countyGovCommsBudget}</span>
+          <span className="text-xs text-sage-dim font-mono block">County CIDP Allocation</span>
         </div>
       </div>
 
@@ -184,7 +184,7 @@ export function CountyEconomicExplorer() {
             </div>
 
             <div className="pt-2 border-t border-hairline">
-              <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block font-bold mb-1.5">
+              <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block font-bold mb-1.5">
                 PRIMARY COMMERCIAL TRADING MARKETS
               </span>
               <ul className="space-y-1 text-xs text-sage">
@@ -202,14 +202,14 @@ export function CountyEconomicExplorer() {
         {/* Right Column: Commercial Opportunities for Nyota FM */}
         <div className="lg:col-span-6 space-y-4">
           <div className="rounded-xl border border-hairline bg-ink p-4 sm:p-5 space-y-3">
-            <span className="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-2">
+            <span className="text-xs font-mono text-moss font-bold uppercase tracking-wider flex items-center gap-2">
               <DollarSign size={14} />
               High-Yield Commercial Opportunities
             </span>
             <div className="space-y-2.5">
               {data.topCommercialOpportunities.map((opp, idx) => (
                 <div key={idx} className="rounded-lg bg-ink-2 border border-hairline p-3 text-xs text-sage flex items-start gap-2.5">
-                  <span className="rounded bg-brass/10 text-brass text-[10px] font-mono font-bold px-1.5 py-0.5 mt-0.5 shrink-0">
+                  <span className="rounded bg-brass/10 text-brass text-xs font-mono font-bold px-1.5 py-0.5 mt-0.5 shrink-0">
                     0{idx + 1}
                   </span>
                   <p className="leading-relaxed text-paper/90">{opp}</p>

@@ -83,7 +83,7 @@ export function InteractiveStudioPlan() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Studio Architecture
             </span>
             <span className="font-mono text-xs text-sage-dim">· Bungoma Broadcast Facility Layout</span>
@@ -111,16 +111,16 @@ export function InteractiveStudioPlan() {
                 : 'bg-ink text-sage hover:text-paper border-hairline hover:border-brass/40'
             }`}
           >
-            <div className="flex items-center justify-between text-[10px] opacity-80 uppercase">
+            <div className="flex items-center justify-between text-xs opacity-80 uppercase">
               <span>{room.code}</span>
-              <span className={`px-1.5 py-0.2 rounded text-[9px] ${
-                room.phase === 'Phase 1' ? 'bg-moss/30 text-emerald-950 font-bold' : 'bg-hairline text-paper'
+              <span className={`px-1.5 py-0.2 rounded text-xs ${
+                room.phase === 'Phase 1' ? 'bg-moss/10 text-moss font-bold' : 'bg-hairline text-paper'
               }`}>
                 {room.phase}
               </span>
             </div>
             <div className="font-semibold text-sm truncate mt-1">{room.name}</div>
-            <div className="text-[10px] opacity-75 mt-0.5">{room.dimensions}</div>
+            <div className="text-xs opacity-75 mt-0.5">{room.dimensions}</div>
           </button>
         ))}
       </div>
@@ -150,7 +150,7 @@ export function InteractiveStudioPlan() {
         <div className="space-y-3">
           <div className="flex items-center justify-between text-xs font-mono text-sage-dim">
             <span>Researched Hardware Specifications</span>
-            <span className="text-emerald-400 font-semibold">Real Local Supplier Quotes</span>
+            <span className="text-moss font-semibold">Real Local Supplier Quotes</span>
           </div>
 
           <div tabIndex={0} className="overflow-x-auto">
@@ -171,7 +171,7 @@ export function InteractiveStudioPlan() {
                       <span>{gear.name}</span>
                     </td>
                     <td className="py-3 px-3 text-sage">{gear.vendor}</td>
-                    <td className="py-3 px-3 font-bold text-emerald-400 whitespace-nowrap">{gear.cost}</td>
+                    <td className="py-3 px-3 font-bold text-moss whitespace-nowrap">{gear.cost}</td>
                     <td className="py-3 pl-3 text-sage-dim text-[11px] font-body leading-snug">{gear.why}</td>
                   </tr>
                 ))}

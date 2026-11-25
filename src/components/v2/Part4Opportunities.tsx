@@ -45,7 +45,7 @@ export function Part4Opportunities() {
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
                 PART 4 · THE OPPORTUNITY MATRIX
               </span>
               <h4 className="font-display text-paper text-base font-semibold">12 Revenue Levers (ranked by the v2.0 composite score)</h4>
@@ -69,7 +69,7 @@ export function Part4Opportunities() {
                 <button
                   key={d}
                   onClick={() => setFilterDifficulty(d)}
-                  className={`px-2 py-0.5 rounded uppercase text-[10px] ${
+                  className={`px-2 py-0.5 rounded uppercase text-xs ${
                     filterDifficulty === d ? 'bg-brass text-ink font-bold' : 'bg-ink-2 text-sage hover:text-paper'
                   }`}
                 >
@@ -107,13 +107,13 @@ export function Part4Opportunities() {
                       <div className="font-bold text-paper text-sm">{op.name}</div>
                       <div className="text-[11px] text-sage font-body line-clamp-1">{op.rationale}</div>
                     </td>
-                    <td className="py-2.5 px-2 font-bold text-emerald-400 whitespace-nowrap">{op.revenue}</td>
+                    <td className="py-2.5 px-2 font-bold text-moss whitespace-nowrap">{op.revenue}</td>
                     <td className="py-2.5 px-2 text-sage whitespace-nowrap">{op.cost}</td>
                     <td className="py-2.5 px-2 text-paper whitespace-nowrap">{op.time}</td>
                     <td className="py-2.5 px-2">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
-                        op.difficulty === 'Low' ? 'bg-moss/20 text-emerald-300' :
-                        op.difficulty === 'Medium' ? 'bg-brass/20 text-amber-300' : 'bg-brick/20 text-rose-300'
+                      <span className={`px-2 py-0.5 rounded text-xs font-semibold ${
+                        op.difficulty === 'Low' ? 'bg-moss/10 text-moss' :
+                        op.difficulty === 'Medium' ? 'bg-brass/20 text-brass' : 'bg-brick/10 text-brick-text'
                       }`}>
                         {op.difficulty}
                       </span>
@@ -136,7 +136,7 @@ export function Part4Opportunities() {
               <div className="p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-brass font-bold text-sm">#1 GAA & County Vendor</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-brass text-ink font-bold">8.5</span>
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-brass text-ink font-bold">8.5</span>
                 </div>
                 <p className="text-sage text-[11px] font-body leading-snug">
                   Highest expected cash flow (KSh 2M–8M). Formalises institutional relations with Bungoma & Kakamega; provides accredited access to 2027 electoral campaigns.
@@ -146,7 +146,7 @@ export function Part4Opportunities() {
               <div className="p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-brass font-bold text-sm">#2 WhatsApp / USSD</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-brass text-ink font-bold">8.2</span>
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-brass text-ink font-bold">8.2</span>
                 </div>
                 <p className="text-sage text-[11px] font-body leading-snug">
                   Uncontested ground. Direct two-way listener database bypasses social algorithms and unlocks subscription polls, classifieds, and mobile airtime rewards.
@@ -156,7 +156,7 @@ export function Part4Opportunities() {
               <div className="p-3.5 bg-ink rounded border border-brass/50 space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-brass font-bold text-sm">#3 Branded Shows</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-brass text-ink font-bold">7.8</span>
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-brass text-ink font-bold">7.8</span>
                 </div>
                 <p className="text-sage text-[11px] font-body leading-snug">
                   Four high-production formats with title sponsors (KSh 80K–150K/mo each). Guaranteed delivery with zero live presenting risk.
@@ -166,7 +166,7 @@ export function Part4Opportunities() {
               <div className="p-3.5 bg-ink rounded border border-hairline space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-paper font-bold text-sm">#4 Outside Broadcast (OB)</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-hairline text-brass font-bold">7.2</span>
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-hairline text-brass font-bold">7.2</span>
                 </div>
                 <p className="text-sage text-[11px] font-body leading-snug">
                   Translates "Hapa Tulipo" into visceral physical community footprint across Bungoma, Kakamega, and Trans Nzoia market centres.
@@ -176,7 +176,7 @@ export function Part4Opportunities() {
               <div className="p-3.5 bg-ink rounded border border-hairline space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-paper font-bold text-sm">#5 YouTube & Video</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-hairline text-brass font-bold">6.9</span>
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-hairline text-brass font-bold">6.9</span>
                 </div>
                 <p className="text-sage text-[11px] font-body leading-snug">
                   Leverages Studio Phase 1 visual radio PTZ camera feeds to build an indexed, monetised digital video library on YouTube and Facebook.
@@ -191,7 +191,7 @@ export function Part4Opportunities() {
       <Reveal>
         <section className="bg-ink-2 border border-brass/40 rounded p-4 sm:p-5" aria-labelledby="touchpoint-rate-card-title">
           <div className="flex flex-col gap-2 border-b border-hairline pb-4">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold">
               PART 4A · DIGITAL COMMERCIAL INVENTORY
             </span>
             <h4 id="touchpoint-rate-card-title" className="font-display text-paper text-lg font-semibold">

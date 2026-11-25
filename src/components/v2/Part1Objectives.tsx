@@ -140,7 +140,7 @@ export function Part1Objectives() {
                       {obj.letter}
                     </span>
                     <span>
-                      <span className="block text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+                      <span className="block text-xs font-mono uppercase tracking-wider text-sage-dim">
                         Objective {obj.letter}
                       </span>
                       <span className="block font-display text-base sm:text-lg text-paper font-medium">
@@ -152,7 +152,7 @@ export function Part1Objectives() {
                   <span className="flex items-center gap-3 shrink-0">
                     <span className="hidden sm:block text-right">
                       <span className="block font-mono text-xs text-paper font-semibold">{obj.keyStat.value}</span>
-                      <span className="block text-[10px] font-mono text-brass">{obj.keyStat.badgeText}</span>
+                      <span className="block text-xs font-mono text-brass">{obj.keyStat.badgeText}</span>
                     </span>
                     <span className="text-sage p-1" aria-hidden="true">
                       {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -170,7 +170,7 @@ export function Part1Objectives() {
                           <span className="text-[11px] font-mono text-sage-dim uppercase tracking-wider">
                             v1.0 Original Target
                           </span>
-                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-hairline text-sage">
+                          <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-hairline text-sage">
                             May 2026
                           </span>
                         </div>
@@ -196,7 +196,7 @@ export function Part1Objectives() {
 
                     {/* Reality Check Analysis */}
                     <div className="p-4 rounded bg-ink border border-hairline space-y-2">
-                      <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-amber-400 uppercase tracking-wider">
+                      <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-brass uppercase tracking-wider">
                         <AlertTriangle size={13} />
                         <span>The Reality Check & Empirical Critique</span>
                       </div>

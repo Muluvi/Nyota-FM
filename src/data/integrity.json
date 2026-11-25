@@ -1,5 +1,5 @@
 {
-  "dataHash": "63385aead206",
+  "dataHash": "81b045278fe1",
   "facts": 30,
   "factsByTier": {
     "0": 4,
@@ -15,6 +15,6 @@
   "sources": 50,
   "deepLinkedSources": 31,
   "contradictions": 0,
-  "hardcodedLiteralsRemaining": 392,
-  "componentsWithLiterals": 30
+  "hardcodedLiteralsRemaining": 389,
+  "componentsWithLiterals": 29
 }

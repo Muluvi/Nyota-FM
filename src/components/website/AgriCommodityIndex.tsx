@@ -123,14 +123,14 @@ export function AgriCommodityIndex() {
               <div className="flex items-start justify-between">
                 <div>
                   <span className="font-bold text-paper text-sm block">{item.crop}</span>
-                  <span className="text-[10px] text-sage-dim font-mono">{item.unit} · {item.market}</span>
+                  <span className="text-xs text-sage-dim font-mono">{item.unit} · {item.market}</span>
                 </div>
                 <div className="text-right">
                   <span className="font-display text-lg font-bold text-paper tabular-nums block">
                     KSh {item.currentPriceKsh.toLocaleString()}
                   </span>
-                  <span className={`text-[10px] font-mono flex items-center justify-end gap-1 ${
-                    item.trend === 'up' ? 'text-emerald-400' : item.trend === 'down' ? 'text-rose-400' : 'text-sage'
+                  <span className={`text-xs font-mono flex items-center justify-end gap-1 ${
+                    item.trend === 'up' ? 'text-moss' : item.trend === 'down' ? 'text-brick-text' : 'text-sage'
                   }`}>
                     {item.trend === 'up' && <TrendingUp size={10} />}
                     {item.trend === 'down' && <TrendingDown size={10} />}
@@ -141,7 +141,7 @@ export function AgriCommodityIndex() {
 
               <p className="text-[11px] text-sage leading-relaxed font-sans">{item.seasonalNote}</p>
 
-              <div className="pt-2 border-t border-hairline flex items-center justify-between text-[10px] font-mono">
+              <div className="pt-2 border-t border-hairline flex items-center justify-between text-xs font-mono">
                 <span className="text-sage-dim">On-Air Sponsor:</span>
                 <span className="text-brass font-bold">{item.advertiserSponsor}</span>
               </div>

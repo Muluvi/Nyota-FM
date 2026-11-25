@@ -136,7 +136,7 @@ export function LiveRadioPlayer() {
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
                   <span className={`relative inline-flex rounded-full h-2 w-2 shrink-0 ${isPlaying ? 'bg-moss' : 'bg-sage-dim'}`} />
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-brass font-semibold truncate">
+                  <span className="font-mono text-xs uppercase tracking-wider text-brass font-semibold truncate">
                     {isPlaying ? '107.3 FM · Live' : '107.3 FM'}
                   </span>
                 </div>
