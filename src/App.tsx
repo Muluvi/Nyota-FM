@@ -7,6 +7,7 @@ import { WebsiteFooter } from './components/website/WebsiteFooter';
 import { ExecutiveBriefingMode } from './components/website/ExecutiveBriefingMode';
 import { MobileBottomDock } from './components/website/MobileBottomDock';
 import { ChapterSection } from './components/ledger/ChapterSection';
+import { MinimalNarrative } from './components/narrative/MinimalNarrative';
 
 // Core Strategic Modules
 import { DocumentHero } from './components/v2/DocumentHero';
@@ -27,8 +28,8 @@ import { sections } from './content/sections';
 export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [briefingOpen, setBriefingOpen] = useState(false);
+  const [narrativeMode, setNarrativeMode] = useState(true);
 
-  // Global keyboard shortcut: Cmd+K / Ctrl+K / '/' to open search, 'b' to open briefing
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -48,23 +49,23 @@ export default function App() {
   }, []);
 
   const handleNavigate = (id: string) => {
-    if (sections.some((section) => section.id === id)) {
-      scrollToSection(id);
-    }
+    setNarrativeMode(false);
+    setTimeout(() => {
+      if (sections.some((section) => section.id === id)) {
+        scrollToSection(id);
+      }
+    }, 100);
   };
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-ink text-paper font-body selection:bg-brass selection:text-ink">
-      {/* Persistent Website Navigation Bar */}
       <Navbar
         onOpenSearch={() => setSearchOpen(true)}
         onOpenBriefing={() => setBriefingOpen(true)}
       />
 
-      {/* Instant Global Search Modal */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      {/* Executive Board Briefing & Resolutions Mode */}
       {briefingOpen && (
         <ExecutiveBriefingMode
           onClose={() => setBriefingOpen(false)}
@@ -75,78 +76,75 @@ export default function App() {
         />
       )}
 
-      {/* Main Content Stream - Optimized for mobile edge spacing and touch safe area */}
-      <main className="mx-auto w-full max-w-7xl px-4 sm:px-6 pt-14 sm:pt-20 pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-12">
-        {/* Cover / Strategic Website Hero Block */}
-        <DocumentHero
-          onNavigate={handleNavigate}
-          onOpenBriefing={() => setBriefingOpen(true)}
-        />
+      <main className="mx-auto w-full max-w-5xl px-6 sm:px-8 pt-20 pb-32">
+        {narrativeMode ? (
+          <MinimalNarrative
+            onShowFull={() => setNarrativeMode(false)}
+            onNavigate={handleNavigate}
+          />
+        ) : (
+          <>
+            <div className="mb-12 flex items-center justify-between">
+              <button
+                onClick={() => setNarrativeMode(true)}
+                className="text-sm tracking-wider uppercase text-sage hover:text-paper"
+              >
+                ← Back to narrative
+              </button>
+              <span className="text-xs tracking-widest uppercase text-sage-dim">Full proposal</span>
+            </div>
 
-        {/* VISUAL SYSTEM — HANDBOOK-LED PROPOSAL LAYER */}
-        <VisualPlaybook />
+            <DocumentHero
+              onNavigate={handleNavigate}
+              onOpenBriefing={() => setBriefingOpen(true)}
+            />
 
-        {/* DATA-ENRICHED FIGURES — COMPLETE SOURCED ANNEXURE */}
-        <DataEnrichedAnnexure />
+            <VisualPlaybook />
+            <DataEnrichedAnnexure />
+            <TouchpointEcosystem />
 
-        {/* COMMERCIAL TOUCHPOINTS — SOCIAL + STREAMING RATE-CARD INVENTORY */}
-        <TouchpointEcosystem />
+            <ChapterSection id="part-1" number="01" title="The Objectives — 5 Strategic Mandates">
+              <Part1Objectives />
+            </ChapterSection>
 
-        {/* PART 1 — THE OBJECTIVES */}
-        <ChapterSection id="part-1" number="01" title="The Objectives — 5 Strategic Mandates">
-          <Part1Objectives />
-        </ChapterSection>
+            <ChapterSection id="part-2" number="02" title="Sourced Master Data Room & Benchmark Tables">
+              <Part2MasterData />
+            </ChapterSection>
 
-        {/* PART 2 — THE DATA (MASTER DATA ANNEXURE) */}
-        <ChapterSection id="part-2" number="02" title="Sourced Master Data Room & Benchmark Tables">
-          <Part2MasterData />
-        </ChapterSection>
+            <ChapterSection id="part-3" number="03" title="Data Analysis, Sensitivity & Payback Simulator">
+              <Part3DataAnalysis />
+            </ChapterSection>
 
-        {/* PART 3 — DATA ANALYSIS & PAYBACK MODEL */}
-        <ChapterSection id="part-3" number="03" title="Data Analysis, Sensitivity & Payback Simulator">
-          <Part3DataAnalysis />
-        </ChapterSection>
+            <ChapterSection id="part-4" number="04" title="The Commercial Opportunities & Expected Value Matrix">
+              <Part4Opportunities />
+            </ChapterSection>
 
-        {/* PART 4 — THE OPPORTUNITIES MATRIX */}
-        <ChapterSection id="part-4" number="04" title="The Commercial Opportunities & Expected Value Matrix">
-          <Part4Opportunities />
-        </ChapterSection>
+            <ChapterSection id="part-5" number="05" title="Action Execution Plans (21 Concrete Strategies)">
+              <Part5Strategies />
+            </ChapterSection>
 
-        {/* PART 5 — STRATEGIES TO CAPTURE */}
-        <ChapterSection id="part-5" number="05" title="Action Execution Plans (21 Concrete Strategies)">
-          <Part5Strategies />
-        </ChapterSection>
+            <ChapterSection id="part-6" number="06" title="Studio Build, Phased Capex & Governance Roadmap">
+              <Part6TheBuild />
+            </ChapterSection>
 
-        {/* PART 6 — THE BUILD */}
-        <ChapterSection id="part-6" number="06" title="Studio Build, Phased Capex & Governance Roadmap">
-          <Part6TheBuild />
-        </ChapterSection>
+            <ChapterSection id="part-7" number="07" title="The Gap Audit (Comprehensive Centerpiece Checklists)">
+              <Part7GapAudit />
+            </ChapterSection>
 
-        {/* PART 7 — THE GAP AUDIT */}
-        <ChapterSection id="part-7" number="07" title="The Gap Audit (Comprehensive Centerpiece Checklists)">
-          <Part7GapAudit />
-        </ChapterSection>
-
-        {/* SOURCE LIST & THE SIX ASKS OF OWNERSHIP */}
-        <div id="part-asks" className="scroll-mt-20 sm:scroll-mt-24 pt-12">
-          <SourceListAndAsks />
-        </div>
+            <div id="part-asks" className="scroll-mt-20 pt-12">
+              <SourceListAndAsks />
+            </div>
+          </>
+        )}
       </main>
 
-      {/* Standard Website Footer */}
       <WebsiteFooter onNavigate={handleNavigate} />
-
-      {/* Interactive Live Radio Player Widget */}
       <LiveRadioPlayer />
-
-      {/* Ergonomic Mobile Phone Bottom Dock (<15% screen height) */}
       <MobileBottomDock
         onOpenSearch={() => setSearchOpen(true)}
         onOpenBriefing={() => setBriefingOpen(true)}
         onNavigate={handleNavigate}
       />
-
-      {/* Desktop Sticky Rail & Back-to-Top Indicator */}
       <FloatingNavRail />
     </div>
   );
