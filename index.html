@@ -24,6 +24,11 @@
         var c = navigator.connection
         var slow = c && (c.saveData || /(^|-)2g|3g/.test(c.effectiveType || ''))
         var lite = stored === '1' || (stored === null && slow)
+        var prefs = JSON.parse(localStorage.getItem('nyota.prefs') || '{}')
+        var root = document.documentElement
+        if (prefs.theme === 'light') root.classList.add('theme-light')
+        if (prefs.accent === 'moss' || prefs.accent === 'brick') root.classList.add('accent-' + prefs.accent)
+        if (prefs.motion === 'calm') root.classList.add('fx-calm')
         if (lite) document.documentElement.classList.add('lite')
         else ['dm-sans-latin-wght-normal', 'big-shoulders-display-latin-800-normal', 'instrument-serif-latin-400-normal'].forEach(function (f) {
           var l = document.createElement('link')
@@ -36,7 +41,7 @@
       html, body { margin: 0; background: #090B0A; color: #F7F8F4; }
     </style>
   </head>
-  <body>
+  <body class="fx-noise">
     <div id="root"></div>
     <noscript>
       <p style="font-family: system-ui, sans-serif; padding: 2rem; max-width: 40rem;">

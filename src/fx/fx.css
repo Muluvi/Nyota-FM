@@ -1,0 +1,412 @@
+/*
+ * Effects layer. Everything decorative lives here and is switched off by:
+ *   html.fx-calm (menu: Motion → Calm), html.lite (data saver), prefers-reduced-motion.
+ * Selectors use :where(html:not(.fx-calm):not(.lite)) via the --fx gate classes below.
+ */
+
+/* Registered custom properties (must stay outside layers) */
+@property --mx { syntax: '<percentage> | <length>'; inherits: true; initial-value: 30%; }
+@property --my { syntax: '<percentage> | <length>'; inherits: true; initial-value: 40%; }
+@property --fx-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+
+/* Effects live in Tailwind's components layer, so utility classes (fixed, absolute, colours) always win. */
+@layer components {
+
+
+/* ════════ J. Themes: light mode and accent themes (token swaps) ════════ */
+html.theme-light {
+  color-scheme: light;
+  --color-ink: #F4F5F0;
+  --color-ink-2: #E9ECE5;
+  --color-paper: #101412;
+  --color-sage: #3A4640;
+  --color-sage-dim: #55625A;
+  --color-brass: #5F4212;
+  --color-hairline: #CDD3CB;
+  --color-brick-ink: #7A3F2C;
+  --color-moss: #274A37;
+  --color-ink-on-paper: #B9C3BC;
+  --color-band-ink: #F4F5F0;
+  --color-band-ink-2: #E9ECE5;
+  --color-band-sage: #EBF0EC;
+  --color-band-moss: #E6EFE9;
+  --color-band-brass: #F3EEE3;
+  --color-band-brick: #F4ECE8;
+  --color-emerald-300: #274A37; --color-emerald-400: #274A37; --color-emerald-500: #274A37; --color-emerald-600: #355C44; --color-emerald-950: #E6EFE9;
+  --color-green-400: #274A37; --color-green-500: #274A37;
+  --color-amber-300: #5F4212; --color-amber-400: #5F4212; --color-amber-600: #5F4212; --color-amber-950: #F3EEE3;
+  --color-yellow-400: #5F4212; --color-orange-400: #5F4212;
+  --color-rose-300: #7A3F2C; --color-rose-400: #7A3F2C; --color-rose-500: #7A3F2C;
+  --color-red-300: #7A3F2C; --color-red-400: #7A3F2C; --color-red-500: #7A3F2C; --color-red-950: #F4ECE8;
+  --color-stone-200: #2A312D; --color-stone-400: #55625A; --color-stone-500: #55625A; --color-stone-700: #CDD3CB; --color-stone-800: #E1E5DE; --color-stone-900: #E9ECE5;
+  --color-pink-300: #3A4640; --color-cyan-200: #3A4640; --color-sky-400: #3A4640; --color-blue-400: #3A4640;
+}
+html.theme-light body { background: var(--color-ink); }
+html.theme-light .band-paper .hl-word { --hl-dim: #8A968F; }
+html.accent-moss { --color-brass: #76A486; }
+html.accent-brick { --color-brass: #D08B72; }
+html.theme-light.accent-moss { --color-brass: #274A37; }
+html.theme-light.accent-brick { --color-brass: #7A3F2C; }
+
+/* Smooth theme switch (colour only, short) */
+html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after {
+  transition: background-color 400ms ease, color 400ms ease, border-color 400ms ease, fill 400ms ease, stroke 400ms ease !important;
+}
+
+/* F. Brand logo silhouette follows the theme; Lite never loads it */
+.brand-logo { filter: brightness(0) invert(1); }
+.brand-logo.blur-md { filter: brightness(0) invert(1) blur(12px); }
+html.theme-light .brand-logo { filter: brightness(0); }
+html.lite .lite-hidden { display: none; }
+
+/* ════════ J. Custom scrollbar ════════ */
+html { scrollbar-color: var(--color-brass) var(--color-ink); scrollbar-width: thin; }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--color-brass), color-mix(in srgb, var(--color-brass) 40%, var(--color-ink))); border-radius: 9999px; }
+
+/* ════════ F. Texture: noise overlay, dot pattern, gradient dividers, mesh ════════ */
+.fx-noise::after {
+  content: ''; position: fixed; inset: -50%; z-index: 200; pointer-events: none; opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html.theme-light .fx-noise::after { opacity: 0.06; mix-blend-mode: multiply; }
+.fx-dots { background-image: radial-gradient(color-mix(in srgb, var(--color-sage) 22%, transparent) 1px, transparent 1.2px); background-size: 22px 22px; }
+.fx-divider { height: 1px; border: 0; margin: 0; background: linear-gradient(90deg, transparent, var(--color-brass), var(--color-moss), transparent); opacity: 0.7; }
+.fx-mesh {
+  background:
+    radial-gradient(40% 50% at 20% 30%, color-mix(in srgb, var(--color-brass) 18%, transparent), transparent 70%),
+    radial-gradient(35% 45% at 80% 20%, color-mix(in srgb, var(--color-moss) 16%, transparent), transparent 70%),
+    radial-gradient(45% 55% at 60% 85%, color-mix(in srgb, var(--color-brick) 14%, transparent), transparent 70%);
+}
+
+/* ════════ A. Liquid / morphing background blobs (CSS fallback for the WebGL shader) ════════ */
+.fx-liquid { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.fx-liquid span { position: absolute; width: 46vmax; height: 46vmax; border-radius: 42% 58% 61% 39% / 44% 39% 61% 56%; filter: blur(60px); opacity: 0.28; will-change: transform; }
+.fx-liquid span:nth-child(1) { background: var(--color-brass); left: -10vmax; top: -12vmax; animation: fx-morph 22s ease-in-out infinite alternate; }
+.fx-liquid span:nth-child(2) { background: var(--color-moss); right: -14vmax; top: 10vmax; animation: fx-morph 26s ease-in-out -6s infinite alternate-reverse; }
+.fx-liquid span:nth-child(3) { background: var(--color-brick); left: 25vmax; bottom: -22vmax; opacity: 0.2; animation: fx-morph 30s ease-in-out -12s infinite alternate; }
+@keyframes fx-morph {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); border-radius: 42% 58% 61% 39% / 44% 39% 61% 56%; }
+  50% { transform: translate(6vmax, 4vmax) rotate(120deg) scale(1.12); border-radius: 58% 42% 39% 61% / 56% 61% 39% 44%; }
+  100% { transform: translate(-4vmax, 7vmax) rotate(240deg) scale(0.94); border-radius: 50% 50% 45% 55% / 40% 60% 40% 60%; }
+}
+.fx-shader-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
+.fx-shader-canvas[data-ready='true'] { opacity: 1; }
+.fx-shader-canvas[data-ready='true'] ~ .fx-liquid { opacity: 0; transition: opacity 1.2s ease; }
+
+/* ════════ A. Hero entrance: curtain, blur-in, split-screen, scale-up, fade sequence ════════ */
+.fx-curtain { position: absolute; inset: 0; z-index: 30; pointer-events: none; display: grid; grid-template-columns: 1fr 1fr; }
+.fx-curtain > span { background: var(--color-ink); animation: fx-curtain-l 1000ms var(--ease-out-expo) 80ms both; border-right: 1px solid var(--color-brass); }
+.fx-curtain > span + span { animation-name: fx-curtain-r; border-right: 0; border-left: 1px solid var(--color-brass); }
+@keyframes fx-curtain-l { to { transform: translateX(-101%); } }
+@keyframes fx-curtain-r { to { transform: translateX(101%); } }
+.fx-blur-in { animation: fx-blur-in 1100ms var(--ease-out-cubic) both; animation-delay: var(--d, 0ms); }
+/* No opacity change: the headline is the LCP element and must paint on the first frame. */
+@keyframes fx-blur-in { from { filter: blur(12px); transform: translateY(8px); } to { filter: none; transform: none; } }
+.fx-from-left { animation: fx-from-left 1000ms var(--ease-out-expo) both; animation-delay: var(--d, 250ms); }
+.fx-from-right { animation: fx-from-right 1000ms var(--ease-out-expo) both; animation-delay: var(--d, 250ms); }
+/* Split-screen slide without fading, so hero text counts as painted immediately (LCP). */
+@keyframes fx-from-left { from { transform: translateX(-8vw); } to { transform: none; } }
+@keyframes fx-from-right { from { transform: translateX(8vw); } to { transform: none; } }
+.fx-scale-up { animation: fx-scale-up 1200ms var(--ease-out-expo) both; animation-delay: var(--d, 300ms); }
+@keyframes fx-scale-up { from { transform: scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.fx-fade-seq > * { animation: fx-fade-up 700ms var(--ease-out-cubic) both; }
+.fx-fade-seq > *:nth-child(1) { animation-delay: 500ms; } .fx-fade-seq > *:nth-child(2) { animation-delay: 650ms; }
+.fx-fade-seq > *:nth-child(3) { animation-delay: 800ms; } .fx-fade-seq > *:nth-child(4) { animation-delay: 950ms; }
+.fx-fade-seq > *:nth-child(5) { animation-delay: 1100ms; }
+html:not(.fx-calm):not(.lite) .fx-fade-seq-item { animation: fx-fade-up 400ms var(--ease-out-cubic) both; }
+@keyframes fx-fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* A. Spotlight: follows the cursor (--mx/--my set by the FX layer), idles with a slow scan */
+.fx-spotlight { position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(520px circle at var(--mx, 30%) var(--my, 40%), color-mix(in srgb, var(--color-brass) 14%, transparent), transparent 60%);
+  animation: fx-scan 14s ease-in-out infinite alternate; }
+.fx-spotlight[data-tracking='true'] { animation: none; }
+@keyframes fx-scan { 0% { --mx: 15%; --my: 30%; } 50% { --mx: 70%; --my: 55%; } 100% { --mx: 40%; --my: 25%; } }
+
+/* A. Glitch (brief, on load and hover) */
+.fx-glitch { position: relative; display: inline-block; }
+.fx-glitch::before, .fx-glitch::after { content: attr(data-text); position: absolute; inset: 0; pointer-events: none; opacity: 0; }
+.fx-glitch::before { color: var(--color-moss); animation: fx-glitch-a 900ms steps(2) 1500ms both; }
+.fx-glitch::after { color: var(--color-brick-ink); animation: fx-glitch-b 900ms steps(2) 1500ms both; }
+.fx-glitch:hover::before { animation: fx-glitch-a 500ms steps(2) both; }
+.fx-glitch:hover::after { animation: fx-glitch-b 500ms steps(2) both; }
+@keyframes fx-glitch-a { 0%, 100% { opacity: 0; } 10%, 60% { opacity: .85; clip-path: inset(10% 0 55% 0); transform: translate(-4px, -2px); } 35% { clip-path: inset(60% 0 10% 0); transform: translate(3px, 1px); } }
+@keyframes fx-glitch-b { 0%, 100% { opacity: 0; } 15%, 70% { opacity: .85; clip-path: inset(45% 0 30% 0); transform: translate(4px, 2px); } 40% { clip-path: inset(5% 0 75% 0); transform: translate(-3px, -1px); } }
+
+/* E. Typewriter caret */
+.fx-caret::after { content: ''; display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -0.12em; background: currentColor; animation: fx-blink 900ms steps(1) infinite; }
+@keyframes fx-blink { 50% { opacity: 0; } }
+
+/* E. Text treatments */
+.fx-gradient-text { background: linear-gradient(100deg, var(--color-brass) 10%, color-mix(in srgb, var(--color-brass) 55%, var(--color-paper)) 45%, var(--color-moss) 90%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: fx-gradient-pan 8s ease-in-out infinite alternate; }
+@keyframes fx-gradient-pan { to { background-position: 100% 0; } }
+.fx-stroke { color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--color-paper) 70%, transparent); }
+.fx-3d { text-shadow: 1px 1px 0 color-mix(in srgb, var(--color-brass) 70%, var(--color-ink)), 2px 2px 0 color-mix(in srgb, var(--color-brass) 55%, var(--color-ink)), 3px 3px 0 color-mix(in srgb, var(--color-brass) 40%, var(--color-ink)), 4px 4px 0 color-mix(in srgb, var(--color-brass) 25%, var(--color-ink)), 6px 10px 24px rgb(0 0 0 / 0.45); }
+.fx-text-shadow { text-shadow: 0 2px 18px rgb(0 0 0 / 0.35); }
+.fx-neon { color: var(--color-brick-ink); text-shadow: 0 0 4px currentColor, 0 0 12px color-mix(in srgb, currentColor 60%, transparent), 0 0 24px color-mix(in srgb, currentColor 35%, transparent); }
+.fx-tracking { transition: letter-spacing 400ms var(--ease-out-expo); }
+.fx-tracking:hover { letter-spacing: 0.04em; }
+.fx-varweight { transition: font-variation-settings 300ms ease, font-weight 300ms ease; }
+.fx-varweight:hover, .fx-varweight:focus-visible { font-variation-settings: 'wght' 700; font-weight: 700; }
+.fx-dropcap::first-letter { float: left; font-family: var(--font-display); font-size: 3.6em; line-height: 0.8; padding: 0.06em 0.12em 0 0; color: var(--color-brass); }
+.band-paper .fx-dropcap::first-letter { color: var(--color-ink); }
+
+/* E. Highlighter mark: draws in when the parent is revealed */
+.fx-mark { background-image: linear-gradient(transparent 58%, color-mix(in srgb, var(--color-brass) 38%, transparent) 58%, color-mix(in srgb, var(--color-brass) 38%, transparent) 92%, transparent 92%); background-repeat: no-repeat; background-size: 0% 100%; transition: background-size 900ms var(--ease-out-expo) 350ms; }
+[data-revealed='true'] .fx-mark, .fx-mark[data-revealed='true'] { background-size: 100% 100%; }
+
+/* E. Animated underline on text links */
+.fx-underline { text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 350ms var(--ease-out-expo); padding-bottom: 2px; }
+.fx-underline:hover, .fx-underline:focus-visible { background-size: 100% 1px; }
+
+/* E. Kinetic slogan words */
+.fx-kinetic > * { display: inline-block; animation: fx-bob 5s ease-in-out infinite; }
+.fx-kinetic > *:nth-child(2) { animation-delay: -2.5s; }
+@keyframes fx-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+/* ════════ C. Hover, focus and cursor effects ════════ */
+.fx-lift { transition: translate 350ms var(--ease-out-expo), box-shadow 350ms ease, border-color 300ms ease; }
+.fx-lift:hover { translate: 0 -4px; box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.55), 0 0 0 1px color-mix(in srgb, var(--color-brass) 35%, transparent); }
+.fx-glow { position: relative; isolation: isolate; }
+.fx-glow::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; z-index: -1; opacity: 0; transition: opacity 400ms ease;
+  background: conic-gradient(from var(--fx-angle, 0deg), transparent 0 30%, var(--color-brass), var(--color-moss), transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: fx-spin-angle 4s linear infinite; }
+.fx-glow:hover::before, .fx-glow:focus-within::before { opacity: 1; }
+@keyframes fx-spin-angle { to { --fx-angle: 360deg; } }
+.fx-shine { position: relative; overflow: hidden; isolation: isolate; }
+.fx-shine::after { content: ''; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; z-index: 1; pointer-events: none; background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.35), transparent); transform: skewX(-20deg); }
+.fx-shine:hover::after { animation: fx-sweep 900ms var(--ease-out-cubic); }
+@keyframes fx-sweep { to { left: 130%; } }
+.fx-bgslide { position: relative; isolation: isolate; overflow: hidden; }
+.fx-bgslide::before { content: ''; position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--color-brass) 14%, transparent); transform: translateX(-101%); transition: transform 400ms var(--ease-out-expo); }
+.fx-bgslide:hover::before, .fx-bgslide:focus-visible::before { transform: none; }
+.fx-scale { transition: scale 250ms var(--ease-out-expo), translate 400ms var(--ease-out-expo); }
+.fx-scale:hover { scale: 1.04; }
+.fx-scale:active { scale: 0.97; }
+.fx-icon-spin svg { transition: transform 500ms var(--ease-out-expo); }
+.fx-icon-spin:hover svg { transform: rotate(180deg); }
+.fx-neon-hover { transition: box-shadow 300ms ease, color 300ms ease; }
+.fx-neon-hover:hover { box-shadow: 0 0 0 1px var(--color-brass), 0 0 18px color-mix(in srgb, var(--color-brass) 45%, transparent), inset 0 0 12px color-mix(in srgb, var(--color-brass) 18%, transparent); }
+.fx-border-draw { position: relative; }
+.fx-border-draw::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; border: 1px solid var(--color-brass); clip-path: inset(0 100% 100% 0); transition: clip-path 600ms var(--ease-out-expo); }
+.fx-border-draw:hover::after, .fx-border-draw:focus-visible::after { clip-path: inset(0 0 0 0); }
+.fx-gradient-hover { background-image: linear-gradient(110deg, var(--color-ink-2), color-mix(in srgb, var(--color-brass) 12%, var(--color-ink-2)), var(--color-ink-2)); background-size: 220% 100%; background-position: 100% 0; transition: background-position 700ms var(--ease-out-expo); }
+.fx-gradient-hover:hover { background-position: 0 0; }
+.fx-reveal-text { display: inline-grid; overflow: hidden; }
+.fx-reveal-text > * { grid-area: 1 / 1; transition: transform 400ms var(--ease-out-expo); }
+.fx-reveal-text > :last-child { transform: translateY(105%); }
+.group:hover .fx-reveal-text > :first-child { transform: translateY(-105%); }
+.group:hover .fx-reveal-text > :last-child { transform: none; }
+
+/* C. 3D tilt + inner parallax (--rx/--ry/--px/--py set by the FX layer) */
+.fx-tilt { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 500ms var(--ease-out-expo); transform-style: preserve-3d; will-change: transform; }
+.fx-tilt[data-tilting='true'] { transition: transform 80ms linear; }
+.fx-tilt .fx-depth { transform: translate3d(calc(var(--px, 0) * 10px), calc(var(--py, 0) * 10px), 30px); transition: transform 300ms var(--ease-out-expo); }
+.fx-tilt::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(300px circle at var(--gx, 50%) var(--gy, 50%), rgb(255 255 255 / 0.08), transparent 60%); opacity: 0; transition: opacity 300ms ease; }
+.fx-tilt[data-tilting='true']::after { opacity: 1; }
+
+/* C. Magnetic buttons (--tx/--ty set by the FX layer) */
+.fx-magnetic { translate: var(--tx, 0px) var(--ty, 0px); transition: translate 400ms var(--ease-out-expo), scale 250ms var(--ease-out-expo); }
+
+/* C. Ripple */
+.fx-ripple { position: relative; overflow: hidden; }
+.fx-ripple-dot { position: absolute; border-radius: 9999px; pointer-events: none; background: currentColor; opacity: 0.25; transform: scale(0); animation: fx-ripple 650ms var(--ease-out-cubic) forwards; }
+@keyframes fx-ripple { to { transform: scale(1); opacity: 0; } }
+
+/* C. Custom cursor and trail (desktop, fine pointer) */
+html.fx-cursor-on, html.fx-cursor-on a, html.fx-cursor-on button { cursor: none; }
+html.fx-cursor-on input, html.fx-cursor-on textarea, html.fx-cursor-on select { cursor: auto; }
+.fx-cursor { position: fixed; left: 0; top: 0; z-index: 300; pointer-events: none; mix-blend-mode: difference; }
+.fx-cursor-dot { position: absolute; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 9999px; background: #F7F8F4; }
+.fx-cursor-ring { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 9999px; border: 1.5px solid #F7F8F4; transition: width 250ms var(--ease-out-expo), height 250ms var(--ease-out-expo), margin 250ms var(--ease-out-expo), opacity 200ms; }
+.fx-cursor[data-hover='true'] .fx-cursor-ring { width: 64px; height: 64px; margin: -32px 0 0 -32px; }
+.fx-cursor[data-down='true'] .fx-cursor-ring { width: 24px; height: 24px; margin: -12px 0 0 -12px; }
+.fx-trail { position: fixed; inset: 0; z-index: 299; pointer-events: none; }
+
+/* C. Focus outline animation (accessibility kept: outline always present) */
+html:not(.fx-calm) *:focus-visible { animation: fx-focus 600ms var(--ease-out-expo); }
+@keyframes fx-focus { from { outline-offset: 10px; outline-color: transparent; } }
+
+/* C. Input glow */
+.fx-input:focus, .fx-input:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brass) 30%, transparent), 0 0 24px color-mix(in srgb, var(--color-brass) 25%, transparent); outline: none; }
+
+/* C. Copy / success glow */
+.fx-flash { animation: fx-flash-glow 900ms ease-out; }
+@keyframes fx-flash-glow { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-moss) 70%, transparent); } 100% { box-shadow: 0 0 0 14px transparent; } }
+
+/* C. Popover / tooltip entry */
+.fx-pop { animation: fx-pop 220ms var(--ease-out-expo); transform-origin: top left; }
+@keyframes fx-pop { from { opacity: 0; transform: translateY(6px) scale(0.97); } }
+
+/* ════════ D. Dynamic UI ════════ */
+.fx-progress { height: 6px; border-radius: 9999px; background: var(--color-hairline); overflow: hidden; }
+.fx-progress > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-moss), var(--color-brass)); transform-origin: left; transform: scaleX(0); transition: transform 1200ms var(--ease-out-expo); }
+[data-revealed='true'] .fx-progress > span, .fx-progress[data-on='true'] > span { transform: scaleX(var(--v, 1)); }
+.fx-ring circle.fx-ring-value { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset 1500ms var(--ease-out-expo); }
+[data-revealed='true'] .fx-ring circle.fx-ring-value { stroke-dashoffset: calc(var(--len) * (1 - var(--v, 1))); }
+.fx-marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.fx-marquee-track { display: flex; width: max-content; gap: 3rem; animation: fx-marquee calc(var(--dur, 60s) / var(--speed, 1)) linear infinite; }
+.fx-marquee:hover .fx-marquee-track, .fx-marquee:focus-within .fx-marquee-track { animation-play-state: paused; }
+@keyframes fx-marquee { to { transform: translateX(-50%); } }
+.fx-wave { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.fx-wave i { width: 2px; height: 100%; border-radius: 1px; background: currentColor; transform-origin: bottom; animation: fx-wave 1.1s ease-in-out infinite; }
+.fx-wave i:nth-child(2) { animation-delay: -0.3s; } .fx-wave i:nth-child(3) { animation-delay: -0.6s; } .fx-wave i:nth-child(4) { animation-delay: -0.15s; } .fx-wave i:nth-child(5) { animation-delay: -0.75s; }
+@keyframes fx-wave { 0%, 100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
+.skeleton { animation: fx-shimmer 1.6s linear infinite; }
+@keyframes fx-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+.fx-modal-backdrop { animation: fx-fade 250ms ease both; }
+.fx-modal { animation: fx-modal-in 380ms var(--ease-out-expo) both; }
+@keyframes fx-fade { from { opacity: 0; } }
+@keyframes fx-modal-in { from { opacity: 0; transform: translateY(24px) scale(0.97); } }
+.fx-panel { animation: fx-panel-in 500ms var(--ease-out-expo) both; }
+@keyframes fx-panel-in { from { transform: translateX(100%); } }
+.fx-accordion { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 450ms var(--ease-out-expo), opacity 300ms ease; opacity: 0; }
+.fx-accordion[data-open='true'] { grid-template-rows: 1fr; opacity: 1; }
+.fx-accordion > * { overflow: hidden; }
+.fx-tab-panel { animation: fx-tab 380ms var(--ease-out-expo); }
+@keyframes fx-tab { from { opacity: 0; transform: translateX(14px); } }
+.fx-flip { perspective: 1200px; }
+.fx-flip-inner { display: grid; transition: transform 800ms var(--ease-out-expo); transform-style: preserve-3d; }
+.fx-flip-inner > * { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.fx-flip-inner > :last-child { transform: rotateY(180deg); }
+.fx-flip[data-flipped='true'] .fx-flip-inner { transform: rotateY(180deg); }
+.fx-topbar { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 120; pointer-events: none; background: linear-gradient(90deg, var(--color-moss), var(--color-brass)); transform-origin: left; animation: fx-topbar 2.4s var(--ease-out-cubic) forwards; }
+@keyframes fx-topbar { from { transform: scaleX(0); } to { transform: scaleX(0.85); } }
+.fx-switch { position: relative; width: 38px; height: 22px; border-radius: 9999px; background: var(--color-hairline); transition: background 300ms ease; flex: none; }
+.fx-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 9999px; background: var(--color-paper); transition: transform 350ms cubic-bezier(.34, 1.56, .64, 1); }
+[aria-pressed='true'] > .fx-switch, .fx-switch[data-on='true'] { background: var(--color-brass); }
+[aria-pressed='true'] > .fx-switch::after, .fx-switch[data-on='true']::after { transform: translateX(16px); background: var(--color-ink); }
+.fx-typing { display: inline-flex; gap: 3px; }
+.fx-typing i { width: 5px; height: 5px; border-radius: 9999px; background: currentColor; animation: fx-typing 1s ease-in-out infinite; }
+.fx-typing i:nth-child(2) { animation-delay: 0.15s; } .fx-typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes fx-typing { 0%, 60%, 100% { transform: translateY(0); opacity: .4; } 30% { transform: translateY(-4px); opacity: 1; } }
+.fx-check path { stroke-dasharray: 24; stroke-dashoffset: 24; animation: fx-draw 500ms var(--ease-out-expo) 120ms forwards; }
+@keyframes fx-draw { to { stroke-dashoffset: 0; } }
+.fx-spinner { width: 16px; height: 16px; border-radius: 9999px; border: 2px solid currentColor; border-right-color: transparent; animation: fx-rotate 700ms linear infinite; }
+@keyframes fx-rotate { to { transform: rotate(360deg); } }
+.fx-dial-spinner { width: 44px; height: 44px; }
+.fx-dial-spinner line { transform-origin: 22px 22px; animation: fx-rotate 1.4s cubic-bezier(.6, .1, .3, .9) infinite; }
+.fx-badge { animation: fx-heartbeat 2.4s ease-in-out infinite; }
+.fx-float { animation: fx-float 6s ease-in-out infinite; }
+@keyframes fx-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* D. Animated data visualisation: bars grow when revealed or when the data changes */
+.fx-bar-grow { transform-origin: bottom; transform: scaleY(0); transition: transform 1100ms var(--ease-out-expo); }
+[data-revealed='true'] .fx-bar-grow { transform: none; }
+.fx-svg-grow { transform-box: fill-box; transform-origin: center bottom; animation: fx-grow-y 800ms var(--ease-out-expo) both; }
+@keyframes fx-grow-y { from { transform: scaleY(0); opacity: 0; } }
+html.fx-calm :is(.fx-bar-grow), html.lite :is(.fx-bar-grow) { transform: none; transition: none; }
+html.fx-calm .fx-svg-grow, html.lite .fx-svg-grow { animation: none; }
+@media (prefers-reduced-motion: reduce) { .fx-bar-grow { transform: none; transition: none; } .fx-svg-grow { animation: none; } }
+@media print { .fx-bar-grow { transform: none !important; } .fx-svg-grow { animation: none !important; } }
+
+/* D. Sparkline draws itself when revealed (A: SVG line drawing) */
+.fx-spark path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1400ms var(--ease-out-expo) 300ms; }
+[data-revealed='true'] .fx-spark path { stroke-dashoffset: 0; }
+html.fx-calm .fx-spark path, html.lite .fx-spark path { stroke-dashoffset: 0; transition: none; }
+@media (prefers-reduced-motion: reduce) { .fx-spark path { stroke-dashoffset: 0; transition: none; } }
+@media print { .fx-spark path { stroke-dashoffset: 0 !important; } }
+
+/* ════════ G. Micro-interaction library ════════ */
+.fx-shake { animation: fx-shake 450ms cubic-bezier(.36, .07, .19, .97); }
+@keyframes fx-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+.fx-tada { animation: fx-tada 900ms ease; }
+@keyframes fx-tada { 10%, 20% { transform: scale(.94) rotate(-3deg); } 30%, 50%, 70%, 90% { transform: scale(1.06) rotate(3deg); } 40%, 60%, 80% { transform: scale(1.06) rotate(-3deg); } }
+.fx-jello { animation: fx-jello 700ms ease; }
+@keyframes fx-jello { 30% { transform: scale(1.12, .88); } 40% { transform: scale(.88, 1.12); } 60% { transform: scale(1.05, .95); } 75% { transform: scale(.97, 1.03); } }
+.fx-rubber { animation: fx-rubber 800ms ease; }
+@keyframes fx-rubber { 30% { transform: scaleX(1.2) scaleY(.8); } 40% { transform: scaleX(.8) scaleY(1.2); } 60% { transform: scaleX(1.1) scaleY(.9); } }
+.fx-wobble:hover { animation: fx-wobble 700ms ease; }
+@keyframes fx-wobble { 15% { transform: translateX(-4px) rotate(-5deg); } 30% { transform: translateX(3px) rotate(3deg); } 45% { transform: translateX(-2px) rotate(-2deg); } 60% { transform: translateX(1px) rotate(1deg); } }
+.fx-swing { transform-origin: top center; animation: fx-swing 1s ease; }
+@keyframes fx-swing { 20% { transform: rotate(12deg); } 40% { transform: rotate(-8deg); } 60% { transform: rotate(4deg); } 80% { transform: rotate(-3deg); } }
+.fx-heartbeat { animation: fx-heartbeat 1.6s ease-in-out infinite; }
+@keyframes fx-heartbeat { 0%, 40%, 100% { transform: scale(1); } 14%, 28% { transform: scale(1.25); } }
+.fx-flash-once { animation: fx-flash-op 800ms ease; }
+@keyframes fx-flash-op { 25%, 75% { opacity: 0.2; } }
+.fx-bounce-in { animation: fx-bounce-in 650ms cubic-bezier(.34, 1.56, .64, 1) both; }
+@keyframes fx-bounce-in { from { opacity: 0; transform: translateY(24px) scale(.9); } }
+.fx-lightspeed { animation: fx-lightspeed 500ms var(--ease-out-expo) both; }
+@keyframes fx-lightspeed { from { opacity: 0; transform: translateX(40%) skewX(-25deg); filter: blur(4px); } 60% { transform: skewX(8deg); filter: none; } }
+.fx-flip-in { animation: fx-flip-in 800ms var(--ease-out-expo) both; backface-visibility: hidden; }
+@keyframes fx-flip-in { from { opacity: 0; transform: perspective(600px) rotateX(-80deg); } }
+.fx-zoom-in { animation: fx-zoom 600ms var(--ease-out-expo) both; }
+@keyframes fx-zoom { from { opacity: 0; transform: scale(.85); } }
+
+/* ════════ B. Scroll-linked effects (--sp: 0 entering → 1 leaving, set by the FX layer) ════════ */
+[data-fx='zoom'] { transform: scale(calc(0.9 + min(var(--sp, .5), .5) * 0.2)); }
+[data-fx='rotate'] { transform: rotate(calc((var(--sp, .5) - .5) * var(--deg, 30deg))); }
+[data-fx='blur-out'] { filter: blur(calc(max(var(--sp, .5) - .7, 0) * 20px)); opacity: calc(1 - max(var(--sp, .5) - .75, 0) * 3); }
+[data-fx='fade-zone'] { opacity: calc(min(var(--sp, .5) * 4, 1) * min((1 - var(--sp, .5)) * 4, 1)); }
+[data-fx='parallax'] { transform: translate3d(0, calc((var(--sp, .5) - .5) * var(--depth, 80px)), 0); }
+[data-fx='clip'] { clip-path: inset(calc(max(.35 - var(--sp, .5), 0) * 140%) round var(--radius-ui)); }
+.fx-slide-left { opacity: 0; transform: translateX(-60px); transition: opacity 800ms var(--ease-out-cubic), transform 900ms var(--ease-out-expo); }
+.fx-slide-right { opacity: 0; transform: translateX(60px); transition: opacity 800ms var(--ease-out-cubic), transform 900ms var(--ease-out-expo); }
+[data-revealed='true'] .fx-slide-left, [data-revealed='true'] .fx-slide-right, .fx-slide-left[data-revealed='true'], .fx-slide-right[data-revealed='true'] { opacity: 1; transform: none; }
+.fx-clip-reveal { clip-path: circle(0% at 50% 50%); }
+[data-revealed='true'] .fx-clip-reveal { clip-path: none; animation: fx-clip 1100ms var(--ease-out-expo) 150ms both; }
+@keyframes fx-clip { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(75% at 50% 50%); } }
+
+/* B. Header transparency over the hero */
+
+/* ════════ Gates: calm, lite and reduced motion switch the decorative layer off ════════ */
+html.fx-calm .fx-curtain, html.lite .fx-curtain,
+html.fx-calm .fx-liquid, html.lite .fx-liquid,
+html.fx-calm .fx-spotlight, html.lite .fx-spotlight,
+html.fx-calm .fx-shader-canvas, html.lite .fx-shader-canvas,
+html.fx-calm .fx-particles, html.lite .fx-particles,
+html.lite .fx-noise::after, html.fx-calm .fx-noise::after { display: none; }
+html.fx-calm :is(.fx-blur-in, .fx-from-left, .fx-from-right, .fx-scale-up, .fx-fade-seq > *, .fx-kinetic > *, .fx-gradient-text, .fx-float, .fx-badge, .fx-marquee-track, .fx-wave i, .fx-glitch::before, .fx-glitch::after),
+html.lite :is(.fx-blur-in, .fx-from-left, .fx-from-right, .fx-scale-up, .fx-fade-seq > *, .fx-kinetic > *, .fx-gradient-text, .fx-float, .fx-badge, .fx-marquee-track, .fx-wave i, .fx-glitch::before, .fx-glitch::after) { animation: none; }
+html.fx-calm :is(.fx-slide-left, .fx-slide-right), html.lite :is(.fx-slide-left, .fx-slide-right) { opacity: 1; transform: none; }
+html.fx-calm .fx-clip-reveal, html.lite .fx-clip-reveal { clip-path: none; animation: none; }
+html.fx-calm [data-fx], html.lite [data-fx] { transform: none !important; filter: none !important; opacity: 1 !important; clip-path: none !important; }
+html.fx-calm .fx-tilt, html.lite .fx-tilt { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .fx-curtain, .fx-liquid, .fx-spotlight, .fx-shader-canvas, .fx-particles, .fx-cursor, .fx-trail { display: none !important; }
+  .fx-slide-left, .fx-slide-right { opacity: 1; transform: none; transition: none; }
+  .fx-clip-reveal, [data-revealed='true'] .fx-clip-reveal { clip-path: none; animation: none; }
+  [data-fx] { transform: none !important; filter: none !important; opacity: 1 !important; clip-path: none !important; }
+  .fx-tilt { transform: none !important; }
+  .fx-magnetic { translate: none !important; }
+  .fx-lift:hover { translate: none; }
+  .fx-mark { transition: none; background-size: 100% 100%; }
+  .fx-progress > span { transition: none; transform: scaleX(var(--v, 1)); }
+  .fx-ring circle.fx-ring-value { transition: none; stroke-dashoffset: calc(var(--len) * (1 - var(--v, 1))); }
+  .fx-panel { animation: fx-panel-in 500ms var(--ease-out-expo) both; }
+@keyframes fx-panel-in { from { transform: translateX(100%); } }
+.fx-accordion { transition: none; }
+  html.fx-cursor-on, html.fx-cursor-on a, html.fx-cursor-on button { cursor: auto; }
+}
+
+/* Print: no decorative layer */
+@media print {
+  .fx-curtain, .fx-liquid, .fx-spotlight, .fx-shader-canvas, .fx-particles, .fx-cursor, .fx-trail, .fx-topbar, .fx-marquee { display: none !important; }
+  .fx-noise::after { display: none; }
+  .fx-slide-left, .fx-slide-right { opacity: 1 !important; transform: none !important; }
+  .fx-stroke { color: #111 !important; -webkit-text-stroke: 0; }
+  .fx-gradient-text { color: #111 !important; background: none; }
+  [data-fx] { transform: none !important; filter: none !important; opacity: 1 !important; clip-path: none !important; }
+  .fx-panel { animation: fx-panel-in 500ms var(--ease-out-expo) both; }
+@keyframes fx-panel-in { from { transform: translateX(100%); } }
+.fx-accordion { grid-template-rows: 1fr !important; opacity: 1 !important; }
+}
+
+}
+
+/* Intentional override of the header's utility background while it sits over the hero (B10). */
+.site-header[data-top='true'] { background: transparent; border-color: transparent; backdrop-filter: none; }
+
+/* Pinned horizontal roadmap: must override layout utilities on the same elements. */
+/* B. Horizontal pinned section (desktop) */
+.fx-hscroll { position: relative; }
+@media (min-width: 1024px) {
+  .fx-hscroll[data-active='true'] { height: var(--hs-height, 300vh); }
+  .fx-hscroll[data-active='true'] > .fx-hscroll-pin { position: sticky; top: 5rem; overflow: hidden; }
+  .fx-hscroll[data-active='true'] .fx-hscroll-track { display: flex; gap: 1.5rem; width: max-content; transform: translate3d(calc(var(--hs, 0) * -1px), 0, 0); will-change: transform; }
+  .fx-hscroll[data-active='true'] .fx-hscroll-track > li { margin: 0 !important; width: 19rem; flex: none; padding: 2.5rem 1.25rem 1.25rem; border: 1px solid var(--color-hairline); border-radius: var(--radius-ui); background: var(--color-ink-2); }
+  .fx-hscroll[data-active='true'] .fx-hscroll-track > li > span:first-child { left: 1.25rem; top: 1rem; }
+  .fx-hscroll[data-active='true'] .fx-hscroll-vline { display: none; }
+  .fx-hscroll[data-active='true'] .fx-hscroll-bar { display: block; }
+}
+

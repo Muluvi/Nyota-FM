@@ -1,6 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 
 type Overlay = 'menu' | 'search' | 'briefing' | 'presentation' | null
+export type Theme = 'dark' | 'light'
+export type AccentTheme = 'brass' | 'moss' | 'brick'
+export type MotionLevel = 'full' | 'calm'
 
 interface Settings {
   lite: boolean
@@ -19,12 +22,39 @@ interface Settings {
   notify: (msg: string) => void
   readChapters: Set<string>
   markRead: (id: string) => void
+  theme: Theme
+  setTheme: (t: Theme) => void
+  accent: AccentTheme
+  setAccent: (a: AccentTheme) => void
+  motion: MotionLevel
+  setMotion: (m: MotionLevel) => void
+  sound: boolean
+  setSound: (on: boolean) => void
 }
 
 const SettingsContext = createContext<Settings | null>(null)
 
 const LITE_KEY = 'nyota.lite'
 const READ_KEY = 'nyota.read'
+const PREF_KEY = 'nyota.prefs'
+
+interface Prefs {
+  theme: Theme
+  accent: AccentTheme
+  motion: MotionLevel
+  sound: boolean
+}
+const DEFAULT_PREFS: Prefs = { theme: 'dark', accent: 'brass', motion: 'full', sound: false }
+
+/** Mirrors preferences onto <html> classes (the inline script in index.html does the same before paint). */
+function applyPrefs(p: Prefs) {
+  const el = document.documentElement
+  el.classList.toggle('theme-light', p.theme === 'light')
+  el.classList.remove('accent-moss', 'accent-brick')
+  if (p.accent !== 'brass') el.classList.add(`accent-${p.accent}`)
+  el.classList.toggle('fx-calm', p.motion === 'calm')
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', p.theme === 'light' ? '#F7F8F4' : '#090B0A')
+}
 
 function safeGet(key: string): string | null {
   try {
@@ -62,6 +92,27 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const [expandAll, setExpandAll] = useState(false)
   const [toast, setToast] = useState<string | null>(null)
   const [readChapters, setRead] = useState<Set<string>>(() => new Set())
+  const [prefs, setPrefs] = useState<Prefs>(DEFAULT_PREFS)
+  const prefsSynced = useRef(false)
+
+  useEffect(() => {
+    if (prefsSynced.current) {
+      applyPrefs(prefs)
+      safeSet(PREF_KEY, JSON.stringify(prefs))
+    }
+  }, [prefs])
+
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(safeGet(PREF_KEY) ?? 'null') as Partial<Prefs> | null
+      if (stored) setPrefs({ ...DEFAULT_PREFS, ...stored })
+    } catch {
+      /* corrupt preference: keep defaults */
+    }
+    prefsSynced.current = true
+  }, [])
+
+  const updatePrefs = useCallback((patch: Partial<Prefs>) => setPrefs((p) => ({ ...p, ...patch })), [])
 
   // Declared before the mount effect so the first pass never strips the pre-paint class.
   useEffect(() => {
@@ -115,8 +166,16 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       notify,
       readChapters,
       markRead,
+      theme: prefs.theme,
+      setTheme: (theme) => updatePrefs({ theme }),
+      accent: prefs.accent,
+      setAccent: (accent) => updatePrefs({ accent }),
+      motion: prefs.motion,
+      setMotion: (motion) => updatePrefs({ motion }),
+      sound: prefs.sound,
+      setSound: (sound) => updatePrefs({ sound }),
     }),
-    [lite, liteAuto, setLite, overlay, sheet, expandAll, toast, notify, readChapters, markRead],
+    [lite, liteAuto, setLite, overlay, sheet, expandAll, toast, notify, readChapters, markRead, prefs, updatePrefs],
   )
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>
