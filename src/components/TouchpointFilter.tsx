@@ -95,13 +95,13 @@ export default function TouchpointFilter() {
         {filtered.map(item => (
           <div 
             key={item.id} 
-            className="glass-panel p-4 flex flex-col justify-between h-32 animate-pop-in"
+            className="glass-panel p-4 flex flex-col justify-between h-32"
             style={{ animationDuration: '0.3s' }}
           >
             <div>
               <div className="flex justify-between items-start mb-1">
                 <h6 className="text-maize-cream font-medium text-sm line-clamp-1 pr-2">{item.name}</h6>
-                <span className="text-[9px] font-mono uppercase tracking-widest text-mulembe-green bg-mulembe-green/10 px-1.5 py-0.5 rounded">{item.cat}</span>
+                <span className="text-xs font-mono uppercase tracking-widest text-mulembe-green bg-mulembe-green/10 px-1.5 py-0.5 rounded">{item.cat}</span>
               </div>
               <p className="text-xs text-static-grey line-clamp-1">{item.pitch}</p>
             </div>
