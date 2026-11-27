@@ -127,7 +127,7 @@ export function TwangaaMobileSimulator() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-[10px] font-mono text-brass font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-xs font-mono text-brass font-bold uppercase tracking-wider">
               <Sparkles size={12} />
               Interactive Prototype · Strategy 5.7
             </span>
@@ -178,7 +178,7 @@ export function TwangaaMobileSimulator() {
               {/* LCD Monochrome / Color Screen */}
               <div className="rounded-xl border-2 border-stone-800 bg-[#7B9B7E] p-3 text-[#142314] font-mono shadow-inner min-h-[220px] flex flex-col justify-between">
                 {/* Screen Header */}
-                <div className="flex items-center justify-between border-b border-[#5e7760] pb-1 text-[10px] font-bold">
+                <div className="flex items-center justify-between border-b border-[#5e7760] pb-1 text-xs font-bold">
                   <span>SAFARICOM 3G</span>
                   <span>107.3 FM</span>
                 </div>
@@ -191,7 +191,7 @@ export function TwangaaMobileSimulator() {
                       <div className="rounded bg-[#6d8a70] p-2 text-center text-sm font-bold tracking-widest text-black">
                         {ussdInput || '*483*107#'}
                       </div>
-                      <p className="text-[10px] text-center opacity-80">
+                      <p className="text-xs text-center opacity-80">
                         Bofya "PIGA" au tumia vitufe vya simu
                       </p>
                     </div>
@@ -199,70 +199,70 @@ export function TwangaaMobileSimulator() {
 
                   {ussdStep === 1 && (
                     <div className="space-y-1">
-                      <div className="font-bold text-[11px] uppercase">NYOTA FM 107.3 TWANG'AA:</div>
-                      <div className="text-[10px] space-y-0.5">
+                      <div className="font-bold text-xs uppercase">NYOTA FM 107.3 TWANG'AA:</div>
+                      <div className="text-xs space-y-0.5">
                         <p>1. Piga Kura ya Kumekucha</p>
                         <p>2. Omba Wimbo wa Luhya/Gospel</p>
                         <p>3. Bei ya Mazao (Chwele Market)</p>
                         <p>4. Jiunge na Twang'aa Cash Club</p>
                       </div>
-                      <div className="mt-2 text-[10px] font-bold">Jibu [1-4]: {ussdInput}</div>
+                      <div className="mt-2 text-xs font-bold">Jibu [1-4]: {ussdInput}</div>
                     </div>
                   )}
 
                   {ussdStep === 2 && (
                     <div className="space-y-1">
-                      <div className="font-bold text-[11px]">KURA YA LEO:</div>
-                      <p className="text-[10px]">Je, serikali ya kaunti ifungue soko la usiku Bungoma mjini?</p>
-                      <p className="text-[10px]">1. Ndio (Inaleta biashara)</p>
-                      <p className="text-[10px]">2. La (Usalama bado mdogo)</p>
-                      <div className="mt-2 text-[10px] font-bold">Jibu: {ussdInput}</div>
+                      <div className="font-bold text-xs">KURA YA LEO:</div>
+                      <p className="text-xs">Je, serikali ya kaunti ifungue soko la usiku Bungoma mjini?</p>
+                      <p className="text-xs">1. Ndio (Inaleta biashara)</p>
+                      <p className="text-xs">2. La (Usalama bado mdogo)</p>
+                      <div className="mt-2 text-xs font-bold">Jibu: {ussdInput}</div>
                     </div>
                   )}
 
                   {ussdStep === 3 && (
                     <div className="space-y-1">
-                      <div className="font-bold text-[11px]">OMBA WIMBO:</div>
-                      <p className="text-[10px]">Chagua aina ya muziki unaotaka kupata on-air:</p>
-                      <p className="text-[10px]">1. Luhya Folk Classics (Sukuma Bin Ongaro)</p>
-                      <p className="text-[10px]">2. Western Gospel Praise</p>
-                      <p className="text-[10px]">3. Bongo / Afrobeats Mix</p>
-                      <div className="mt-2 text-[10px] font-bold">Jibu: {ussdInput}</div>
+                      <div className="font-bold text-xs">OMBA WIMBO:</div>
+                      <p className="text-xs">Chagua aina ya muziki unaotaka kupata on-air:</p>
+                      <p className="text-xs">1. Luhya Folk Classics (Sukuma Bin Ongaro)</p>
+                      <p className="text-xs">2. Western Gospel Praise</p>
+                      <p className="text-xs">3. Bongo / Afrobeats Mix</p>
+                      <div className="mt-2 text-xs font-bold">Jibu: {ussdInput}</div>
                     </div>
                   )}
 
                   {ussdStep === 4 && (
                     <div className="space-y-1">
-                      <div className="font-bold text-[11px]">CHWELE SOKO PRICES:</div>
-                      <p className="text-[10px]">1. Gunia ya Mahindi: KSh 3,400</p>
-                      <p className="text-[10px]">2. Maharagwe (Rosecoco): KSh 7,800</p>
-                      <p className="text-[10px]">3. Kuku wa Kienyeji: KSh 850</p>
-                      <div className="mt-2 text-[10px] font-bold">1. Tuma SMS ya Bei | 0. Nyuma: {ussdInput}</div>
+                      <div className="font-bold text-xs">CHWELE SOKO PRICES:</div>
+                      <p className="text-xs">1. Gunia ya Mahindi: KSh 3,400</p>
+                      <p className="text-xs">2. Maharagwe (Rosecoco): KSh 7,800</p>
+                      <p className="text-xs">3. Kuku wa Kienyeji: KSh 850</p>
+                      <div className="mt-2 text-xs font-bold">1. Tuma SMS ya Bei | 0. Nyuma: {ussdInput}</div>
                     </div>
                   )}
 
                   {ussdStep === 5 && (
                     <div className="space-y-1">
-                      <div className="font-bold text-[11px]">TWANG'AA CASH CLUB:</div>
-                      <p className="text-[10px]">Umesajiliwa nambari {Math.floor(1000 + Math.random() * 9000)}.</p>
-                      <p className="text-[10px]">Sikiliza Hapa Tulipo saa 17:00 kwa droo ya KSh 5,000 ya leo!</p>
-                      <div className="mt-2 text-[10px] font-bold">0. Toka: {ussdInput}</div>
+                      <div className="font-bold text-xs">TWANG'AA CASH CLUB:</div>
+                      <p className="text-xs">Umesajiliwa nambari {Math.floor(1000 + Math.random() * 9000)}.</p>
+                      <p className="text-xs">Sikiliza Hapa Tulipo saa 17:00 kwa droo ya KSh 5,000 ya leo!</p>
+                      <div className="mt-2 text-xs font-bold">0. Toka: {ussdInput}</div>
                     </div>
                   )}
 
                   {ussdStep === 6 && (
                     <div className="space-y-2 text-center">
                       <div className="font-bold text-xs">ASANTE!</div>
-                      <p className="text-[10px]">
+                      <p className="text-xs">
                         Ujumbe wako umepokewa na watangazaji wa Nyota FM 107.3. Umepokea nafasi ya bure kwenye droo ya leo.
                       </p>
-                      <p className="text-[9px] opacity-75">Tumeokoa data yako: USSD ni bila gharama ya mtandao.</p>
+                      <p className="text-xs opacity-75">Tumeokoa data yako: USSD ni bila gharama ya mtandao.</p>
                     </div>
                   )}
                 </div>
 
                 {/* Screen Footer Buttons */}
-                <div className="flex justify-between border-t border-[#5e7760] pt-1 text-[9px] font-bold">
+                <div className="flex justify-between border-t border-[#5e7760] pt-1 text-xs font-bold">
                   <button type="button" onClick={submitUSSD} className="hover:underline">
                     {ussdStep === 0 ? 'PIGA' : ussdStep === 6 ? 'MALIZA' : 'TUMA'}
                   </button>
@@ -311,7 +311,7 @@ export function TwangaaMobileSimulator() {
           {/* Technical Architecture & Commercial Derivation */}
           <div className="lg:col-span-6 space-y-4 text-xs font-mono">
             <div className="rounded-lg border border-hairline bg-ink p-4 space-y-3">
-              <span className="text-[10px] text-brass uppercase tracking-wider font-bold block">
+              <span className="text-xs text-brass uppercase tracking-wider font-bold block">
                 WHY ZERO-DATA USSD WINS WESTERN KENYA
               </span>
               <p className="text-sage text-xs font-sans leading-relaxed">
@@ -319,20 +319,20 @@ export function TwangaaMobileSimulator() {
               </p>
               <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                 <div className="rounded border border-hairline bg-ink-2 p-2.5">
-                  <span className="text-[10px] text-sage-dim block">Setup Capex</span>
+                  <span className="text-xs text-sage-dim block">Setup Capex</span>
                   <span className="text-sm font-bold text-paper">KSh 145,000</span>
-                  <span className="text-[10px] text-moss block mt-0.5">Africa's Talking Shortcode</span>
+                  <span className="text-xs text-moss block mt-0.5">Africa's Talking Shortcode</span>
                 </div>
                 <div className="rounded border border-hairline bg-ink-2 p-2.5">
-                  <span className="text-[10px] text-sage-dim block">Monthly Access</span>
+                  <span className="text-xs text-sage-dim block">Monthly Access</span>
                   <span className="text-sm font-bold text-brass">KSh 70,000 / mo</span>
-                  <span className="text-[10px] text-sage-dim block mt-0.5">Telco link fees</span>
+                  <span className="text-xs text-sage-dim block mt-0.5">Telco link fees</span>
                 </div>
               </div>
             </div>
 
             <div className="rounded-lg border border-hairline bg-ink p-4 space-y-2.5">
-              <span className="text-[10px] text-brass uppercase tracking-wider font-bold block">
+              <span className="text-xs text-brass uppercase tracking-wider font-bold block">
                 COMMERCIAL SPONSORSHIP INTEGRATION
               </span>
               <ul className="space-y-1.5 text-xs font-sans text-sage">
@@ -375,7 +375,7 @@ export function TwangaaMobileSimulator() {
                       <Check size={9} strokeWidth={4} />
                     </span>
                   </div>
-                  <span className="text-[10px] text-[#25D366] block">Official Business Account</span>
+                  <span className="text-xs text-[#25D366] block">Official Business Account</span>
                 </div>
               </div>
 
@@ -391,21 +391,21 @@ export function TwangaaMobileSimulator() {
                     }`}
                   >
                     <p className="whitespace-pre-line text-xs font-sans leading-relaxed">{msg.text}</p>
-                    <div className="flex items-center justify-end gap-1 mt-1 text-[9px] text-sage-dim">
+                    <div className="flex items-center justify-end gap-1 mt-1 text-xs text-sage-dim">
                       <span>{msg.time}</span>
                       {msg.sender === 'user' && <CheckCheck size={12} className="text-[#53bdeb]" />}
                     </div>
                   </div>
                 ))}
                 {isTyping && (
-                  <div className="mr-auto bg-[#202c33] text-sage text-[11px] px-3 py-1.5 rounded-lg border border-hairline/40 animate-pulse">
+                  <div className="mr-auto bg-[#202c33] text-sage text-xs px-3 py-1.5 rounded-lg border border-hairline/40">
                     Nyota FM inajibu...
                   </div>
                 )}
               </div>
 
               {/* Quick Prompt Pills */}
-              <div className="flex gap-1.5 overflow-x-auto py-1 px-1 text-[10px] font-mono no-scrollbar">
+              <div tabIndex={0} role="region" aria-label="Scrollable table" className="flex gap-1.5 overflow-x-auto py-1 px-1 text-xs font-mono no-scrollbar">
                 {['1', '2', '3', 'Soko Chwele'].map((opt) => (
                   <button
                     key={opt}
@@ -443,7 +443,7 @@ export function TwangaaMobileSimulator() {
           {/* Business Model Explanation */}
           <div className="lg:col-span-6 space-y-4 text-xs font-mono">
             <div className="rounded-lg border border-hairline bg-ink p-4 space-y-2.5">
-              <span className="text-[10px] text-brass uppercase tracking-wider font-bold block">
+              <span className="text-xs text-brass uppercase tracking-wider font-bold block">
                 METRICS & SCALE (STRATEGY 5.7 / PART 2)
               </span>
               <p className="text-sage text-xs font-sans leading-relaxed">
@@ -451,20 +451,20 @@ export function TwangaaMobileSimulator() {
               </p>
               <div className="grid grid-cols-2 gap-2 text-xs font-mono pt-1">
                 <div className="rounded border border-hairline bg-ink-2 p-2.5">
-                  <span className="text-[10px] text-sage-dim block">BSP Setup Cost</span>
+                  <span className="text-xs text-sage-dim block">BSP Setup Cost</span>
                   <span className="text-sm font-bold text-paper">$85 (KSh 11,000)</span>
-                  <span className="text-[10px] text-moss block mt-0.5">Africa's Talking Gateway</span>
+                  <span className="text-xs text-moss block mt-0.5">Africa's Talking Gateway</span>
                 </div>
                 <div className="rounded border border-hairline bg-ink-2 p-2.5">
-                  <span className="text-[10px] text-sage-dim block">Monthly Service</span>
+                  <span className="text-xs text-sage-dim block">Monthly Service</span>
                   <span className="text-sm font-bold text-brass">$50 / mo (~KSh 6,500)</span>
-                  <span className="text-[10px] text-sage-dim block mt-0.5">Plus Meta per-convo fees</span>
+                  <span className="text-xs text-sage-dim block mt-0.5">Plus Meta per-convo fees</span>
                 </div>
               </div>
             </div>
 
             <div className="rounded-lg border border-hairline bg-ink p-4 space-y-2">
-              <span className="text-[10px] text-brass uppercase tracking-wider font-bold block">
+              <span className="text-xs text-brass uppercase tracking-wider font-bold block">
                 REVENUE MONETIZATION CHANNELS
               </span>
               <ul className="space-y-1.5 text-xs font-sans text-sage">

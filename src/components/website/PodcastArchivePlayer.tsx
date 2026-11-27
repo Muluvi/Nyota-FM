@@ -135,7 +135,7 @@ export function PodcastArchivePlayer() {
                 <div
                   className={`h-9 w-9 rounded-full shrink-0 flex items-center justify-center transition-colors ${
                     currentPlaying
-                      ? 'bg-brass text-ink animate-pulse'
+                      ? 'bg-brass text-ink'
                       : 'bg-ink-2 border border-hairline text-brass'
                   }`}
                 >
@@ -143,13 +143,13 @@ export function PodcastArchivePlayer() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-brass">
+                  <div className="flex items-center gap-2 text-xs font-mono text-brass">
                     <span>{ep.series}</span>
                     <span className="text-sage-dim">·</span>
                     <span className="text-sage-dim">{ep.duration}</span>
                   </div>
                   <h4 className="text-xs font-bold text-paper mt-0.5 truncate">{ep.title}</h4>
-                  <p className="text-[11px] text-sage-dim font-sans line-clamp-1 mt-0.5">{ep.summary}</p>
+                  <p className="text-xs text-sage-dim font-sans line-clamp-1 mt-0.5">{ep.summary}</p>
                 </div>
               </button>
             );
@@ -160,13 +160,13 @@ export function PodcastArchivePlayer() {
         <div className="lg:col-span-6 rounded-xl border border-hairline bg-ink p-5 space-y-4">
           <div className="flex items-start justify-between border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-wider block">
+              <span className="text-xs font-mono text-brass uppercase tracking-wider block">
                 {activeEp.series}
               </span>
               <h4 className="font-display text-base font-bold text-paper mt-0.5">
                 {activeEp.title}
               </h4>
-              <span className="text-[10px] font-mono text-sage-dim block mt-0.5">
+              <span className="text-xs font-mono text-sage-dim block mt-0.5">
                 Hosted by {activeEp.host} · {activeEp.date}
               </span>
             </div>
@@ -205,7 +205,7 @@ export function PodcastArchivePlayer() {
                     key={spd}
                     type="button"
                     onClick={() => setPlaybackSpeed(spd)}
-                    className={`px-1.5 py-0.5 rounded text-[10px] ${
+                    className={`px-1.5 py-0.5 rounded text-xs ${
                       playbackSpeed === spd ? 'bg-brass text-ink font-bold' : 'text-sage hover:text-paper'
                     }`}
                   >
@@ -214,7 +214,7 @@ export function PodcastArchivePlayer() {
                 ))}
               </div>
 
-              <span className="text-[10px] font-mono text-moss">
+              <span className="text-xs font-mono text-moss">
                 Title Sponsor: {activeEp.sponsors}
               </span>
             </div>

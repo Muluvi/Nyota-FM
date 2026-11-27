@@ -27,7 +27,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         {/* Top Status Eyebrow Bar */}
         <div className="flex flex-wrap items-center justify-between text-eyebrow text-sage-dim mb-4 tracking-widest pb-3 border-b border-hairline gap-2">
           <span className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-moss animate-ping" />
+            <span className="size-2 rounded-full bg-moss" />
             <span className="text-moss font-semibold">107.3 FM BROADCAST PLATFORM</span>
           </span>
           <span className="text-brass font-mono font-semibold">
@@ -99,20 +99,20 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
         {/* Live Animated Metrics Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-8 sm:mb-12">
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+            <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Evidence Standard
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-paper font-bold flex items-center gap-1.5 group-hover:text-brass transition-colors">
               <AnimatedCounter value={37} duration={1200} />
               <span className="text-xs font-normal text-emerald-400">Sources</span>
             </div>
-            <div className="text-[11px] text-sage mt-1">
+            <div className="text-xs text-sage mt-1">
               KNBS, CA Kenya, GeoPoll & ReelAnalytics
             </div>
           </div>
 
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+            <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Phase 1 Studio Capex
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-brass font-bold flex items-center gap-1 group-hover:brightness-110 transition-colors">
@@ -120,33 +120,33 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               <AnimatedCounter value={627} duration={1400} />
               <span className="text-xs font-normal text-sage-dim">K – 837K</span>
             </div>
-            <div className="text-[11px] text-sage mt-1">
+            <div className="text-xs text-sage mt-1">
               Sourced local hardware quotations
             </div>
           </div>
 
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+            <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Operational Build
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-paper font-bold flex items-center gap-1.5 group-hover:text-brass transition-colors">
               <AnimatedCounter value={40} duration={1000} />
               <span className="text-xs font-normal text-brass">Items</span>
             </div>
-            <div className="text-[11px] text-sage mt-1">
+            <div className="text-xs text-sage mt-1">
               Scheduled, costed & accountability assigned
             </div>
           </div>
 
           <div className="bg-ink-2 p-4 rounded-xl border border-hairline hover:border-brass/40 transition-colors group">
-            <div className="text-[10px] font-mono uppercase text-sage-dim tracking-wider mb-1">
+            <div className="text-xs font-mono uppercase text-sage-dim tracking-wider mb-1">
               Action Execution Plans
             </div>
             <div className="font-mono text-2xl sm:text-3xl text-emerald-400 font-bold flex items-center gap-1.5 group-hover:brightness-110 transition-colors">
               <AnimatedCounter value={21} duration={1000} />
               <span className="text-xs font-normal text-sage-dim">Strategies</span>
             </div>
-            <div className="text-[11px] text-sage mt-1">
+            <div className="text-xs text-sage mt-1">
               Every strategy with receipts & milestone KPIs
             </div>
           </div>
@@ -157,7 +157,7 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4 mb-5">
             <div>
               <div className="flex items-center gap-2">
-                <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+                <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
                   Audit Protocol
                 </span>
                 <span className="font-mono text-xs text-sage-dim">· Three-Tier Evidence Standard</span>
@@ -216,10 +216,10 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 font-semibold">
-                    <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="size-2 rounded-full bg-emerald-400" />
                     TIER 1 · PRIMARY VERIFIED HARD DATA
                   </span>
-                  <span className="text-[11px] font-mono text-sage-dim">37 Documented Sources</span>
+                  <span className="text-xs font-mono text-sage-dim">37 Documented Sources</span>
                 </div>
                 <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-body">
                   Traceable to a named, publicly citable institution or documented vendor quote. Includes Kenya National Bureau of Statistics (KNBS) 2019 Census, Communications Authority of Kenya (CA) Q2–Q4 2025/26 sector statistics, Media Council of Kenya, ReelAnalytics broadcast monitoring, and Africa&apos;s Talking official rate cards.
@@ -235,10 +235,10 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-mono text-amber-300 font-semibold">
-                    <span className="size-2 rounded-full bg-amber-400 animate-pulse" />
+                    <span className="size-2 rounded-full bg-amber-400" />
                     TIER 2 · MODELLED ECONOMETRIC ESTIMATE
                   </span>
-                  <span className="text-[11px] font-mono text-sage-dim">Reproducible Formulae</span>
+                  <span className="text-xs font-mono text-sage-dim">Reproducible Formulae</span>
                 </div>
                 <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-body">
                   Derived mathematically from Tier 1 verified inputs using an explicit, reproducible method. Used for market share trajectories, discounted cash flow payback schedules, outside broadcast yield projections, and digital conversion funnels.
@@ -254,10 +254,10 @@ export function DocumentHero({ onNavigate, onOpenBriefing }: DocumentHeroProps) 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-mono text-rose-300 font-semibold">
-                    <span className="size-2 rounded-full bg-rose-400 animate-pulse" />
+                    <span className="size-2 rounded-full bg-rose-400" />
                     TIER 0 · EXPLICIT DATA GAP
                   </span>
-                  <span className="text-[11px] font-mono text-sage-dim">Primary Field Research Needed</span>
+                  <span className="text-xs font-mono text-sage-dim">Primary Field Research Needed</span>
                 </div>
                 <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-body">
                   A figure the transformation model needs, but which cannot be responsibly sourced without dedicated on-the-ground field surveying. Instead of guessing, each gap is explicitly catalogued with recommended methodology, timeline, and budget.

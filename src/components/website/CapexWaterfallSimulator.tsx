@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TrendingUp, DollarSign, Calendar, Layers, ShieldCheck, ArrowRight } from 'lucide-react';
 import { TierBadge } from '../v2/TierBadge';
+import { capexWaterfall } from '../../content/data/payback';
 
 export function CapexWaterfallSimulator() {
   const [scenario, setScenario] = useState<'conservative' | 'base' | 'accelerated'>('base');
@@ -8,26 +9,7 @@ export function CapexWaterfallSimulator() {
   // Month 1 to 12 data per scenario
   const months = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10', 'M11', 'M12'];
 
-  const scenarioData = {
-    conservative: {
-      initialCapex: -627299,
-      monthlyNetProfit: [45000, 60000, 75000, 90000, 110000, 130000, 150000, 165000, 180000, 195000, 210000, 230000],
-      breakEvenMonth: 'Month 7',
-      twelveMonthRoi: '+164%',
-    },
-    base: {
-      initialCapex: -627299,
-      monthlyNetProfit: [65000, 95000, 125000, 160000, 190000, 220000, 250000, 275000, 300000, 320000, 340000, 365000],
-      breakEvenMonth: 'Month 5',
-      twelveMonthRoi: '+332%',
-    },
-    accelerated: {
-      initialCapex: -627299,
-      monthlyNetProfit: [90000, 140000, 190000, 240000, 280000, 320000, 360000, 390000, 420000, 450000, 480000, 510000],
-      breakEvenMonth: 'Month 4',
-      twelveMonthRoi: '+517%',
-    },
-  };
+  const scenarioData = capexWaterfall;
 
   const current = scenarioData[scenario];
 
@@ -83,49 +65,49 @@ export function CapexWaterfallSimulator() {
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="rounded-lg border border-hairline bg-ink p-3 space-y-1">
-          <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+          <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
             Initial Capex (Outflow)
           </span>
           <span className="font-display text-xl font-bold text-rose-400 tabular-nums">
             -KSh 627,299
           </span>
-          <span className="text-[10px] text-sage-dim font-mono block">2× PTZ, Switcher, Acoustics</span>
+          <span className="text-xs text-sage-dim font-mono block">2× PTZ, Switcher, Acoustics</span>
         </div>
 
         <div className="rounded-lg border border-hairline bg-ink p-3 space-y-1">
-          <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+          <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
             Full Breakeven Point
           </span>
           <span className="font-display text-xl font-bold text-brass">
             {current.breakEvenMonth}
           </span>
-          <span className="text-[10px] text-emerald-400 font-mono block">Capital 100% Recovered</span>
+          <span className="text-xs text-emerald-400 font-mono block">Capital 100% Recovered</span>
         </div>
 
         <div className="rounded-lg border border-hairline bg-ink p-3 space-y-1">
-          <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+          <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
             Year 1 Net Cumulative
           </span>
           <span className="font-display text-xl font-bold text-emerald-400 tabular-nums">
             +KSh {waterfallSteps[11].cumulativeCash.toLocaleString()}
           </span>
-          <span className="text-[10px] text-sage-dim font-mono block">After capex recovery</span>
+          <span className="text-xs text-sage-dim font-mono block">After capex recovery</span>
         </div>
 
         <div className="rounded-lg border border-hairline bg-ink p-3 space-y-1">
-          <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+          <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
             12-Month Net ROI
           </span>
           <span className="font-display text-xl font-bold text-paper tabular-nums">
             {current.twelveMonthRoi}
           </span>
-          <span className="text-[10px] text-moss font-mono block">On capital invested</span>
+          <span className="text-xs text-moss font-mono block">On capital invested</span>
         </div>
       </div>
 
       {/* Visual Waterfall Bars */}
       <div className="rounded-xl border border-hairline bg-ink p-4 space-y-3">
-        <span className="text-[10px] font-mono text-brass uppercase tracking-wider font-semibold block">
+        <span className="text-xs font-mono text-brass uppercase tracking-wider font-semibold block">
           MONTH-BY-MONTH CUMULATIVE LIQUIDITY TRAJECTORY (KSh)
         </span>
         <div className="grid grid-cols-6 sm:grid-cols-12 gap-1.5 items-end h-40 pt-4 pb-2 border-b border-hairline">
@@ -140,7 +122,7 @@ export function CapexWaterfallSimulator() {
                   }`}
                   style={{ height: `${barHeightPct}%` }}
                 />
-                <span className="text-[10px] font-mono text-sage-dim">{step.month}</span>
+                <span className="text-xs font-mono text-sage-dim">{step.month}</span>
               </div>
             );
           })}

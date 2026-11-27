@@ -87,7 +87,7 @@ export function OBVanExplorer() {
               <span className="text-xs font-mono text-brass uppercase tracking-wider font-semibold">
                 OB RIG HARDWARE SPECIFICATIONS
               </span>
-              <span className="text-[10px] font-mono text-moss">Phase 2 Capex: KSh 320,000 Conversion</span>
+              <span className="text-xs font-mono text-moss">Phase 2 Capex: KSh 320,000 Conversion</span>
             </div>
 
             {/* Gear Selector Tabs */}
@@ -194,7 +194,7 @@ export function OBVanExplorer() {
                   }`}
                 >
                   <span className="text-paper font-bold block">{stop.name}</span>
-                  <span className="text-[10px] text-sage-dim">{stop.county} · {stop.day}</span>
+                  <span className="text-xs text-sage-dim">{stop.county} · {stop.day}</span>
                 </button>
               ))}
             </div>
@@ -206,7 +206,7 @@ export function OBVanExplorer() {
                 <span className="text-emerald-400 font-mono font-bold">{selectedStop.expectedYield}</span>
               </div>
               <p className="text-sage text-xs leading-relaxed">{selectedStop.highlight}</p>
-              <div className="grid grid-cols-2 gap-2 font-mono text-[11px] pt-1 text-sage">
+              <div className="grid grid-cols-2 gap-2 font-mono text-xs pt-1 text-sage">
                 <div>
                   <span className="text-sage-dim block">Footfall:</span>
                   <strong className="text-paper">{selectedStop.crowdSize}</strong>

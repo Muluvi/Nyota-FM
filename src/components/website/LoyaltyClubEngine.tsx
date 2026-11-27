@@ -56,7 +56,7 @@ export function LoyaltyClubEngine() {
             <Award size={20} />
           </div>
           <div>
-            <span className="text-[10px] font-mono text-sage-dim uppercase tracking-wider block">
+            <span className="text-xs font-mono text-sage-dim uppercase tracking-wider block">
               Active Loyalty Balance
             </span>
             <span className="font-display text-2xl font-bold text-brass tabular-nums">
@@ -113,7 +113,7 @@ export function LoyaltyClubEngine() {
                 >
                   <div>
                     <span className="text-paper font-semibold block">{rew.title}</span>
-                    <span className="text-[10px] text-sage-dim">Sponsored by {rew.sponsor}</span>
+                    <span className="text-xs text-sage-dim">Sponsored by {rew.sponsor}</span>
                   </div>
 
                   <button

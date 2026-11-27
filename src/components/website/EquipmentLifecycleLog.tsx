@@ -165,7 +165,7 @@ export function EquipmentLifecycleLog() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-lg border border-hairline">
+      <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto rounded-lg border border-hairline">
         <table className="w-full text-left text-xs font-mono">
           <thead className="bg-ink text-sage-dim uppercase tracking-wider border-b border-hairline">
             <tr>
@@ -183,15 +183,15 @@ export function EquipmentLifecycleLog() {
               <tr key={item.id} className="hover:bg-ink/50 transition-colors">
                 <td className="p-3">
                   <span className="font-bold text-paper block">{item.name}</span>
-                  <span className="text-[10px] text-brass">{item.id}</span>
+                  <span className="text-xs text-brass">{item.id}</span>
                 </td>
                 <td className="p-3 text-sage">{item.category}</td>
                 <td className="p-3 text-paper font-bold tabular-nums">
                   KSh {item.costKsh.toLocaleString()}
                 </td>
                 <td className="p-3 text-emerald-400 font-semibold">{item.warrantyYears} Years</td>
-                <td className="p-3 text-sage text-[11px] font-sans">{item.maintenanceSchedule}</td>
-                <td className="p-3 text-paper text-[11px] font-sans">{item.localServiceAgent}</td>
+                <td className="p-3 text-sage text-xs font-sans">{item.maintenanceSchedule}</td>
+                <td className="p-3 text-paper text-xs font-sans">{item.localServiceAgent}</td>
                 <td className="p-3 text-sage-dim">{item.kraDepreciationRate}</td>
               </tr>
             ))}

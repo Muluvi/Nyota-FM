@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, statSync } from 'node:fs'
 import { resolve, dirname, extname } from 'node:path'
 
 const root = resolve('src')
@@ -11,7 +11,7 @@ function resolveImport(from, specifier) {
   const base = resolve(dirname(from), specifier)
   for (const extension of extensions) {
     const candidate = extension ? `${base}${extension}` : base
-    if (existsSync(candidate)) return candidate
+    if (existsSync(candidate) && statSync(candidate).isFile()) return candidate
   }
   for (const extension of ['.ts', '.tsx']) {
     const candidate = resolve(base, `index${extension}`)
@@ -24,11 +24,15 @@ function visit(file) {
   if (!file || visited.has(file)) return
   visited.add(file)
   const source = readFileSync(file, 'utf8')
-  const imports = [...source.matchAll(/(?:import|export)\s+(?:[^'";]+?\s+from\s+)?['"]([^'"]+)['"]/g)]
+  const imports = [
+    ...source.matchAll(/(?:import|export)\s+(?:[^'";]+?\s+from\s+)?['"]([^'"]+)['"]/g),
+    ...source.matchAll(/import\(\s*['"]([^'"]+)['"]\s*\)/g),
+  ]
   for (const [, specifier] of imports) visit(resolveImport(file, specifier))
 }
 
 visit(entry)
+visit(resolve(root, 'entry-server.tsx'))
 const files = []
 function collect(directory) {
   for (const name of readdirSync(directory, { withFileTypes: true })) {

@@ -92,12 +92,12 @@ export function CompetitorDialMap() {
 
       {/* FM Dial Interactive Radio Band */}
       <div className="rounded-xl border border-hairline bg-ink p-4 space-y-3">
-        <span className="text-[10px] font-mono text-brass uppercase tracking-wider font-semibold block">
+        <span className="text-xs font-mono text-brass uppercase tracking-wider font-semibold block">
           WESTERN KENYA FM BROADCAST SPECTRUM (88.0 – 108.0 MHz)
         </span>
         <div className="relative h-20 bg-ink-2 rounded-lg border border-hairline overflow-hidden flex items-center px-6">
           {/* Radio dial frequency ruler markings */}
-          <div className="absolute inset-x-0 bottom-0 h-4 flex justify-between px-4 text-[9px] font-mono text-sage-dim border-t border-hairline/40">
+          <div className="absolute inset-x-0 bottom-0 h-4 flex justify-between px-4 text-xs font-mono text-sage-dim border-t border-hairline/40">
             <span>88.0</span>
             <span>92.0</span>
             <span>96.0</span>
@@ -130,7 +130,7 @@ export function CompetitorDialMap() {
                   >
                     {st.freq}
                   </div>
-                  <span className="text-[10px] font-mono text-sage mt-1">
+                  <span className="text-xs font-mono text-sage mt-1">
                     {st.name.split(' ')[0]}
                   </span>
                 </button>
@@ -156,7 +156,7 @@ export function CompetitorDialMap() {
           </div>
 
           <div className="text-right">
-            <span className="text-[10px] font-mono text-sage-dim block uppercase">Western Share</span>
+            <span className="text-xs font-mono text-sage-dim block uppercase">Western Share</span>
             <span className="font-display text-lg font-bold text-emerald-400">
               {selectedStation.marketShareWestern}
             </span>

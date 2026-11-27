@@ -1,0 +1,3 @@
+# Confidential board proposal: not for indexing.
+User-agent: *
+Disallow: /

@@ -61,7 +61,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Interactive Media Kit
             </span>
             <span className="font-mono text-xs text-sage-dim">· Real-Time Campaign Cost & Reach Estimator</span>
@@ -103,8 +103,8 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
                   }`}
                 >
                   <div className="font-semibold text-xs truncate">{dp.label}</div>
-                  <div className="text-[10px] opacity-80">{dp.time}</div>
-                  <div className="text-[11px] mt-1 font-bold">KSh {dp.rate}</div>
+                  <div className="text-xs opacity-80">{dp.time}</div>
+                  <div className="text-xs mt-1 font-bold">KSh {dp.rate}</div>
                 </button>
               ))}
             </div>
@@ -126,7 +126,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
                 onChange={(e) => setSpotsPerDay(parseInt(e.target.value))}
                 className="w-full accent-brass cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] font-mono text-sage-dim">
+              <div className="flex justify-between text-xs font-mono text-sage-dim">
                 <span>2 (Lite)</span>
                 <span>4 (Standard)</span>
                 <span>8 (Heavy)</span>
@@ -147,7 +147,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
                 onChange={(e) => setWeeks(parseInt(e.target.value))}
                 className="w-full accent-brass cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] font-mono text-sage-dim">
+              <div className="flex justify-between text-xs font-mono text-sage-dim">
                 <span>1 Wk</span>
                 <span>4 Wks (1 Mo)</span>
                 <span>8 Wks (2 Mo)</span>
@@ -172,7 +172,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
                 <Truck size={16} className={includeOB ? 'text-moss mt-0.5' : 'text-sage-dim mt-0.5'} />
                 <div>
                   <div className="font-semibold text-paper">Outside Broadcast (OB)</div>
-                  <div className="text-[11px] text-sage mt-0.5">+KSh 180,000 (1 Day Market Rig)</div>
+                  <div className="text-xs text-sage mt-0.5">+KSh 180,000 (1 Day Market Rig)</div>
                 </div>
               </button>
 
@@ -186,12 +186,12 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
                 <MessageCircle size={16} className={includeWhatsApp ? 'text-moss mt-0.5' : 'text-sage-dim mt-0.5'} />
                 <div>
                   <div className="font-semibold text-paper">WhatsApp Push Blast</div>
-                  <div className="text-[11px] text-sage mt-0.5">+KSh 35,000 (10K Contacts)</div>
+                  <div className="text-xs text-sage mt-0.5">+KSh 35,000 (10K Contacts)</div>
                 </div>
               </button>
 
               <div className="p-3 rounded-lg bg-ink border border-hairline space-y-1">
-                <div className="flex justify-between text-[11px] text-sage font-mono">
+                <div className="flex justify-between text-xs text-sage font-mono">
                   <span>Live Mentions</span>
                   <span className="text-brass font-bold">{includeLiveMentions}x</span>
                 </div>
@@ -204,7 +204,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
                   onChange={(e) => setIncludeLiveMentions(parseInt(e.target.value))}
                   className="w-full accent-brass cursor-pointer"
                 />
-                <div className="text-[10px] text-sage-dim">KSh 4,500 / live read</div>
+                <div className="text-xs text-sage-dim">KSh 4,500 / live read</div>
               </div>
             </div>
           </div>
@@ -217,7 +217,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
               <span className="font-mono text-xs uppercase tracking-wider text-brass font-bold">
                 CAMPAIGN TOTALS
               </span>
-              <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] text-brass">
+              <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs text-brass">
                 {totalSpots} Total Spots
               </span>
             </div>
@@ -264,13 +264,13 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
 
             {/* Net Total Investment Box */}
             <div className="rounded-lg bg-ink-2 p-3.5 border border-brass/50 text-center">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-sage-dim">
+              <div className="text-xs font-mono uppercase tracking-widest text-sage-dim">
                 Net Campaign Investment
               </div>
               <div className="text-2xl sm:text-3xl font-mono text-brass font-bold mt-0.5">
                 KSh {netInvestment.toLocaleString()}
               </div>
-              <div className="text-[11px] font-mono text-emerald-400 mt-1">
+              <div className="text-xs font-mono text-emerald-400 mt-1">
                 ≈ {estimatedGrossImpressions.toLocaleString()} Listener Impressions
               </div>
             </div>
@@ -285,7 +285,7 @@ Coverage: Western Kenya (Bungoma, Kakamega, Trans Nzoia, Busia, Vihiga)`;
               {copied ? <Check size={14} /> : <Copy size={14} />}
               <span>{copied ? 'Campaign Proposal Copied!' : 'Copy Media Plan Summary'}</span>
             </button>
-            <div className="text-[10px] font-mono text-center text-sage-dim">
+            <div className="text-xs font-mono text-center text-sage-dim">
               Includes pre-campaign script production & post-campaign broadcast log
             </div>
           </div>

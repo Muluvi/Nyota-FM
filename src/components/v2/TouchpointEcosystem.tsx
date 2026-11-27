@@ -131,7 +131,7 @@ export function TouchpointEcosystem() {
     <section id="touchpoint-ecosystem" className="mobile-section-deferred scroll-mt-24 border-y border-hairline/70 py-10 sm:py-14">
       <Reveal>
         <div className="mb-6 max-w-3xl">
-          <div className="mb-3 flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.22em] text-brass">
+          <div className="mb-3 flex items-center gap-2 text-xs font-mono uppercase tracking-[0.22em] text-brass">
             <Sparkles size={14} />
             Commercial inventory · Digital expansion
           </div>
@@ -147,7 +147,7 @@ export function TouchpointEcosystem() {
       <Reveal delay={100}>
         <div className="mb-6 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3">
           <div className="rounded border border-brass/40 bg-ink-2 p-4 sm:col-span-2">
-            <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sage-dim">
               <BadgeDollarSign size={14} className="text-brass" />
               Total rate-card inventory
             </div>
@@ -155,12 +155,12 @@ export function TouchpointEcosystem() {
             <div className="mt-1 text-xs text-sage">50 commercial touchpoints across the ecosystem</div>
           </div>
           <div className="rounded border border-hairline bg-ink-2 p-4">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">Highest-value channel</div>
+            <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">Highest-value channel</div>
             <div className="mt-2 font-display text-lg text-paper">YouTube</div>
             <div className="mt-1 font-mono text-xs text-brass">{money(95000)}</div>
           </div>
           <div className="rounded border border-hairline bg-ink-2 p-4">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">Premium formats</div>
+            <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">Premium formats</div>
             <div className="mt-2 font-display text-lg text-paper">Exclusive</div>
             <div className="mt-1 font-mono text-xs text-brass">{money(40000)}</div>
           </div>
@@ -170,7 +170,7 @@ export function TouchpointEcosystem() {
       <Reveal delay={150}>
         <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="rounded border border-hairline bg-ink-2 p-3 sm:p-4">
-            <div className="mb-3 flex items-center gap-2 border-b border-hairline px-2 pb-3 text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+            <div className="mb-3 flex items-center gap-2 border-b border-hairline px-2 pb-3 text-xs font-mono uppercase tracking-wider text-sage-dim">
               <Tag size={14} className="text-brass" />
               Choose a commercial channel
             </div>
@@ -189,7 +189,7 @@ export function TouchpointEcosystem() {
                       <Icon size={17} className={active ? group.accent : 'text-sage-dim'} />
                       <span>
                         <span className="block text-sm font-medium">{group.platform}</span>
-                        <span className="mt-0.5 block text-[11px] text-sage-dim">{group.touchpoints.length} touchpoints</span>
+                        <span className="mt-0.5 block text-xs text-sage-dim">{group.touchpoints.length} touchpoints</span>
                       </span>
                     </span>
                     <span className="font-mono text-xs text-brass">{money(group.total)}</span>
@@ -206,12 +206,12 @@ export function TouchpointEcosystem() {
           <div className="rounded border border-brass/40 bg-ink-2 p-4 sm:p-5">
             <div className="flex flex-col gap-3 border-b border-hairline pb-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-brass">Selected inventory</div>
+                <div className="text-xs font-mono uppercase tracking-wider text-brass">Selected inventory</div>
                 <h3 className="mt-1 font-display text-xl text-paper">{selected.platform}</h3>
                 <p className="mt-1 text-xs text-sage">{selected.subtitle}</p>
               </div>
               <div className="rounded bg-brass/10 px-3 py-2 text-right">
-                <div className="text-[9px] font-mono uppercase tracking-wider text-sage-dim">Channel total</div>
+                <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">Channel total</div>
                 <div className="font-mono text-sm font-semibold text-brass">{money(selected.total)}</div>
               </div>
             </div>

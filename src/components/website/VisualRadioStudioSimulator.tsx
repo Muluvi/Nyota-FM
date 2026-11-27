@@ -58,7 +58,7 @@ export function VisualRadioStudioSimulator() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-[10px] font-mono text-brass font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brass/10 border border-brass/30 px-2.5 py-0.5 text-xs font-mono text-brass font-bold uppercase tracking-wider">
               <Sparkles size={12} />
               Interactive Hardware Simulator · Studio Build
             </span>
@@ -74,7 +74,7 @@ export function VisualRadioStudioSimulator() {
 
         {/* Live On-Air Indicator */}
         <div className="flex items-center gap-2 rounded-lg border border-red-500/40 bg-red-950/30 px-3 py-1.5 text-xs font-mono text-red-400">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-500 animate-ping" />
+          <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
           <span className="font-bold tracking-wider">PROGRAM ON AIR · 1080p 60fps</span>
         </div>
       </div>
@@ -94,10 +94,10 @@ export function VisualRadioStudioSimulator() {
             {/* Top Overlay: Tally & Station Watermark */}
             <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="rounded bg-red-600 px-2 py-0.5 font-mono text-[10px] font-bold text-white shadow">
+                <span className="rounded bg-red-600 px-2 py-0.5 font-mono text-xs font-bold text-white shadow">
                   PGM: {activeProgramCam.toUpperCase()}
                 </span>
-                <span className="rounded bg-ink/80 backdrop-blur-sm px-2 py-0.5 font-mono text-[10px] text-paper border border-hairline">
+                <span className="rounded bg-ink/80 backdrop-blur-sm px-2 py-0.5 font-mono text-xs text-paper border border-hairline">
                   107.3 FM LIVE STREAM
                 </span>
               </div>
@@ -105,7 +105,7 @@ export function VisualRadioStudioSimulator() {
               {/* Station Logo & Sponsor Bug */}
               <div className="flex items-center gap-2">
                 {sponsorBugActive && (
-                  <span className="rounded bg-ink/85 border border-brass/50 px-2 py-0.5 text-[9px] font-mono font-bold text-brass uppercase shadow">
+                  <span className="rounded bg-ink/85 border border-brass/50 px-2 py-0.5 text-xs font-mono font-bold text-brass uppercase shadow">
                     SPONSOR: SAFARICOM M-PESA
                   </span>
                 )}
@@ -134,10 +134,10 @@ export function VisualRadioStudioSimulator() {
             {lowerThirdActive && (
               <div className="absolute bottom-6 left-3 right-16 rounded-md bg-ink-2/95 border-l-4 border-brass p-2.5 backdrop-blur-md shadow-xl text-paper">
                 <div className="flex items-center gap-2">
-                  <span className="rounded bg-brass/20 text-brass text-[9px] font-mono font-bold px-1.5 py-0.5 uppercase">
+                  <span className="rounded bg-brass/20 text-brass text-xs font-mono font-bold px-1.5 py-0.5 uppercase">
                     KUMEKUCHA BREAKFAST
                   </span>
-                  <span className="text-[10px] text-sage-dim font-mono">06:00 – 10:00 AM</span>
+                  <span className="text-xs text-sage-dim font-mono">06:00 – 10:00 AM</span>
                 </div>
                 <h4 className="text-xs sm:text-sm font-bold text-paper mt-0.5">
                   Achieng & Otieno · Discussing Western Kenya Maize & Fertilizer Subsidies
@@ -147,11 +147,11 @@ export function VisualRadioStudioSimulator() {
 
             {/* Bottom News/WhatsApp Ticker */}
             {tickerActive && (
-              <div className="absolute bottom-0 left-0 right-0 bg-ink-2/95 border-t border-hairline px-3 py-1 flex items-center gap-2 text-[10px] font-mono overflow-hidden">
+              <div className="absolute bottom-0 left-0 right-0 bg-ink-2/95 border-t border-hairline px-3 py-1 flex items-center gap-2 text-xs font-mono overflow-hidden">
                 <span className="bg-[#25D366] text-ink font-bold px-1.5 py-0.2 rounded shrink-0">
                   WHATSAPP 0720...
                 </span>
-                <div className="animate-marquee whitespace-nowrap text-paper">
+                <div className=" whitespace-nowrap text-paper">
                   Mulembe Nyota FM! Sisi wakulima wa Chwele tunapongeza bei mpya za mbolea. Tuko ndani kabisa ya 107.3 FM! · Chwele Market: Mahindi 90kg KSh 3,400 ·
                 </div>
               </div>
@@ -173,12 +173,12 @@ export function VisualRadioStudioSimulator() {
                 <Tv size={14} className="text-brass" />
                 ATEM Switcher Console
               </span>
-              <span className="text-[10px] font-mono text-sage-dim">Model: HD8 Studio</span>
+              <span className="text-xs font-mono text-sage-dim">Model: HD8 Studio</span>
             </div>
 
             {/* Program Row (Red Tally) */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-mono text-red-400 font-bold uppercase tracking-wider block">
+              <span className="text-xs font-mono text-red-400 font-bold uppercase tracking-wider block">
                 PROGRAM (ON AIR):
               </span>
               <div className="grid grid-cols-3 gap-1.5">
@@ -194,7 +194,7 @@ export function VisualRadioStudioSimulator() {
                     }`}
                   >
                     <span>{cam.toUpperCase()}</span>
-                    <span className="text-[8px] font-normal opacity-80">
+                    <span className="text-xs font-normal opacity-80">
                       {cam === 'cam1' ? 'HOST' : cam === 'cam2' ? 'GUEST' : 'WIDE'}
                     </span>
                   </button>
@@ -204,7 +204,7 @@ export function VisualRadioStudioSimulator() {
 
             {/* Preview Row (Green Tally) */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
+              <span className="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider block">
                 PREVIEW (NEXT):
               </span>
               <div className="grid grid-cols-3 gap-1.5">
@@ -220,7 +220,7 @@ export function VisualRadioStudioSimulator() {
                     }`}
                   >
                     <span>{cam.toUpperCase()}</span>
-                    <span className="text-[8px] font-normal opacity-80">
+                    <span className="text-xs font-normal opacity-80">
                       {cam === 'cam1' ? 'HOST' : cam === 'cam2' ? 'GUEST' : 'WIDE'}
                     </span>
                   </button>
@@ -241,7 +241,7 @@ export function VisualRadioStudioSimulator() {
 
             {/* Graphics Overlays Toggles */}
             <div className="pt-2 border-t border-hairline space-y-2">
-              <span className="text-[10px] font-mono text-brass font-bold uppercase tracking-wider block">
+              <span className="text-xs font-mono text-brass font-bold uppercase tracking-wider block">
                 BROADCAST OVERLAYS (DSK):
               </span>
               <div className="space-y-1.5">
@@ -255,7 +255,7 @@ export function VisualRadioStudioSimulator() {
                   }`}
                 >
                   <span>Lower-Third Presenter Card</span>
-                  <span className={`text-[10px] ${lowerThirdActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
+                  <span className={`text-xs ${lowerThirdActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
                     {lowerThirdActive ? 'LIVE' : 'MUTED'}
                   </span>
                 </button>
@@ -270,7 +270,7 @@ export function VisualRadioStudioSimulator() {
                   }`}
                 >
                   <span>WhatsApp Community Ticker</span>
-                  <span className={`text-[10px] ${tickerActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
+                  <span className={`text-xs ${tickerActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
                     {tickerActive ? 'LIVE' : 'MUTED'}
                   </span>
                 </button>
@@ -285,7 +285,7 @@ export function VisualRadioStudioSimulator() {
                   }`}
                 >
                   <span>Corner Sponsor Bug (Safaricom)</span>
-                  <span className={`text-[10px] ${sponsorBugActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
+                  <span className={`text-xs ${sponsorBugActive ? 'text-brass font-bold' : 'text-sage-dim'}`}>
                     {sponsorBugActive ? 'LIVE' : 'MUTED'}
                   </span>
                 </button>

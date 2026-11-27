@@ -68,7 +68,7 @@ export function InteractiveGapAuditWorkbench() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Governance & Compliance
             </span>
             <span className="font-mono text-xs text-sage-dim">· Gap Audit Operational Workbench</span>
@@ -87,7 +87,7 @@ export function InteractiveGapAuditWorkbench() {
             {progressPct}%
           </div>
           <div>
-            <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+            <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">
               Readiness Score
             </div>
             <div className="font-mono text-xs text-paper font-bold">
@@ -124,7 +124,7 @@ export function InteractiveGapAuditWorkbench() {
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto font-mono text-xs">
+        <div tabIndex={0} role="region" aria-label="Scrollable table" className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto font-mono text-xs">
           {['All', 'Regulatory', 'Engineering', 'Commercial', 'Operations'].map((cat) => (
             <button
               key={cat}
@@ -171,7 +171,7 @@ export function InteractiveGapAuditWorkbench() {
                   <span className={`font-display text-base font-semibold ${isDone ? 'line-through text-sage' : 'text-paper'}`}>
                     {item.item}
                   </span>
-                  <div className="flex items-center gap-2 font-mono text-[10px]">
+                  <div className="flex items-center gap-2 font-mono text-xs">
                     <span className="rounded bg-hairline px-2 py-0.5 text-sage">
                       {item.category}
                     </span>
@@ -185,7 +185,7 @@ export function InteractiveGapAuditWorkbench() {
                   {item.mitigation}
                 </p>
 
-                <div className="mt-2 flex items-center justify-between text-[11px] font-mono text-sage-dim">
+                <div className="mt-2 flex items-center justify-between text-xs font-mono text-sage-dim">
                   <span>Cost Commitment: <strong className="text-paper">{item.cost}</strong></span>
                   <span className={isDone ? 'text-emerald-400 font-bold' : 'text-sage-dim'}>
                     {isDone ? 'Verified in Audit' : 'Pending Verification'}

@@ -1,151 +1,202 @@
-import React, { useState, useEffect } from 'react';
-import { Navbar } from './components/website/Navbar';
-import { SearchModal } from './components/website/SearchModal';
-import { LiveRadioPlayer } from './components/website/LiveRadioPlayer';
-import { FloatingNavRail } from './components/website/FloatingNavRail';
-import { WebsiteFooter } from './components/website/WebsiteFooter';
-import { ExecutiveBriefingMode } from './components/website/ExecutiveBriefingMode';
-import { MobileBottomDock } from './components/website/MobileBottomDock';
-import { ChapterSection } from './components/ledger/ChapterSection';
-import { MinimalNarrative } from './components/narrative/MinimalNarrative';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
+import { resolveHash } from './content/sections'
+import { SettingsProvider, useSettings } from './state/settings'
+import { useActiveSection } from './motion/useActiveSection'
+import { useMotionAllowed } from './motion/useMotionAllowed'
+import { preloadAllDetail } from './components/chapter/detailLoaders'
+import { Skeleton } from './components/chapter/DetailBlock'
+import { Header } from './components/site/Header'
+import { Hero } from './components/site/Hero'
+import { InShort } from './components/site/InShort'
+import { Footer } from './components/site/Footer'
+import { MenuOverlay } from './components/site/MenuOverlay'
+import { Toaster } from './components/site/Toaster'
 
-// Core Strategic Modules
-import { DocumentHero } from './components/v2/DocumentHero';
-import { Part1Objectives } from './components/v2/Part1Objectives';
-import { Part2MasterData } from './components/v2/Part2MasterData';
-import { Part3DataAnalysis } from './components/v2/Part3DataAnalysis';
-import { Part4Opportunities } from './components/v2/Part4Opportunities';
-import { Part5Strategies } from './components/v2/Part5Strategies';
-import { Part6TheBuild } from './components/v2/Part6TheBuild';
-import { Part7GapAudit } from './components/v2/Part7GapAudit';
-import { SourceListAndAsks } from './components/v2/SourceListAndAsks';
-import { VisualPlaybook } from './components/v2/VisualPlaybook';
-import { TouchpointEcosystem } from './components/v2/TouchpointEcosystem';
-import { DataEnrichedAnnexure } from './components/v2/DataEnrichedAnnexure';
-import { scrollToSection } from './lib/scroll';
-import { sections } from './content/sections';
+const Appendix = lazy(() => import('./components/site/Appendix'))
+const DecisionSheet = lazy(() => import('./components/site/DecisionSheet'))
+const loadChapters = () => import('./components/site/Chapters')
+const Chapters = lazy(loadChapters)
+// Start fetching the chapters while the prerendered hero hydrates.
+if (typeof window !== 'undefined') void loadChapters()
+const SearchPanel = lazy(() => import('./components/site/SearchPanel').then((m) => ({ default: m.SearchPanel })))
+const BriefingOverlay = lazy(() => import('./components/site/BriefingOverlay').then((m) => ({ default: m.BriefingOverlay })))
+const PresentationMode = lazy(() => import('./components/site/PresentationMode').then((m) => ({ default: m.PresentationMode })))
+const ToolSheetHost = lazy(() => import('./components/toolkit/ToolSheetHost').then((m) => ({ default: m.ToolSheetHost })))
 
-export default function App() {
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [briefingOpen, setBriefingOpen] = useState(false);
-  const [narrativeMode, setNarrativeMode] = useState(true);
+const APPENDIX_HASH = /^#(appendix|toolkit|annex-|figure|glossary)/
 
+/** Scroll to a hash target, waiting briefly for lazy content to mount. */
+function scrollToHash(hash: string, tries = 40) {
+  const id = decodeURIComponent(hash.replace(/^#/, ''))
+  if (!id) return
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ block: 'start' })
+    return
+  }
+  if (tries > 0) window.setTimeout(() => scrollToHash(hash, tries - 1), 75)
+}
+
+/** Appendix loads when the reader nears it, or straight away for a deep link into it. */
+function DeferredAppendix() {
+  const [show, setShow] = useState(false)
+  const sentinel = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setSearchOpen((prev) => !prev);
-      } else if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-        setSearchOpen(true);
-      } else if ((e.key === 'b' || e.key === 'B') && !e.metaKey && !e.ctrlKey && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-        setBriefingOpen((prev) => !prev);
-      }
-    };
+    if (show) return
+    if (APPENDIX_HASH.test(window.location.hash)) {
+      setShow(true)
+      return
+    }
+    const onHash = () => APPENDIX_HASH.test(window.location.hash) && setShow(true)
+    window.addEventListener('hashchange', onHash)
+    const el = sentinel.current
+    const io = el ? new IntersectionObserver(([e]) => e.isIntersecting && setShow(true), { rootMargin: '1200px 0px' }) : null
+    if (el && io) io.observe(el)
+    return () => {
+      window.removeEventListener('hashchange', onHash)
+      io?.disconnect()
+    }
+  }, [show])
+  if (!show) return <div ref={sentinel} id="appendix" className="min-h-40" />
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-[90rem] px-4 py-20 sm:px-8 lg:px-12"><Skeleton label="Loading the appendix" /></div>}>
+      <Appendix />
+    </Suspense>
+  )
+}
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+function useSmoothScroll() {
+  const allowed = useMotionAllowed()
+  useEffect(() => {
+    if (!allowed || !window.matchMedia('(pointer: fine)').matches) return
+    let destroyed = false
+    let instance: { destroy: () => void } | null = null
+    import('lenis').then(({ default: Lenis }) => {
+      if (destroyed) return
+      instance = new Lenis({ autoRaf: true, anchors: { offset: -72 }, lerp: 0.12 })
+    })
+    return () => {
+      destroyed = true
+      instance?.destroy()
+    }
+  }, [allowed])
+}
 
-  const handleNavigate = (id: string) => {
-    setNarrativeMode(false);
-    setTimeout(() => {
-      if (sections.some((section) => section.id === id)) {
-        scrollToSection(id);
+const chaptersPlaceholder = (
+  <div className="mx-auto min-h-[100vh] max-w-[90rem] px-4 py-20 sm:px-8 lg:px-12">
+    <Skeleton label="Loading the chapters" />
+  </div>
+)
+
+function Story() {
+  // Lazy chapters mount after hydration so the prerendered HTML matches exactly.
+  const [hydrated, setHydrated] = useState(false)
+  useEffect(() => setHydrated(true), [])
+  const [chaptersReady, setChaptersReady] = useState(false)
+  const onChaptersReady = useCallback(() => setChaptersReady(true), [])
+  const active = useActiveSection(chaptersReady)
+  const settings = useSettings()
+  const { overlay, openOverlay, setExpandAll } = settings
+  useSmoothScroll()
+
+  // Deep links: resolve legacy ids (#part-3), open details, scroll after mount.
+  useEffect(() => {
+    const go = () => {
+      const resolved = resolveHash(window.location.hash)
+      if (resolved && window.location.hash !== `#${resolved.anchor}` && !window.location.hash.startsWith(`#${resolved.anchor}`)) {
+        history.replaceState(null, '', `#${resolved.anchor}`)
+        window.dispatchEvent(new Event('nyota:open-detail'))
       }
-    }, 100);
-  };
+      if (window.location.hash) requestAnimationFrame(() => scrollToHash(window.location.hash))
+    }
+    go()
+    window.addEventListener('hashchange', go)
+    return () => window.removeEventListener('hashchange', go)
+  }, [])
+
+  // Keyboard shortcuts: ⌘K and / search, B briefing, P present.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const typing = ['INPUT', 'TEXTAREA', 'SELECT'].includes((document.activeElement?.tagName ?? '').toUpperCase())
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        openOverlay(overlay === 'search' ? null : 'search')
+      } else if (!typing && !overlay && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        if (e.key === '/') {
+          e.preventDefault()
+          openOverlay('search')
+        } else if (e.key.toLowerCase() === 'b') openOverlay('briefing')
+        else if (e.key.toLowerCase() === 'p') openOverlay('presentation')
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [overlay, openOverlay])
+
+  // Print: expand every chapter detail. Ctrl+P expands whatever is loaded.
+  useEffect(() => {
+    const before = () => flushSync(() => setExpandAll(true))
+    const after = () => setExpandAll(false)
+    window.addEventListener('beforeprint', before)
+    window.addEventListener('afterprint', after)
+    return () => {
+      window.removeEventListener('beforeprint', before)
+      window.removeEventListener('afterprint', after)
+    }
+  }, [setExpandAll])
+
+  const printStory = useCallback(async () => {
+    settings.notify('Preparing the full document…')
+    await preloadAllDetail()
+    flushSync(() => setExpandAll(true))
+    await new Promise((r) => window.setTimeout(r, 600))
+    window.print()
+  }, [setExpandAll, settings])
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-ink text-paper font-body selection:bg-brass selection:text-ink">
-      <Navbar
-        onOpenSearch={() => setSearchOpen(true)}
-        onOpenBriefing={() => setBriefingOpen(true)}
-      />
-
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-
-      {briefingOpen && (
-        <ExecutiveBriefingMode
-          onClose={() => setBriefingOpen(false)}
-          onNavigate={(id) => {
-            setBriefingOpen(false);
-            handleNavigate(id);
-          }}
-        />
-      )}
-
-      <main className="mx-auto w-full max-w-5xl px-6 sm:px-8 pt-20 pb-32">
-        {narrativeMode ? (
-          <MinimalNarrative
-            onShowFull={() => setNarrativeMode(false)}
-            onNavigate={handleNavigate}
-          />
+    <>
+      <a href="#main" className="skip-link sr-only-focusable fixed top-2 left-2 z-[100] rounded-full bg-brass px-5 py-3 text-ink">
+        Skip to the story
+      </a>
+      <Header active={active} />
+      <main id="main" tabIndex={-1} className="outline-none">
+        <div id="top" />
+        <Hero />
+        <InShort />
+        {hydrated ? (
+          <Suspense fallback={chaptersPlaceholder}>
+            <Chapters onReady={onChaptersReady} />
+          </Suspense>
         ) : (
-          <>
-            <div className="mb-12 flex items-center justify-between">
-              <button
-                onClick={() => setNarrativeMode(true)}
-                className="text-sm tracking-wider uppercase text-sage hover:text-paper"
-              >
-                ← Back to narrative
-              </button>
-              <span className="text-xs tracking-widest uppercase text-sage-dim">Full proposal</span>
-            </div>
-
-            <DocumentHero
-              onNavigate={handleNavigate}
-              onOpenBriefing={() => setBriefingOpen(true)}
-            />
-
-            <VisualPlaybook />
-            <DataEnrichedAnnexure />
-            <TouchpointEcosystem />
-
-            <ChapterSection id="part-1" number="01" title="The Objectives — 5 Strategic Mandates">
-              <Part1Objectives />
-            </ChapterSection>
-
-            <ChapterSection id="part-2" number="02" title="Sourced Master Data Room & Benchmark Tables">
-              <Part2MasterData />
-            </ChapterSection>
-
-            <ChapterSection id="part-3" number="03" title="Data Analysis, Sensitivity & Payback Simulator">
-              <Part3DataAnalysis />
-            </ChapterSection>
-
-            <ChapterSection id="part-4" number="04" title="The Commercial Opportunities & Expected Value Matrix">
-              <Part4Opportunities />
-            </ChapterSection>
-
-            <ChapterSection id="part-5" number="05" title="Action Execution Plans (21 Concrete Strategies)">
-              <Part5Strategies />
-            </ChapterSection>
-
-            <ChapterSection id="part-6" number="06" title="Studio Build, Phased Capex & Governance Roadmap">
-              <Part6TheBuild />
-            </ChapterSection>
-
-            <ChapterSection id="part-7" number="07" title="The Gap Audit (Comprehensive Centerpiece Checklists)">
-              <Part7GapAudit />
-            </ChapterSection>
-
-            <div id="part-asks" className="scroll-mt-20 pt-12">
-              <SourceListAndAsks />
-            </div>
-          </>
+          chaptersPlaceholder
         )}
+        <DeferredAppendix />
       </main>
+      <Footer />
+      <MenuOverlay active={active} onPrint={printStory} />
+      <Suspense fallback={null}>
+        {overlay === 'search' && <SearchPanel />}
+        {overlay === 'briefing' && <BriefingOverlay />}
+        {overlay === 'presentation' && <PresentationMode />}
+        {settings.sheet && <ToolSheetHost />}
+      </Suspense>
+      <Toaster />
+    </>
+  )
+}
 
-      <WebsiteFooter onNavigate={handleNavigate} />
-      <LiveRadioPlayer />
-      <MobileBottomDock
-        onOpenSearch={() => setSearchOpen(true)}
-        onOpenBriefing={() => setBriefingOpen(true)}
-        onNavigate={handleNavigate}
-      />
-      <FloatingNavRail />
-    </div>
-  );
+export default function App() {
+  const view = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('view')
+  return (
+    <SettingsProvider>
+      {view === 'decision-sheet' ? (
+        <Suspense fallback={null}>
+          <DecisionSheet />
+        </Suspense>
+      ) : (
+        <Story />
+      )}
+    </SettingsProvider>
+  )
 }

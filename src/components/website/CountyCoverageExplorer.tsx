@@ -96,7 +96,7 @@ export function CountyCoverageExplorer() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Interactive Signal Map
             </span>
             <span className="font-mono text-xs text-sage-dim">· 5-County Western Coverage Matrix</span>
@@ -124,9 +124,9 @@ export function CountyCoverageExplorer() {
                 : 'bg-ink text-sage hover:text-paper border-hairline hover:border-brass/50'
             }`}
           >
-            <div className="text-[10px] opacity-80 uppercase tracking-wider">{c.coverageStatus.split(' ')[0]}</div>
+            <div className="text-xs opacity-80 uppercase tracking-wider">{c.coverageStatus.split(' ')[0]}</div>
             <div className="text-sm font-semibold truncate mt-0.5">{c.name.replace(' County', '')}</div>
-            <div className="text-[11px] opacity-90 mt-1">{c.projected2026} pop</div>
+            <div className="text-xs opacity-90 mt-1">{c.projected2026} pop</div>
           </button>
         ))}
       </div>
@@ -138,7 +138,7 @@ export function CountyCoverageExplorer() {
             <div className="flex items-center gap-2 mb-1">
               <MapPin size={16} className="text-brass" />
               <h4 className="font-display text-2xl text-paper font-bold">{selectedCounty.name}</h4>
-              <span className="rounded-full bg-moss/20 text-moss px-2.5 py-0.5 font-mono text-[10px] font-semibold border border-moss/40">
+              <span className="rounded-full bg-moss/20 text-moss px-2.5 py-0.5 font-mono text-xs font-semibold border border-moss/40">
                 {selectedCounty.coverageStatus}
               </span>
             </div>
@@ -152,7 +152,7 @@ export function CountyCoverageExplorer() {
           </div>
 
           <div className="flex items-center gap-2 rounded bg-ink-2 px-3 py-1.5 border border-hairline font-mono text-xs text-sage-dim">
-            <Radio size={14} className="text-brass animate-pulse" />
+            <Radio size={14} className="text-brass" />
             <span>Frequency: 107.3 MHz</span>
           </div>
         </div>
@@ -161,25 +161,25 @@ export function CountyCoverageExplorer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Vernacular & Key Towns */}
           <div className="rounded-lg bg-ink-2 p-4 border border-hairline space-y-2">
-            <div className="text-[11px] font-mono uppercase text-brass font-semibold tracking-wider">
+            <div className="text-xs font-mono uppercase text-brass font-semibold tracking-wider">
               Language Clusters & Key Towns
             </div>
             <div className="flex flex-wrap gap-1.5 pt-1">
               {selectedCounty.languages.map((l) => (
-                <span key={l} className="rounded bg-ink px-2 py-0.5 text-[11px] font-mono text-paper border border-hairline">
+                <span key={l} className="rounded bg-ink px-2 py-0.5 text-xs font-mono text-paper border border-hairline">
                   {l}
                 </span>
               ))}
             </div>
             <div className="pt-2 text-xs font-body text-sage leading-relaxed">
-              <span className="text-sage-dim font-mono text-[10px] block uppercase">Urban & Trade Centers:</span>
+              <span className="text-sage-dim font-mono text-xs block uppercase">Urban & Trade Centers:</span>
               {selectedCounty.keyTowns.join(' · ')}
             </div>
           </div>
 
           {/* Economic Anchors */}
           <div className="rounded-lg bg-ink-2 p-4 border border-hairline space-y-2">
-            <div className="text-[11px] font-mono uppercase text-brass font-semibold tracking-wider">
+            <div className="text-xs font-mono uppercase text-brass font-semibold tracking-wider">
               Key Economic Drivers
             </div>
             <ul className="space-y-1 text-xs font-body text-sage pt-1">
@@ -194,7 +194,7 @@ export function CountyCoverageExplorer() {
 
           {/* Commercial & OB Strategy */}
           <div className="rounded-lg bg-ink-2 p-4 border border-brass/40 space-y-2">
-            <div className="text-[11px] font-mono uppercase text-brass font-semibold tracking-wider">
+            <div className="text-xs font-mono uppercase text-brass font-semibold tracking-wider">
               Commercial Value Potential
             </div>
             <div className="font-mono text-sm text-paper font-semibold">

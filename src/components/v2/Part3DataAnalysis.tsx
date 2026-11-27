@@ -5,22 +5,13 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
-import { InteractivePaybackSimulator } from '../website/InteractivePaybackSimulator';
-import { CapexWaterfallSimulator } from '../website/CapexWaterfallSimulator';
+import { revenueQuarters } from '../../content/data/revenueModel';
+import { ToolkitInline } from '../toolkit/ToolkitInline';
 
 export function Part3DataAnalysis() {
   const [selectedQuarter, setSelectedQuarter] = useState<number>(7); // Q4 2027 (index 7)
 
-  const quarters = [
-    { q: 'Q1 2026', spot: 100, nonSpot: 0, total: 100, mix: '0%' },
-    { q: 'Q2 2026', spot: 100, nonSpot: 5, total: 105, mix: '5%' },
-    { q: 'Q3 2026', spot: 102, nonSpot: 15, total: 117, mix: '13%' },
-    { q: 'Q4 2026', spot: 105, nonSpot: 30, total: 135, mix: '22%' },
-    { q: 'Q1 2027', spot: 108, nonSpot: 45, total: 153, mix: '29%' },
-    { q: 'Q2 2027', spot: 112, nonSpot: 55, total: 167, mix: '33%' },
-    { q: 'Q3 2027', spot: 115, nonSpot: 65, total: 180, mix: '36%' },
-    { q: 'Q4 2027', spot: 120, nonSpot: 80, total: 200, mix: '40%' },
-  ];
+  const quarters = revenueQuarters;
 
   const currentQ = quarters[selectedQuarter];
 
@@ -31,7 +22,7 @@ export function Part3DataAnalysis() {
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
                 SECTION 3.1
               </span>
               <h4 className="font-display text-paper text-base font-semibold">Where Radio Revenue Actually Concentrates</h4>
@@ -47,27 +38,27 @@ export function Part3DataAnalysis() {
             <div className="p-3 bg-ink rounded border border-brass/50">
               <span className="text-brass font-bold block text-sm">1. Financial</span>
               <span className="text-paper font-semibold block mt-1">KSh 1.3 Billion</span>
-              <span className="text-sage text-[10px]">21% national radio share</span>
+              <span className="text-sage text-xs">21% national radio share</span>
             </div>
             <div className="p-3 bg-ink rounded border border-hairline">
               <span className="text-paper font-bold block text-sm">2. Transport</span>
               <span className="text-paper font-semibold block mt-1">KSh 727 Million</span>
-              <span className="text-sage text-[10px]">11% national radio share</span>
+              <span className="text-sage text-xs">11% national radio share</span>
             </div>
             <div className="p-3 bg-ink rounded border border-hairline">
               <span className="text-paper font-bold block text-sm">3. Banking & SACCOs</span>
               <span className="text-paper font-semibold block mt-1">11% Share</span>
-              <span className="text-sage text-[10px]">Western Kenya rural SACCOs</span>
+              <span className="text-sage text-xs">Western Kenya rural SACCOs</span>
             </div>
             <div className="p-3 bg-ink rounded border border-hairline">
               <span className="text-paper font-bold block text-sm">4. County Gov</span>
               <span className="text-paper font-semibold block mt-1">High Budget</span>
-              <span className="text-sage text-[10px]">Bungoma & Kakamega IFMIS</span>
+              <span className="text-sage text-xs">Bungoma & Kakamega IFMIS</span>
             </div>
             <div className="p-3 bg-ink rounded border border-hairline">
               <span className="text-paper font-bold block text-sm">5. Agriculture</span>
               <span className="text-paper font-semibold block mt-1">Core Trans Nzoia</span>
-              <span className="text-sage text-[10px]">Inputs, seeds & co-ops</span>
+              <span className="text-sage text-xs">Inputs, seeds & co-ops</span>
             </div>
           </div>
 
@@ -89,14 +80,14 @@ export function Part3DataAnalysis() {
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="border-b border-hairline pb-3">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
               SECTION 3.2
             </span>
             <h4 className="font-display text-paper text-base font-semibold">Which v1.0 Assumptions Survive Contact with Evidence</h4>
             <p className="text-xs text-sage mt-0.5">Rigorous scorecard testing May 2026 hypotheses against September 2026 data receipts</p>
           </div>
 
-          <div className="overflow-x-auto">
+          <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
               <thead>
                 <tr className="border-b border-hairline text-sage-dim">
@@ -193,7 +184,7 @@ export function Part3DataAnalysis() {
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="border-b border-hairline pb-3">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
               SECTION 3.3
             </span>
             <h4 className="font-display text-paper text-base font-semibold">The Real Whitespace Portfolio Assessment</h4>
@@ -225,8 +216,8 @@ export function Part3DataAnalysis() {
                 }`}
               >
                 <div className="font-bold text-paper text-sm mb-1">{w.stream}</div>
-                <div className="text-sage text-[11px] mb-1.5">{w.status}</div>
-                <div className={`text-[11px] font-bold ${
+                <div className="text-sage text-xs mb-1.5">{w.status}</div>
+                <div className={`text-xs font-bold ${
                   w.tone === 'priority' ? 'text-brass' : w.tone === 'good' ? 'text-emerald-400' : 'text-sage-dim'
                 }`}>
                   Verdict: {w.verdict}
@@ -242,7 +233,7 @@ export function Part3DataAnalysis() {
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
                 SECTION 3.4
               </span>
               <h4 className="font-display text-paper text-base font-semibold">The 8-Quarter Payback Model (Base Case: 2.0× Growth)</h4>
@@ -263,14 +254,14 @@ export function Part3DataAnalysis() {
                 <button
                   key={idx}
                   onClick={() => setSelectedQuarter(idx)}
-                  className={`py-2 px-1 text-center font-mono rounded text-[11px] transition-all ${
+                  className={`py-2 px-1 text-center font-mono rounded text-xs transition-all ${
                     selectedQuarter === idx
                       ? 'bg-brass text-ink font-bold shadow-md'
                       : 'bg-ink-2 text-sage hover:text-paper hover:bg-hairline'
                   }`}
                 >
                   <div className="font-semibold">{q.q.split(' ')[0]}</div>
-                  <div className="text-[9px] opacity-80">{q.total}</div>
+                  <div className="text-xs opacity-80">{q.total}</div>
                 </button>
               ))}
             </div>
@@ -278,15 +269,15 @@ export function Part3DataAnalysis() {
             {/* Quarter Deep-Dive Bar */}
             <div className="grid grid-cols-3 gap-3 pt-3 border-t border-hairline text-center text-xs font-mono">
               <div className="p-2.5 bg-ink-2 rounded border border-hairline">
-                <span className="text-sage text-[10px] block uppercase">Spot Revenue Index</span>
+                <span className="text-sage text-xs block uppercase">Spot Revenue Index</span>
                 <span className="text-paper text-lg font-bold">{currentQ.spot}</span>
               </div>
               <div className="p-2.5 bg-ink-2 rounded border border-brass/40">
-                <span className="text-brass text-[10px] block uppercase">Non-Spot Index</span>
+                <span className="text-brass text-xs block uppercase">Non-Spot Index</span>
                 <span className="text-brass text-lg font-bold">+{currentQ.nonSpot}</span>
               </div>
               <div className="p-2.5 bg-ink-2 rounded border border-emerald-500/40">
-                <span className="text-emerald-400 text-[10px] block uppercase">Non-Spot Share</span>
+                <span className="text-emerald-400 text-xs block uppercase">Non-Spot Share</span>
                 <span className="text-emerald-400 text-lg font-bold">{currentQ.mix}</span>
               </div>
             </div>
@@ -295,7 +286,7 @@ export function Part3DataAnalysis() {
           {/* Sensitivity Table */}
           <div className="space-y-2">
             <h5 className="font-display text-sm text-paper font-semibold">Stress-Test Sensitivity Analysis (Q4 2027)</h5>
-            <div className="overflow-x-auto">
+            <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
                   <tr className="border-b border-hairline text-sage-dim">
@@ -331,11 +322,11 @@ export function Part3DataAnalysis() {
 
           {/* What Must Be True */}
           <div className="p-4 bg-ink rounded border border-hairline space-y-2.5 text-xs font-mono">
-            <div className="text-brass font-bold uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+            <div className="text-brass font-bold uppercase tracking-wider text-xs flex items-center gap-1.5">
               <CheckCircle2 size={13} className="text-brass" />
               <span>What Must Be True for Base Case (2.0×) to Materialise:</span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sage text-[11px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sage text-xs">
               <div>1. USSD shortcode live by Q3 2026 (Africa's Talking timeline)</div>
               <div>2. WhatsApp BSP fully onboarded by Q2 2026</div>
               <div>3. GAA registration completed by Q2 2027</div>
@@ -347,21 +338,13 @@ export function Part3DataAnalysis() {
         </div>
       </Reveal>
 
-      {/* Interactive Payback & Sensitivity Engine */}
-      <Reveal>
-        <InteractivePaybackSimulator />
-      </Reveal>
-
-      {/* Interactive Month-by-Month Capex Waterfall Recovery */}
-      <Reveal>
-        <CapexWaterfallSimulator />
-      </Reveal>
+      <ToolkitInline ids={['payback-sim', 'waterfall']} />
 
       {/* 3.5 The Single Biggest Risks */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="border-b border-hairline pb-3">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
               SECTION 3.5
             </span>
             <h4 className="font-display text-paper text-base font-semibold">The Single Biggest Risks to the Proposal</h4>
@@ -370,28 +353,28 @@ export function Part3DataAnalysis() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
             {/* Revenue Risk */}
             <div className="p-4 bg-brick/20 border border-brick/60 rounded space-y-2">
-              <div className="flex items-center gap-2 text-rose-400 font-bold uppercase tracking-wider text-[11px]">
+              <div className="flex items-center gap-2 text-rose-400 font-bold uppercase tracking-wider text-xs">
                 <ShieldAlert size={14} />
                 <span>Single Biggest Risk to Revenue Case</span>
               </div>
               <p className="text-paper/90 font-body leading-relaxed text-xs">
                 <strong>Failure to secure GAA registration and county government contracts.</strong> These are relationship-dependent, timeline-uncertain, and politically exposed. If neither materialises, the non-spot mix stalls at ~25%, and total station revenue reverts to the worst-case scenario (140 index).
               </p>
-              <div className="text-sage text-[10px] pt-1">
+              <div className="text-sage text-xs pt-1">
                 Mitigation: Firefly GM leads direct bureaucratic liaison in Q1 2026; prepare IFMIS prequalification paperwork immediately.
               </div>
             </div>
 
             {/* Audience Risk */}
             <div className="p-4 bg-brick/20 border border-brick/60 rounded space-y-2">
-              <div className="flex items-center gap-2 text-rose-400 font-bold uppercase tracking-wider text-[11px]">
+              <div className="flex items-center gap-2 text-rose-400 font-bold uppercase tracking-wider text-xs">
                 <TrendingDown size={14} />
                 <span>Single Biggest Risk to Audience Case</span>
               </div>
               <p className="text-paper/90 font-body leading-relaxed text-xs">
                 <strong>The continuing structural decline in radio listenership (75% → 41% in two years)</strong> outpacing the station's ability to convert listeners into directly-addressable contacts. If listenership decline accelerates in Western Kenya, the 250,000-contact target becomes unachievable regardless of studio quality.
               </p>
-              <div className="text-sage text-[10px] pt-1">
+              <div className="text-sage text-xs pt-1">
                 Mitigation: Immediate deployment of WhatsApp on-air CTAs + USSD shortcode to capture listeners before they drift off linear radio.
               </div>
             </div>

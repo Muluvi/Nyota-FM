@@ -83,7 +83,7 @@ export function CMORoyaltyCalculator() {
                 onChange={(e) => setLocalMusicPercent(Number(e.target.value))}
                 className="w-full accent-brass cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] font-mono text-sage-dim mt-0.5">
+              <div className="flex justify-between text-xs font-mono text-sage-dim mt-0.5">
                 <span>20% (Non-compliant)</span>
                 <span>40% (CA Minimum)</span>
                 <span>68% (Nyota FM Actual)</span>
@@ -108,7 +108,7 @@ export function CMORoyaltyCalculator() {
         {/* Audit Receipts Breakdown */}
         <div className="lg:col-span-6 space-y-4">
           <div className="rounded-xl border border-hairline bg-ink p-5 space-y-4 text-xs font-mono">
-            <span className="text-[10px] text-brass uppercase tracking-wider font-bold block">
+            <span className="text-xs text-brass uppercase tracking-wider font-bold block">
               ANNUAL STATUTORY ROYALTY VOUCHER
             </span>
 
@@ -140,7 +140,7 @@ export function CMORoyaltyCalculator() {
               </span>
             </div>
 
-            <p className="text-[11px] font-sans text-sage leading-relaxed">
+            <p className="text-xs font-sans text-sage leading-relaxed">
               Protection against KECOBO copyright enforcement raids or on-air transmitter impoundments. Automatically submits monthly digital broadcast log sheets.
             </p>
           </div>
