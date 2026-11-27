@@ -57,7 +57,7 @@ export function PresentationMode() {
 
   return (
     <div ref={panel} role="dialog" aria-modal="true" aria-label="Presentation mode" className="fixed inset-0 z-[80] grid place-items-center bg-ink p-4">
-      <div className="relative flex aspect-video w-full max-w-[min(100vw-2rem,calc((100vh-6rem)*16/9))] flex-col justify-between overflow-hidden rounded-md border border-hairline bg-ink-2 p-[4%]">
+      <div key={i} className="fx-tab-panel relative flex aspect-video w-full max-w-[min(100vw-2rem,calc((100vh-6rem)*16/9))] flex-col justify-between overflow-hidden rounded-md border border-hairline bg-ink-2 p-[4%]">
         <div aria-live="polite">
           <p className={`m-0 font-mono text-[clamp(1rem,1.6vw,1.5rem)] ${accentText[s.accent]}`}>
             {s.number} · {s.label}

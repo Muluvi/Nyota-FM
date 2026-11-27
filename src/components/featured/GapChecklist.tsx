@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { checklistA, checklistB, checklistC } from '../../content/data/gaps'
-import { Counter } from '../ui/Counter'
+import { ProgressRing } from '../ui/ProgressRing'
 import { Pills } from '../ui/Pills'
 
 type List = 'A' | 'B' | 'C'
@@ -34,10 +34,10 @@ export function GapChecklist() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-x-8 gap-y-2">
-        <Counter value={String(checklistA.length)} label="gaps closed" />
-        <Counter value={String(checklistB.length)} label="build items" />
-        <Counter value={String(checklistC.length)} label="levers added" />
+      <div className="flex flex-wrap gap-x-10 gap-y-4">
+        <ProgressRing value={checklistA.length} total={checklistA.length} label="v1.0 gaps closed" />
+        <ProgressRing value={checklistB.filter((b) => b.owner).length} total={checklistB.length} label="build items with an owner" />
+        <ProgressRing value={checklistC.filter((c) => !c.ref.startsWith('Rec.')).length} total={checklistC.length} label="added levers already addressed in v2.0 (the rest are recommended for later)" />
       </div>
       <div className="mt-6 flex flex-wrap gap-3">
         <Pills
@@ -56,7 +56,7 @@ export function GapChecklist() {
         {list === 'B' && (
           <label className="inline-flex min-h-11 items-center gap-2 text-small text-sage">
             Owner
-            <select value={owner} onChange={(e) => setOwner(e.target.value)} className="min-h-11 rounded-md border border-hairline bg-ink px-3 text-paper">
+            <select value={owner} onChange={(e) => setOwner(e.target.value)} className="fx-input min-h-11 rounded-md border border-hairline bg-ink px-3 text-paper">
               {owners.map((o) => (
                 <option key={o} value={o}>{o === 'all' ? 'All owners' : o}</option>
               ))}
@@ -64,9 +64,9 @@ export function GapChecklist() {
           </label>
         )}
       </div>
-      <ol className="m-0 mt-6 list-none border-t border-hairline p-0" aria-live="polite">
+      <ol key={`${list}-${owner}`} className="fx-tab-panel m-0 mt-6 list-none border-t border-hairline p-0" aria-live="polite">
         {shown.map((r) => (
-          <li key={r.key} className="grid grid-cols-[2.5rem_1fr] gap-x-3 border-b border-hairline py-4 sm:grid-cols-[2.5rem_1fr_auto] sm:gap-x-6">
+          <li key={r.key} className="fx-bgslide grid grid-cols-[2.5rem_1fr] gap-x-3 border-b border-hairline py-4 sm:grid-cols-[2.5rem_1fr_auto] sm:gap-x-6">
             <span className="font-mono text-small text-sage tabular">{String(r.n).padStart(2, '0')}</span>
             <span>
               <span className="block text-body text-paper">{r.title}</span>

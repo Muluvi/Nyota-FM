@@ -4,6 +4,7 @@ import { resolveHash } from './content/sections'
 import { SettingsProvider, useSettings } from './state/settings'
 import { useActiveSection } from './motion/useActiveSection'
 import { useMotionAllowed } from './motion/useMotionAllowed'
+import { useFxLayer } from './fx/useFxLayer'
 import { preloadAllDetail } from './components/chapter/detailLoaders'
 import { Skeleton } from './components/chapter/DetailBlock'
 import { Header } from './components/site/Header'
@@ -12,6 +13,8 @@ import { InShort } from './components/site/InShort'
 import { Footer } from './components/site/Footer'
 import { MenuOverlay } from './components/site/MenuOverlay'
 import { Toaster } from './components/site/Toaster'
+import { NavDots } from './components/site/NavDots'
+import { BackToTop } from './components/site/BackToTop'
 
 const Appendix = lazy(() => import('./components/site/Appendix'))
 const DecisionSheet = lazy(() => import('./components/site/DecisionSheet'))
@@ -93,6 +96,7 @@ function Story() {
   // Lazy chapters mount after hydration so the prerendered HTML matches exactly.
   const [hydrated, setHydrated] = useState(false)
   useEffect(() => setHydrated(true), [])
+  useFxLayer(hydrated)
   const [chaptersReady, setChaptersReady] = useState(false)
   const onChaptersReady = useCallback(() => setChaptersReady(true), [])
   const active = useActiveSection(chaptersReady)
@@ -160,6 +164,9 @@ function Story() {
         Skip to the story
       </a>
       <Header active={active} />
+      {hydrated && !chaptersReady && <div className="fx-topbar" aria-hidden="true" />}
+      <NavDots active={active} />
+      <BackToTop />
       <main id="main" tabIndex={-1} className="outline-none">
         <div id="top" />
         <Hero />

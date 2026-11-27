@@ -57,12 +57,19 @@ export function OnAirCard() {
     <div ref={host} className="onair-card no-print relative">
       {!expanded ? (
         <button type="button" onClick={() => setExpanded(true)} aria-expanded={false} aria-label={`${live ? 'On air' : '107.3 FM schedule'}${slot ? `: ${slot.show}` : ''}`} className="flex min-h-11 items-center gap-2 rounded-full border border-hairline px-3 text-small text-paper hover:border-sage-dim">
-          <span className={`h-2.5 w-2.5 rounded-full ${live ? 'onair-dot bg-brick-ink' : 'bg-sage-dim'}`} aria-hidden="true" />
-          <span className="hidden font-mono sm:inline">{live ? 'ON AIR' : '107.3 FM'}</span>
+          <span className={`h-2.5 w-2.5 rounded-full ${live ? 'onair-dot fx-heartbeat bg-brick-ink' : 'bg-moss'}`} aria-hidden="true" />
+          <span className={`hidden font-mono sm:inline ${live ? 'fx-neon' : ''}`}>{live ? 'ON AIR' : '107.3 FM'}</span>
+          <span className="fx-wave hidden text-moss sm:inline-flex" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </span>
           {slot && <span className="hidden max-w-[12rem] truncate text-sage xl:inline">{slot.show}</span>}
         </button>
       ) : (
-        <div role="dialog" aria-label="On air" className="absolute right-0 top-0 z-50 w-[min(20rem,calc(100vw-2rem))] rounded-md border border-hairline bg-ink-2 p-4 shadow-2xl">
+        <div role="dialog" aria-label="On air" className="fx-modal absolute right-0 top-0 z-50 w-[min(20rem,calc(100vw-2rem))] rounded-md border border-hairline bg-ink-2 p-4 shadow-2xl">
           <div className="flex items-center justify-between">
             <p className="m-0 flex items-center gap-2 font-mono text-small text-paper">
               <span className={`h-2.5 w-2.5 rounded-full ${live ? 'onair-dot bg-brick-ink' : 'bg-sage-dim'}`} aria-hidden="true" />

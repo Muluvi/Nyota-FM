@@ -6,6 +6,11 @@ export function Skeleton({ label = 'Loading' }: { label?: string }) {
   return (
     <div role="status" aria-live="polite" className="space-y-3 py-4">
       <span className="sr-only">{label}…</span>
+      <svg viewBox="0 0 44 44" className="fx-dial-spinner text-brass" aria-hidden="true">
+        <circle cx="22" cy="22" r="18" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" strokeDasharray="2 4" />
+        <line x1="22" y1="22" x2="22" y2="8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="22" cy="22" r="3" fill="currentColor" />
+      </svg>
       <div className="skeleton h-6 w-2/3 rounded-md" />
       <div className="skeleton h-4 w-full rounded-md" />
       <div className="skeleton h-4 w-5/6 rounded-md" />

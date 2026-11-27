@@ -50,19 +50,21 @@ export function Disclosure({ id, title, summary, children, expandOnPrint = false
           aria-expanded={isOpen}
           aria-controls={`${id}-panel`}
           onClick={() => setOpen((o) => !o)}
-          className="no-print group flex min-h-14 w-full items-center justify-between gap-4 py-4 text-left"
+          className="fx-bgslide no-print group flex min-h-14 w-full items-center justify-between gap-4 py-4 text-left"
         >
           <span>
             <span className="block text-body font-medium text-paper">{title}</span>
             {summary && <span className="mt-1 block text-small text-sage">{summary}</span>}
           </span>
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-hairline text-paper transition-colors group-hover:border-paper" aria-hidden="true">
+          <span className="fx-icon-spin grid h-10 w-10 shrink-0 place-items-center rounded-full border border-hairline text-paper transition-colors group-hover:border-paper" aria-hidden="true">
             {isOpen ? <Minus size={18} /> : <Plus size={18} />}
           </span>
         </button>
       </h3>
-      <div id={`${id}-panel`} hidden={!isOpen} className="pb-10">
-        {everOpened && children(isOpen)}
+      <div id={`${id}-panel`} className="fx-accordion" data-open={isOpen} aria-hidden={!isOpen} {...(!isOpen ? { inert: true } : {})}>
+        <div>
+          <div className="pb-10">{everOpened && children(isOpen)}</div>
+        </div>
       </div>
     </div>
   )

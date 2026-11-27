@@ -29,7 +29,7 @@ export const glossary = {
   'tier-1': { term: 'Tier 1', definition: 'Hard data traceable to a named institution or vendor quote.' },
   'tier-2': { term: 'Tier 2', definition: 'A modelled estimate with its method and inputs stated.' },
   'tier-0': { term: 'Tier 0', definition: 'A declared data gap that needs field research before it can be filled.' },
-  'hapa-tulipo': { term: 'Hapa tulipo', definition: 'Kiswahili: "Right where we are", on the ground with the people.' },
+  'hapo-tulipo': { term: 'Hapo Tulipo', definition: 'Kiswahili: "Right where we are", on the ground with the people.' },
   twangaa: { term: "Twang'aa", definition: 'Kiswahili: to shine brightly, radiate excellence, illuminate the community.' },
 } as const satisfies Record<string, GlossaryEntry>
 

@@ -18,8 +18,8 @@ export function Sparkline({ values, label, className = '' }: SparklineProps) {
   const d = pts.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)},${y.toFixed(1)}`).join(' ')
   const [lx, ly] = pts[pts.length - 1]
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} width={w} height={h} role="img" aria-label={label} className={className}>
-      <path d={d} fill="none" stroke="currentColor" strokeOpacity={0.45} strokeWidth={1.5} strokeLinejoin="round" />
+    <svg viewBox={`0 0 ${w} ${h}`} width={w} height={h} role="img" aria-label={label} className={`fx-spark ${className}`}>
+      <path pathLength={1} d={d} fill="none" stroke="currentColor" strokeOpacity={0.45} strokeWidth={1.5} strokeLinejoin="round" />
       <circle cx={lx} cy={ly} r={3} className="fill-brass" />
     </svg>
   )

@@ -16,15 +16,16 @@ type ButtonProps = BaseProps & ({ href: string; onClick?: MouseEventHandler<HTML
 
 /**
  * The one button style: an outline pill with an arrow in a circle.
- * `primary` (brass fill) is used once per screen.
+ * `primary` (brass fill) is used once per screen; it is magnetic and shines on hover.
+ * All buttons ripple on press and scale slightly on hover (C13, ripple, shine).
  */
 export function Button(props: ButtonProps) {
   const { children, variant = 'outline', arrow = 'up-right', className = '', tone = 'dark' } = props
   const base =
-    'group inline-flex min-h-11 items-center gap-3 rounded-full py-1.5 pl-5 pr-1.5 text-body font-medium transition-colors duration-200'
+    'fx-ripple fx-scale group inline-flex min-h-11 items-center gap-3 rounded-full py-1.5 pl-5 pr-1.5 text-body font-medium transition-colors duration-200'
   const styles =
     variant === 'primary'
-      ? 'bg-brass text-ink hover:bg-paper'
+      ? 'fx-shine fx-magnetic bg-brass text-ink hover:bg-paper'
       : tone === 'light'
         ? 'border border-ink/30 text-ink hover:border-ink'
         : 'border border-sage-dim/50 text-paper hover:border-paper'

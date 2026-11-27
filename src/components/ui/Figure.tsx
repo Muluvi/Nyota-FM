@@ -1,16 +1,20 @@
 import { conflictVariants, figures, type FigureId } from '../../content/figures'
 import { sourceHref, sourceLabel, externalSource } from '../../content/sources'
 import { Popover } from './Popover'
+import { useCountUp } from '../../motion/useCountUp'
 
 interface FigureProps {
   id: FigureId
+  /** Count the number up whenever it scrolls into view (D18, B counter reset). */
+  countUp?: boolean
   /** Show the exact source value instead of the house-style display. */
   exact?: boolean
   className?: string
 }
 
 /** Every number on the site renders through here, with a citation popover. */
-export function Figure({ id, exact = false, className = '' }: FigureProps) {
+export function Figure({ id, exact = false, className = '', countUp = false }: FigureProps) {
+  const countRef = useCountUp<HTMLSpanElement>()
   const entry = figures[id]
   const text = exact && entry.exact ? entry.exact : entry.display
   const ext = externalSource(entry.sourceId)
@@ -30,10 +34,10 @@ export function Figure({ id, exact = false, className = '' }: FigureProps) {
           onMouseLeave={onMouseLeave}
           data-figure={id}
         >
-          <span className="fig-value tabular">{text}</span>
+          <span ref={countUp ? countRef : undefined} className="fig-value tabular">{text}</span>
           {!entry.verified && (
             <>
-              <span className="fig-prov" aria-hidden="true" />
+              <span className="fig-prov fx-wobble" aria-hidden="true" />
               <span className="sr-only"> (provisional)</span>
             </>
           )}
