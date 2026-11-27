@@ -80,7 +80,7 @@ All figures backed by 37 verified industry citations (KNBS, CA Kenya, GeoPoll, R
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Executive Briefing Mode
             </span>
             <span className="font-mono text-xs text-sage-dim">· 10-Minute Board Decision Memo</span>
@@ -128,7 +128,7 @@ All figures backed by 37 verified industry citations (KNBS, CA Kenya, GeoPoll, R
                   <span className="size-1.5 rounded-full bg-brass" />
                   RESOLUTION {d.num}
                 </span>
-                <span className="rounded bg-brass/10 text-brass px-2 py-0.5 text-[10px] font-semibold">
+                <span className="rounded bg-brass/10 text-brass px-2 py-0.5 text-xs font-semibold">
                   {d.amount}
                 </span>
               </div>

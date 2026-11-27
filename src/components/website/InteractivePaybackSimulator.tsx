@@ -53,7 +53,7 @@ export function InteractivePaybackSimulator() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-[10px] font-bold text-brass uppercase tracking-wider">
+            <span className="rounded bg-brass/20 px-2 py-0.5 font-mono text-xs font-bold text-brass uppercase tracking-wider">
               Interactive Tool
             </span>
             <span className="font-mono text-xs text-sage-dim">· Dynamic Payback & Sensitivity Engine</span>
@@ -72,7 +72,7 @@ export function InteractivePaybackSimulator() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Scenario Switcher */}
         <div className="rounded-lg bg-ink p-4 border border-hairline space-y-2.5">
-          <div className="text-[11px] font-mono uppercase text-sage-dim tracking-wider font-semibold">
+          <div className="text-xs font-mono uppercase text-sage-dim tracking-wider font-semibold">
             1. Market Conditions
           </div>
           <div className="grid grid-cols-3 gap-1.5 font-mono text-xs">
@@ -95,7 +95,7 @@ export function InteractivePaybackSimulator() {
               </button>
             ))}
           </div>
-          <div className="text-[11px] text-sage leading-snug">
+          <div className="text-xs text-sage leading-snug">
             {scenario === 'pessimistic' && 'Reflects regulatory tightening on gaming/betting and further 15% mainstream contraction.'}
             {scenario === 'base' && 'Reflects current 2026 market baseline (KSh 25.9B radio market, 81% Western penetration).'}
             {scenario === 'optimistic' && 'Includes high-demand 2027 election run-up and FMCG regional activations.'}
@@ -104,7 +104,7 @@ export function InteractivePaybackSimulator() {
 
         {/* Studio Investment Scope */}
         <div className="rounded-lg bg-ink p-4 border border-hairline space-y-2.5">
-          <div className="text-[11px] font-mono uppercase text-sage-dim tracking-wider font-semibold">
+          <div className="text-xs font-mono uppercase text-sage-dim tracking-wider font-semibold">
             2. Studio Capex Tier
           </div>
           <div className="grid grid-cols-3 gap-1.5 font-mono text-xs">
@@ -136,7 +136,7 @@ export function InteractivePaybackSimulator() {
         {/* OB Monthly Frequency */}
         <div className="rounded-lg bg-ink p-4 border border-hairline space-y-2.5">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono uppercase text-sage-dim tracking-wider font-semibold">
+            <span className="text-xs font-mono uppercase text-sage-dim tracking-wider font-semibold">
               3. Outside Broadcasts / Month
             </span>
             <span className="font-mono text-xs text-brass font-bold">{obMonthlyFrequency} OBs</span>
@@ -149,7 +149,7 @@ export function InteractivePaybackSimulator() {
             onChange={(e) => setObMonthlyFrequency(parseInt(e.target.value))}
             className="w-full accent-brass cursor-pointer"
           />
-          <div className="flex justify-between text-[10px] font-mono text-sage-dim">
+          <div className="flex justify-between text-xs font-mono text-sage-dim">
             <span>1 / month (Conservative)</span>
             <span>3 (Target)</span>
             <span>6 (Full Capacity)</span>
@@ -160,43 +160,43 @@ export function InteractivePaybackSimulator() {
       {/* KPI Output Banner */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <div className="bg-ink p-4 rounded-lg border border-hairline">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+          <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">
             Monthly Net Cash Flow
           </div>
           <div className="text-2xl sm:text-3xl font-mono text-emerald-400 font-bold mt-1">
             KSh {(monthlyNetCashFlow / 1000).toFixed(0)}K
           </div>
-          <div className="text-[11px] text-sage mt-1">After KSh 1.15M monthly opex</div>
+          <div className="text-xs text-sage mt-1">After KSh 1.15M monthly opex</div>
         </div>
 
         <div className="bg-ink p-4 rounded-lg border border-hairline">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+          <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">
             Payback Horizon
           </div>
           <div className="text-2xl sm:text-3xl font-mono text-brass font-bold mt-1">
             {paybackMonths} Months
           </div>
-          <div className="text-[11px] text-sage mt-1">To 100% full capex recovery</div>
+          <div className="text-xs text-sage mt-1">To 100% full capex recovery</div>
         </div>
 
         <div className="bg-ink p-4 rounded-lg border border-hairline">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+          <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">
             24-Month Net Return (ROIC)
           </div>
           <div className="text-2xl sm:text-3xl font-mono text-paper font-bold mt-1">
             +{roiTwoYears}%
           </div>
-          <div className="text-[11px] text-sage mt-1">Net profit relative to capex</div>
+          <div className="text-xs text-sage mt-1">Net profit relative to capex</div>
         </div>
 
         <div className="bg-ink p-4 rounded-lg border border-hairline">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+          <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">
             Projected Year 1 Gross
           </div>
           <div className="text-2xl sm:text-3xl font-mono text-amber-300 font-bold mt-1">
             KSh {(monthlyGross * 12 / 1000000).toFixed(1)}M
           </div>
-          <div className="text-[11px] text-sage mt-1">Diversified across 4 active streams</div>
+          <div className="text-xs text-sage mt-1">Diversified across 4 active streams</div>
         </div>
       </div>
 
@@ -206,7 +206,7 @@ export function InteractivePaybackSimulator() {
           <div className="text-xs font-mono text-paper font-semibold uppercase tracking-wider">
             8-Quarter Revenue & EBITDA Trajectory (Modelled)
           </div>
-          <div className="flex items-center gap-4 text-[11px] font-mono">
+          <div className="flex items-center gap-4 text-xs font-mono">
             <span className="flex items-center gap-1.5 text-sage">
               <span className="size-2 rounded-sm bg-brass" /> Gross Revenue
             </span>
@@ -224,7 +224,7 @@ export function InteractivePaybackSimulator() {
 
             return (
               <div key={q.q} className="flex flex-col items-center gap-1 h-full justify-end group">
-                <div className="text-[9px] font-mono text-sage-dim opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                <div className="text-xs font-mono text-sage-dim opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                   {(q.revenue / 1000000).toFixed(1)}M
                 </div>
                 <div className="flex items-end gap-1 w-full justify-center">
@@ -239,7 +239,7 @@ export function InteractivePaybackSimulator() {
                     title={`EBITDA: KSh ${q.ebitda.toLocaleString()}`}
                   />
                 </div>
-                <span className="text-[10px] font-mono text-sage-dim mt-1">{q.q}</span>
+                <span className="text-xs font-mono text-sage-dim mt-1">{q.q}</span>
               </div>
             );
           })}

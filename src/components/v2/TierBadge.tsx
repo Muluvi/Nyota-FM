@@ -63,10 +63,10 @@ export function TierBadge({
       <button
         type="button"
         onClick={() => hasMeta && setIsOpen(!isOpen)}
-        className={`inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded border transition-all duration-150 ${details.bg} ${hasMeta ? 'cursor-pointer' : 'cursor-default'}`}
+        className={`inline-flex items-center text-xs font-mono px-2 py-0.5 rounded border transition-all duration-150 ${details.bg} ${hasMeta ? 'cursor-pointer' : 'cursor-default'}`}
         title={hasMeta ? 'Click to inspect methodology & data citation' : undefined}
       >
-        <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${details.dot} animate-pulse`} />
+        <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${details.dot}`} />
         {details.icon}
         <span className="font-semibold tracking-wider">{details.label}</span>
         {hasMeta && (
@@ -80,26 +80,26 @@ export function TierBadge({
         <span className="block p-2 text-xs font-mono rounded bg-ink-2 border border-hairline text-paper/90 shadow-lg text-left mt-1 z-20 max-w-sm">
           {tier === 1 && (
             <span className="space-y-1 block">
-              <span className="text-sage text-[10px] block uppercase tracking-wider font-semibold">Verified Source Citation</span>
+              <span className="text-sage text-xs block uppercase tracking-wider font-semibold">Verified Source Citation</span>
               <span className="block text-paper font-medium">{citation}</span>
               {url && (
                 <a
                   href={`https://${url.replace(/^https?:\/\//, '')}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center text-brass hover:underline text-[11px] mt-0.5"
+                  className="inline-flex items-center text-brass hover:underline text-xs mt-0.5"
                 >
                   <span>{url}</span>
                   <ExternalLink size={10} className="ml-1" />
                 </a>
               )}
-              {accessDate && <span className="block text-sage-dim text-[10px]">Accessed: {accessDate}</span>}
+              {accessDate && <span className="block text-sage-dim text-xs">Accessed: {accessDate}</span>}
             </span>
           )}
 
           {tier === 2 && (
             <span className="space-y-1 block">
-              <span className="text-amber-400 text-[10px] block uppercase tracking-wider font-semibold">Modelled Derivation</span>
+              <span className="text-amber-400 text-xs block uppercase tracking-wider font-semibold">Modelled Derivation</span>
               {method && <span className="block text-paper/90"><span className="text-sage-dim">Method: </span>{method}</span>}
               {inputs && <span className="block text-sage"><span className="text-sage-dim">Inputs: </span>{inputs}</span>}
             </span>
@@ -107,7 +107,7 @@ export function TierBadge({
 
           {tier === 0 && (
             <span className="space-y-1 block">
-              <span className="text-rose-400 text-[10px] block uppercase tracking-wider font-semibold">Identified Primary Research Gap</span>
+              <span className="text-rose-400 text-xs block uppercase tracking-wider font-semibold">Identified Primary Research Gap</span>
               {gapMethod && <span className="block text-paper/90"><span className="text-sage-dim">Recommended Method: </span>{gapMethod}</span>}
               {indicativeCost && <span className="block text-brass"><span className="text-sage-dim">Indicative Budget: </span>{indicativeCost}</span>}
               {timeline && <span className="block text-sage"><span className="text-sage-dim">Timeline: </span>{timeline}</span>}

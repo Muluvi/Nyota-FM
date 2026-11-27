@@ -145,7 +145,7 @@ All citizens across all ${currentCounty.subcounties} sub-counties are invited to
         <div className="lg:col-span-6 space-y-4">
           <div className="rounded-xl border border-hairline bg-ink p-5 space-y-4 text-xs font-mono">
             <div className="flex items-center justify-between border-b border-hairline pb-2.5">
-              <span className="text-[10px] text-brass uppercase tracking-wider font-bold">
+              <span className="text-xs text-brass uppercase tracking-wider font-bold">
                 GAZETTED BROADCAST REQUISITION
               </span>
               <span className="text-emerald-400 font-bold">GAA APPROVED TIER 1</span>
@@ -155,7 +155,7 @@ All citizens across all ${currentCounty.subcounties} sub-counties are invited to
               <p className="font-bold text-paper text-sm">
                 COUNTY GOVERNMENT OF {selectedCounty.toUpperCase()}
               </p>
-              <p className="text-[11px] text-sage-dim">
+              <p className="text-xs text-sage-dim">
                 Statutory Reference: {currentCounty.legalAct}
               </p>
               <p className="text-paper font-medium pt-1">

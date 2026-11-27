@@ -180,10 +180,10 @@ export function LiveRadioPlayer() {
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
                   <span className="flex h-2 w-2 relative shrink-0">
-                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isPlaying ? 'bg-moss' : 'bg-brass'} opacity-75`} />
+                    <span className={` absolute inline-flex h-full w-full rounded-full ${isPlaying ? 'bg-moss' : 'bg-brass'} opacity-75`} />
                     <span className={`relative inline-flex rounded-full h-2 w-2 ${isPlaying ? 'bg-moss' : 'bg-brass'}`} />
                   </span>
-                  <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-wider text-brass font-semibold truncate">
+                  <span className="font-mono text-xs sm:text-xs uppercase tracking-wider text-brass font-semibold truncate">
                     107.3 FM LIVE
                   </span>
                 </div>
@@ -226,8 +226,8 @@ export function LiveRadioPlayer() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="size-2 rounded-full bg-moss animate-pulse" />
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-brass font-bold">
+                    <span className="size-2 rounded-full bg-moss" />
+                    <span className="font-mono text-xs uppercase tracking-widest text-brass font-bold">
                       BROADCAST STREAM · 107.3 MHZ
                     </span>
                   </div>
@@ -245,7 +245,7 @@ export function LiveRadioPlayer() {
             </div>
 
             <div className="my-4 rounded-lg bg-ink p-3 border border-hairline">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-sage-dim">
+              <div className="text-xs font-mono uppercase tracking-wider text-sage-dim">
                 Now On Air ({nowPlaying.time})
               </div>
               <div className="mt-1 font-display text-lg text-paper font-medium leading-tight">
@@ -254,7 +254,7 @@ export function LiveRadioPlayer() {
               <div className="mt-0.5 text-xs text-brass font-mono">
                 Hosted by {nowPlaying.hosts}
               </div>
-              <div className="mt-2 flex items-center justify-between text-[11px] text-sage-dim font-mono border-t border-hairline/60 pt-2">
+              <div className="mt-2 flex items-center justify-between text-xs text-sage-dim font-mono border-t border-hairline/60 pt-2">
                 <span>Coverage: {nowPlaying.region}</span>
                 <div className="flex items-center gap-1">
                   {(['32k', '128k', '256k'] as const).map((b) => (
@@ -262,7 +262,7 @@ export function LiveRadioPlayer() {
                       key={b}
                       type="button"
                       onClick={() => setStreamBitrate(b)}
-                      className={`px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors ${
+                      className={`px-1.5 py-0.5 rounded text-xs font-mono transition-colors ${
                         streamBitrate === b ? 'bg-moss text-ink font-bold' : 'text-sage hover:text-paper bg-ink-2'
                       }`}
                       title={b === '32k' ? 'Low Data (2G/3G)' : b === '128k' ? 'Standard HQ' : 'Lossless Studio'}
@@ -290,7 +290,7 @@ export function LiveRadioPlayer() {
             </div>
 
             {/* EQ Preset Selector */}
-            <div className="flex items-center justify-between text-[10px] font-mono text-sage-dim mb-3 px-1">
+            <div className="flex items-center justify-between text-xs font-mono text-sage-dim mb-3 px-1">
               <span>EQ Preset:</span>
               <div className="flex gap-1">
                 {(['voice', 'music', 'flat'] as const).map((eq) => (
@@ -325,7 +325,7 @@ export function LiveRadioPlayer() {
                   <div className="text-xs font-mono font-medium text-paper">
                     {isPlaying ? 'Streaming Live' : 'Paused · Ready'}
                   </div>
-                  <div className="text-[10px] font-mono text-sage-dim">
+                  <div className="text-xs font-mono text-sage-dim">
                     {isPlaying ? 'Audio Synthesizer Active' : 'Tap play to start'}
                   </div>
                 </div>

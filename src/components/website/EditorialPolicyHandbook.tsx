@@ -131,13 +131,13 @@ export function EditorialPolicyHandbook() {
               {isExpanded && (
                 <div className="px-4 pb-4 pt-1 border-t border-hairline space-y-3 text-xs font-sans text-sage">
                   <div>
-                    <strong className="text-paper block mb-0.5 font-mono text-[11px] uppercase tracking-wider">
+                    <strong className="text-paper block mb-0.5 font-mono text-xs uppercase tracking-wider">
                       Operational Guideline:
                     </strong>
                     <p className="leading-relaxed">{rule.guideline}</p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-hairline/60 font-mono text-[11px]">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-hairline/60 font-mono text-xs">
                     <div>
                       <span className="text-rose-400 font-bold block">Sanction for Breach:</span>
                       <span className="text-paper">{rule.sanction}</span>

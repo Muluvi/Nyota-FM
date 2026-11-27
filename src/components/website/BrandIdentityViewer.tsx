@@ -56,15 +56,15 @@ export function BrandIdentityViewer() {
                 style={{ backgroundColor: c.hex }}
               >
                 {copiedHex === c.hex && (
-                  <span className="bg-ink/90 text-brass text-[10px] font-mono px-2 py-0.5 rounded shadow">
+                  <span className="bg-ink/90 text-brass text-xs font-mono px-2 py-0.5 rounded shadow">
                     COPIED
                   </span>
                 )}
               </div>
               <div>
                 <span className="font-bold text-paper text-xs block">{c.name}</span>
-                <span className="text-[10px] font-mono text-brass block">{c.hex}</span>
-                <span className="text-[10px] font-mono text-sage-dim block mt-0.5">{c.role}</span>
+                <span className="text-xs font-mono text-brass block">{c.hex}</span>
+                <span className="text-xs font-mono text-sage-dim block mt-0.5">{c.role}</span>
               </div>
             </button>
           ))}
@@ -80,15 +80,15 @@ export function BrandIdentityViewer() {
           <div className="space-y-2 text-sage">
             <div className="p-2.5 rounded bg-ink-2 border border-hairline">
               <span className="text-paper font-bold block">Display Serif: Cormorant / Playfair</span>
-              <span className="text-[11px] text-sage-dim">Used for headlines, station slogans, and chapter numbers.</span>
+              <span className="text-xs text-sage-dim">Used for headlines, station slogans, and chapter numbers.</span>
             </div>
             <div className="p-2.5 rounded bg-ink-2 border border-hairline">
               <span className="text-paper font-bold block">Body Prose: Plus Jakarta Sans / Satoshi</span>
-              <span className="text-[11px] text-sage-dim">High-legibility humanist sans-serif for comfortable long-form reading.</span>
+              <span className="text-xs text-sage-dim">High-legibility humanist sans-serif for comfortable long-form reading.</span>
             </div>
             <div className="p-2.5 rounded bg-ink-2 border border-hairline">
               <span className="text-paper font-bold block">Tabular Figures: JetBrains Mono / IBM Plex</span>
-              <span className="text-[11px] text-sage-dim">Strict vertical alignment for financial payback models and rates.</span>
+              <span className="text-xs text-sage-dim">Strict vertical alignment for financial payback models and rates.</span>
             </div>
           </div>
         </div>
@@ -100,15 +100,15 @@ export function BrandIdentityViewer() {
           <div className="space-y-2 text-sage">
             <div className="p-2.5 rounded bg-ink-2 border border-hairline">
               <span className="text-paper font-bold block">Studio Mic Flag: 65mm × 65mm Square</span>
-              <span className="text-[11px] text-sage-dim">Matte black acrylic with embossed gold star logo on Shure SM7B rigs.</span>
+              <span className="text-xs text-sage-dim">Matte black acrylic with embossed gold star logo on Shure SM7B rigs.</span>
             </div>
             <div className="p-2.5 rounded bg-ink-2 border border-hairline">
               <span className="text-paper font-bold block">OB Van Livery & Vehicle Wrap</span>
-              <span className="text-[11px] text-sage-dim">High-visibility reflective gold & moss green along Toyota Land Cruiser flank.</span>
+              <span className="text-xs text-sage-dim">High-visibility reflective gold & moss green along Toyota Land Cruiser flank.</span>
             </div>
             <div className="p-2.5 rounded bg-ink-2 border border-hairline">
               <span className="text-paper font-bold block">Presenter Uniform & Field Jackets</span>
-              <span className="text-[11px] text-sage-dim">Waterproof storm jackets with embroidered 107.3 FM frequency beacon.</span>
+              <span className="text-xs text-sage-dim">Waterproof storm jackets with embroidered 107.3 FM frequency beacon.</span>
             </div>
           </div>
         </div>

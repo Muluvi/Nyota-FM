@@ -127,7 +127,7 @@ export function PoliticalRateCardEngine() {
         {/* Breakdown Card */}
         <div className="lg:col-span-6 space-y-4">
           <div className="rounded-xl border border-hairline bg-ink p-5 space-y-4 text-xs font-mono">
-            <span className="text-[10px] text-brass uppercase tracking-wider font-bold block">
+            <span className="text-xs text-brass uppercase tracking-wider font-bold block">
               STATUTORY ELECTION RATE CARD SUMMARY
             </span>
 
@@ -153,7 +153,7 @@ export function PoliticalRateCardEngine() {
               </span>
             </div>
 
-            <div className="p-3 rounded bg-ink-2 border border-hairline/80 text-[11px] font-sans text-sage leading-relaxed space-y-1">
+            <div className="p-3 rounded bg-ink-2 border border-hairline/80 text-xs font-sans text-sage leading-relaxed space-y-1">
               <p className="font-semibold text-paper">Communications Authority Section 46 Mandate:</p>
               <p>
                 Broadcasters must ensure all political campaign messages are vetted by the station legal editor. Live call-in segments require a minimum 7-second audio delay to prevent live broadcast of inciting remarks.

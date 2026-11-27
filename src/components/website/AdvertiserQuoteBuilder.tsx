@@ -206,14 +206,14 @@ Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
           <div className="rounded-xl border border-hairline bg-ink p-5 space-y-4 shadow-lg text-xs font-mono">
             <div className="flex items-start justify-between border-b border-hairline pb-3">
               <div>
-                <span className="text-[10px] text-brass uppercase tracking-widest font-bold block">
+                <span className="text-xs text-brass uppercase tracking-widest font-bold block">
                   PRO-FORMA INVOICE
                 </span>
                 <span className="text-sm font-bold text-paper mt-0.5 block">NYOTA FM 107.3</span>
-                <span className="text-[10px] text-sage-dim">PIN: P051284920K · Bungoma Studios</span>
+                <span className="text-xs text-sage-dim">PIN: P051284920K · Bungoma Studios</span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] text-sage-dim block">Date</span>
+                <span className="text-xs text-sage-dim block">Date</span>
                 <span className="text-paper font-bold">October 2026</span>
               </div>
             </div>
@@ -223,7 +223,7 @@ Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
               <div className="flex justify-between pt-1">
                 <div>
                   <span className="text-paper font-semibold block">{daypart} 30-sec Spots</span>
-                  <span className="text-[10px] text-sage-dim">{totalSpots} spots @ KSh {spotRate.toLocaleString()}</span>
+                  <span className="text-xs text-sage-dim">{totalSpots} spots @ KSh {spotRate.toLocaleString()}</span>
                 </div>
                 <span className="text-paper font-bold tabular-nums">KSh {spotSubtotal.toLocaleString()}</span>
               </div>
@@ -232,7 +232,7 @@ Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
                 <div className="flex justify-between pt-2">
                   <div>
                     <span className="text-paper font-semibold block">Hapa Tulipo Market OB Roadshow</span>
-                    <span className="text-[10px] text-sage-dim">Live 4-hour broadcast + PA activations</span>
+                    <span className="text-xs text-sage-dim">Live 4-hour broadcast + PA activations</span>
                   </div>
                   <span className="text-paper font-bold tabular-nums">KSh 180,000</span>
                 </div>
@@ -242,7 +242,7 @@ Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
                 <div className="flex justify-between pt-2">
                   <div>
                     <span className="text-paper font-semibold block">WhatsApp Business API Push</span>
-                    <span className="text-[10px] text-sage-dim">Dedicated opt-in broadcast message</span>
+                    <span className="text-xs text-sage-dim">Dedicated opt-in broadcast message</span>
                   </div>
                   <span className="text-paper font-bold tabular-nums">KSh {waCost.toLocaleString()}</span>
                 </div>
@@ -262,10 +262,10 @@ Contact: Commercial Directorate, Nyota FM 107.3, Bungoma Town`;
             {/* Net Total Box */}
             <div className="rounded-lg bg-ink-2 border border-brass/50 p-3.5 flex items-center justify-between">
               <div>
-                <span className="text-[10px] text-brass uppercase tracking-wider block font-bold">
+                <span className="text-xs text-brass uppercase tracking-wider block font-bold">
                   TOTAL NET INVESTMENT
                 </span>
-                <span className="text-[10px] text-sage-dim">Includes broadcast airtime & digital reach</span>
+                <span className="text-xs text-sage-dim">Includes broadcast airtime & digital reach</span>
               </div>
               <span className="font-display text-xl sm:text-2xl font-bold text-brass tabular-nums">
                 KSh {netTotal.toLocaleString()}

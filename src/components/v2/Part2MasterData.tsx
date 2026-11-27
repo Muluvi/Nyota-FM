@@ -5,13 +5,7 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
-import { CountyCoverageExplorer } from '../website/CountyCoverageExplorer';
-import { CountyEconomicExplorer } from '../website/CountyEconomicExplorer';
-import { CompetitorDialMap } from '../website/CompetitorDialMap';
-import { TransmitterElevationTool } from '../website/TransmitterElevationTool';
-import { AgriCommodityIndex } from '../website/AgriCommodityIndex';
-import { ListenerVoxPop } from '../website/ListenerVoxPop';
-import { CMORoyaltyCalculator } from '../website/CMORoyaltyCalculator';
+import { ToolkitInline } from '../toolkit/ToolkitInline';
 
 export function Part2MasterData() {
   const [activeTab, setActiveTab] = useState<'market' | 'competitors' | 'ad_econ' | 'digital' | 'studio' | 'regulatory' | 'audience' | 'levers'>('market');
@@ -22,7 +16,7 @@ export function Part2MasterData() {
       <Reveal>
         <div className="p-4 bg-ink-2 rounded border border-hairline flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div>
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
               PART 2 · MASTER DATA ANNEXURE
             </span>
             <p className="text-xs text-sage mt-0.5">
@@ -30,9 +24,9 @@ export function Part2MasterData() {
             </p>
           </div>
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-moss/20 text-emerald-300 border border-moss/50 font-semibold">Tier 1 Hard</span>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-brass/20 text-amber-300 border border-brass/50 font-semibold">Tier 2 Modelled</span>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-brick/20 text-rose-300 border border-brick/50 font-semibold">Tier 0 Gap</span>
+            <span className="text-xs font-mono px-2 py-0.5 rounded bg-moss/20 text-emerald-300 border border-moss/50 font-semibold">Tier 1 Hard</span>
+            <span className="text-xs font-mono px-2 py-0.5 rounded bg-brass/20 text-amber-300 border border-brass/50 font-semibold">Tier 2 Modelled</span>
+            <span className="text-xs font-mono px-2 py-0.5 rounded bg-brick/20 text-rose-300 border border-brick/50 font-semibold">Tier 0 Gap</span>
           </div>
         </div>
       </Reveal>
@@ -136,7 +130,7 @@ export function Part2MasterData() {
             </div>
 
             <div className="p-3 bg-ink rounded border border-hairline text-xs space-y-1.5 font-body">
-              <div className="text-amber-400 font-mono text-[11px] font-semibold uppercase tracking-wider">
+              <div className="text-amber-400 font-mono text-xs font-semibold uppercase tracking-wider">
                 Note on v1.0 Discrepancy (Audited Correction)
               </div>
               <p className="text-sage text-xs leading-relaxed">
@@ -145,26 +139,7 @@ export function Part2MasterData() {
             </div>
           </div>
 
-          {/* Interactive 5-County Signal Coverage Explorer */}
-          <CountyCoverageExplorer />
-
-          {/* Interactive Western Kenya County Economic & Commercial Engine */}
-          <CountyEconomicExplorer />
-
-          {/* Interactive Transmitter Elevation & Propagation Profile Tool */}
-          <TransmitterElevationTool />
-
-          {/* Comparative Radio Dial Map & Competitor Spectrum */}
-          <CompetitorDialMap />
-
-          {/* Agri-Commodity Live Price Ticker & Market Soko Index */}
-          <AgriCommodityIndex />
-
-          {/* Grassroots Listener Panel & Qualitative Testimonials */}
-          <ListenerVoxPop />
-
-          {/* Music Copyright Licensing (MCSK, PRISK, KAMP) & Local Content Quota */}
-          <CMORoyaltyCalculator />
+          <ToolkitInline ids={['coverage', 'economy', 'elevation', 'dial', 'agri', 'voxpop', 'royalties']} />
 
           {/* 2.1.2 Radio Penetration & 2.1.3 Device Ownership */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -230,18 +205,18 @@ export function Part2MasterData() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
               <div className="p-3 bg-ink rounded border border-hairline">
                 <div className="text-brass font-bold text-base">Bukusu (56%)</div>
-                <div className="text-sage text-[11px] mt-1">Bungoma, Trans Nzoia</div>
-                <div className="text-sage-dim text-[10px] mt-1">Core primary vernacular audience</div>
+                <div className="text-sage text-xs mt-1">Bungoma, Trans Nzoia</div>
+                <div className="text-sage-dim text-xs mt-1">Core primary vernacular audience</div>
               </div>
               <div className="p-3 bg-ink rounded border border-hairline">
                 <div className="text-paper font-bold text-base">Maragoli (11%)</div>
-                <div className="text-sage text-[11px] mt-1">Vihiga, Kakamega</div>
-                <div className="text-sage-dim text-[10px] mt-1">Second largest linguistic sub-group</div>
+                <div className="text-sage text-xs mt-1">Vihiga, Kakamega</div>
+                <div className="text-sage-dim text-xs mt-1">Second largest linguistic sub-group</div>
               </div>
               <div className="p-3 bg-ink rounded border border-hairline">
                 <div className="text-sage font-bold text-base">Other Sub-Clusters (33%)</div>
-                <div className="text-sage text-[11px] mt-1">Isukha, Idakho, Samia, Khayo, Tiriki</div>
-                <div className="text-sage-dim text-[10px] mt-1">Unified via Swahili + Pan-Luhya civic bridge</div>
+                <div className="text-sage text-xs mt-1">Isukha, Idakho, Samia, Khayo, Tiriki</div>
+                <div className="text-sage-dim text-xs mt-1">Unified via Swahili + Pan-Luhya civic bridge</div>
               </div>
             </div>
           </div>
@@ -383,7 +358,7 @@ export function Part2MasterData() {
               </div>
               <div className="shrink-0 text-right">
                 <span className="text-brass font-mono font-bold block">KSh 200,000–500,000</span>
-                <span className="text-[10px] font-mono text-sage-dim">Timeline: 4–6 weeks</span>
+                <span className="text-xs font-mono text-sage-dim">Timeline: 4–6 weeks</span>
               </div>
             </div>
 
@@ -410,7 +385,7 @@ export function Part2MasterData() {
               </div>
 
               <div className="p-3 bg-ink rounded border border-brass/40 text-xs font-body leading-relaxed">
-                <strong className="text-brass font-mono text-[11px] uppercase tracking-wider block mb-1">
+                <strong className="text-brass font-mono text-xs uppercase tracking-wider block mb-1">
                   Critical Strategic Correction to v1.0's Fragmentation Thesis
                 </strong>
                 <p className="text-paper/90">
@@ -498,7 +473,7 @@ export function Part2MasterData() {
                 <span className="text-brass block mt-1">VAT: 16% levied on all commercial billings</span>
               </div>
               <div className="p-3 bg-ink rounded border border-hairline">
-                <span className="text-amber-400 block font-semibold uppercase text-[10px]">Tier 2 Derivation Method</span>
+                <span className="text-amber-400 block font-semibold uppercase text-xs">Tier 2 Derivation Method</span>
                 <p className="text-sage font-body text-xs mt-1">
                   Positioning Nyota between "small station" off-peak (KSh 5,000) and Radio Jambo prime (KSh 12,000–18,000), discounted for lower initial baseline reach and rising with GeoPoll panel proof.
                 </p>
@@ -514,24 +489,24 @@ export function Part2MasterData() {
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
                 <div className="p-3 bg-ink rounded border border-hairline">
-                  <div className="text-sage-dim text-[10px]">Financial Services</div>
+                  <div className="text-sage-dim text-xs">Financial Services</div>
                   <div className="text-emerald-400 font-bold text-base mt-1">KSh 1,300M</div>
-                  <div className="text-sage text-[10px]">21% of radio spend (#1)</div>
+                  <div className="text-sage text-xs">21% of radio spend (#1)</div>
                 </div>
                 <div className="p-3 bg-ink rounded border border-hairline">
-                  <div className="text-sage-dim text-[10px]">Transport Sector</div>
+                  <div className="text-sage-dim text-xs">Transport Sector</div>
                   <div className="text-paper font-bold text-base mt-1">KSh 727M</div>
-                  <div className="text-sage text-[10px]">11% of total spend (#2)</div>
+                  <div className="text-sage text-xs">11% of total spend (#2)</div>
                 </div>
                 <div className="p-3 bg-ink rounded border border-hairline">
-                  <div className="text-sage-dim text-[10px]">Telecoms / Comms</div>
+                  <div className="text-sage-dim text-xs">Telecoms / Comms</div>
                   <div className="text-paper font-bold text-base mt-1">KSh 302M</div>
-                  <div className="text-sage text-[10px]">10% of total spend</div>
+                  <div className="text-sage text-xs">10% of total spend</div>
                 </div>
                 <div className="p-3 bg-brick/20 rounded border border-brick/60">
-                  <div className="text-rose-400 text-[10px] font-bold">Betting Collapse</div>
+                  <div className="text-rose-400 text-xs font-bold">Betting Collapse</div>
                   <div className="text-rose-400 font-bold text-base mt-1">KSh 51M</div>
-                  <div className="text-rose-300 text-[10px]">Fell 89% from KSh 513M</div>
+                  <div className="text-rose-300 text-xs">Fell 89% from KSh 513M</div>
                 </div>
               </div>
             </div>
@@ -540,23 +515,23 @@ export function Part2MasterData() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs font-mono">
               <div className="p-3 bg-ink rounded border border-hairline">
                 <span className="text-brass font-bold block mb-1">RMS National Hegemony</span>
-                <p className="text-sage text-[11px] font-body leading-snug">
+                <p className="text-sage text-xs font-body leading-snug">
                   Royal Media Services accounts for <strong>41% of daily listeners</strong> and &gt;<strong>37% of all radio ad spend</strong> in Kenya (CA Kenya Competition Study).
                 </p>
               </div>
               <div className="p-3 bg-ink rounded border border-hairline">
                 <span className="text-brass font-bold block mb-1">GAA Registration Path</span>
-                <p className="text-sage text-[11px] font-body leading-snug">
+                <p className="text-sage text-xs font-body leading-snug">
                   Government Advertising Agency National Register prequalification. Regional radio stations eligible for national ministry campaigns.
                 </p>
-                <span className="text-[10px] text-amber-300 block mt-1">Tier 0 Gap: Rate transparency</span>
+                <span className="text-xs text-amber-300 block mt-1">Tier 0 Gap: Rate transparency</span>
               </div>
               <div className="p-3 bg-ink rounded border border-hairline">
                 <span className="text-brass font-bold block mb-1">County Tenders</span>
-                <p className="text-sage text-[11px] font-body leading-snug">
+                <p className="text-sage text-xs font-body leading-snug">
                   Bungoma Assembly tender <code className="text-paper">BGM/CNTY/OT/FWC/05/07/2026-2028</code>. Kakamega County IFMIS media frameworks.
                 </p>
-                <span className="text-[10px] text-amber-300 block mt-1">Tier 0 Gap: Value disclosure</span>
+                <span className="text-xs text-amber-300 block mt-1">Tier 0 Gap: Value disclosure</span>
               </div>
             </div>
           </div>
@@ -599,7 +574,7 @@ export function Part2MasterData() {
                   <span className="text-sage">Partner Threshold</span>
                   <span className="text-paper">1,000 subs + 4,000 hrs</span>
                 </div>
-                <div className="p-2 bg-ink-2 rounded border border-brass/30 text-[11px] font-body text-paper/90">
+                <div className="p-2 bg-ink-2 rounded border border-brass/30 text-xs font-body text-paper/90">
                   <strong className="text-brass font-mono">Nyota FM Maturity Model:</strong> 50,000–200,000 subscribers with 500,000 monthly views generates <span className="text-brass font-semibold">KSh 50,000–200,000/month</span> in AdSense.
                 </div>
               </div>
@@ -610,11 +585,11 @@ export function Part2MasterData() {
                   <span className="text-rose-400 font-bold">2.4.2 TikTok Kenya Reality Check</span>
                   <TierBadge tier={1} citation="LinkedIn / Jason Corder & Monitor Uganda 2025" url="monitor.co.ug" />
                 </div>
-                <div className="p-2 bg-ink rounded border border-brick/40 text-[11px] font-body text-paper/90">
+                <div className="p-2 bg-ink rounded border border-brick/40 text-xs font-body text-paper/90">
                   <strong className="text-rose-400 font-mono block mb-1">CRITICAL FACTUAL CORRECTION TO v1.0:</strong>
                   TikTok Creator Rewards Program is <strong>NOT available in Kenya</strong>. TikTok pays ZERO direct view-based payouts to Kenyan accounts.
                 </div>
-                <div className="space-y-1 text-sage text-[11px]">
+                <div className="space-y-1 text-sage text-xs">
                   <div>• TikTok for Business Kenya: 200+ advertisers active</div>
                   <div>• Creator monetisation limited to: LIVE gifts, diamonds, branded sponsorships</div>
                   <div className="text-brass">• Nyota Strategy: Sell physical brand sponsorships & OB integration, not imaginary platform view checks.</div>
@@ -681,16 +656,16 @@ export function Part2MasterData() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono pt-2">
               <div className="p-3 bg-ink rounded border border-hairline">
                 <span className="text-brass font-bold block mb-1">2.4.5 African Podcast CPMs</span>
-                <p className="text-sage text-[11px] font-body leading-snug">
+                <p className="text-sage text-xs font-body leading-snug">
                   African podcast programmatic CPM is <strong>$3–$8</strong>. Flat sponsorship for top African podcasts commands <strong>$500–$5,000 per episode</strong> (AfroTools).
                 </p>
               </div>
               <div className="p-3 bg-ink rounded border border-hairline">
                 <span className="text-brass font-bold block mb-1">2.4.6 Paid Media CPMs (Kenya)</span>
-                <p className="text-sage text-[11px] font-body leading-snug">
+                <p className="text-sage text-xs font-body leading-snug">
                   Meta Kenya CPM benchmark: <strong>KSh 50–150</strong>. Google Ads: <strong>KSh 30–100</strong>.
                 </p>
-                <span className="text-[10px] text-amber-300 block mt-1">Tier 0 Gap: Run KSh 10,000 test pilot to lock in sub-county CPMs</span>
+                <span className="text-xs text-amber-300 block mt-1">Tier 0 Gap: Run KSh 10,000 test pilot to lock in sub-county CPMs</span>
               </div>
             </div>
           </div>
@@ -803,7 +778,7 @@ export function Part2MasterData() {
               </div>
               <div className="text-right">
                 <span className="text-emerald-400 font-bold text-sm block">Saves &gt; KSh 1.5M</span>
-                <span className="text-sage-dim text-[10px]">vs v1.0's inflated KSh 2.2M–3.8M envelope</span>
+                <span className="text-sage-dim text-xs">vs v1.0's inflated KSh 2.2M–3.8M envelope</span>
               </div>
             </div>
           </div>
@@ -830,7 +805,7 @@ export function Part2MasterData() {
                 </div>
                 <div className="text-sage">Application Fee: <strong className="text-paper">KSh 5,000</strong></div>
                 <div className="text-sage">Annual Fee: <strong className="text-emerald-400">KSh 100,000</strong></div>
-                <div className="text-[10px] text-sage-dim">Or 0.4% of annual turnover, whichever is higher (CA Kenya)</div>
+                <div className="text-xs text-sage-dim">Or 0.4% of annual turnover, whichever is higher (CA Kenya)</div>
               </div>
 
               {/* Music Sync Rights */}
@@ -841,7 +816,7 @@ export function Part2MasterData() {
                 <div className="text-sage">• MCSK: Provisional 6-month status</div>
                 <div className="text-sage">• KAMP / PRISK: Performers rights</div>
                 <div className="text-sage">• PAVRISK: Audiovisual synchronization</div>
-                <div className="text-[10px] text-rose-300">Tier 0 Gap: Video streaming sync rates require direct negotiation (4 wks)</div>
+                <div className="text-xs text-rose-300">Tier 0 Gap: Video streaming sync rates require direct negotiation (4 wks)</div>
               </div>
 
               {/* Data Protection Act 2019 */}
@@ -852,7 +827,7 @@ export function Part2MasterData() {
                 <div className="text-sage">Micro & Small Data Controller: <strong className="text-paper">KSh 4,000</strong></div>
                 <div className="text-sage">Medium Entity: <strong className="text-paper">KSh 16,000</strong></div>
                 <div className="text-sage">Large Entity: <strong className="text-paper">KSh 40,000</strong></div>
-                <div className="text-[10px] text-emerald-400 font-semibold">Mandatory for WhatsApp/USSD listener opt-in database</div>
+                <div className="text-xs text-emerald-400 font-semibold">Mandatory for WhatsApp/USSD listener opt-in database</div>
               </div>
             </div>
           </div>
@@ -877,7 +852,7 @@ export function Part2MasterData() {
                 <span className="text-brass font-mono text-xs font-bold uppercase tracking-wider">
                   2.7.2 Net Listener Score (NLS) — Mathematical Methodology
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-brass/20 text-amber-300 border border-brass/40">
+                <span className="text-xs font-mono px-2 py-0.5 rounded bg-brass/20 text-amber-300 border border-brass/40">
                   Constructed Equation
                 </span>
               </div>
@@ -891,19 +866,19 @@ export function Part2MasterData() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono pt-1">
                 <div className="p-2.5 bg-ink-2 rounded border border-hairline">
                   <span className="text-brass font-semibold block">WAL: Weekly Active Listeners</span>
-                  <span className="text-sage text-[11px]">Unique listeners in past 7 days measured via GeoPoll / KARF panel oversample.</span>
+                  <span className="text-sage text-xs">Unique listeners in past 7 days measured via GeoPoll / KARF panel oversample.</span>
                 </div>
                 <div className="p-2.5 bg-ink-2 rounded border border-hairline">
                   <span className="text-brass font-semibold block">AWLH: Average Weekly Listening Hours</span>
-                  <span className="text-sage text-[11px]">Time spent listening per diary and daypart recall surveys.</span>
+                  <span className="text-sage text-xs">Time spent listening per diary and daypart recall surveys.</span>
                 </div>
                 <div className="p-2.5 bg-ink-2 rounded border border-hairline">
                   <span className="text-brass font-semibold block">RCI: Repeat Caller Index</span>
-                  <span className="text-sage text-[11px]">Formula: <code className="text-paper">(Unique Callers / Week ÷ Total Callers) × 100</code> recorded via studio call logs.</span>
+                  <span className="text-sage text-xs">Formula: <code className="text-paper">(Unique Callers / Week ÷ Total Callers) × 100</code> recorded via studio call logs.</span>
                 </div>
                 <div className="p-2.5 bg-ink-2 rounded border border-hairline">
                   <span className="text-brass font-semibold block">CPEI: Cross-Platform Engagement Index</span>
-                  <span className="text-sage text-[11px]">Formula: <code className="text-paper">(WhatsApp Opt-In Retention % + USSD Freq + App WAU) ÷ 3</code>.</span>
+                  <span className="text-sage text-xs">Formula: <code className="text-paper">(WhatsApp Opt-In Retention % + USSD Freq + App WAU) ÷ 3</code>.</span>
                 </div>
               </div>
 
@@ -914,7 +889,7 @@ export function Part2MasterData() {
                 <p className="text-paper/90 font-body text-xs">
                   Establishing the empirical baseline NLS for Nyota FM requires primary listener survey research.
                 </p>
-                <div className="text-sage text-[11px]">
+                <div className="text-sage text-xs">
                   Recommended method: Commission GeoPoll or KARF for a Western Kenya survey with Nyota FM county oversample. <strong>Budget: KSh 500,000–1,000,000</strong>. Timeline: 6–8 weeks.
                 </div>
               </div>

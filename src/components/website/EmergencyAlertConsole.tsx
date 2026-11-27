@@ -102,7 +102,7 @@ export function EmergencyAlertConsole() {
           onClick={() => triggerAlertSiren(activeAlert)}
           className={`px-3.5 py-2 rounded font-mono text-xs font-bold transition-all flex items-center gap-1.5 shadow ${
             isPlayingSiren
-              ? 'bg-red-600 text-white animate-pulse'
+              ? 'bg-red-600 text-white'
               : 'bg-red-500/20 border border-red-500/50 text-red-400 hover:bg-red-500/30'
           }`}
         >
@@ -130,14 +130,14 @@ export function EmergencyAlertConsole() {
                     : 'border-hairline bg-ink text-sage hover:text-paper'
                 }`}
               >
-                <div className="flex items-center justify-between text-[10px] font-mono mb-1">
+                <div className="flex items-center justify-between text-xs font-mono mb-1">
                   <span className="text-brass uppercase font-bold">{item.category}</span>
                   <span className="text-red-400 font-bold px-1 rounded bg-red-950/50 border border-red-800">
                     {item.severity}
                   </span>
                 </div>
                 <h4 className="text-xs font-bold text-paper">{item.headline}</h4>
-                <span className="text-[10px] text-sage-dim font-mono block mt-1">{item.county}</span>
+                <span className="text-xs text-sage-dim font-mono block mt-1">{item.county}</span>
               </button>
             );
           })}
@@ -146,16 +146,16 @@ export function EmergencyAlertConsole() {
         {/* Live Bilingual On-Air Bulletin Display */}
         <div className="lg:col-span-7 rounded-xl border border-red-500/40 bg-ink p-5 space-y-4">
           <div className="flex items-center justify-between border-b border-hairline pb-2.5">
-            <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest font-bold flex items-center gap-1.5">
+            <span className="text-xs font-mono text-red-400 uppercase tracking-widest font-bold flex items-center gap-1.5">
               <AlertTriangle size={12} />
               ON-AIR BULLETIN CUE · HIGH PRIORITY OVERRIDE
             </span>
-            <span className="text-[10px] font-mono text-sage-dim">Zone: {activeAlert.county}</span>
+            <span className="text-xs font-mono text-sage-dim">Zone: {activeAlert.county}</span>
           </div>
 
           {/* Swahili broadcast text */}
           <div className="space-y-1">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-wider block font-bold">
+            <span className="text-xs font-mono text-brass uppercase tracking-wider block font-bold">
               KISWAHILI ON-AIR BULLETIN
             </span>
             <p className="text-xs sm:text-sm font-sans text-paper leading-relaxed bg-ink-2 p-3 rounded border border-hairline">
@@ -165,7 +165,7 @@ export function EmergencyAlertConsole() {
 
           {/* Bukusu vernacular broadcast text */}
           <div className="space-y-1">
-            <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider block font-bold">
+            <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block font-bold">
               LUKUSU (VERNACULAR) ON-AIR BULLETIN
             </span>
             <p className="text-xs sm:text-sm font-sans text-paper leading-relaxed bg-ink-2 p-3 rounded border border-hairline">
@@ -173,7 +173,7 @@ export function EmergencyAlertConsole() {
             </p>
           </div>
 
-          <div className="flex items-center justify-between text-[10px] font-mono text-sage-dim pt-1 border-t border-hairline">
+          <div className="flex items-center justify-between text-xs font-mono text-sage-dim pt-1 border-t border-hairline">
             <span>Disaster Response: Red Cross Western & Bungoma County Police</span>
             <span className="text-brass">Toll Free: 1199</span>
           </div>

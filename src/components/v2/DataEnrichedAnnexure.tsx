@@ -168,14 +168,14 @@ export function DataEnrichedAnnexure() {
   const [open, setOpen] = useState(0);
   return <section id="data-annexure" className="mx-auto mt-12 w-full max-w-6xl px-4 sm:mt-20 sm:px-6">
     <div className="mb-5 flex items-end justify-between gap-4 border-b border-hairline pb-4">
-      <div><div className="mb-2 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.2em] text-brass"><Database size={13} /> sourced figures / v2.0</div><h2 className="font-display text-4xl text-paper sm:text-6xl">The data room.</h2></div>
-      <div className="hidden text-right font-mono text-[10px] uppercase tracking-widest text-sage-dim sm:block">37 named citations<br />strictly confidential</div>
+      <div><div className="mb-2 flex items-center gap-2 font-mono text-xs uppercase tracking-[.2em] text-brass"><Database size={13} /> sourced figures / v2.0</div><h2 className="font-display text-4xl text-paper sm:text-6xl">The data room.</h2></div>
+      <div className="hidden text-right font-mono text-xs uppercase tracking-widest text-sage-dim sm:block">37 named citations<br />strictly confidential</div>
     </div>
     <p className="mb-7 max-w-2xl text-sm leading-7 text-sage">Every supplied figure is placed in the decision context where it earns attention: audience, market, connectivity, commercial design, operating cost, studio investment, and board action.</p>
     <div className="divide-y divide-hairline border-y border-hairline">
       {sections.map((section, index) => <div key={section.title}>
-        <button type="button" onClick={() => setOpen(open === index ? -1 : index)} className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-brass"><span><span className="mr-3 font-mono text-[10px] text-brass">{section.eyebrow}</span><span className="font-display text-2xl sm:text-3xl">{section.title}</span></span><ChevronDown className={`shrink-0 transition-transform ${open === index ? 'rotate-180' : ''}`} size={18} /></button>
-        {open === index && <div className="grid grid-cols-1 gap-px bg-hairline pb-5 sm:grid-cols-2 lg:grid-cols-3">{section.items.map(([label, value, note]) => <article key={label} className="bg-ink px-4 py-4 sm:px-5"><div className="mb-2 text-[10px] font-mono uppercase tracking-wider text-sage-dim">{label}</div><div className="font-display text-2xl leading-tight text-brass">{value}</div><p className="mt-2 text-xs leading-5 text-sage">{note}</p></article>)}</div>}
+        <button type="button" onClick={() => setOpen(open === index ? -1 : index)} className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-brass"><span><span className="mr-3 font-mono text-xs text-brass">{section.eyebrow}</span><span className="font-display text-2xl sm:text-3xl">{section.title}</span></span><ChevronDown className={`shrink-0 transition-transform ${open === index ? 'rotate-180' : ''}`} size={18} /></button>
+        {open === index && <div className="grid grid-cols-1 gap-px bg-hairline pb-5 sm:grid-cols-2 lg:grid-cols-3">{section.items.map(([label, value, note]) => <article key={label} className="bg-ink px-4 py-4 sm:px-5"><div className="mb-2 text-xs font-mono uppercase tracking-wider text-sage-dim">{label}</div><div className="font-display text-2xl leading-tight text-brass">{value}</div><p className="mt-2 text-xs leading-5 text-sage">{note}</p></article>)}</div>}
       </div>)}
     </div>
     <div className="flex items-center gap-2 py-5 text-xs text-sage-dim"><ExternalLink size={13} className="text-brass" /> Source list: KNBS · CA Kenya · GeoPoll · ReelAnalytics · Khusoko · ODPC · GAA · Payscale · Meta · Africa’s Talking · DataReportal · named vendor quotes.</div>

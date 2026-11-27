@@ -39,7 +39,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
                   <span className="font-mono text-xs uppercase tracking-widest text-brass font-bold block">
                     107.3 FM · WESTERN KENYA
                   </span>
-                  <span className="text-[11px] text-sage-dim">
+                  <span className="text-xs text-sage-dim">
                     Nyota Frequency Modulation Limited
                   </span>
                 </div>
@@ -139,7 +139,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
               <p className="text-xs text-sage leading-relaxed mb-3">
                 Every metric is validated against 37 verified industry sources including KNBS, CA Kenya, GeoPoll, and ReelAnalytics.
               </p>
-              <div className="space-y-1.5 text-[11px] font-mono">
+              <div className="space-y-1.5 text-xs font-mono">
                 <div className="flex items-center gap-2 text-emerald-400">
                   <span className="size-1.5 rounded-full bg-emerald-400" />
                   <span>Tier 1 · Hard Data Citations</span>
@@ -195,7 +195,7 @@ export function WebsiteFooter({ onNavigate }: { onNavigate: (id: string) => void
           >
             <div className="flex items-center justify-between border-b border-hairline pb-3">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-brass font-bold">
+                <span className="text-xs font-mono uppercase tracking-wider text-brass font-bold">
                   COMMERCIAL INQUIRY
                 </span>
                 <h3 className="font-display text-2xl text-paper font-semibold">

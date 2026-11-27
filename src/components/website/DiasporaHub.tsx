@@ -66,7 +66,7 @@ export function DiasporaHub() {
                   }`}
                 >
                   <span>{loc}</span>
-                  <span className="text-[10px] text-brass">{timezones[loc].timeDiff}</span>
+                  <span className="text-xs text-brass">{timezones[loc].timeDiff}</span>
                 </button>
               ))}
             </div>
@@ -90,7 +90,7 @@ export function DiasporaHub() {
 
         {/* Live Diaspora On-Air Shoutout Form */}
         <div className="lg:col-span-7 rounded-xl border border-hairline bg-ink p-5 space-y-4">
-          <span className="text-[10px] font-mono text-brass uppercase tracking-wider font-bold block">
+          <span className="text-xs font-mono text-brass uppercase tracking-wider font-bold block">
             SUNDAY DIASPORA LIVE ON-AIR SHOUTOUT DISPATCH
           </span>
 
@@ -120,7 +120,7 @@ export function DiasporaHub() {
             </div>
 
             <div className="flex items-center justify-between pt-1">
-              <span className="text-[11px] font-mono text-sage-dim">
+              <span className="text-xs font-mono text-sage-dim">
                 Read live on *Mwangaza wa Usiku* (19:00–22:00)
               </span>
               <button

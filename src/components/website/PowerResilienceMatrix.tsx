@@ -41,7 +41,7 @@ export function PowerResilienceMatrix() {
             className={`px-3.5 py-1.5 rounded text-xs font-mono font-bold border transition-all flex items-center gap-1.5 ${
               gridStatus === 'online'
                 ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-400'
-                : 'bg-red-500/20 border-red-500 text-red-400 animate-pulse'
+                : 'bg-red-500/20 border-red-500 text-red-400'
             }`}
           >
             <span className={`h-2 w-2 rounded-full ${gridStatus === 'online' ? 'bg-emerald-400' : 'bg-red-500'}`} />
@@ -63,7 +63,7 @@ export function PowerResilienceMatrix() {
               <Zap size={14} className={gridStatus === 'online' ? 'text-emerald-400' : 'text-sage-dim'} />
               Primary: Kenya Power (Mains)
             </span>
-            <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${
+            <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${
               gridStatus === 'online' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-stone-800 text-stone-400'
             }`}>
               {gridStatus === 'online' ? 'ACTIVE' : 'CUT'}
@@ -86,7 +86,7 @@ export function PowerResilienceMatrix() {
               <Sun size={14} />
               Hybrid Solar (10kVA Inverter)
             </span>
-            <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-brass/20 text-brass">
+            <span className="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-brass/20 text-brass">
               15.4 kWh LFP
             </span>
           </div>
@@ -117,8 +117,8 @@ export function PowerResilienceMatrix() {
               <Gauge size={14} className={generatorRunning ? 'text-red-400' : 'text-sage-dim'} />
               Emergency: Perkins 15kVA Gen
             </span>
-            <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${
-              generatorRunning ? 'bg-red-500/20 text-red-400 animate-pulse' : 'bg-stone-800 text-stone-400'
+            <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${
+              generatorRunning ? 'bg-red-500/20 text-red-400' : 'bg-stone-800 text-stone-400'
             }`}>
               {generatorRunning ? 'RUNNING' : 'STANDBY'}
             </span>

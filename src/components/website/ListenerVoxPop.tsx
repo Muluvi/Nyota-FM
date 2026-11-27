@@ -113,7 +113,7 @@ export function ListenerVoxPop() {
                   <div>
                     <span className="font-bold text-paper text-sm block">{vp.name}</span>
                     <span className="text-xs text-brass font-mono block">{vp.role}</span>
-                    <div className="flex items-center gap-1 text-[11px] text-sage-dim font-mono mt-0.5">
+                    <div className="flex items-center gap-1 text-xs text-sage-dim font-mono mt-0.5">
                       <MapPin size={11} className="text-brass" />
                       <span>{vp.location}</span>
                     </div>
@@ -124,7 +124,7 @@ export function ListenerVoxPop() {
                     onClick={() => playVoiceChime(vp)}
                     className={`h-8 w-8 rounded-full border flex items-center justify-center transition-colors ${
                       isPlaying
-                        ? 'border-brass bg-brass text-ink animate-pulse'
+                        ? 'border-brass bg-brass text-ink'
                         : 'border-hairline text-sage hover:border-brass hover:text-brass'
                     }`}
                     title="Play voice stinger"
@@ -138,7 +138,7 @@ export function ListenerVoxPop() {
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-hairline text-[10px] font-mono text-sage-dim flex justify-between">
+              <div className="pt-2 border-t border-hairline text-xs font-mono text-sage-dim flex justify-between">
                 <span>Listening Window:</span>
                 <span className="text-emerald-400 font-semibold">{vp.timeOfListening}</span>
               </div>

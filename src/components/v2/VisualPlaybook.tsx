@@ -106,18 +106,18 @@ export function VisualPlaybook() {
               </div>
             </div>
             <div className="relative min-h-64 overflow-hidden rounded border border-brass/40 bg-ink-2 p-5 sm:min-h-80">
-              <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[.2em] text-sage-dim">
+              <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[.2em] text-sage-dim">
                 <span>Signal map / Kakamega → everywhere</span>
                 <span className="flex items-center gap-1 text-moss">
-                  <span className="size-1.5 animate-ping rounded-full bg-moss" /> live
+                  <span className="size-1.5 rounded-full bg-moss" /> live
                 </span>
               </div>
               <div className="absolute inset-x-8 top-1/2 h-px bg-gradient-to-r from-transparent via-brass to-transparent" />
-              <div className="absolute left-[16%] top-[49%] size-3 rounded-full bg-brass shadow-[0_0_28px_8px_rgba(184,146,90,.35)] animate-pulse" />
+              <div className="absolute left-[16%] top-[49%] size-3 rounded-full bg-brass shadow-[0_0_28px_8px_rgba(184,146,90,.35)]" />
               {['Nairobi', 'Kisumu', 'Bungoma', 'Vihiga'].map((place, index) => (
                 <div
                   key={place}
-                  className="absolute flex items-center gap-2 text-[10px] font-mono text-sage animate-section-entrance"
+                  className="absolute flex items-center gap-2 text-xs font-mono text-sage animate-section-entrance"
                   style={{
                     left: `${27 + index * 18}%`,
                     top: `${33 + (index % 2) * 33}%`,
@@ -186,7 +186,7 @@ export function VisualPlaybook() {
               type="button"
               onClick={() => setLowBandwidth(!lowBandwidth)}
               aria-pressed={lowBandwidth}
-              className="mt-5 flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-sage-dim hover:text-paper"
+              className="mt-5 flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sage-dim hover:text-paper"
             >
               <span className={`size-2 rounded-full ${lowBandwidth ? 'bg-moss' : 'bg-hairline'}`} />{' '}
               {lowBandwidth ? 'Lite mode on' : 'Lite mode'}
@@ -201,7 +201,7 @@ export function VisualPlaybook() {
                   <h3 className="mt-2 font-display text-3xl text-paper sm:text-4xl">The schedule becomes a surface.</h3>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-moss">
-                  <span className="size-2 animate-pulse rounded-full bg-moss" /> on air now
+                  <span className="size-2 rounded-full bg-moss" /> on air now
                 </div>
               </div>
               <div className="grid gap-4 lg:grid-cols-[1.1fr_.9fr]">
@@ -262,9 +262,9 @@ export function VisualPlaybook() {
                         <span className={`size-1.5 rounded-full ${programme.color}`} />
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-sm text-paper">{programme.title}</span>
-                          <span className="block truncate text-[11px] text-sage">{programme.host}</span>
+                          <span className="block truncate text-xs text-sage">{programme.host}</span>
                         </span>
-                        <span className="text-[9px] font-mono text-sage-dim">{programme.type}</span>
+                        <span className="text-xs font-mono text-sage-dim">{programme.type}</span>
                       </button>
                     ))}
                   </div>
@@ -311,7 +311,7 @@ export function VisualPlaybook() {
                   <p className="mt-5 max-w-md text-sm leading-relaxed text-sage">{story.copy}</p>
                   <div className="mt-7">
                     <AnimatedBars values={story.bars} muted={lowBandwidth} />
-                    <div className="mt-2 flex justify-between text-[10px] font-mono text-sage-dim">
+                    <div className="mt-2 flex justify-between text-xs font-mono text-sage-dim">
                       <span>Q1</span>
                       <span>Q2</span>
                       <span>Q3</span>
