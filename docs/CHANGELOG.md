@@ -40,3 +40,11 @@ Brief: "The content is okay but jumbled up. It's not flowing well. The website s
 ### Numbers (before → after)
 - First-load JS 206 KB → 96 KB gzip. Lighthouse mobile (old narrative view → new full story): Performance 92–96 → 97, Accessibility 94 → 100, Best Practices 96 → 100, LCP 2.3s. SEO 92 → 63 only because of the intentional `noindex`. axe-core: 0 violations with every detail open.
 - Words in view: 11,884 → 3,271 (−72%), with no content removed. Text under 12px: 2,598 nodes → 0.
+
+## Effects layer — 27 November 2026
+
+The owner asked for extensive visual effects ("Use these features extensively"). This reverses the original "minimalistic" and "no decorative loops" direction for the default experience. To keep both, a **Calm motion** switch in the menu restores the restrained v3 behaviour, and Lite mode plus reduced motion turn every effect off. The full map of effects, with where each lives and what was skipped and why, is in `docs/redesign/EFFECTS.md`.
+
+- New: `src/fx/` (stylesheet in the components layer, lazy runtime, particles, WebGL shader, confetti), dark/light theme, accent themes, sound preference, navigation dots, back-to-top, pinned horizontal roadmap, comparison slider, sortable opportunities, progress rings, "Mark as discussed" on the asks (this device only), sources marquee and progressive loading, station logo in the footer.
+- Kept: one story, the figure registry, all checks. check-figures, verify-figures and orphans pass; axe shows 0 violations in both themes.
+- Costs: first-load JS 96 → 101 KB gzip, CSS 16 → 24 KB gzip. Lighthouse Performance 97 → 89–91. Simulated LCP 2.3 → 3.1s (measured 0.24s).
