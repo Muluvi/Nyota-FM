@@ -124,7 +124,7 @@ export function InteractiveGapAuditWorkbench() {
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto font-mono text-xs">
+        <div tabIndex={0} role="region" aria-label="Scrollable table" className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto font-mono text-xs">
           {['All', 'Regulatory', 'Engineering', 'Commercial', 'Operations'].map((cat) => (
             <button
               key={cat}

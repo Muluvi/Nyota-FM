@@ -52,7 +52,7 @@ export function Part4Opportunities() {
           </div>
 
           {/* Master Ranked Table */}
-          <div className="overflow-x-auto">
+          <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
               <thead>
                 <tr className="border-b border-hairline text-sage-dim">

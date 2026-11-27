@@ -68,7 +68,7 @@ export function Part5Strategies() {
                 className="w-full bg-ink border border-hairline rounded pl-9 pr-3 py-2 text-paper focus:border-brass focus:outline-none text-xs"
               />
             </div>
-            <div className="flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none">
+            <div tabIndex={0} role="region" aria-label="Scrollable table" className="flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none">
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -119,7 +119,7 @@ export function Part5Strategies() {
                       <span className="hidden md:inline font-mono text-xs text-sage">
                         {st.execution.timeline}
                       </span>
-                      <button className="text-sage hover:text-paper p-1">
+                      <button type="button" aria-expanded={isExpanded} aria-label={`${isExpanded ? 'Collapse' : 'Expand'} strategy ${st.num}: ${st.title}`} className="text-sage hover:text-paper p-1">
                         {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                       </button>
                     </div>
@@ -195,7 +195,7 @@ export function Part5Strategies() {
                           <span className="text-paper font-mono text-xs font-semibold block">
                             Milestone Scorecard (Months 3 to 24)
                           </span>
-                          <div className="overflow-x-auto">
+                          <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
                             <table className="w-full text-left text-xs font-mono">
                               <thead>
                                 <tr className="border-b border-hairline text-sage-dim">

@@ -50,7 +50,7 @@ const programmes = [
 
 function AnimatedBars({ values, muted = false }: { values: number[]; muted?: boolean }) {
   return (
-    <div className="flex h-28 items-end gap-1.5" aria-label="Animated bar chart">
+    <div className="flex h-28 items-end gap-1.5" role="img" aria-label="Bar chart">
       {values.map((value, index) => (
         <div
           key={`${value}-${index}`}
@@ -223,7 +223,7 @@ export function VisualPlaybook() {
                     </div>
                     <Headphones className="text-sage" size={20} />
                   </div>
-                  <div className="flex h-28 items-end gap-1 py-5" aria-label="Live audio waveform">
+                  <div className="flex h-28 items-end gap-1 py-5" role="img" aria-label="Audio waveform">
                     {Array.from({ length: 34 }, (_, index) => (
                       <span
                         key={index}

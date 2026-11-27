@@ -62,7 +62,7 @@ export function Part1Objectives() {
                       <div className="font-mono text-xs text-paper font-semibold">{obj.keyStat.value}</div>
                       <div className="text-xs font-mono text-brass">{obj.keyStat.badgeText}</div>
                     </div>
-                    <button className="text-sage hover:text-paper p-1">
+                    <button type="button" aria-expanded={isExpanded} aria-label={`${isExpanded ? 'Collapse' : 'Expand'} objective ${obj.letter}: ${obj.title}`} className="text-sage hover:text-paper p-1">
                       {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                     </button>
                   </div>

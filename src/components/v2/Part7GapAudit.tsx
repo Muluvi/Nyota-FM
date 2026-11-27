@@ -94,7 +94,7 @@ export function Part7GapAudit() {
                 <span className="text-emerald-400 font-semibold">20 / 20 Closed</span>
               </div>
 
-              <div className="overflow-x-auto">
+              <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">
@@ -132,7 +132,7 @@ export function Part7GapAudit() {
             <div className="space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono">
                 <span className="text-sage">Complete 40-Item Operational Procurement & Resourcing Register</span>
-                <div className="flex items-center gap-1 overflow-x-auto">
+                <div tabIndex={0} role="region" aria-label="Scrollable table" className="flex items-center gap-1 overflow-x-auto">
                   {['all', 'Equipment', 'Software', 'Personnel', 'Regulatory', 'Partnership', 'Data', 'Brand', 'Capability'].map((cat) => (
                     <button
                       key={cat}
@@ -147,7 +147,7 @@ export function Part7GapAudit() {
                 </div>
               </div>
 
-              <div className="overflow-x-auto">
+              <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">
@@ -204,7 +204,7 @@ export function Part7GapAudit() {
                 <span className="text-brass font-semibold">12 Reclaimed Levers</span>
               </div>
 
-              <div className="overflow-x-auto">
+              <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">

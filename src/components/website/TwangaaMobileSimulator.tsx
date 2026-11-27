@@ -405,7 +405,7 @@ export function TwangaaMobileSimulator() {
               </div>
 
               {/* Quick Prompt Pills */}
-              <div className="flex gap-1.5 overflow-x-auto py-1 px-1 text-xs font-mono no-scrollbar">
+              <div tabIndex={0} role="region" aria-label="Scrollable table" className="flex gap-1.5 overflow-x-auto py-1 px-1 text-xs font-mono no-scrollbar">
                 {['1', '2', '3', 'Soko Chwele'].map((opt) => (
                   <button
                     key={opt}

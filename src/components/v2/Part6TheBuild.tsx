@@ -83,7 +83,7 @@ export function Part6TheBuild() {
                 <span>Phase 1 (Months 1–4): Visual Radio Foundation</span>
                 <TierBadge tier={1} citation="BS International, Cellular Kenya, Rondamo" url="bsint.net" />
               </div>
-              <div className="overflow-x-auto">
+              <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">
@@ -149,7 +149,7 @@ export function Part6TheBuild() {
                 <span>Phase 2 (Months 5–10): Multi-Cam Live Production</span>
                 <TierBadge tier={1} citation="BS International & Rondamo" url="rondamo.co.ke" />
               </div>
-              <div className="overflow-x-auto">
+              <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">
@@ -215,7 +215,7 @@ export function Part6TheBuild() {
                 <span>Phase 3 (Months 11–18): Full Multi-Platform Hub</span>
                 <TierBadge tier={2} citation="Enterprise Facility Model" />
               </div>
-              <div className="overflow-x-auto">
+              <div tabIndex={0} role="region" aria-label="Scrollable table" className="overflow-x-auto">
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-hairline text-sage-dim">

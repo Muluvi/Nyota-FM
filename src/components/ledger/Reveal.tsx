@@ -1,16 +1,6 @@
-import React from 'react';
-import { useInView } from './useInView';
+import React from 'react'
 
-export function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) {
-  const { ref, inView } = useInView({ triggerOnce: true });
-  
-  return (
-    <div 
-      ref={ref}
-      className={`${inView ? 'animate-section-entrance' : 'opacity-0'} ${className}`}
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
+/** Legacy wrapper kept for the detail layer: renders content immediately (no hidden-until-scrolled state). */
+export function Reveal({ children, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+  return <div className={className}>{children}</div>
 }
