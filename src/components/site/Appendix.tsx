@@ -36,16 +36,19 @@ function ToolGroup({ id, label, number }: { id: string; label: string; number: s
         <span className="text-small font-normal text-sage">({list.length})</span>
       </h4>
       <ul className="m-0 grid list-none gap-3 p-0 sm:grid-cols-2 xl:grid-cols-3">
-        {list.map((t) => (
-          <li key={t.id}>
-            <button type="button" onClick={() => openSheet(t.id)} className="group flex h-full min-h-28 w-full flex-col justify-between gap-4 rounded-md border border-hairline p-5 text-left transition-colors hover:border-sage-dim">
+        {list.map((t, i) => (
+          <li key={t.id} className="fx-fade-seq-item" style={{ animationDelay: `${i * 60}ms` }}>
+            <button type="button" onClick={() => openSheet(t.id)} className="fx-tilt fx-lift fx-border-draw fx-ripple fx-shine group relative flex h-full min-h-28 w-full flex-col justify-between gap-4 rounded-md border border-hairline p-5 text-left transition-colors hover:border-sage-dim" data-tilt-max="5">
               <span>
                 <span className="block text-body text-paper">{t.name}</span>
                 <span className="mt-1 block text-small text-sage">{t.answers}</span>
               </span>
               <span className="flex items-center justify-between text-small text-sage">
                 {t.illustrative ? 'Illustrative' : 'Interactive'}
-                <span className="inline-flex items-center gap-1 text-paper">Open <ArrowUpRight size={14} aria-hidden="true" className="text-brass" /></span>
+                <span className="inline-flex items-center gap-1 text-paper">
+                  <span className="fx-reveal-text"><span>Open</span><span>Open tool</span></span>
+                  <ArrowUpRight size={14} aria-hidden="true" className="text-brass transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </span>
               </span>
             </button>
           </li>
@@ -59,7 +62,7 @@ function ToolGroup({ id, label, number }: { id: string; label: string; number: s
 export default function Appendix() {
   const section = sectionById('appendix')
   return (
-    <section id="appendix" data-chapter="appendix" aria-labelledby="appendix-title" className="band-ink scroll-mt-16 border-t border-hairline">
+    <section id="appendix" data-chapter="appendix" aria-labelledby="appendix-title" className="fx-dots band-ink scroll-mt-16 border-t border-hairline bg-fixed [content-visibility:auto] [contain-intrinsic-size:auto_2400px]">
       <div className="mx-auto max-w-[90rem] px-4 py-20 sm:px-8 md:py-28 lg:px-12">
         <h2 id="appendix-title" className="m-0 font-display text-heading font-normal text-paper">Appendix</h2>
         <p className="measure mt-4 text-body text-sage">{section?.actionTitle} Nothing from the earlier site was deleted; it lives here or in each chapter's detail.</p>
@@ -102,9 +105,9 @@ export default function Appendix() {
           </Disclosure>
           <Disclosure id="glossary" title="Glossary" summary={`${Object.keys(glossary).length} terms used in the proposal.`}>
             {() => (
-              <dl className="m-0 grid gap-x-10 pt-4 sm:grid-cols-2">
+              <dl className="m-0 gap-x-10 pt-4 sm:columns-2">
                 {Object.entries(glossary).map(([k, g]) => (
-                  <div key={k} id={`glossary-${k}`} className="scroll-mt-24 border-b border-hairline py-3">
+                  <div key={k} id={`glossary-${k}`} className="scroll-mt-24 break-inside-avoid border-b border-hairline py-3">
                     <dt className="text-body text-paper">{g.term}</dt>
                     <dd className="m-0 mt-1 text-small text-sage">{g.definition}</dd>
                   </div>

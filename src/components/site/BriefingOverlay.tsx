@@ -10,7 +10,7 @@ export function BriefingOverlay() {
   const { overlay, closeOverlay } = useSettings()
   if (overlay !== 'briefing') return null
   return (
-    <Sheet title="Board briefing" subtitle="The 30-second version" onClose={closeOverlay}>
+    <Sheet title="Board briefing" subtitle="The 30-second version" onClose={closeOverlay} side>
       <p className="m-0 font-display text-heading text-paper">
         <Rich text={inShort.recommendation} />
       </p>

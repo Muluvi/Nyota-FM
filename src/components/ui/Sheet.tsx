@@ -8,10 +8,12 @@ interface SheetProps {
   onClose: () => void
   children: ReactNode
   wide?: boolean
+  /** Slide in from the right edge as a side panel (D: slide-out panel). */
+  side?: boolean
 }
 
 /** Focused modal sheet with focus trap, Esc to close and body scroll lock. */
-export function Sheet({ title, subtitle, onClose, children, wide = false }: SheetProps) {
+export function Sheet({ title, subtitle, onClose, children, wide = false, side = false }: SheetProps) {
   const panel = useRef<HTMLDivElement>(null)
   useFocusTrap(panel, true, onClose)
 
@@ -24,14 +26,14 @@ export function Sheet({ title, subtitle, onClose, children, wide = false }: Shee
   }, [])
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-ink/80 backdrop-blur-sm sm:items-center sm:p-6" onClick={onClose}>
+    <div className={`fx-modal-backdrop fixed inset-0 z-[70] flex bg-ink/80 backdrop-blur-sm ${side ? 'justify-end' : 'items-end justify-center sm:items-center sm:p-6'}`} onClick={onClose}>
       <div
         ref={panel}
         role="dialog"
         aria-modal="true"
         aria-label={title}
         onClick={(e) => e.stopPropagation()}
-        className={`flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-md border border-hairline bg-ink sm:rounded-md ${wide ? 'sm:max-w-5xl' : 'sm:max-w-3xl'}`}
+        className={side ? 'fx-panel flex h-full w-full max-w-xl flex-col overflow-hidden border-l border-hairline bg-ink' : `fx-modal flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-md border border-hairline bg-ink sm:rounded-md ${wide ? 'sm:max-w-5xl' : 'sm:max-w-3xl'}`}
       >
         <div className="flex items-start justify-between gap-4 border-b border-hairline px-5 py-4 sm:px-7">
           <div>

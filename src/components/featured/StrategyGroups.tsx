@@ -24,17 +24,24 @@ export function StrategyGroups() {
                 aria-expanded={isOpen}
                 aria-controls={panel}
                 onClick={() => setOpen(isOpen ? null : cat)}
-                className="flex min-h-14 w-full items-center gap-4 py-4 text-left"
+                className="fx-bgslide flex min-h-14 w-full items-center gap-4 px-2 py-4 text-left"
               >
                 <span className="w-10 font-mono text-heading text-paper tabular">{items.length}</span>
-                <span className="flex-1 text-body font-medium text-paper">{cat}</span>
-                <span className="grid h-10 w-10 place-items-center rounded-full border border-hairline text-paper" aria-hidden="true">
+                <span className="flex-1">
+                  <span className="block text-body font-medium text-paper">{cat}</span>
+                  <span className="fx-progress mt-2 block max-w-[14rem]" aria-hidden="true">
+                    <span style={{ ['--v' as string]: items.length / strategies.length }} />
+                  </span>
+                </span>
+                <span className="fx-icon-spin grid h-10 w-10 place-items-center rounded-full border border-hairline text-paper" aria-hidden="true">
                   {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                 </span>
               </button>
-              <ol id={panel} hidden={!isOpen} className="m-0 mb-5 list-none space-y-0 p-0 sm:pl-14">
+              <div className="fx-accordion" data-open={isOpen} aria-hidden={!isOpen} {...(!isOpen ? { inert: true } : {})}>
+              <div>
+              <ol id={panel} className="m-0 mb-5 list-none space-y-0 p-0 sm:pl-14">
                 {items.map((s) => (
-                  <li key={s.id} className="grid gap-1 border-t border-hairline/60 py-3 sm:grid-cols-[3.5rem_1fr_auto] sm:gap-4">
+                  <li key={s.id} className={`grid gap-1 border-t border-hairline/60 py-3 sm:grid-cols-[3.5rem_1fr_auto] sm:gap-4 ${isOpen ? 'fx-fade-seq-item' : ''}`} style={{ animationDelay: `${items.indexOf(s) * 45}ms` }}>
                     <span className="font-mono text-small text-sage tabular">{s.num}</span>
                     <span className="text-body text-paper">
                       {s.title}
@@ -44,6 +51,8 @@ export function StrategyGroups() {
                   </li>
                 ))}
               </ol>
+              </div>
+              </div>
             </li>
           )
         })}

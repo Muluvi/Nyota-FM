@@ -22,10 +22,10 @@ export function Counties() {
                 onClick={() => setActive(c.name)}
                 onMouseEnter={() => setActive(c.name)}
                 onFocus={() => setActive(c.name)}
-                className={`flex h-40 w-full flex-col justify-end rounded-md border p-3 text-left transition-colors ${on ? 'border-sage bg-ink-2' : 'border-hairline hover:border-sage-dim'}`}
+                className={`fx-tilt fx-lift relative flex h-40 w-full flex-col justify-end rounded-md border p-3 text-left transition-colors ${on ? 'border-sage bg-ink-2' : 'border-hairline hover:border-sage-dim'}`}
               >
                 <span className="relative mb-3 block h-full w-2 self-start overflow-hidden rounded-full bg-hairline" aria-hidden="true">
-                  <span className={`absolute inset-x-0 bottom-0 rounded-full ${on ? 'bg-brass' : 'bg-sage-dim'}`} style={{ height: `${(countyScale(c) / max) * 100}%` }} />
+                  <span className={`fx-bar-grow absolute inset-x-0 bottom-0 rounded-full ${on ? 'bg-brass' : 'bg-sage-dim'}`} style={{ height: `${(countyScale(c) / max) * 100}%`, transitionDelay: `${300 + counties.indexOf(c) * 120}ms` }} />
                 </span>
                 <span className="text-body font-medium text-paper">{c.name}</span>
                 <span className="font-mono text-small text-sage tabular">{c.census2019}</span>
@@ -34,7 +34,7 @@ export function Counties() {
           )
         })}
       </ul>
-      <div className="mt-4 grid gap-4 rounded-md border border-hairline p-5 sm:grid-cols-3" aria-live="polite">
+      <div key={current.name} className="fx-tab-panel fx-gradient-hover mt-4 grid gap-4 rounded-md border border-hairline p-5 sm:grid-cols-3" aria-live="polite">
         <p className="m-0">
           <span className="block text-small text-sage">{current.name} · 2019 Census</span>
           <span className="font-display text-heading text-paper tabular">{current.census2019}</span>

@@ -4,6 +4,7 @@ import { roadmapQuarters } from '../../content/data/roadmap'
 import { useLineDraw } from '../../motion/useLineDraw'
 import { Figure } from '../ui/Figure'
 import { Pills } from '../ui/Pills'
+import { CompareSlider } from './CompareSlider'
 
 /** 06 · Phase pills (O10) and a self-drawing 8-quarter roadmap with typographic dates (K7). */
 export function BuildRoadmap() {
@@ -30,17 +31,24 @@ export function BuildRoadmap() {
         </div>
       </div>
 
-      <div ref={lineRef} className="relative">
+      <CompareSlider />
+
+      {/* B. Horizontal scroll section, pinned while the page scrolls (desktop); vertical line-draw on phones */}
+      <div ref={lineRef} className="fx-hscroll relative">
+        <div className="fx-hscroll-pin">
         <h3 className="m-0 mb-6 text-body font-medium text-paper">The 24-month roadmap</h3>
-        <svg className="absolute left-[0.6rem] top-14 h-[calc(100%-3.5rem)] w-2 overflow-visible" preserveAspectRatio="none" viewBox="0 0 2 100" aria-hidden="true">
+        <div className="fx-hscroll-bar mb-6 hidden h-0.5 bg-hairline" aria-hidden="true">
+          <span className="block h-full origin-left bg-moss" style={{ transform: 'scaleX(var(--hsp, 0))' }} />
+        </div>
+        <svg className="fx-hscroll-vline absolute left-[0.6rem] top-14 h-[calc(100%-3.5rem)] w-2 overflow-visible" preserveAspectRatio="none" viewBox="0 0 2 100" aria-hidden="true">
           <path d="M1 0 V100" className="stroke-hairline" strokeWidth={2} vectorEffect="non-scaling-stroke" />
           <path data-draw d="M1 0 V100" className="stroke-moss" strokeWidth={2} vectorEffect="non-scaling-stroke" />
         </svg>
-        <ol className="m-0 list-none space-y-10 p-0">
+        <ol className="fx-hscroll-track m-0 list-none space-y-10 p-0">
           {roadmapQuarters.map((q, i) => {
             const [qq, year] = q.q.split(' ')
             return (
-              <li key={q.q} data-at={(i / (roadmapQuarters.length - 1)).toFixed(3)} className="group relative pl-10" data-reached="true">
+              <li key={q.q} data-at={(i / (roadmapQuarters.length - 1)).toFixed(3)} className="fx-hscroll-card group relative pl-10" data-reached="true">
                 <span className="absolute left-0 top-2 h-5 w-5 rounded-full border-2 border-moss bg-ink transition-colors group-data-[reached=true]:bg-moss" aria-hidden="true" />
                 <p className="m-0 flex items-baseline gap-3 font-display text-heading leading-none text-paper">
                   <span>{qq}</span>
@@ -58,6 +66,7 @@ export function BuildRoadmap() {
             )
           })}
         </ol>
+        </div>
       </div>
     </div>
   )

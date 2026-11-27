@@ -82,7 +82,7 @@ export function Popover({ trigger, children, label }: PopoverProps) {
             role="dialog"
             aria-label={label}
             style={{ position: 'fixed', top: pos?.top ?? -9999, left: pos?.left ?? 0, width: pos?.width ?? WIDTH }}
-            className="z-[95] block rounded-md border border-hairline bg-ink-2 p-4 text-left font-body text-small font-normal not-italic normal-case tracking-normal text-sage shadow-2xl"
+            className="fx-pop z-[95] block rounded-md border border-hairline bg-ink-2 p-4 text-left font-body text-small font-normal not-italic normal-case tracking-normal text-sage shadow-2xl"
             onMouseEnter={() => window.clearTimeout(hoverTimer.current)}
             onMouseLeave={() => canHover() && setOpen(false)}
           >

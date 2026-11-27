@@ -13,7 +13,7 @@ interface MenuOverlayProps {
 
 /** Full-screen menu: numbered chapters with action titles (K3, O12) and tools. */
 export function MenuOverlay({ active, onPrint }: MenuOverlayProps) {
-  const { overlay, closeOverlay, openOverlay, lite, setLite, notify, readChapters } = useSettings()
+  const { overlay, closeOverlay, openOverlay, lite, setLite, notify, readChapters, theme, setTheme, accent, setAccent, motion, setMotion, sound, setSound } = useSettings()
   const open = overlay === 'menu'
   const panel = useRef<HTMLDivElement>(null)
   useFocusTrap(panel, open, closeOverlay)
@@ -35,9 +35,28 @@ export function MenuOverlay({ active, onPrint }: MenuOverlayProps) {
     { label: 'Search', hint: '⌘K', onClick: () => openOverlay('search') },
     { label: 'Briefing', hint: 'B', onClick: () => openOverlay('briefing') },
     { label: 'Present', hint: 'P', onClick: () => openOverlay('presentation') },
-    { label: lite ? 'Lite mode: on' : 'Lite mode: off', onClick: () => setLite(!lite), pressed: lite },
     { label: 'Print / PDF', onClick: () => { closeOverlay(); onPrint() } },
     { label: 'Copy link', onClick: copyLink },
+  ]
+
+  // J. Smooth theme switch: colours cross-fade for 450ms only during the change.
+  const switchTheme = () => {
+    const root = document.documentElement
+    root.classList.add('theme-switching')
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+    window.setTimeout(() => root.classList.remove('theme-switching'), 450)
+  }
+
+  const switches: { label: string; on: boolean; onClick: () => void; hint: string }[] = [
+    { label: 'Light mode', on: theme === 'light', onClick: switchTheme, hint: 'Paper background for daylight and print-like reading' },
+    { label: 'Calm motion', on: motion === 'calm', onClick: () => setMotion(motion === 'calm' ? 'full' : 'calm'), hint: 'Turns off decorative effects; keeps the reading motion' },
+    { label: 'Lite mode', on: lite, onClick: () => setLite(!lite), hint: 'System fonts, no effects, tools load on tap' },
+    { label: 'Sound', on: sound, onClick: () => setSound(!sound), hint: 'Soft clicks on buttons and confirmations' },
+  ]
+  const accents: { id: 'brass' | 'moss' | 'brick'; label: string; swatch: string }[] = [
+    { id: 'brass', label: 'Brass', swatch: 'bg-[#D6A75C]' },
+    { id: 'moss', label: 'Moss', swatch: 'bg-[#76A486]' },
+    { id: 'brick', label: 'Brick', swatch: 'bg-[#D08B72]' },
   ]
 
   return (
@@ -94,13 +113,45 @@ export function MenuOverlay({ active, onPrint }: MenuOverlayProps) {
           <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
             {tools.map((t) => (
               <li key={t.label}>
-                <button type="button" onClick={t.onClick} aria-pressed={t.pressed} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-hairline px-4 text-small text-paper hover:border-paper">
+                <button type="button" onClick={t.onClick} aria-pressed={t.pressed} className="fx-ripple fx-varweight fx-neon-hover inline-flex min-h-11 items-center gap-2 rounded-full border border-hairline px-4 text-small text-paper hover:border-paper">
                   {t.label}
                   {t.hint && <kbd className="font-mono text-xs text-sage-dim">{t.hint}</kbd>}
                 </button>
               </li>
             ))}
           </ul>
+          <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_auto]">
+            <ul className="m-0 grid list-none gap-2 p-0 sm:grid-cols-2" aria-label="Display and motion">
+              {switches.map((sw) => (
+                <li key={sw.label}>
+                  <button type="button" onClick={sw.onClick} aria-pressed={sw.on} className="fx-bgslide flex min-h-11 w-full items-center justify-between gap-4 rounded-md px-3 py-2 text-left">
+                    <span>
+                      <span className="block text-small text-paper">{sw.label}</span>
+                      <span className="block text-xs text-sage-dim">{sw.hint}</span>
+                    </span>
+                    <span className="fx-switch" aria-hidden="true" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <fieldset className="m-0 border-0 p-0">
+              <legend className="mb-2 text-small text-paper">Accent colour</legend>
+              <div className="flex gap-2">
+                {accents.map((a) => (
+                  <button
+                    key={a.id}
+                    type="button"
+                    onClick={() => setAccent(a.id)}
+                    aria-pressed={accent === a.id}
+                    aria-label={`${a.label} accent`}
+                    className={`fx-scale grid h-11 w-11 place-items-center rounded-full border-2 transition-colors ${accent === a.id ? 'border-paper' : 'border-transparent hover:border-sage-dim'}`}
+                  >
+                    <span className={`block h-7 w-7 rounded-full ${a.swatch}`} aria-hidden="true" />
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          </div>
           <p className="m-0 mt-5 text-small text-sage" aria-live="polite">
             You've read {read} of {story.length} chapters · about {totalMinutes} minutes to skim the story.
           </p>
