@@ -5,109 +5,19 @@ import {
 } from 'lucide-react';
 import { TierBadge } from './TierBadge';
 import { Reveal } from '../ledger/Reveal';
-import { InteractiveStudioPlan } from '../website/InteractiveStudioPlan';
-import { VisualRadioStudioSimulator } from '../website/VisualRadioStudioSimulator';
-import { PowerResilienceMatrix } from '../website/PowerResilienceMatrix';
-import { OBVanExplorer } from '../website/OBVanExplorer';
-import { EquipmentLifecycleLog } from '../website/EquipmentLifecycleLog';
-import { BrandIdentityViewer } from '../website/BrandIdentityViewer';
+import { roadmapQuarters } from '../../content/data/roadmap';
+import { ToolkitInline } from '../toolkit/ToolkitInline';
 
 export function Part6TheBuild() {
   const [activePhase, setActivePhase] = useState<'p1' | 'p2' | 'p3'>('p1');
 
-  const roadmapQuarters = [
-    {
-      q: 'Q1 2026',
-      title: 'Foundation & Procurement',
-      milestones: [
-        'Brand build begins & visual identity refresh',
-        'Studio Phase 1 procurement & acoustic installation begins',
-        'Social media channel audit & handle rationalization',
-        'WhatsApp BSP onboarding with Africa’s Talking',
-        'GAA National Register prequalification submission',
-        'CA Kenya USSD shortcode application filed'
-      ]
-    },
-    {
-      q: 'Q2 2026',
-      title: 'Live Visual Launch & Shows 1–2',
-      milestones: [
-        'Brand book officially launched across station',
-        'Studio Phase 1 complete & signed off',
-        'Live video streaming on air (2×/week YouTube/FB)',
-        'First two pre-recorded shows broadcast (Asubuhi ya Imani, Hapa Tulipo Mix)',
-        'YouTube channel relaunch & initial SEO push',
-        'Podcast distribution live on Spotify & Apple'
-      ]
-    },
-    {
-      q: 'Q3 2026',
-      title: 'Mobile Scale & Field Roadshow',
-      milestones: [
-        'Studio Phase 2 multi-cam build begins',
-        'Dedicated USSD shortcode live with Safaricom & AT',
-        'Nyota FM mobile application v1.0 internal beta',
-        'Hapa Tulipo Outside Broadcast circuit launches',
-        'Shows 3 & 4 broadcast (Sauti ya Nchi, Wanawake wa Twang’aa)',
-        '12-SKU merchandise catalogue launched'
-      ]
-    },
-    {
-      q: 'Q4 2026',
-      title: 'Commercial Automation & Loyalty',
-      milestones: [
-        'Studio Phase 2 complete & control room operational',
-        'Nyota Mobile App v1.0 public release on Google Play',
-        'First marquee tentpole OB festival activation',
-        'Self-serve advertiser portal live on nyotafm.com',
-        'Twang’aa Club listener loyalty programme rollout'
-      ]
-    },
-    {
-      q: 'Q1 2027',
-      title: 'Hub Expansion & Civic Prequalification',
-      milestones: [
-        'Studio Phase 3 secondary studio construction begins',
-        'Bungoma & Kakamega county IFMIS media prequalification',
-        '2027 General Election political rate card release & advance bookings'
-      ]
-    },
-    {
-      q: 'Q2 2027',
-      title: 'Syndication & Diaspora Bridge',
-      milestones: [
-        'Nyota App v1.1 update with livestream chat',
-        'First cross-border regional syndication contract signed',
-        'Diaspora Sunday programme block & remittance partnerships live'
-      ]
-    },
-    {
-      q: 'Q3 2027',
-      title: 'Asset Completion & Election Cycle',
-      milestones: [
-        'Studio Phase 3 complete (DAM & AI auto-clipping running)',
-        'Second regional syndication affiliate onboarded',
-        'High-volume 2027 political advertising execution'
-      ]
-    },
-    {
-      q: 'Q4 2027',
-      title: 'Leadership Assertion & Year 3 Scale',
-      milestones: [
-        'Market-leadership assertion across Western Kenya',
-        'Independent GeoPoll audience measurement validation audit',
-        'Presentation of Year-3 2028 strategic horizon to Ownership'
-      ]
-    },
-  ];
-
-  return (
+    return (
     <div className="space-y-6">
       {/* 6.1 Master Timeline */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="border-b border-hairline pb-3">
-            <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+            <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
               SECTION 6.1
             </span>
             <h4 className="font-display text-paper text-base font-semibold">Master 24-Month Roadmap (Q1 2026 – Q4 2027)</h4>
@@ -120,10 +30,10 @@ export function Part6TheBuild() {
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="text-brass font-bold text-xs">{rq.q}</span>
-                    <span className="text-[10px] text-sage-dim">M{idx * 3 + 1}–M{idx * 3 + 3}</span>
+                    <span className="text-xs text-sage-dim">M{idx * 3 + 1}–M{idx * 3 + 3}</span>
                   </div>
-                  <div className="font-semibold text-paper text-[13px] mb-2">{rq.title}</div>
-                  <ul className="space-y-1 text-sage text-[11px] font-body">
+                  <div className="font-semibold text-paper text-sm mb-2">{rq.title}</div>
+                  <ul className="space-y-1 text-sage text-xs font-body">
                     {rq.milestones.map((m, mIdx) => (
                       <li key={mIdx} className="flex items-start gap-1.5">
                         <span className="text-brass text-xs">•</span>
@@ -138,42 +48,14 @@ export function Part6TheBuild() {
         </div>
       </Reveal>
 
-      {/* Interactive Studio Floor Plan & Equipment Inspector */}
-      <Reveal>
-        <InteractiveStudioPlan />
-      </Reveal>
-
-      {/* Interactive Visual Radio Multi-Cam Studio Switcher */}
-      <Reveal>
-        <VisualRadioStudioSimulator />
-      </Reveal>
-
-      {/* Studio Power Resilience & Zero-Downtime Grid Failover */}
-      <Reveal>
-        <PowerResilienceMatrix />
-      </Reveal>
-
-      {/* "Hapa Tulipo" Outside Broadcast (OB) Van & Roadshow Unit */}
-      <Reveal>
-        <OBVanExplorer />
-      </Reveal>
-
-      {/* Station Equipment Registry & Maintenance Lifecycle Log */}
-      <Reveal>
-        <EquipmentLifecycleLog />
-      </Reveal>
-
-      {/* Official Brand Identity & Design System Specifications */}
-      <Reveal>
-        <BrandIdentityViewer />
-      </Reveal>
+      <ToolkitInline ids={['studio-plan', 'switcher', 'power', 'ob-van', 'equipment', 'brand']} />
 
       {/* 6.2 Consolidated Studio Capex Schedule */}
       <Reveal>
         <div className="bg-ink-2 border border-hairline rounded p-4 sm:p-5 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
             <div>
-              <span className="text-[10px] font-mono text-brass uppercase tracking-widest font-semibold block">
+              <span className="text-xs font-mono text-brass uppercase tracking-widest font-semibold block">
                 SECTION 6.2
               </span>
               <h4 className="font-display text-paper text-base font-semibold">Studio Build — Consolidated Cost Schedule</h4>
@@ -385,11 +267,11 @@ export function Part6TheBuild() {
             <div>
               <span className="text-brass font-bold text-sm block">Total Studio Capex (All 3 Phases):</span>
               <span className="text-paper text-base font-bold">KSh 4,969,099 – 9,595,099</span>
-              <span className="text-sage block text-[11px] mt-0.5">Phased across 18 months, gate-controlled by revenue thresholds</span>
+              <span className="text-sage block text-xs mt-0.5">Phased across 18 months, gate-controlled by revenue thresholds</span>
             </div>
             <div className="sm:text-right">
               <span className="text-emerald-400 font-bold block text-sm">&gt; 50% Reduction</span>
-              <span className="text-sage-dim text-[11px]">vs v1.0's unresearched KSh 12.7M–21.3M envelope</span>
+              <span className="text-sage-dim text-xs">vs v1.0's unresearched KSh 12.7M–21.3M envelope</span>
             </div>
           </div>
         </div>
@@ -405,8 +287,8 @@ export function Part6TheBuild() {
           </div>
 
           <div className="space-y-1.5">
-            <div className="text-brass text-[11px] font-bold uppercase">Role Evolution Map:</div>
-            <div className="text-sage text-[11px] leading-snug">
+            <div className="text-brass text-xs font-bold uppercase">Role Evolution Map:</div>
+            <div className="text-sage text-xs leading-snug">
               • Presenter → <strong className="text-paper">On-camera presenter</strong> (dual audience performance)<br />
               • Producer → <strong className="text-paper">Multi-platform producer</strong> (commissioning social clips)<br />
               • Engineer → <strong className="text-paper">IT/AV engineer</strong> (streaming, switchers & NDI routing)
@@ -414,7 +296,7 @@ export function Part6TheBuild() {
           </div>
 
           <div className="space-y-1 pt-1 border-t border-hairline">
-            <div className="text-brass text-[11px] font-bold uppercase">New Hire Monthly Benchmarks:</div>
+            <div className="text-brass text-xs font-bold uppercase">New Hire Monthly Benchmarks:</div>
             <div className="divide-y divide-hairline">
               <div className="flex justify-between py-1"><span className="text-sage">Head of Digital</span><span className="text-paper font-semibold">KSh 120,000–200,000</span></div>
               <div className="flex justify-between py-1"><span className="text-sage">Video Producer</span><span className="text-paper font-semibold">KSh 60,000–100,000</span></div>
@@ -424,7 +306,7 @@ export function Part6TheBuild() {
             </div>
           </div>
 
-          <div className="p-2 bg-ink rounded border border-hairline text-sage text-[11px] font-body">
+          <div className="p-2 bg-ink rounded border border-hairline text-sage text-xs font-body">
             <strong>Induction:</strong> 12-week intensive training led by Firefly covering camera posture, multi-platform SOPs, switcher operations, and community SLAs.
           </div>
         </div>
@@ -436,7 +318,7 @@ export function Part6TheBuild() {
             <TierBadge tier={1} citation="CA Kenya, ODPC & GAA" url="gaa.go.ke" />
           </div>
 
-          <div className="space-y-2 text-[11px]">
+          <div className="space-y-2 text-xs">
             <div className="p-2 bg-ink rounded border border-hairline flex justify-between">
               <div>
                 <strong className="text-paper block">WhatsApp BSP Setup</strong>
@@ -480,8 +362,8 @@ export function Part6TheBuild() {
 
           {/* 6.5 Governance */}
           <div className="pt-2 border-t border-hairline space-y-1">
-            <span className="text-brass text-[11px] font-bold uppercase block">6.5 Governance & Steering</span>
-            <p className="text-sage text-[11px] font-body leading-snug">
+            <span className="text-brass text-xs font-bold uppercase block">6.5 Governance & Steering</span>
+            <p className="text-sage text-xs font-body leading-snug">
               Monthly <strong>Joint Steering Committee</strong> (Ownership + Firefly + GM) overseeing budget release phase-gates. Quarterly commercial business reviews and annual independent brand audits.
             </p>
           </div>
