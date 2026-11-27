@@ -60,10 +60,13 @@ export function Header({ active }: { active: string | null }) {
           href="#top"
           onClick={() => setLogoAnim(true)}
           onAnimationEnd={() => setLogoAnim(false)}
-          className={`fx-tracking flex min-h-11 items-center gap-2 font-wordmark text-[1.6rem] font-extrabold uppercase leading-none text-paper ${logoAnim ? 'fx-rubber' : ''}`}
+          className={`fx-tracking flex min-h-11 items-center gap-2.5 whitespace-nowrap font-wordmark text-[1.2rem] uppercase leading-none text-paper sm:text-[1.45rem] ${logoAnim ? 'fx-rubber' : ''}`}
           aria-label="Nyota FM 107.3, back to top"
         >
-          Nyota <span className="text-brass">107.3</span>
+          <img src="/brand/nyota-star-128.webp" srcSet="/brand/nyota-star-128.webp 128w, /brand/nyota-star-256.webp 256w" sizes="2.5rem" width={128} height={128} alt="" aria-hidden="true" decoding="async" className="brand-mark h-10 w-10 shrink-0" draggable={false} />
+          <span>
+            Nyota <span className="text-brass">107.3</span>
+          </span>
         </a>
         <p className="m-0 hidden min-w-0 flex-1 truncate text-center text-small text-sage sm:block" aria-hidden="true">
           <span key={section?.id ?? 'none'} className="fx-lightspeed inline-block">

@@ -1,52 +1,61 @@
 /* ── Self-hosted fonts (latin subsets, font-display: swap) ───────────── */
 @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 100 1000; font-display: swap; src: url('/fonts/dm-sans-latin-opsz-normal.woff2') format('woff2-variations'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400-italic.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'DM Serif Display'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/dm-serif-display-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'DM Serif Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/dm-serif-display-latin-400-italic.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 @font-face { font-family: 'DM Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 @font-face { font-family: 'DM Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/dm-mono-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
-@font-face { font-family: 'Big Shoulders Display'; font-style: normal; font-weight: 800; font-display: swap; src: url('/fonts/big-shoulders-display-latin-800-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+2000-206F; }
 
 @import "tailwindcss";
 
 @theme {
-  /* Palette: v2.0 hues tuned for OLED. Ink is true black (pixels switch off,
-     infinite contrast); paper is a touch softer to avoid halation on black. */
+  /* Palette: Nyota FM brand kit. Gold, green and cream sampled from the official
+     logo (Nov 2026); dark theme on true black for OLED. */
   --color-ink: #000000;
-  --color-ink-2: #0A0D0B;
-  --color-paper: #EEF0EA;
-  --color-sage: #B4C2B9;
-  --color-sage-dim: #8A9A90;
-  --color-brass: #D6A75C;
-  --color-hairline: #222B26;
+  --color-ink-2: #04140B;
+  --color-paper: #F8F2E2;            /* Cream White */
+  --color-sage: #BCC6B5;
+  --color-sage-dim: #8E9C8C;
+  --color-brass: #E7B44A;            /* Nyota Gold */
+  --color-hairline: #1C2E23;
   --color-brick: #9B624C;
-  --color-moss: #76A486;
+  --color-moss: #74B08A;             /* Nyota Green, lifted for text on black */
   /* Text-safe tints for small text on dark (contrast ≥ 4.5:1 on ink) */
   --color-brick-ink: #D08B72;
   --color-ink-on-paper: #3B4540;
 
+  /* Brand constants (never theme-swapped) */
+  --color-nyota-green: #042311;      /* Deep Nyota Green */
+  --color-nyota-green-2: #11432B;
+  --color-nyota-gold: #E7B44A;
+  --color-gold-hi: #FEE991;
+  --color-gold-deep: #A46B1C;
+  --color-cream: #F8F2E2;
+
   /* Chapter bands: palette tints, used once per chapter */
   --color-band-ink: #000000;
-  --color-band-ink-2: #0A0D0B;
-  --color-band-sage: #070D0A;
-  --color-band-moss: #041009;
-  --color-band-brass: #0F0B04;
+  --color-band-ink-2: #020C06;
+  --color-band-sage: #03140A;
+  --color-band-moss: #042311;
+  --color-band-brass: #110C02;
   --color-band-brick: #110805;
 
   /* Legacy palette absorption: stray Tailwind colours resolve to tokens */
-  --color-emerald-300: #A3C7AF; --color-emerald-400: #8DB79A; --color-emerald-500: #76A486; --color-emerald-600: #5E8B6E; --color-emerald-950: #0E1A13;
-  --color-green-400: #8DB79A; --color-green-500: #76A486;
-  --color-amber-300: #E2BD82; --color-amber-400: #D6A75C; --color-amber-600: #B88A44; --color-amber-950: #1A140B;
-  --color-yellow-400: #D6A75C; --color-orange-400: #D6A75C;
+  --color-emerald-300: #A3CBB0; --color-emerald-400: #8CBF9C; --color-emerald-500: #74B08A; --color-emerald-600: #4F8C66; --color-emerald-950: #042311;
+  --color-green-400: #8CBF9C; --color-green-500: #74B08A;
+  --color-amber-300: #F0CC74; --color-amber-400: #E7B44A; --color-amber-600: #C08F2E; --color-amber-950: #1A1404;
+  --color-yellow-400: #E7B44A; --color-orange-400: #E7B44A;
   --color-rose-300: #E0A792; --color-rose-400: #D08B72; --color-rose-500: #B7735B;
   --color-red-300: #E0A792; --color-red-400: #D08B72; --color-red-500: #B7735B; --color-red-600: #9B624C; --color-red-800: #5C3A2D; --color-red-950: #1A100C;
-  --color-stone-200: #D9DED9; --color-stone-400: #8A9A90; --color-stone-500: #6E7C74; --color-stone-700: #27312C; --color-stone-800: #1A201D; --color-stone-900: #111513;
-  --color-pink-300: #B4C2B9; --color-cyan-200: #B4C2B9; --color-sky-400: #B4C2B9; --color-blue-400: #B4C2B9;
+  --color-stone-200: #DCDDD0; --color-stone-400: #8E9C8C; --color-stone-500: #6E7C6E; --color-stone-700: #1C2E23; --color-stone-800: #10201A; --color-stone-900: #04140B;
+  --color-pink-300: #BCC6B5; --color-cyan-200: #BCC6B5; --color-sky-400: #BCC6B5; --color-blue-400: #BCC6B5;
 
   /* Type */
-  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  /* Brand kit §4: bold serif display for branding and titles; sans for frequency, body and tagline.
+     DM Serif Display stands in until the production faces are confirmed ("Nyota Sans" has no file yet). */
+  --font-display: "DM Serif Display", Georgia, "Times New Roman", serif;
   --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --font-wordmark: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-wordmark: "DM Serif Display", Georgia, "Times New Roman", serif;
 
   /* Type scale: six steps. Nothing renders below 12px. */
   --text-small: 0.8125rem;          /* 13px: metadata only */
@@ -57,8 +66,8 @@
   --text-body-l--line-height: 1.45;
   --text-heading: clamp(1.4375rem, 1.15rem + 1.2vw, 2.25rem);
   --text-heading--line-height: 1.18;
-  --text-display-l: clamp(2rem, 0.9rem + 4vw, 4.75rem);
-  --text-display-l--line-height: 1.06;
+  --text-display-l: clamp(1.875rem, 1rem + 2.9vw, 3.75rem);
+  --text-display-l--line-height: 1.08;
   --text-display-xl: clamp(4.25rem, 1rem + 10.5vw, 12.5rem);
   --text-display-xl--line-height: 0.82;
 
@@ -119,7 +128,7 @@ blockquote, .font-display { hanging-punctuation: first; }
 }
 
 button, a, input, select, textarea { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-.font-display { font-synthesis: none; }
+.font-display, .font-wordmark { font-synthesis: none; }
 .tabular { font-variant-numeric: tabular-nums; }
 
 ::selection { background: var(--color-brass); color: var(--color-ink); }

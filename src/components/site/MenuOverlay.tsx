@@ -72,8 +72,11 @@ export function MenuOverlay({ active, onPrint }: MenuOverlayProps) {
     >
       <div className="mx-auto flex min-h-full max-w-[90rem] flex-col px-5 pb-10 sm:px-8 lg:px-12">
         <div className="flex h-16 items-center justify-between">
-          <span className="font-wordmark text-[1.6rem] font-extrabold uppercase leading-none text-paper">
-            Nyota <span className="text-brass">107.3</span>
+          <span className="flex items-center gap-2.5 whitespace-nowrap font-wordmark text-[1.2rem] uppercase leading-none text-paper sm:text-[1.45rem]">
+            <img src="/brand/nyota-star-128.webp" srcSet="/brand/nyota-star-128.webp 128w, /brand/nyota-star-256.webp 256w" sizes="2.5rem" width={128} height={128} alt="" aria-hidden="true" decoding="async" className="brand-mark h-10 w-10 shrink-0" draggable={false} />
+            <span>
+              Nyota <span className="text-brass">107.3</span>
+            </span>
           </span>
           <button type="button" onClick={closeOverlay} className="inline-flex min-h-11 items-center gap-3 rounded-full border border-sage-dim/50 py-1.5 pr-1.5 pl-5 text-paper hover:border-paper">
             Close

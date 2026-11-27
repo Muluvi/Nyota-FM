@@ -16,51 +16,52 @@
 /* ════════ J. Themes: light mode and accent themes (token swaps) ════════ */
 html.theme-light {
   color-scheme: light;
-  --color-ink: #F4F5F0;
-  --color-ink-2: #E9ECE5;
-  --color-paper: #101412;
-  --color-sage: #3A4640;
-  --color-sage-dim: #55625A;
-  --color-brass: #5F4212;
-  --color-hairline: #CDD3CB;
+  /* Brand board light treatment: cream ground, Deep Nyota Green text, dark gold accents */
+  --color-ink: #F8F2E2;
+  --color-ink-2: #F1E7CC;
+  --color-paper: #042311;
+  --color-sage: #23402F;
+  --color-sage-dim: #4A5E50;
+  --color-brass: #5E3E09;
+  --color-hairline: #DDD0AE;
   --color-brick-ink: #7A3F2C;
-  --color-moss: #274A37;
-  --color-ink-on-paper: #B9C3BC;
-  --color-band-ink: #F4F5F0;
-  --color-band-ink-2: #E9ECE5;
-  --color-band-sage: #EBF0EC;
-  --color-band-moss: #E6EFE9;
-  --color-band-brass: #F3EEE3;
-  --color-band-brick: #F4ECE8;
-  --color-emerald-300: #274A37; --color-emerald-400: #274A37; --color-emerald-500: #274A37; --color-emerald-600: #355C44; --color-emerald-950: #E6EFE9;
-  --color-green-400: #274A37; --color-green-500: #274A37;
-  --color-amber-300: #5F4212; --color-amber-400: #5F4212; --color-amber-600: #5F4212; --color-amber-950: #F3EEE3;
-  --color-yellow-400: #5F4212; --color-orange-400: #5F4212;
+  --color-moss: #1B4D33;
+  --color-ink-on-paper: #C9D3C2;
+  --color-band-ink: #F8F2E2;
+  --color-band-ink-2: #F1E7CC;
+  --color-band-sage: #EFEEDB;
+  --color-band-moss: #E5EDDC;
+  --color-band-brass: #F6EBCB;
+  --color-band-brick: #F5E9DF;
+  --color-emerald-300: #1B4D33; --color-emerald-400: #1B4D33; --color-emerald-500: #1B4D33; --color-emerald-600: #11432B; --color-emerald-950: #E5EDDC;
+  --color-green-400: #1B4D33; --color-green-500: #1B4D33;
+  --color-amber-300: #5E3E09; --color-amber-400: #5E3E09; --color-amber-600: #5E3E09; --color-amber-950: #F6EBCB;
+  --color-yellow-400: #5E3E09; --color-orange-400: #5E3E09;
   --color-rose-300: #7A3F2C; --color-rose-400: #7A3F2C; --color-rose-500: #7A3F2C;
-  --color-red-300: #7A3F2C; --color-red-400: #7A3F2C; --color-red-500: #7A3F2C; --color-red-950: #F4ECE8;
-  --color-stone-200: #2A312D; --color-stone-400: #55625A; --color-stone-500: #55625A; --color-stone-700: #CDD3CB; --color-stone-800: #E1E5DE; --color-stone-900: #E9ECE5;
-  --color-pink-300: #3A4640; --color-cyan-200: #3A4640; --color-sky-400: #3A4640; --color-blue-400: #3A4640;
+  --color-red-300: #7A3F2C; --color-red-400: #7A3F2C; --color-red-500: #7A3F2C; --color-red-950: #F5E9DF;
+  --color-stone-200: #1E3327; --color-stone-400: #4A5E50; --color-stone-500: #4A5E50; --color-stone-700: #DDD0AE; --color-stone-800: #E8DDBF; --color-stone-900: #F1E7CC;
+  --color-pink-300: #23402F; --color-cyan-200: #23402F; --color-sky-400: #23402F; --color-blue-400: #23402F;
 }
 html.theme-light body { background: var(--color-ink); }
 html.theme-light .band-paper .hl-word { --hl-dim: #8A968F; }
-html.accent-moss { --color-brass: #76A486; }
+html.accent-moss { --color-brass: #74B08A; }
 html.accent-brick { --color-brass: #D08B72; }
-html.theme-light.accent-moss { --color-brass: #274A37; }
+html.theme-light.accent-moss { --color-brass: #1B4D33; }
 html.theme-light.accent-brick { --color-brass: #7A3F2C; }
 
 /* J. Wide-gamut accents for OLED / Display P3 phones. Same hues and lightness
    as the sRGB tokens (contrast unchanged), with the extra saturation the panel can show. */
 @media (color-gamut: p3) {
   html:not(.theme-light) {
-    --color-brass: color(display-p3 0.86 0.65 0.31);
-    --color-moss: color(display-p3 0.43 0.66 0.51);
+    --color-brass: color(display-p3 0.93 0.71 0.26);
+    --color-moss: color(display-p3 0.42 0.70 0.52);
     --color-brick: color(display-p3 0.64 0.37 0.26);
     --color-brick-ink: color(display-p3 0.86 0.53 0.41);
-    --color-amber-400: color(display-p3 0.86 0.65 0.31);
-    --color-emerald-500: color(display-p3 0.43 0.66 0.51);
+    --color-amber-400: color(display-p3 0.93 0.71 0.26);
+    --color-emerald-500: color(display-p3 0.42 0.70 0.52);
     --color-rose-400: color(display-p3 0.86 0.53 0.41);
   }
-  html.accent-moss:not(.theme-light) { --color-brass: color(display-p3 0.43 0.66 0.51); }
+  html.accent-moss:not(.theme-light) { --color-brass: color(display-p3 0.42 0.70 0.52); }
   html.accent-brick:not(.theme-light) { --color-brass: color(display-p3 0.86 0.53 0.41); }
 }
 
@@ -69,10 +70,9 @@ html.theme-switching *, html.theme-switching *::before, html.theme-switching *::
   transition: background-color 400ms ease, color 400ms ease, border-color 400ms ease, fill 400ms ease, stroke 400ms ease !important;
 }
 
-/* F. Brand logo silhouette follows the theme; Lite never loads it */
-.brand-logo { filter: brightness(0) invert(1); }
-.brand-logo.blur-md { filter: brightness(0) invert(1) blur(12px); }
-html.theme-light .brand-logo { filter: brightness(0); }
+/* F. Official logo: full colour on every theme, with a soft gold halo on dark (brand kit §8: clear contrast) */
+.brand-mark { filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.35)) drop-shadow(0 6px 18px rgb(231 180 74 / 0.18)); }
+html.theme-light .brand-mark { filter: drop-shadow(0 4px 12px rgb(4 35 17 / 0.18)); }
 html.lite .lite-hidden { display: none; }
 
 /* ════════ J. Custom scrollbar ════════ */
@@ -85,7 +85,9 @@ html { scrollbar-color: var(--color-brass) var(--color-ink); scrollbar-width: th
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 html.theme-light .fx-noise::after { opacity: 0.06; mix-blend-mode: multiply; }
-.fx-dots { background-image: radial-gradient(color-mix(in srgb, var(--color-sage) 22%, transparent) 1px, transparent 1.2px); background-size: 22px 22px; }
+/* F. Brand pattern: repeated small gold stars (brand kit §5), replacing the dot grid */
+.fx-dots { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='%23E7B44A' fill-opacity='0.28'%3E%3Cpolygon points='8.00,4.80 8.76,6.95 11.04,7.01 9.24,8.40 9.88,10.59 8.00,9.30 6.12,10.59 6.76,8.40 4.96,7.01 7.24,6.95'/%3E%3Cpolygon points='24.00,20.80 24.76,22.95 27.04,23.01 25.24,24.40 25.88,26.59 24.00,25.30 22.12,26.59 22.76,24.40 20.96,23.01 23.24,22.95'/%3E%3C/g%3E%3C/svg%3E"); background-size: 32px 32px; }
+html.theme-light .fx-dots { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='%23A46B1C' fill-opacity='0.3'%3E%3Cpolygon points='8.00,4.80 8.76,6.95 11.04,7.01 9.24,8.40 9.88,10.59 8.00,9.30 6.12,10.59 6.76,8.40 4.96,7.01 7.24,6.95'/%3E%3Cpolygon points='24.00,20.80 24.76,22.95 27.04,23.01 25.24,24.40 25.88,26.59 24.00,25.30 22.12,26.59 22.76,24.40 20.96,23.01 23.24,22.95'/%3E%3C/g%3E%3C/svg%3E"); }
 .fx-divider { height: 1px; border: 0; margin: 0; background: linear-gradient(90deg, transparent, var(--color-brass), var(--color-moss), transparent); opacity: 0.7; }
 .fx-mesh {
   background:

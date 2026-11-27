@@ -45,3 +45,15 @@ Defaults used on the site are in **bold**. Nothing was resolved silently; every 
 - **Indexing.** `noindex, nofollow` and a disallow-all robots.txt were added because the proposal is marked strictly confidential. Remove both if the site should be public.
 - **Analytics (optional).** Not installed. If wanted: a cookieless counter (e.g. Plausible or a self-hosted endpoint) recording chapter views and clicks on "Download decision sheet", with no personal data.
 - **Persistent signal motif (O1).** Deferred; the hero dial carries the motif. A fixed 2D layer is possible later; WebGL not proposed.
+
+## Brand kit (27 November 2026)
+
+1. **Tagline spelling.** The official logo and the brand kit read **"Hapo Tulipo, Twang'aa"**. The v1/v2 proposal used "Hapa tulipo. Twang'aa." The site's station tagline now follows the logo.
+   - Unchanged, because they're proper names in the source data: the show "Hapa Tulipo Mix", the "Hapa Tulipo" roadshow and OB names, and the legacy lexicon entries. Confirm whether these should also read "Hapo".
+   - The glossary still defines the phrase as "Right where we are". Confirm that this definition holds for "Hapo".
+2. **Exact colour values.** The brand kit leaves HEX/RGB/CMYK to be sampled from the master logo. Values were sampled from the official logo supplied in chat; see `docs/BRAND.md`. Cream White is not in the logo, so `#F8F2E2` is provisional.
+3. **Typefaces.**
+   - "Bold serif display": DM Serif Display (OFL) is a stand-in.
+   - "Nyota Sans": no file exists. DM Sans is the stand-in.
+   - Replace both once the production fonts and licences are confirmed.
+4. **Logo variants.** Only the full-colour master was supplied. The site uses a transparent cut-out of it, with no recolouring or redrawing. Monochrome, reversed and simplified versions, clear space and minimum size are still to be specified.

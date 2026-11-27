@@ -6,4 +6,4 @@ export const PROPOSAL_TITLE = "Twang'aa Transformation"
 export const PROPOSAL_PERIOD = '2026–2028'
 export const STATION = 'Nyota FM 107.3'
 export const SUBMITTED_BY = 'Firefly Management · Strategy Directorate'
-export const SLOGAN = "Hapa tulipo. Twang'aa."
+export const SLOGAN = "Hapo Tulipo, Twang'aa" // as on the official logo and brand kit (Nov 2026)

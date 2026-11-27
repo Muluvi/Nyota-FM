@@ -269,25 +269,33 @@ function favicon(): Cleanup {
     const p = max > 0 ? Math.round((window.scrollY / max) * 20) / 20 : 0
     if (p === last) return
     last = p
-    const brass = getComputedStyle(document.documentElement).getPropertyValue('--color-brass').trim() || '#D6A75C'
+    // Brand app-icon style: Deep Nyota Green tile, gold progress ring, gold star.
+    const star = (R: number, r: number) => {
+      ctx.beginPath()
+      for (let i = 0; i < 10; i++) {
+        const a = -Math.PI / 2 + (i * Math.PI) / 5
+        const rad = i % 2 === 0 ? R : r
+        ctx.lineTo(32 + rad * Math.cos(a), 33 + rad * Math.sin(a))
+      }
+      ctx.closePath()
+    }
     ctx.clearRect(0, 0, 64, 64)
-    ctx.fillStyle = '#090B0A'
+    ctx.fillStyle = '#042311'
     ctx.beginPath()
-    ctx.roundRect(0, 0, 64, 64, 12)
+    ctx.roundRect(0, 0, 64, 64, 14)
     ctx.fill()
-    ctx.lineWidth = 6
-    ctx.strokeStyle = '#27312C'
+    ctx.lineWidth = 5
+    ctx.strokeStyle = '#11432B'
     ctx.beginPath()
-    ctx.arc(32, 32, 22, 0, Math.PI * 2)
+    ctx.arc(32, 32, 27, 0, Math.PI * 2)
     ctx.stroke()
-    ctx.strokeStyle = brass
+    ctx.strokeStyle = '#E7B44A'
     ctx.lineCap = 'round'
     ctx.beginPath()
-    ctx.arc(32, 32, 22, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(0.02, p))
+    ctx.arc(32, 32, 27, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(0.02, p))
     ctx.stroke()
-    ctx.fillStyle = brass
-    ctx.beginPath()
-    ctx.arc(32, 32, 5, 0, Math.PI * 2)
+    ctx.fillStyle = '#E7B44A'
+    star(19, 8)
     ctx.fill()
     link.href = canvas.toDataURL('image/png')
   }

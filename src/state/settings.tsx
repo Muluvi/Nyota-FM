@@ -53,7 +53,7 @@ function applyPrefs(p: Prefs) {
   el.classList.remove('accent-moss', 'accent-brick')
   if (p.accent !== 'brass') el.classList.add(`accent-${p.accent}`)
   el.classList.toggle('fx-calm', p.motion === 'calm')
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', p.theme === 'light' ? '#F4F5F0' : '#000000')
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', p.theme === 'light' ? '#F8F2E2' : '#000000')
 }
 
 function safeGet(key: string): string | null {

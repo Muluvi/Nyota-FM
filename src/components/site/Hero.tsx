@@ -6,19 +6,6 @@ import { Rich } from '../ui/Rich'
 import { FrequencyDial } from './FrequencyDial'
 import { Typewriter } from './Typewriter'
 
-/** O2 · Letters rise from behind a mask (pure CSS, so prerendered HTML animates without waiting for JS). */
-function MaskWord({ text, offset = 0, className = '' }: { text: string; offset?: number; className?: string }) {
-  return (
-    <span className={`block ${className}`} aria-hidden="true">
-      {text.split('').map((ch, i) => (
-        <span key={i} className="mask-line">
-          <span style={{ ['--i' as string]: i + offset }}>{ch}</span>
-        </span>
-      ))}
-    </span>
-  )
-}
-
 /**
  * Hero. Load: curtain reveal, split-screen entrance, blur-in headline, fade
  * sequence, mask-rise wordmark with a brief glitch, dial scale-up and needle
@@ -26,7 +13,7 @@ function MaskWord({ text, offset = 0, className = '' }: { text: string; offset?:
  * cursor-reactive particles, spotlight, dot texture, parallax layers.
  */
 export function Hero() {
-  const [first, second] = SLOGAN.split('. ')
+  const [first, second] = SLOGAN.split(', ')
   const [cardTitle, cardPeriod, cardKind] = hero.card.split(' · ')
 
   return (
@@ -49,12 +36,19 @@ export function Hero() {
       <div data-fx="blur-out" className="relative z-[2] mx-auto grid min-h-[100svh] max-w-[90rem] items-center gap-6 px-5 pt-[4.5rem] pb-12 sm:gap-8 sm:pt-20 sm:pb-16 lg:gap-10 lg:pt-24 sm:px-8 lg:grid-cols-12 lg:px-12">
         <div className="fx-from-left order-2 lg:order-1 lg:col-span-7">
           <div data-fx="parallax" style={{ ['--depth' as string]: '-90px' }}>
-            <div className="select-none font-wordmark text-display-xl font-extrabold uppercase tracking-[-0.01em] text-paper">
-              <MaskWord text="Nyota" />
-              <span className="fx-glitch block" data-text="107.3">
-                <MaskWord text="107.3" offset={5} className="text-brass" />
-              </span>
-            </div>
+            {/* Official station logo (brand kit §2), self-hosted cut-out of the master artwork */}
+            <img
+              src="/brand/nyota-star-512.webp"
+              srcSet="/brand/nyota-star-256.webp 256w, /brand/nyota-star-512.webp 512w, /brand/nyota-star-1024.webp 1024w"
+              sizes="(min-width: 1024px) 19rem, (min-width: 640px) 14rem, 10rem"
+              width={512}
+              height={512}
+              alt="Nyota 107.3 FM logo: a gold star with a microphone and the tagline Hapo Tulipo, Twang'aa"
+              fetchPriority="high"
+              decoding="async"
+              className="brand-mark fx-scale-up block h-auto w-40 select-none sm:w-56 lg:w-[19rem]"
+              draggable={false}
+            />
           </div>
           <h1 id="hero-title" className="fx-blur-in fx-text-shadow mt-6 mb-4 max-w-[24ch] sm:mt-8 sm:mb-5 font-display text-[clamp(1.75rem,1.1rem+2.2vw,3.25rem)] leading-[1.08] font-normal text-paper" style={{ ['--d' as string]: '120ms' }}>
             {hero.headline}
@@ -63,8 +57,8 @@ export function Hero() {
             <Rich text={hero.lede} />
           </p>
           <div className="fx-fade-seq">
-            <p className="fx-kinetic m-0 mt-6 font-display text-heading italic text-paper">
-              <Gloss term="hapa-tulipo">{`${first}.`}</Gloss> <Gloss term="twangaa">{second}</Gloss>
+            <p className="fx-kinetic m-0 mt-6 font-body text-[1.375rem] font-bold italic tracking-[-0.01em] text-paper sm:text-heading">
+              <Gloss term="hapo-tulipo">{`${first},`}</Gloss> <Gloss term="twangaa">{second}</Gloss>
             </p>
             <div className="no-print mt-8 flex flex-wrap items-center gap-6 sm:mt-10">
               <Button href="#in-short" variant="primary" arrow="down" className="fx-magnetic fx-shine fx-ripple">
@@ -74,7 +68,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="fx-from-right order-1 mx-auto w-full max-w-[12.5rem] sm:max-w-[22rem] lg:order-2 lg:col-span-5 lg:max-w-[28rem]">
+        <div className="fx-from-right order-1 mx-auto hidden w-full sm:block sm:max-w-[22rem] lg:order-2 lg:col-span-5 lg:max-w-[28rem]">
           <div data-fx="parallax" style={{ ['--depth' as string]: '70px' }}>
             <div className="fx-scale-up">
               <FrequencyDial />
