@@ -139,17 +139,27 @@ button, a, input, select, textarea { touch-action: manipulation; -webkit-tap-hig
 .reveal-x[data-revealed='true'] { opacity: 1; transform: none; }
 
 /* ── Word highlight (explain) ───────────────────────────────────────── */
-.hl-word { transition: opacity 180ms linear; opacity: 0.28; }
-.hl-word[data-on='true'] { opacity: 1; }
+.hl-word { --hl-dim: var(--color-sage-dim); transition: color 180ms linear; color: var(--hl-dim); }
+.band-paper .hl-word { --hl-dim: #5F6B64; }
+.hl-word[data-on='true'] { color: inherit; }
+/* Dim words stay ≥ 4.5:1 contrast: sage-dim on ink, #5F6B64 on paper. */
 
 /* ── Mask rise ──────────────────────────────────────────────────────── */
 .mask-line { display: inline-block; overflow: hidden; vertical-align: bottom; }
-.mask-line > span { display: inline-block; will-change: transform; }
+.mask-line > span { display: inline-block; animation: mask-rise 900ms var(--ease-out-expo) both; animation-delay: calc(150ms + var(--i, 0) * 60ms); }
+@keyframes mask-rise { from { transform: translateY(105%); } to { transform: none; } }
+
+/* ── Frequency dial (A1): needle settles on 107.3, wave idles on screen ── */
+.dial-needle { transform-origin: 200px 200px; transform-box: view-box; transform: rotate(var(--to)); animation: dial-sweep 1400ms cubic-bezier(0.34, 1.45, 0.5, 1) 300ms both; }
+@keyframes dial-sweep { from { transform: rotate(var(--from)); } to { transform: rotate(var(--to)); } }
+.dial-wave { animation: dial-wave 4s linear infinite; animation-play-state: paused; }
+.dial[data-visible='true'] .dial-wave { animation-play-state: running; }
+@keyframes dial-wave { from { transform: translateX(0); } to { transform: translateX(-80px); } }
 
 /* ── Figures, glossary, provisional marker ──────────────────────────── */
 .fig-btn { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: help; text-align: inherit; }
 .fig-btn:hover .fig-value, .fig-btn[aria-expanded='true'] .fig-value { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-.fig-prov { display: inline-block; width: 7px; height: 7px; margin-left: 3px; border: 1.5px solid currentColor; border-radius: 9999px; opacity: 0.5; vertical-align: 0.9em; }
+.fig-prov { display: inline-block; width: 6px; height: 6px; margin-left: 2px; border: 1.5px solid currentColor; border-radius: 9999px; opacity: 0.5; vertical-align: 0.55em; }
 .gloss { text-decoration: underline dotted; text-decoration-thickness: 1.5px; text-underline-offset: 0.22em; cursor: help; }
 .dotted-current { background-image: radial-gradient(circle, currentColor 1px, transparent 1.4px); background-size: 6px 3px; background-repeat: repeat-x; background-position: 0 100%; padding-bottom: 6px; }
 
@@ -211,14 +221,16 @@ button, a, input, select, textarea { touch-action: manipulation; -webkit-tap-hig
 /* ── Lite mode: system fonts, no motion ─────────────────────────────── */
 html.lite { --font-display: Georgia, "Times New Roman", serif; --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --font-mono: ui-monospace, Menlo, monospace; --font-wordmark: "Arial Narrow", sans-serif-condensed, sans-serif; }
 html.lite .reveal, html.lite .reveal-x { opacity: 1; transform: none; transition: none; }
-html.lite .hl-word { opacity: 1; }
+html.lite .hl-word { color: inherit; }
+html.lite .mask-line > span, html.lite .dial-needle, html.lite .dial-wave { animation: none; }
 
 /* ── Reduced motion: final states only ──────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal, .reveal-x { opacity: 1; transform: none; transition: none; }
-  .hl-word { opacity: 1; transition: none; }
+  .hl-word { color: inherit; transition: none; }
   .onair-dot { animation: none; }
+  .mask-line > span, .dial-needle, .dial-wave { animation: none !important; }
   .menu-overlay, .menu-overlay[data-open='true'] { transition: none; }
   .site-header { transition: none; }
   .arrow-roll > * { transition: none; }
@@ -241,5 +253,8 @@ html.lite .hl-word { opacity: 1; }
   .print-only { display: block !important; }
   .sticky, .stack-card { position: static !important; }
   details > *:not(summary) { display: block !important; }
+  .fill-paper { fill: #111 !important; }
+  .text-ink-on-paper, .text-ink { color: #111 !important; }
+  section[aria-labelledby='hero-title'] .min-h-\[100svh\] { min-height: 0 !important; }
 }
 .print-only { display: none; }

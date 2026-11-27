@@ -1,46 +1,28 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
-import { chapters } from './content/chapters'
-import { chapterSections, resolveHash } from './content/sections'
-import type { FeaturedKey } from './content/chapters/types'
+import { resolveHash } from './content/sections'
 import { SettingsProvider, useSettings } from './state/settings'
 import { useActiveSection } from './motion/useActiveSection'
 import { useMotionAllowed } from './motion/useMotionAllowed'
-import { ChapterShell } from './components/chapter/ChapterShell'
 import { preloadAllDetail } from './components/chapter/detailLoaders'
 import { Skeleton } from './components/chapter/DetailBlock'
-import { Mandates } from './components/featured/Mandates'
-import { Counties } from './components/featured/Counties'
-import { PaybackExplorer } from './components/featured/PaybackExplorer'
-import { OpportunityIndex } from './components/featured/OpportunityIndex'
-import { StrategyGroups } from './components/featured/StrategyGroups'
-import { BuildRoadmap } from './components/featured/BuildRoadmap'
-import { GapChecklist } from './components/featured/GapChecklist'
 import { Header } from './components/site/Header'
 import { Hero } from './components/site/Hero'
 import { InShort } from './components/site/InShort'
-import { Asks } from './components/site/Asks'
-import { Sources } from './components/site/Sources'
 import { Footer } from './components/site/Footer'
 import { MenuOverlay } from './components/site/MenuOverlay'
-import { SearchPanel } from './components/site/SearchPanel'
-import { BriefingOverlay } from './components/site/BriefingOverlay'
-import { PresentationMode } from './components/site/PresentationMode'
 import { Toaster } from './components/site/Toaster'
-import { ToolSheetHost } from './components/toolkit/ToolSheetHost'
 
 const Appendix = lazy(() => import('./components/site/Appendix'))
 const DecisionSheet = lazy(() => import('./components/site/DecisionSheet'))
-
-const featured: Record<FeaturedKey, () => React.ReactNode> = {
-  mandates: () => <Mandates />,
-  counties: () => <Counties />,
-  payback: () => <PaybackExplorer />,
-  opportunities: () => <OpportunityIndex />,
-  strategies: () => <StrategyGroups />,
-  build: () => <BuildRoadmap />,
-  gaps: () => <GapChecklist />,
-}
+const loadChapters = () => import('./components/site/Chapters')
+const Chapters = lazy(loadChapters)
+// Start fetching the chapters while the prerendered hero hydrates.
+if (typeof window !== 'undefined') void loadChapters()
+const SearchPanel = lazy(() => import('./components/site/SearchPanel').then((m) => ({ default: m.SearchPanel })))
+const BriefingOverlay = lazy(() => import('./components/site/BriefingOverlay').then((m) => ({ default: m.BriefingOverlay })))
+const PresentationMode = lazy(() => import('./components/site/PresentationMode').then((m) => ({ default: m.PresentationMode })))
+const ToolSheetHost = lazy(() => import('./components/toolkit/ToolSheetHost').then((m) => ({ default: m.ToolSheetHost })))
 
 const APPENDIX_HASH = /^#(appendix|toolkit|annex-|figure|glossary)/
 
@@ -58,10 +40,14 @@ function scrollToHash(hash: string, tries = 40) {
 
 /** Appendix loads when the reader nears it, or straight away for a deep link into it. */
 function DeferredAppendix() {
-  const [show, setShow] = useState(() => APPENDIX_HASH.test(window.location.hash))
+  const [show, setShow] = useState(false)
   const sentinel = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (show) return
+    if (APPENDIX_HASH.test(window.location.hash)) {
+      setShow(true)
+      return
+    }
     const onHash = () => APPENDIX_HASH.test(window.location.hash) && setShow(true)
     window.addEventListener('hashchange', onHash)
     const el = sentinel.current
@@ -72,7 +58,7 @@ function DeferredAppendix() {
       io?.disconnect()
     }
   }, [show])
-  if (!show) return <div ref={sentinel} id="appendix" className="min-h-40" aria-label="Appendix" />
+  if (!show) return <div ref={sentinel} id="appendix" className="min-h-40" />
   return (
     <Suspense fallback={<div className="mx-auto max-w-[90rem] px-4 py-20 sm:px-8 lg:px-12"><Skeleton label="Loading the appendix" /></div>}>
       <Appendix />
@@ -97,8 +83,19 @@ function useSmoothScroll() {
   }, [allowed])
 }
 
+const chaptersPlaceholder = (
+  <div className="mx-auto min-h-[100vh] max-w-[90rem] px-4 py-20 sm:px-8 lg:px-12">
+    <Skeleton label="Loading the chapters" />
+  </div>
+)
+
 function Story() {
-  const active = useActiveSection()
+  // Lazy chapters mount after hydration so the prerendered HTML matches exactly.
+  const [hydrated, setHydrated] = useState(false)
+  useEffect(() => setHydrated(true), [])
+  const [chaptersReady, setChaptersReady] = useState(false)
+  const onChaptersReady = useCallback(() => setChaptersReady(true), [])
+  const active = useActiveSection(chaptersReady)
   const settings = useSettings()
   const { overlay, openOverlay, setExpandAll } = settings
   useSmoothScroll()
@@ -167,26 +164,30 @@ function Story() {
         <div id="top" />
         <Hero />
         <InShort />
-        {chapterSections.map((s) => (
-          <ChapterShell key={s.id} section={s} copy={chapters[s.id]} featured={featured[chapters[s.id].featured]()} />
-        ))}
-        <Asks />
-        <Sources />
+        {hydrated ? (
+          <Suspense fallback={chaptersPlaceholder}>
+            <Chapters onReady={onChaptersReady} />
+          </Suspense>
+        ) : (
+          chaptersPlaceholder
+        )}
         <DeferredAppendix />
       </main>
       <Footer />
       <MenuOverlay active={active} onPrint={printStory} />
-      <SearchPanel />
-      <BriefingOverlay />
-      <PresentationMode />
-      <ToolSheetHost />
+      <Suspense fallback={null}>
+        {overlay === 'search' && <SearchPanel />}
+        {overlay === 'briefing' && <BriefingOverlay />}
+        {overlay === 'presentation' && <PresentationMode />}
+        {settings.sheet && <ToolSheetHost />}
+      </Suspense>
       <Toaster />
     </>
   )
 }
 
 export default function App() {
-  const view = new URLSearchParams(window.location.search).get('view')
+  const view = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('view')
   return (
     <SettingsProvider>
       {view === 'decision-sheet' ? (

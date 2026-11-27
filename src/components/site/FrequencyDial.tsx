@@ -1,7 +1,4 @@
 import { useEffect, useRef } from 'react'
-import { animate } from 'animejs/animation'
-import { duration } from '../../motion/easings'
-import { useMotionAllowed } from '../../motion/useMotionAllowed'
 
 const MIN = 87.5
 const MAX = 108
@@ -22,28 +19,18 @@ const arc = (a0: number, a1: number, r: number) => {
   return `M${x0},${y0} A${r},${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1},${y1}`
 }
 
-/** A1 · FM dial whose needle settles on 107.3; the wave idles only while visible. */
+/** A1 · FM dial whose needle settles on 107.3 (CSS); the wave idles only while visible. */
 export function FrequencyDial() {
-  const allowed = useMotionAllowed()
-  const needle = useRef<SVGGElement>(null)
-  const wave = useRef<SVGGElement>(null)
   const host = useRef<SVGSVGElement>(null)
 
+  // The idle wave only runs while the dial is on screen.
   useEffect(() => {
-    const n = needle.current
-    const w = wave.current
     const h = host.current
-    if (!n || !w || !h || !allowed) return
-    const sweep = animate(n, { rotate: [angleFor(MIN), angleFor(FREQ)], duration: duration.dial, delay: 300, ease: 'outElastic(1, .6)' })
-    const idle = animate(w, { translateX: [0, -80], duration: 4000, ease: 'linear', loop: true, autoplay: false })
-    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? idle.play() : idle.pause()))
+    if (!h) return
+    const io = new IntersectionObserver(([e]) => h.setAttribute('data-visible', e.isIntersecting ? 'true' : 'false'))
     io.observe(h)
-    return () => {
-      io.disconnect()
-      sweep.revert()
-      idle.revert()
-    }
-  }, [allowed])
+    return () => io.disconnect()
+  }, [])
 
   const ticks = []
   for (let f = 88; f <= MAX + 0.001; f += 0.5) {
@@ -65,7 +52,7 @@ export function FrequencyDial() {
   const wavePath = Array.from({ length: 9 }, (_, i) => `q20,${i % 2 ? 14 : -14} 40,0`).join(' ')
 
   return (
-    <svg ref={host} viewBox="0 0 400 400" className="h-auto w-full" role="img" aria-label="FM dial tuned to 107.3 megahertz">
+    <svg ref={host} viewBox="0 0 400 400" className="dial h-auto w-full" data-visible="false" role="img" aria-label="FM dial tuned to 107.3 megahertz">
       <defs>
         <clipPath id="dial-wave-clip">
           <rect x={120} y={262} width={160} height={40} />
@@ -76,7 +63,7 @@ export function FrequencyDial() {
       <path d={arc(angleFor(104), angleFor(MAX), R + 8)} className="fill-none stroke-brass" strokeOpacity={0.35} strokeWidth={4} strokeLinecap="round" />
       <path d={arc(angleFor(FREQ) - 1.5, angleFor(FREQ) + 1.5, R + 8)} className="fill-none stroke-brass" strokeWidth={6} strokeLinecap="round" />
       {ticks}
-      <g ref={needle} style={{ transformOrigin: '200px 200px', transformBox: 'view-box', transform: `rotate(${angleFor(FREQ)}deg)` }}>
+      <g className="dial-needle" style={{ ['--from' as string]: `${angleFor(MIN)}deg`, ['--to' as string]: `${angleFor(FREQ)}deg` }}>
         <line x1={C} y1={C + 18} x2={C} y2={C - R + 4} className="stroke-brass" strokeWidth={2.5} strokeLinecap="round" />
         <circle cx={C} cy={C} r={7} className="fill-brass" />
       </g>
@@ -87,7 +74,7 @@ export function FrequencyDial() {
         MHz
       </text>
       <g clipPath="url(#dial-wave-clip)">
-        <g ref={wave}>
+        <g className="dial-wave">
           <path d={`M120,282 ${wavePath}`} className="fill-none stroke-moss" strokeWidth={2} />
         </g>
       </g>

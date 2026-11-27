@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 
 type Overlay = 'menu' | 'search' | 'briefing' | 'presentation' | null
 
@@ -53,18 +53,31 @@ export function detectSlowConnection(): boolean {
 }
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
-  const stored = safeGet(LITE_KEY)
-  const liteAuto = stored === null && detectSlowConnection()
-  const [lite, setLiteState] = useState<boolean>(stored === null ? liteAuto : stored === '1')
+  // First render is identical on server and client; browser state is read after mount.
+  const [lite, setLiteState] = useState(false)
+  const [liteAuto, setLiteAuto] = useState(false)
+  const synced = useRef(false)
   const [overlay, setOverlay] = useState<Overlay>(null)
   const [sheet, setSheet] = useState<string | null>(null)
   const [expandAll, setExpandAll] = useState(false)
   const [toast, setToast] = useState<string | null>(null)
-  const [readChapters, setRead] = useState<Set<string>>(() => new Set((safeGet(READ_KEY) ?? '').split(',').filter(Boolean)))
+  const [readChapters, setRead] = useState<Set<string>>(() => new Set())
+
+  // Declared before the mount effect so the first pass never strips the pre-paint class.
+  useEffect(() => {
+    if (synced.current) document.documentElement.classList.toggle('lite', lite)
+  }, [lite])
 
   useEffect(() => {
-    document.documentElement.classList.toggle('lite', lite)
-  }, [lite])
+    const stored = safeGet(LITE_KEY)
+    const auto = stored === null && detectSlowConnection()
+    setLiteAuto(auto)
+    // The inline script in index.html already applied the class before first paint.
+    setLiteState(document.documentElement.classList.contains('lite') || auto)
+    setRead(new Set((safeGet(READ_KEY) ?? '').split(',').filter(Boolean)))
+    synced.current = true
+  }, [])
+
 
   const setLite = useCallback((on: boolean) => {
     setLiteState(on)

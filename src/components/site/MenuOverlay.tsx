@@ -71,7 +71,10 @@ export function MenuOverlay({ active, onPrint }: MenuOverlayProps) {
                   <a href={`#${s.id}`} onClick={closeOverlay} aria-current={current ? 'location' : undefined} className="group grid min-h-16 grid-cols-[3rem_1fr_auto] items-center gap-4 py-3 sm:grid-cols-[4rem_14rem_1fr_auto]">
                     <span className="font-mono text-small text-sage tabular">{s.number}</span>
                     <span className={`font-display text-heading text-paper ${current ? 'dotted-current' : ''}`}>{s.label}</span>
-                    <span className="hidden text-small text-sage sm:block">{renderPlain(s.actionTitle)}</span>
+                    <span className="hidden text-small text-sage sm:block">
+                      {renderPlain(s.actionTitle)}
+                      <span className="ml-2 whitespace-nowrap text-sage-dim">· {Math.round(s.readMinutes * 60)} sec</span>
+                    </span>
                     <span className={`grid h-10 w-10 place-items-center rounded-full text-ink transition-transform group-hover:scale-110 ${accentBg[s.accent]}`} aria-hidden="true">
                       <ArrowUpRight size={18} />
                     </span>

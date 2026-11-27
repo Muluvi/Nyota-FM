@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Pause, Play, Radio, X } from 'lucide-react'
-import { slotAt, STREAM_URL } from '../../content/data/schedule'
+import { slotAt, STREAM_URL, type Slot } from '../../content/data/schedule'
 
 type Status = 'idle' | 'playing' | 'offline'
 
@@ -12,9 +12,25 @@ export function OnAirCard() {
   const [expanded, setExpanded] = useState(false)
   const [status, setStatus] = useState<Status>(STREAM_URL ? 'idle' : 'offline')
   const audio = useRef<HTMLAudioElement | null>(null)
-  const slot = slotAt(new Date())
+  const [slot, setSlot] = useState<Slot | null>(null)
 
+  const host = useRef<HTMLDivElement>(null)
+
+  // Time-of-day schedule is resolved after mount so prerendered HTML stays stable.
+  useEffect(() => setSlot(slotAt(new Date())), [])
   useEffect(() => () => audio.current?.pause(), [])
+
+  useEffect(() => {
+    if (!expanded) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setExpanded(false)
+    const onDown = (e: PointerEvent) => host.current && !host.current.contains(e.target as Node) && setExpanded(false)
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('pointerdown', onDown)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('pointerdown', onDown)
+    }
+  }, [expanded])
 
   const toggle = async () => {
     if (!STREAM_URL) return
@@ -38,12 +54,12 @@ export function OnAirCard() {
   const live = status === 'playing'
 
   return (
-    <div className="onair-card no-print relative">
+    <div ref={host} className="onair-card no-print relative">
       {!expanded ? (
-        <button type="button" onClick={() => setExpanded(true)} aria-expanded={false} aria-label={`${live ? 'On air' : '107.3 FM schedule'}: ${slot.show}`} className="flex min-h-11 items-center gap-2 rounded-full border border-hairline px-3 text-small text-paper hover:border-sage-dim">
+        <button type="button" onClick={() => setExpanded(true)} aria-expanded={false} aria-label={`${live ? 'On air' : '107.3 FM schedule'}${slot ? `: ${slot.show}` : ''}`} className="flex min-h-11 items-center gap-2 rounded-full border border-hairline px-3 text-small text-paper hover:border-sage-dim">
           <span className={`h-2.5 w-2.5 rounded-full ${live ? 'onair-dot bg-brick-ink' : 'bg-sage-dim'}`} aria-hidden="true" />
           <span className="hidden font-mono sm:inline">{live ? 'ON AIR' : '107.3 FM'}</span>
-          <span className="hidden max-w-[12rem] truncate text-sage xl:inline">{slot.show}</span>
+          {slot && <span className="hidden max-w-[12rem] truncate text-sage xl:inline">{slot.show}</span>}
         </button>
       ) : (
         <div role="dialog" aria-label="On air" className="absolute right-0 top-0 z-50 w-[min(20rem,calc(100vw-2rem))] rounded-md border border-hairline bg-ink-2 p-4 shadow-2xl">
@@ -61,8 +77,8 @@ export function OnAirCard() {
               </button>
             </span>
           </div>
-          <p className="m-0 mt-2 text-body text-paper">{slot.show}</p>
-          <p className="m-0 text-small text-sage">{slot.hosts} (illustrative) · {slot.time}</p>
+          {slot && <p className="m-0 mt-2 text-body text-paper">{slot.show}</p>}
+          {slot && <p className="m-0 text-small text-sage">{slot.hosts} (illustrative) · {slot.time}</p>}
           {status === 'offline' ? (
             <p className="m-0 mt-3 border-t border-hairline pt-3 text-small text-sage" role="status">
               The live stream is not connected in this proposal site. Listen on 107.3 FM across Western Kenya.

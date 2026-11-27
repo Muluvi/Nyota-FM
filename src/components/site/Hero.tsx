@@ -1,17 +1,17 @@
 import { hero } from '../../content/chapters/intro'
 import { SLOGAN } from '../../content/meta'
-import { useMaskRise } from '../../motion/useMaskRise'
 import { Button } from '../ui/Button'
 import { Gloss } from '../ui/Gloss'
 import { Rich } from '../ui/Rich'
 import { FrequencyDial } from './FrequencyDial'
 
-function MaskWord({ text, className = '' }: { text: string; className?: string }) {
+/** O2 · Letters rise from behind a mask (pure CSS, so prerendered HTML animates without waiting for JS). */
+function MaskWord({ text, offset = 0, className = '' }: { text: string; offset?: number; className?: string }) {
   return (
     <span className={`block ${className}`} aria-hidden="true">
       {text.split('').map((ch, i) => (
         <span key={i} className="mask-line">
-          <span>{ch}</span>
+          <span style={{ ['--i' as string]: i + offset }}>{ch}</span>
         </span>
       ))}
     </span>
@@ -20,16 +20,15 @@ function MaskWord({ text, className = '' }: { text: string; className?: string }
 
 /** Hero: K1 wordmark, O2 mask rise, A1 dial, O5 glass card, O6 side tab, O7 scroll cue. */
 export function Hero() {
-  const wordmarkRef = useMaskRise<HTMLDivElement>()
   const [first, second] = SLOGAN.split('. ')
 
   return (
     <section aria-labelledby="hero-title" className="band-ink relative overflow-hidden">
       <div className="mx-auto grid min-h-[100svh] max-w-[90rem] items-center gap-8 px-4 pt-20 pb-16 lg:gap-10 lg:pt-24 sm:px-8 lg:grid-cols-12 lg:px-12">
         <div className="order-2 lg:order-1 lg:col-span-7">
-          <div ref={wordmarkRef} className="select-none font-wordmark text-display-xl font-extrabold uppercase tracking-[-0.01em] text-paper">
+          <div className="select-none font-wordmark text-display-xl font-extrabold uppercase tracking-[-0.01em] text-paper">
             <MaskWord text="Nyota" />
-            <MaskWord text="107.3" className="text-brass" />
+            <MaskWord text="107.3" offset={5} className="text-brass" />
           </div>
           <h1 id="hero-title" className="mt-8 mb-5 max-w-[24ch] font-display text-[clamp(1.75rem,1.1rem+2.2vw,3.25rem)] leading-[1.08] font-normal text-paper">
             {hero.headline}
@@ -40,7 +39,7 @@ export function Hero() {
           <p className="m-0 mt-6 font-display text-heading italic text-paper">
             <Gloss term="hapa-tulipo">{`${first}.`}</Gloss> <Gloss term="twangaa">{second}</Gloss>
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-6">
+          <div className="no-print mt-10 flex flex-wrap items-center gap-6">
             <Button href="#in-short" variant="primary" arrow="down">
               {hero.cta}
             </Button>
@@ -60,7 +59,7 @@ export function Hero() {
         </div>
       </div>
 
-      <p className="pointer-events-none absolute right-2 top-1/2 m-0 hidden -translate-y-1/2 rotate-180 font-mono text-small tracking-[0.2em] text-sage-dim [writing-mode:vertical-rl] md:block" aria-hidden="true">
+      <p className="no-print pointer-events-none absolute right-2 top-1/2 m-0 hidden -translate-y-1/2 rotate-180 font-mono text-small tracking-[0.2em] text-sage-dim [writing-mode:vertical-rl] md:block" aria-hidden="true">
         {hero.sideTab}
       </p>
 

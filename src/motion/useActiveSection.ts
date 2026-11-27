@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { sections } from '../content/sections'
 import { renderPlain } from '../lib/richText'
 import { STATION } from '../content/meta'
@@ -11,8 +11,9 @@ const BASE_DESCRIPTION =
  * Tracks the section crossing the upper third of the viewport. Updates the URL
  * hash (replaceState, no history spam), document title and meta description.
  */
-export function useActiveSection(): string | null {
+export function useActiveSection(ready = true): string | null {
   const [active, setActive] = useState<string | null>(null)
+  const hadActive = useRef(false)
 
   useEffect(() => {
     const els = sections
@@ -34,19 +35,19 @@ export function useActiveSection(): string | null {
             bestTop = top
           }
         }
-        if (!best && window.scrollY < window.innerHeight * 0.5) best = null
-        setActive((prev) => (best === undefined ? prev : best))
+        setActive(best)
       },
       { rootMargin: '0px 0px -60% 0px', threshold: [0, 0.01] },
     )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
-  }, [])
+  }, [ready])
 
   useEffect(() => {
     const section = sections.find((s) => s.id === active)
     const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]')
     if (section) {
+      hadActive.current = true
       document.title = `${section.number ? `${section.number} · ` : ''}${section.label} · ${STATION}`
       meta?.setAttribute('content', renderPlain(section.actionTitle))
       const current = window.location.hash.replace('#', '')
@@ -56,7 +57,8 @@ export function useActiveSection(): string | null {
     } else {
       document.title = BASE_TITLE
       meta?.setAttribute('content', BASE_DESCRIPTION)
-      if (window.location.hash && window.scrollY < 50) history.replaceState(null, '', window.location.pathname + window.location.search)
+      // Only clear the hash once the reader has scrolled back to the hero, never on load.
+      if (hadActive.current && window.location.hash && window.scrollY < 50) history.replaceState(null, '', window.location.pathname + window.location.search)
     }
   }, [active])
 

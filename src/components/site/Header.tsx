@@ -18,8 +18,13 @@ export function Header({ active }: { active: string | null }) {
       const y = window.scrollY
       const max = document.documentElement.scrollHeight - window.innerHeight
       if (progress.current) progress.current.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`
-      if (Math.abs(y - lastY) > 6) {
-        setHidden(y > lastY && y > 240)
+      const delta = y - lastY
+      if (Math.abs(delta) > window.innerHeight) {
+        // A jump (deep link, menu, anchor) keeps the header visible.
+        setHidden(false)
+        lastY = y
+      } else if (Math.abs(delta) > 6) {
+        setHidden(delta > 0 && y > 240)
         lastY = y
       }
     }

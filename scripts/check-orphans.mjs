@@ -32,6 +32,7 @@ function visit(file) {
 }
 
 visit(entry)
+visit(resolve(root, 'entry-server.tsx'))
 const files = []
 function collect(directory) {
   for (const name of readdirSync(directory, { withFileTypes: true })) {
