@@ -19,9 +19,12 @@ const arc = (a0: number, a1: number, r: number) => {
   return `M${x0},${y0} A${r},${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1},${y1}`
 }
 
-/** A1 · FM dial whose needle settles on 107.3 (CSS); the wave idles only while visible. */
+/** A1 · FM dial whose needle settles on 107.3 (CSS); drag the needle to tune; the wave idles only while visible. */
 export function FrequencyDial() {
   const host = useRef<SVGSVGElement>(null)
+
+  const needle = useRef<SVGGElement>(null)
+  const readout = useRef<SVGTextElement>(null)
 
   // The idle wave only runs while the dial is on screen.
   useEffect(() => {
@@ -30,6 +33,54 @@ export function FrequencyDial() {
     const io = new IntersectionObserver(([e]) => h.setAttribute('data-visible', e.isIntersecting ? 'true' : 'false'))
     io.observe(h)
     return () => io.disconnect()
+  }, [])
+
+  // D. Draggable needle: tune across the band, then spring back to 107.3 (elastic).
+  useEffect(() => {
+    const h = host.current
+    const n = needle.current
+    const t = readout.current
+    if (!h || !n || !t) return
+    let dragging = false
+    const toAngle = (e: PointerEvent) => {
+      const r = h.getBoundingClientRect()
+      const x = e.clientX - (r.left + r.width / 2)
+      const y = e.clientY - (r.top + r.height / 2)
+      const deg = (Math.atan2(y, x) * 180) / Math.PI + 90
+      const norm = deg > 180 ? deg - 360 : deg
+      return Math.min(START + SWEEP, Math.max(START, norm))
+    }
+    const set = (deg: number) => {
+      n.style.animation = 'none'
+      n.style.transition = 'none'
+      n.style.transform = `rotate(${deg}deg)`
+      const mhz = MIN + ((deg - START) / SWEEP) * (MAX - MIN)
+      t.textContent = mhz.toFixed(1)
+    }
+    const down = (e: PointerEvent) => {
+      if (!(e.target as Element).closest('[data-needle-grab]')) return
+      dragging = true
+      h.setPointerCapture(e.pointerId)
+      set(toAngle(e))
+    }
+    const move = (e: PointerEvent) => dragging && set(toAngle(e))
+    const up = () => {
+      if (!dragging) return
+      dragging = false
+      n.style.transition = 'transform 1100ms cubic-bezier(0.34, 1.8, 0.5, 1)'
+      n.style.transform = `rotate(${angleFor(FREQ)}deg)`
+      t.textContent = String(FREQ)
+    }
+    h.addEventListener('pointerdown', down)
+    h.addEventListener('pointermove', move)
+    h.addEventListener('pointerup', up)
+    h.addEventListener('pointercancel', up)
+    return () => {
+      h.removeEventListener('pointerdown', down)
+      h.removeEventListener('pointermove', move)
+      h.removeEventListener('pointerup', up)
+      h.removeEventListener('pointercancel', up)
+    }
   }, [])
 
   const ticks = []
@@ -63,11 +114,12 @@ export function FrequencyDial() {
       <path d={arc(angleFor(104), angleFor(MAX), R + 8)} className="fill-none stroke-brass" strokeOpacity={0.35} strokeWidth={4} strokeLinecap="round" />
       <path d={arc(angleFor(FREQ) - 1.5, angleFor(FREQ) + 1.5, R + 8)} className="fill-none stroke-brass" strokeWidth={6} strokeLinecap="round" />
       {ticks}
-      <g className="dial-needle" style={{ ['--from' as string]: `${angleFor(MIN)}deg`, ['--to' as string]: `${angleFor(FREQ)}deg` }}>
+      <g ref={needle} data-needle-grab className="dial-needle cursor-grab touch-none" style={{ ['--from' as string]: `${angleFor(MIN)}deg`, ['--to' as string]: `${angleFor(FREQ)}deg` }}>
         <line x1={C} y1={C + 18} x2={C} y2={C - R + 4} className="stroke-brass" strokeWidth={2.5} strokeLinecap="round" />
         <circle cx={C} cy={C} r={7} className="fill-brass" />
+        <line x1={C} y1={C} x2={C} y2={C - R + 4} stroke="transparent" strokeWidth={28} />
       </g>
-      <text x={C} y={C - 44} textAnchor="middle" className="fill-paper" fontSize={44} style={{ fontFamily: 'var(--font-wordmark)', fontWeight: 800 }}>
+      <text ref={readout} x={C} y={C - 44} textAnchor="middle" className="fill-paper" fontSize={44} style={{ fontFamily: 'var(--font-wordmark)', fontWeight: 800 }}>
         107.3
       </text>
       <text x={C} y={C - 16} textAnchor="middle" className="fill-sage-dim font-mono" fontSize={19}>
