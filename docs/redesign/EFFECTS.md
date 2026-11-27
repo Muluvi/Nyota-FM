@@ -106,10 +106,28 @@ Print always gets the plain version.
 Swing, roll and flip-in exist in the library but are not wired to anything. Nothing on the page called for them.
 
 ## H. 3D and WebGL
-- **Built:** WebGL fragment shader (liquid mesh gradient with vignette and chromatic fringe); 3D card hover; 2.5D particle depth; 3D text extrusion; post-processing (vignette, fringe).
-- **Skipped (cost and scope):**
-  - Three.js scenes, 3D model viewers and ray marching. Three.js alone is about 150 KB gzip, there is no 3D content to show, and the brief's no-Three.js rule still applies.
-  - Caustics and fluid simulations: same reasons.
+- **Built:**
+  - **Three.js hero scene** (`src/fx/scene3d.ts`, `three@0.187.0`): a wireframe terrain, a lattice transmitter mast with a pulsing beacon, and signal rings radiating from the antenna. It adds a 3D particle field, exponential fog, ACES tone mapping, an UnrealBloom post-processing pass and a pointer-driven camera. A gradient mask keeps the text column legible.
+    - It runs only on desktops with a fine pointer, WebGL2, a width of at least 1024 px and at least 4 cores. Otherwise the raw-WebGL shader below is used, and phones keep the 2D canvas.
+    - Lazy: 136 KB gzip, never in first-load JS.
+  - **WebGL fragment shader:** a liquid mesh gradient with vignette and chromatic fringe; the fallback.
+  - **Other effects:** 3D card hover; 2.5D particle depth; 3D text extrusion.
+- **Skipped:**
+  - 3D model viewers: there is no model to show.
+  - Ray marching, caustics and fluid simulations: their cost on mid-range phones isn't justified.
+
+## K. Mobile and OLED (second pass)
+- **Colour:**
+  - True-black ink `#000` and softened paper `#EEF0EA`.
+  - Display-P3 accents under `@media (color-gamut: p3)`, at the same lightness as the sRGB tokens.
+  - Canvases are rendered at up to 2.5× or 3× the device pixel ratio.
+- **Typography:**
+  - DM Sans optical sizing (`opsz` axis).
+  - Balanced headings and `pretty` paragraphs.
+  - Phone metadata text set to 14 px.
+- **Spacing on phones:** 20 px gutters and 64 px section padding. Safe-area insets for notched screens. The hero fits the first screen.
+- **Touch:** hover-only effects are disabled under `(hover: none)`.
+- Full list: `docs/CHANGELOG.md`, "Mobile, OLED and 3D pass".
 
 ## I. Accessibility and performance
 - **Motion safety:** reduced motion, Calm and Lite all switch the layer off.
@@ -130,6 +148,7 @@ Swing, roll and flip-in exist in the library but are not wired to anything. Noth
 | First-load JS (gzip) | 96 KB | 101 KB |
 | CSS (gzip) | 16 KB | 24 KB |
 | Lazy effects (runtime + particles + shader) | — | 6 KB, desktop/idle only |
+| Lazy Three.js scene | — | 136 KB, capable desktops only |
 | Lighthouse mobile perf / a11y / BP | 97 / 100 / 100 | 89–91 / 100 / 100 |
 | Measured LCP (unthrottled) | — | 0.24 s |
 | Simulated LCP (throttled 4G) | 2.3 s | 3.1 s (larger CSS blocks render for about 0.3 s in the simulation) |

@@ -70,7 +70,7 @@ export function MenuOverlay({ active, onPrint }: MenuOverlayProps) {
       className="menu-overlay fixed inset-0 z-[60] overflow-y-auto bg-ink"
       {...(!open ? { inert: true } : {})}
     >
-      <div className="mx-auto flex min-h-full max-w-[90rem] flex-col px-4 pb-10 sm:px-8 lg:px-12">
+      <div className="mx-auto flex min-h-full max-w-[90rem] flex-col px-5 pb-10 sm:px-8 lg:px-12">
         <div className="flex h-16 items-center justify-between">
           <span className="font-wordmark text-[1.6rem] font-extrabold uppercase leading-none text-paper">
             Nyota <span className="text-brass">107.3</span>

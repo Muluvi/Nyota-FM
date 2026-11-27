@@ -19,7 +19,7 @@ export function mountParticles(host: HTMLElement, { interactive, count }: { inte
   const ctx = canvas.getContext('2d')
   if (!ctx) return () => canvas.remove()
 
-  const dpr = Math.min(1.5, devicePixelRatio)
+  const dpr = Math.min(2.5, devicePixelRatio) // crisp on 3x OLED phones; few particles, so cheap
   let w = 0
   let h = 0
   const resize = () => {

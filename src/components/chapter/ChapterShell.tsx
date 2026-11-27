@@ -50,12 +50,12 @@ export function ChapterShell({ section, copy, featured }: ChapterShellProps) {
       <span
         data-fx="parallax"
         style={{ ['--depth' as string]: '-220px' }}
-        className="fx-stroke pointer-events-none absolute -top-10 -right-6 -z-10 select-none font-wordmark text-[clamp(12rem,30vw,28rem)] leading-none font-extrabold opacity-[0.12]"
+        className="fx-stroke pointer-events-none absolute -top-10 -right-6 -z-10 hidden select-none sm:block font-wordmark text-[clamp(12rem,30vw,28rem)] leading-none font-extrabold opacity-[0.12]"
         aria-hidden="true"
       >
         {section.number}
       </span>
-      <div className="mx-auto grid max-w-[90rem] gap-12 px-4 py-20 sm:px-8 md:py-32 lg:grid-cols-12 lg:gap-16 lg:px-12">
+      <div className="mx-auto grid max-w-[90rem] gap-10 px-5 py-16 sm:gap-12 sm:px-8 sm:py-20 md:py-32 lg:grid-cols-12 lg:gap-16 lg:px-12">
         <header className="fx-slide-left lg:col-span-5">
           <div className="lg:sticky lg:top-28">
             <p className={`reveal-x m-0 flex items-baseline gap-3 font-mono text-body ${accent}`}>

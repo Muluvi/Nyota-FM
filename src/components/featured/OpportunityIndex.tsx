@@ -82,11 +82,11 @@ export function OpportunityIndex() {
               <td className="py-4 pr-3 font-mono text-small text-sage tabular">{String(o.rank).padStart(2, '0')}</td>
               <td className="py-4 pr-3">
                 <span className="block text-body text-paper">{o.name}</span>
-                <span className="mt-1 flex items-center gap-2 text-small text-sage">
-                  <span className={`h-2 w-2 rounded-full ${dot[o.difficulty]}`} aria-hidden="true" />
-                  {o.difficulty} difficulty · {o.time}
-                  <span className="sm:hidden"> · {o.revenue}</span>
+                <span className="mt-1 flex items-baseline gap-2 text-small text-sage">
+                  <span className={`h-2 w-2 shrink-0 translate-y-[-1px] rounded-full ${dot[o.difficulty]}`} aria-hidden="true" />
+                  <span>{o.difficulty} difficulty · {o.time}</span>
                 </span>
+                <span className="mt-1 block font-mono text-small text-paper tabular sm:hidden">{o.revenue}</span>
                 <span className="fx-progress mt-3 block max-w-[16rem]" aria-hidden="true">
                   <span style={{ ['--v' as string]: o.score / 10 }} />
                 </span>

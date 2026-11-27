@@ -334,20 +334,39 @@ function sounds(): Cleanup {
 }
 
 /* ── A. Hero canvases (particles everywhere; WebGL shader on desktop) ─── */
+/** H. Three.js needs WebGL2, a fine pointer, a wide screen and a few cores; phones keep the 2D canvases. */
+function canRun3d(finePointer: boolean): boolean {
+  if (!finePointer || window.innerWidth < 1024 || (navigator.hardwareConcurrency || 4) < 4) return false
+  try {
+    return !!document.createElement('canvas').getContext('webgl2')
+  } catch {
+    return false
+  }
+}
+
 function heroCanvases(finePointer: boolean): Cleanup {
   const cleanups: Cleanup[] = []
   let cancelled = false
+  const use3d = canRun3d(finePointer)
   const particlesHost = document.querySelector<HTMLElement>('[data-fx-host="particles"]')
-  if (particlesHost) {
+  if (particlesHost && !use3d) {
     void import('./particles').then(({ mountParticles }) => {
       if (!cancelled) cleanups.push(mountParticles(particlesHost, { interactive: finePointer, count: finePointer ? 70 : 28 }))
     })
   }
   const shaderHost = document.querySelector<HTMLElement>('[data-fx-host="shader"]')
-  if (shaderHost && finePointer) {
-    void import('./shader').then(({ mountShader }) => {
-      if (!cancelled) cleanups.push(mountShader(shaderHost))
+  const mountFlatShader = () =>
+    import('./shader').then(({ mountShader }) => {
+      if (!cancelled && shaderHost) cleanups.push(mountShader(shaderHost))
     })
+  if (shaderHost && use3d) {
+    import('./scene3d')
+      .then(({ mountScene3d }) => {
+        if (!cancelled) cleanups.push(mountScene3d(shaderHost))
+      })
+      .catch(() => void mountFlatShader())
+  } else if (shaderHost && finePointer) {
+    void mountFlatShader()
   }
   return () => {
     cancelled = true

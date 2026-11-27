@@ -55,7 +55,7 @@ export function Header({ active }: { active: string | null }) {
       data-hidden={hidden && overlay !== 'menu' ? 'true' : 'false'}
       data-top={atTop && !overlay ? 'true' : 'false'}
     >
-      <div className="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-4 px-4 sm:px-8 lg:px-12">
+      <div className="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
         <a
           href="#top"
           onClick={() => setLogoAnim(true)}

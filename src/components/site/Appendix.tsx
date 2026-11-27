@@ -63,7 +63,7 @@ export default function Appendix() {
   const section = sectionById('appendix')
   return (
     <section id="appendix" data-chapter="appendix" aria-labelledby="appendix-title" className="fx-dots band-ink scroll-mt-16 border-t border-hairline bg-fixed [content-visibility:auto] [contain-intrinsic-size:auto_2400px]">
-      <div className="mx-auto max-w-[90rem] px-4 py-20 sm:px-8 md:py-28 lg:px-12">
+      <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20 md:py-28 lg:px-12">
         <h2 id="appendix-title" className="m-0 font-display text-heading font-normal text-paper">Appendix</h2>
         <p className="measure mt-4 text-body text-sage">{section?.actionTitle} Nothing from the earlier site was deleted; it lives here or in each chapter's detail.</p>
 

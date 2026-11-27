@@ -1,5 +1,5 @@
 /* ── Self-hosted fonts (latin subsets, font-display: swap) ───────────── */
-@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 100 1000; font-display: swap; src: url('/fonts/dm-sans-latin-wght-normal.woff2') format('woff2-variations'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 100 1000; font-display: swap; src: url('/fonts/dm-sans-latin-opsz-normal.woff2') format('woff2-variations'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 @font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 @font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400-italic.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
 @font-face { font-family: 'DM Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
@@ -9,14 +9,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette (unchanged from v2.0) */
-  --color-ink: #090B0A;
-  --color-ink-2: #111513;
-  --color-paper: #F7F8F4;
+  /* Palette: v2.0 hues tuned for OLED. Ink is true black (pixels switch off,
+     infinite contrast); paper is a touch softer to avoid halation on black. */
+  --color-ink: #000000;
+  --color-ink-2: #0A0D0B;
+  --color-paper: #EEF0EA;
   --color-sage: #B4C2B9;
   --color-sage-dim: #8A9A90;
   --color-brass: #D6A75C;
-  --color-hairline: #27312C;
+  --color-hairline: #222B26;
   --color-brick: #9B624C;
   --color-moss: #76A486;
   /* Text-safe tints for small text on dark (contrast ≥ 4.5:1 on ink) */
@@ -24,12 +25,12 @@
   --color-ink-on-paper: #3B4540;
 
   /* Chapter bands: palette tints, used once per chapter */
-  --color-band-ink: #090B0A;
-  --color-band-ink-2: #111513;
-  --color-band-sage: #0E1311;
-  --color-band-moss: #0B140F;
-  --color-band-brass: #14110B;
-  --color-band-brick: #160F0C;
+  --color-band-ink: #000000;
+  --color-band-ink-2: #0A0D0B;
+  --color-band-sage: #070D0A;
+  --color-band-moss: #041009;
+  --color-band-brass: #0F0B04;
+  --color-band-brick: #110805;
 
   /* Legacy palette absorption: stray Tailwind colours resolve to tokens */
   --color-emerald-300: #A3C7AF; --color-emerald-400: #8DB79A; --color-emerald-500: #76A486; --color-emerald-600: #5E8B6E; --color-emerald-950: #0E1A13;
@@ -54,10 +55,10 @@
   --text-body--line-height: 1.6;
   --text-body-l: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);   /* core sentence */
   --text-body-l--line-height: 1.45;
-  --text-heading: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
-  --text-heading--line-height: 1.15;
-  --text-display-l: clamp(2.25rem, 1.4rem + 3.6vw, 4.75rem);
-  --text-display-l--line-height: 1.02;
+  --text-heading: clamp(1.4375rem, 1.15rem + 1.2vw, 2.25rem);
+  --text-heading--line-height: 1.18;
+  --text-display-l: clamp(2rem, 0.9rem + 4vw, 4.75rem);
+  --text-display-l--line-height: 1.06;
   --text-display-xl: clamp(4.25rem, 1rem + 10.5vw, 12.5rem);
   --text-display-xl--line-height: 0.82;
 
@@ -96,7 +97,25 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;          /* DM Sans opsz axis: sharper small text, tighter large text */
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  /* Notches and rounded corners (viewport-fit=cover) */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Typesetting: balanced headings, no orphans in paragraphs, hanging quotes */
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li, figcaption, blockquote { text-wrap: pretty; }
+blockquote, .font-display { hanging-punctuation: first; }
+.font-display { font-kerning: normal; font-feature-settings: 'kern', 'liga'; }
+
+/* Phones: comfortable reading measure, fewer hyphen ladders, larger metadata */
+@media (max-width: 639px) {
+  :root { --text-small: 0.875rem; --text-body: 1.0625rem; }
+  p, li { hyphens: manual; overflow-wrap: break-word; }
 }
 
 button, a, input, select, textarea { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
@@ -195,7 +214,7 @@ button, a, input, select, textarea { touch-action: manipulation; -webkit-tap-hig
 .onair-dot { animation: onair 2s ease-in-out infinite; }
 
 /* ── Skeleton ───────────────────────────────────────────────────────── */
-.skeleton { background: linear-gradient(90deg, var(--color-ink-2), #161b18, var(--color-ink-2)); background-size: 200% 100%; }
+.skeleton { background: linear-gradient(90deg, var(--color-ink-2), #141916, var(--color-ink-2)); background-size: 200% 100%; }
 
 /* ── Legacy detail and toolkit restyle ──────────────────────────────── */
 .legacy { font-size: 0.9375rem; }

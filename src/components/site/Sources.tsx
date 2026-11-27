@@ -52,7 +52,7 @@ export function Sources() {
           ))}
         </div>
       </div>
-      <div className="mx-auto max-w-[90rem] px-4 py-20 sm:px-8 md:py-28 lg:px-12">
+      <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20 md:py-28 lg:px-12">
         <div className="grid gap-10 lg:grid-cols-12">
           <header className="lg:col-span-4">
             <h2 id="sources-title" className="m-0 font-display text-heading font-normal text-paper">Sources</h2>

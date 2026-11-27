@@ -46,7 +46,7 @@ export function Hero() {
         <span />
       </div>
 
-      <div data-fx="blur-out" className="relative z-[2] mx-auto grid min-h-[100svh] max-w-[90rem] items-center gap-8 px-4 pt-20 pb-16 lg:gap-10 lg:pt-24 sm:px-8 lg:grid-cols-12 lg:px-12">
+      <div data-fx="blur-out" className="relative z-[2] mx-auto grid min-h-[100svh] max-w-[90rem] items-center gap-6 px-5 pt-[4.5rem] pb-12 sm:gap-8 sm:pt-20 sm:pb-16 lg:gap-10 lg:pt-24 sm:px-8 lg:grid-cols-12 lg:px-12">
         <div className="fx-from-left order-2 lg:order-1 lg:col-span-7">
           <div data-fx="parallax" style={{ ['--depth' as string]: '-90px' }}>
             <div className="select-none font-wordmark text-display-xl font-extrabold uppercase tracking-[-0.01em] text-paper">
@@ -56,7 +56,7 @@ export function Hero() {
               </span>
             </div>
           </div>
-          <h1 id="hero-title" className="fx-blur-in fx-text-shadow mt-8 mb-5 max-w-[24ch] font-display text-[clamp(1.75rem,1.1rem+2.2vw,3.25rem)] leading-[1.08] font-normal text-paper" style={{ ['--d' as string]: '120ms' }}>
+          <h1 id="hero-title" className="fx-blur-in fx-text-shadow mt-6 mb-4 max-w-[24ch] sm:mt-8 sm:mb-5 font-display text-[clamp(1.75rem,1.1rem+2.2vw,3.25rem)] leading-[1.08] font-normal text-paper" style={{ ['--d' as string]: '120ms' }}>
             {hero.headline}
           </h1>
           <p className="fx-blur-in measure m-0 text-body text-sage" style={{ ['--d' as string]: '220ms' }}>
@@ -66,7 +66,7 @@ export function Hero() {
             <p className="fx-kinetic m-0 mt-6 font-display text-heading italic text-paper">
               <Gloss term="hapa-tulipo">{`${first}.`}</Gloss> <Gloss term="twangaa">{second}</Gloss>
             </p>
-            <div className="no-print mt-10 flex flex-wrap items-center gap-6">
+            <div className="no-print mt-8 flex flex-wrap items-center gap-6 sm:mt-10">
               <Button href="#in-short" variant="primary" arrow="down" className="fx-magnetic fx-shine fx-ripple">
                 {hero.cta}
               </Button>
@@ -74,7 +74,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="fx-from-right order-1 mx-auto w-full max-w-[16rem] sm:max-w-[22rem] lg:order-2 lg:col-span-5 lg:max-w-[28rem]">
+        <div className="fx-from-right order-1 mx-auto w-full max-w-[12.5rem] sm:max-w-[22rem] lg:order-2 lg:col-span-5 lg:max-w-[28rem]">
           <div data-fx="parallax" style={{ ['--depth' as string]: '70px' }}>
             <div className="fx-scale-up">
               <FrequencyDial />

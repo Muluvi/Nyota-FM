@@ -9,7 +9,7 @@ export function Footer() {
   return (
     <footer className="fx-mesh band-ink relative overflow-hidden border-t border-hairline pb-28">
       <hr className="fx-divider absolute inset-x-0 top-0" aria-hidden="true" />
-      <div className="mx-auto max-w-[90rem] px-4 pt-20 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[90rem] px-5 pt-16 sm:px-8 sm:pt-20 lg:px-12">
         <p className="fx-kinetic m-0 font-display text-display-l italic text-paper">
           <Gloss term="hapa-tulipo">{`${first}.`}</Gloss> <Gloss term="twangaa">{second}</Gloss>
         </p>

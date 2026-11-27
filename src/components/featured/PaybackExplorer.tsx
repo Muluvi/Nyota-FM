@@ -60,7 +60,7 @@ export function PaybackExplorer() {
 
       <svg viewBox={`0 0 ${W} ${H}`} className="mt-6 block h-auto w-full" role="img" aria-label={`Cumulative cash after the Phase 1 outlay, ${scenario} scenario. Turns positive in ${data.breakEvenMonth}.`}>
         <line x1={0} x2={W} y1={y(0)} y2={y(0)} className="stroke-sage-dim" strokeDasharray="3 4" />
-        <text x={4} y={y(0) - 8} className="chart-label fill-sage-dim">Capex recovered</text>
+        <text x={4} y={y(0) - 8} className="chart-label fill-sage-dim max-sm:hidden">Capex recovered</text>
         <rect x={bw * 0.15} width={bw * 0.7} y={y(0)} height={y(lo) - y(0)} className="fill-brick" opacity={0.8} />
         {steps.map((s, i) => {
           const top = y(Math.max(s.start, s.end))
@@ -79,6 +79,9 @@ export function PaybackExplorer() {
           )
         })}
       </svg>
+      <p className="m-0 mt-2 flex items-center gap-2 text-small text-sage-dim sm:hidden" aria-hidden="true">
+        <span className="inline-block w-6 border-t border-dashed border-sage-dim" /> Capex recovered
+      </p>
 
       <label htmlFor={sliderId} className="mt-6 block text-small text-sage">
         Month <span className="font-mono text-paper tabular">{month}</span> of 12

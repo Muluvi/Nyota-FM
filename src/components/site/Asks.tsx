@@ -57,7 +57,7 @@ export function Asks() {
 
   return (
     <section ref={ref} id="asks" data-chapter="asks" aria-labelledby="asks-title" className="band-ink-2 scroll-mt-16">
-      <div className="mx-auto max-w-[90rem] px-4 py-20 sm:px-8 md:py-32 lg:px-12">
+      <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20 md:py-32 lg:px-12">
         <div className="grid gap-10 lg:grid-cols-12">
           <header className="lg:col-span-5">
             <p className="m-0 flex items-baseline gap-3 font-mono text-body text-brass">
@@ -81,7 +81,7 @@ export function Asks() {
           <ol className="m-0 list-none p-0 lg:col-span-7">
             {asks.map((a) => (
               <li key={a.id} className="reveal fx-gradient-hover fx-border-draw print-avoid relative overflow-hidden border-t border-hairline px-3 py-8 last:border-b">
-                <span data-fx="parallax" style={{ ['--depth' as string]: '-60px' }} className="fx-stroke pointer-events-none absolute -top-6 right-0 font-wordmark text-[9rem] leading-none opacity-30" aria-hidden="true">
+                <span data-fx="parallax" style={{ ['--depth' as string]: '-60px' }} className="fx-stroke pointer-events-none absolute -top-6 right-0 hidden font-wordmark text-[9rem] leading-none opacity-30 sm:block" aria-hidden="true">
                   {a.id}
                 </span>
                 <h3 className="relative m-0 flex gap-4 font-display text-heading font-normal text-paper">

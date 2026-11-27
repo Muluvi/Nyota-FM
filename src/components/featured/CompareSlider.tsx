@@ -11,7 +11,7 @@ export function CompareSlider() {
   return (
     <div className="rounded-md border border-hairline p-4 sm:p-6">
       <div className="relative h-56 overflow-hidden rounded-md select-none" aria-hidden="true">
-        <div className="fx-mesh absolute inset-0 flex flex-col justify-end bg-band-brick p-5">
+        <div className="fx-mesh absolute inset-0 flex flex-col justify-start bg-band-brick p-5 sm:justify-end">
           <p className="m-0 text-small text-sage">v1.0 envelope (unresearched)</p>
           <p className="m-0 mt-1 font-display text-heading text-paper">
             <Figure id="capex-v1-total" />

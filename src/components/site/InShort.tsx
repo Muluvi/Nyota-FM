@@ -72,7 +72,7 @@ export function InShort() {
         <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" strokeWidth="6" strokeDasharray="0.6 4.6" />
         <circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" strokeWidth="0.6" strokeDasharray="10 6" />
       </svg>
-      <div className="mx-auto max-w-[90rem] px-4 py-20 sm:px-8 md:py-32 lg:px-12">
+      <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20 md:py-32 lg:px-12">
         <h2 id="in-short-title" className="fx-tracking m-0 font-mono text-body font-normal text-ink-on-paper">
           <span className="tabular">00</span> · In short
         </h2>
@@ -94,7 +94,7 @@ export function InShort() {
         <ul
           ref={track}
           onScroll={onTrackScroll}
-          className="m-0 mt-10 -mx-4 flex snap-x snap-mandatory list-none gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0"
+          className="m-0 mt-10 -mx-5 flex snap-x snap-mandatory list-none gap-4 overflow-x-auto scroll-px-5 px-5 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:snap-none md:grid-cols-3 md:overflow-visible md:px-0"
           aria-label="Three numbers"
         >
           {inShort.stats.map((s, i) => (

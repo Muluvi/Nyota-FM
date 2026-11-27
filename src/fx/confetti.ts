@@ -9,7 +9,7 @@ export function confetti(x = window.innerWidth / 2, y = window.innerHeight / 2, 
   const canvas = document.createElement('canvas')
   canvas.setAttribute('aria-hidden', 'true')
   canvas.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:310'
-  const dpr = Math.min(2, devicePixelRatio)
+  const dpr = Math.min(3, devicePixelRatio)
   canvas.width = innerWidth * dpr
   canvas.height = innerHeight * dpr
   document.body.append(canvas)

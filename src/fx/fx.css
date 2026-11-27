@@ -48,6 +48,22 @@ html.accent-brick { --color-brass: #D08B72; }
 html.theme-light.accent-moss { --color-brass: #274A37; }
 html.theme-light.accent-brick { --color-brass: #7A3F2C; }
 
+/* J. Wide-gamut accents for OLED / Display P3 phones. Same hues and lightness
+   as the sRGB tokens (contrast unchanged), with the extra saturation the panel can show. */
+@media (color-gamut: p3) {
+  html:not(.theme-light) {
+    --color-brass: color(display-p3 0.86 0.65 0.31);
+    --color-moss: color(display-p3 0.43 0.66 0.51);
+    --color-brick: color(display-p3 0.64 0.37 0.26);
+    --color-brick-ink: color(display-p3 0.86 0.53 0.41);
+    --color-amber-400: color(display-p3 0.86 0.65 0.31);
+    --color-emerald-500: color(display-p3 0.43 0.66 0.51);
+    --color-rose-400: color(display-p3 0.86 0.53 0.41);
+  }
+  html.accent-moss:not(.theme-light) { --color-brass: color(display-p3 0.43 0.66 0.51); }
+  html.accent-brick:not(.theme-light) { --color-brass: color(display-p3 0.86 0.53 0.41); }
+}
+
 /* Smooth theme switch (colour only, short) */
 html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after {
   transition: background-color 400ms ease, color 400ms ease, border-color 400ms ease, fill 400ms ease, stroke 400ms ease !important;
@@ -91,6 +107,8 @@ html.theme-light .fx-noise::after { opacity: 0.06; mix-blend-mode: multiply; }
 }
 .fx-shader-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
 .fx-shader-canvas[data-ready='true'] { opacity: 1; }
+/* 3D scene: fade under the text column so the headline and lede stay crisp */
+.fx-scene3d { -webkit-mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.3) 0%, rgb(0 0 0 / 0.45) 40%, #000 72%); mask-image: linear-gradient(100deg, rgb(0 0 0 / 0.3) 0%, rgb(0 0 0 / 0.45) 40%, #000 72%); }
 .fx-shader-canvas[data-ready='true'] ~ .fx-liquid { opacity: 0; transition: opacity 1.2s ease; }
 
 /* ════════ A. Hero entrance: curtain, blur-in, split-screen, scale-up, fade sequence ════════ */
@@ -377,6 +395,19 @@ html.fx-calm .fx-tilt, html.lite .fx-tilt { transform: none; }
 @keyframes fx-panel-in { from { transform: translateX(100%); } }
 .fx-accordion { transition: none; }
   html.fx-cursor-on, html.fx-cursor-on a, html.fx-cursor-on button { cursor: auto; }
+}
+
+/* Touch screens: hover-only effects must not stick after a tap */
+@media (hover: none) {
+  .fx-lift:hover { translate: none; box-shadow: none; }
+  .fx-scale:hover { scale: none; }
+  .fx-tracking:hover { letter-spacing: inherit; }
+  .fx-shine:hover::after, .fx-glitch:hover::before, .fx-glitch:hover::after, .fx-wobble:hover { animation: none; }
+  .fx-icon-spin:hover svg { transform: none; }
+  .fx-neon-hover:hover { box-shadow: none; }
+  .fx-gradient-hover:hover { background-position: 100% 0; }
+  .fx-glow:hover::before { opacity: 0; }
+  .fx-tilt { transform: none !important; }
 }
 
 /* Print: no decorative layer */

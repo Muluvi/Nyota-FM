@@ -48,3 +48,41 @@ The owner asked for extensive visual effects ("Use these features extensively").
 - New: `src/fx/` (stylesheet in the components layer, lazy runtime, particles, WebGL shader, confetti), dark/light theme, accent themes, sound preference, navigation dots, back-to-top, pinned horizontal roadmap, comparison slider, sortable opportunities, progress rings, "Mark as discussed" on the asks (this device only), sources marquee and progressive loading, station logo in the footer.
 - Kept: one story, the figure registry, all checks. check-figures, verify-figures and orphans pass; axe shows 0 violations in both themes.
 - Costs: first-load JS 96 → 101 KB gzip, CSS 16 → 24 KB gzip. Lighthouse Performance 97 → 89–91. Simulated LCP 2.3 → 3.1s (measured 0.24s).
+
+## Mobile, OLED and 3D pass — 27 November 2026
+
+Request: "Optimize spacing for mobile phone users. Optimize Typography for mobile phone users. Optimize color palette for mobile phone users for entire website to appear 4k quality on oled screens. Install all you need to be able to utilise all possible visual features." No figures, sources, quotes or asks changed.
+
+### Spacing (phones)
+- Page gutters 16 → 20 px; section padding 80 → 64 px below 640 px (desktop unchanged). Safe-area insets on the body for notched phones.
+- Hero: smaller dial and tighter top padding, so the headline, lede, slogan and CTA all fit in the first screen at 390 × 844.
+- Ghost chapter and ask numerals hidden below 640 px (they overlapped titles).
+- Proof figures: 36 px numbers, 15 px labels, hairline-separated rows instead of loose padded cards.
+- Opportunity rows: annual revenue gets its own line under the difficulty and timing.
+- Payback chart: the "Capex recovered" label moves out of the chart into a legend on phones (it overlapped the bars).
+- Comparison slider: v1.0 label sits top-left on phones so the two figures no longer meet at the handle.
+- Hover-only effects (lift, scale, glow, shine, tilt, neon…) are disabled on touch screens so they don't stick after a tap.
+
+### Typography
+- DM Sans now ships with its optical-size axis (`opsz` 9–40, same file also carries weight); `font-optical-sizing: auto` sharpens small text and tightens large text. +26 KB woff2.
+- Action titles: 34 → 32 px minimum with a 1.06 line height; headings 23 px minimum.
+- Metadata text 13 → 14 px on phones.
+- `text-wrap: balance` on headings and `pretty` on paragraphs (no single-word last lines); kerning and ligatures on; hanging punctuation.
+
+### Colour (OLED)
+- Dark theme ink is true black `#000` (pixels off, infinite contrast); raised surfaces `#0A0D0B`; chapter bands re-tinted on black; hairlines `#222B26`.
+- Paper text softened `#F7F8F4` → `#EEF0EA` to reduce halation on black.
+- Display-P3 accents on wide-gamut screens (most OLED phones): brass, moss and brick use the extra saturation at the same lightness, so contrast is unchanged. Light theme keeps its sRGB values.
+- Browser chrome (`theme-color`) and the pre-paint background are black.
+- Canvases render at device resolution: particles up to 2.5×, confetti up to 3×. WebGL colours are resolved through a canvas probe so P3 tokens map correctly.
+
+### 3D (Three.js)
+- Installed `three@0.187.0` (and `@types/three`). New `src/fx/scene3d.ts`: wireframe terrain, a lattice transmitter mast with a pulsing beacon, signal rings radiating from the antenna, a 3D particle field, depth fog, ACES tone mapping and an UnrealBloom pass; the camera follows the pointer.
+- Loads only on desktops with a fine pointer, WebGL2, ≥ 1024 px and ≥ 4 cores; 136 KB gzip, lazy, never on phones. Paused off-screen and in background tabs, capped at ~45 fps, follows theme changes, fully disposed. Falls back to the existing shader. Off under Calm, Lite and reduced motion.
+- First-load JS unchanged (~101 KB gzip).
+
+### Verification
+- `pnpm check` (tsc, orphans, check-figures, build) and `verify:figures` pass.
+- axe: 0 violations at 1280 px and 390 px, dark and light, with and without reduced motion.
+- Lighthouse mobile (simulated): performance 85–88, accessibility 100, best practices 96 (the only failure is the sandbox blocking the Cloudinary logo, not a site issue), LCP 3.1–3.4 s, CLS 0.
+- Screenshots: `docs/screenshots/after/hero-3d-1440.png`, `mobile-oled-a.png`, `mobile-oled-b.png`.

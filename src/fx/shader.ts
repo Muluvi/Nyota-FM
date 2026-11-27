@@ -4,6 +4,7 @@
  * post-processing. Raw WebGL, no library. Half-resolution, 30fps cap, paused
  * off-screen. Falls back to the CSS morphing blobs if WebGL is unavailable.
  */
+import { cssToRgb } from './color'
 const VERT = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`
 
 const FRAG = `precision mediump float;
@@ -31,14 +32,8 @@ void main(){
   gl_FragColor = vec4(mix(bg, col, vig), 1.0);
 }`
 
-function rgb(cssColor: string): [number, number, number] {
-  const probe = document.createElement('span')
-  probe.style.color = cssColor
-  document.body.append(probe)
-  const m = getComputedStyle(probe).color.match(/\d+(\.\d+)?/g) ?? ['0', '0', '0']
-  probe.remove()
-  return [Number(m[0]) / 255, Number(m[1]) / 255, Number(m[2]) / 255]
-}
+/** Tokens may be wide-gamut (display-p3); the canvas probe maps them to sRGB for GL. */
+const rgb = (cssColor: string) => cssToRgb(cssColor)
 
 export function mountShader(host: HTMLElement): () => void {
   const canvas = document.createElement('canvas')
