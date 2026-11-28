@@ -115,6 +115,10 @@ export function Header({ active }: { active: string | null }) {
       <div className="h-px w-full bg-transparent">
         <div ref={progress} className={`h-[2px] w-full origin-left transition-colors duration-700 ${section ? accentBg[section.accent] : 'bg-brass'}`} style={{ transform: 'scaleX(0)' }} />
       </div>
+      {/* Extra mobile bottom gold progress */}
+      <div className="mobile-progress sm:hidden" aria-hidden="true">
+        <span style={{ transform: 'scaleX(0)' }} />
+      </div>
     </header>
   )
 }

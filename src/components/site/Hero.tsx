@@ -40,17 +40,17 @@ export function Hero() {
             <img
               src="/brand/nyota-star-512.webp"
               srcSet="/brand/nyota-star-256.webp 256w, /brand/nyota-star-512.webp 512w, /brand/nyota-star-1024.webp 1024w"
-              sizes="(min-width: 1024px) 19rem, (min-width: 640px) 14rem, 10rem"
+              sizes="(min-width: 1024px) 19rem, (min-width: 640px) 14rem, 9rem"
               width={512}
               height={512}
               alt="Nyota 107.3 FM logo: a gold star with a microphone and the tagline Hapo Tulipo, Twang'aa"
               fetchPriority="high"
               decoding="async"
-              className="brand-mark fx-scale-up block h-auto w-40 select-none sm:w-56 lg:w-[19rem]"
+              className="brand-mark fx-scale-up block h-auto w-36 select-none sm:w-56 lg:w-[19rem]"
               draggable={false}
             />
           </div>
-          <h1 id="hero-title" className="fx-blur-in fx-text-shadow mt-6 mb-4 max-w-[24ch] sm:mt-8 sm:mb-5 font-display text-[clamp(1.75rem,1.1rem+2.2vw,3.25rem)] leading-[1.08] font-normal text-paper" style={{ ['--d' as string]: '120ms' }}>
+          <h1 id="hero-title" className="fx-blur-in fx-text-shadow mt-4 mb-3 max-w-[20ch] sm:mt-8 sm:mb-5 font-display text-[clamp(1.6rem,1rem+2vw,3.25rem)] leading-[1.1] font-normal text-paper" style={{ ['--d' as string]: '120ms' }}>
             {hero.headline}
           </h1>
           <p className="fx-blur-in measure m-0 text-body text-sage" style={{ ['--d' as string]: '220ms' }}>
