@@ -350,3 +350,68 @@ html.lite .mask-line > span, html.lite .dial-needle, html.lite .dial-wave { anim
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: none; }
 }
+
+/* ── Additional mobile improvements ─────────────────────────────────── */
+@media (max-width: 639px) {
+  /* Mobile bottom progress + chapter indicator */
+  .mobile-progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--color-hairline);
+    z-index: 60;
+    pointer-events: none;
+  }
+  .mobile-progress > span {
+    display: block;
+    height: 100%;
+    background: var(--color-nyota-gold);
+    transform-origin: left;
+    transition: transform 150ms linear;
+  }
+
+  /* Star pattern background on paper bands */
+  .band-paper {
+    background-image: radial-gradient(circle at 20% 30%, rgba(231, 180, 74, 0.06) 1px, transparent 1px),
+                      radial-gradient(circle at 80% 70%, rgba(231, 180, 74, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px, 72px 72px;
+  }
+
+  /* Stronger metric / callout treatment */
+  .fig-value, .text-data {
+    color: var(--color-nyota-gold) !important;
+    font-weight: 600;
+  }
+
+  /* Hero mobile refinements */
+  section[aria-labelledby="hero-title"] .brand-mark {
+    width: 7.5rem !important;
+  }
+  section[aria-labelledby="hero-title"] h1 {
+    max-width: 22ch;
+  }
+}
+
+/* Mobile chapter jump helper (simple) */
+.mobile-chapter-chip {
+  display: none;
+}
+@media (max-width: 639px) {
+  .mobile-chapter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    margin-bottom: 0.5rem;
+  }
+  .mobile-chapter-chip::before {
+    content: "★";
+    color: var(--color-nyota-gold);
+    font-size: 0.65rem;
+  }
+}

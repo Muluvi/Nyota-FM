@@ -40,13 +40,13 @@ export function Hero() {
             <img
               src="/brand/nyota-star-512.webp"
               srcSet="/brand/nyota-star-256.webp 256w, /brand/nyota-star-512.webp 512w, /brand/nyota-star-1024.webp 1024w"
-              sizes="(min-width: 1024px) 19rem, (min-width: 640px) 14rem, 10rem"
+              sizes="(min-width: 1024px) 19rem, (min-width: 640px) 14rem, 9rem"
               width={512}
               height={512}
               alt="Nyota 107.3 FM logo: a gold star with a microphone and the tagline Hapo Tulipo, Twang'aa"
               fetchPriority="high"
               decoding="async"
-              className="brand-mark fx-scale-up block h-auto w-40 select-none sm:w-56 lg:w-[19rem]"
+              className="brand-mark fx-scale-up block h-auto w-36 select-none sm:w-56 lg:w-[19rem]"
               draggable={false}
             />
           </div>
