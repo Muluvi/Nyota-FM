@@ -89,10 +89,15 @@ export function MenuOverlay({ active, onPrint }: MenuOverlayProps) {
             {story.map((s, i) => {
               const current = s.id === active
               return (
-                <li key={s.id} className="border-b border-hairline" style={{ transitionDelay: `${i * 40}ms` }}>
-                  <a href={`#${s.id}`} onClick={closeOverlay} aria-current={current ? 'location' : undefined} className="group grid min-h-16 grid-cols-[3rem_1fr_auto] items-center gap-4 py-3 sm:grid-cols-[4rem_14rem_1fr_auto]">
-                    <span className="font-mono text-small text-sage tabular">{s.number}</span>
-                    <span className={`font-display text-heading text-paper ${current ? 'dotted-current' : ''}`}>{s.label}</span>
+                <li key={s.id} className="border-b border-hairline mobile-chapter-item" style={{ transitionDelay: `${i * 40}ms` }}>
+                  <a
+                    href={`#${s.id}`}
+                    onClick={closeOverlay}
+                    className={`group grid min-h-16 grid-cols-[3rem_1fr_auto] items-center gap-4 py-3 sm:grid-cols-[4rem_14rem_1fr_auto] ${current ? 'text-brass' : 'text-paper'}`}
+                    aria-current={current ? 'location' : undefined}
+                  >
+                    <span className="chapter-number font-mono text-small text-brass tabular">{s.number}</span>
+                    <span className={`visual-aid font-display text-heading ${current ? 'dotted-current' : ''}`}>{s.label}</span>
                     <span className="hidden text-small text-sage sm:block">
                       {renderPlain(s.actionTitle)}
                       <span className="ml-2 whitespace-nowrap text-sage-dim">· {Math.round(s.readMinutes * 60)} sec</span>

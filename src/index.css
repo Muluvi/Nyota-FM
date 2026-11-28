@@ -415,3 +415,65 @@ html.lite .mask-line > span, html.lite .dial-needle, html.lite .dial-wave { anim
     font-size: 0.65rem;
   }
 }
+
+/* ── Full mobile implementation: drawer, aids, overlays, cards ──────── */
+@media (max-width: 639px) {
+  /* Enhanced mobile chapter drawer styling */
+  .menu-overlay {
+    background: linear-gradient(180deg, var(--color-ink) 0%, var(--color-ink-2) 100%);
+  }
+  .menu-overlay nav li {
+    padding: 1rem 0;
+  }
+  .menu-overlay nav a {
+    font-size: 1.125rem;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+  }
+  .menu-overlay .chapter-number {
+    color: var(--color-nyota-gold);
+    font-weight: 600;
+    margin-right: 0.75rem;
+  }
+
+  /* Visual aid icons via CSS */
+  .visual-aid::before {
+    content: "★";
+    color: var(--color-nyota-gold);
+    margin-right: 0.5rem;
+    font-size: 0.9em;
+  }
+  .metric-card {
+    border-left: 3px solid var(--color-nyota-gold);
+    padding: 1.25rem;
+    background: rgba(231, 180, 74, 0.04);
+    margin-bottom: 1rem;
+  }
+
+  /* Hero full mobile redesign tweaks */
+  section[aria-labelledby="hero-title"] {
+    min-height: 90svh;
+  }
+  section[aria-labelledby="hero-title"] .brand-mark {
+    width: 8rem !important;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Overlay improvements */
+  .menu-overlay, [role="dialog"] {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Reusable visual aid classes */
+.aid-star { position: relative; }
+.aid-star::before {
+  content: "★";
+  color: var(--color-nyota-gold);
+  position: absolute;
+  left: -1.25rem;
+  top: 0.15em;
+  font-size: 0.75em;
+}
